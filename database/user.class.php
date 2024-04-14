@@ -15,19 +15,19 @@ class User{
         $this->isadmin = $isadmin;
     }
 
-    function getUsername() : string{
+    public function getUsername() : string{
         return $this->username;
     }
 
-    function getEmail() : string{
+    public function getEmail() : string{
         return $this->email;
     }
 
-    function getIsAdmin() : int{
+    public function getIsAdmin() : int{
         return $this->isadmin;
     }
 
-    function getUserOwnedItens(PDO $db){
+   public function getUserOwnedItens(PDO $db){
         $stmt = $db->prepare('
             SELECT *
             FROM PRODUCTS
