@@ -34,7 +34,25 @@ class User{
             WHERE owner = ?
             ');
         
-        $stmt->fetchAll();
+        $stmt->execute(array($this->id));
+        
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                $productDB['id'],
+                $productDB['price'],
+                $productDB['quantity'],
+                $productDB['name'],
+                $productDB['description'],
+                $productDB['owner'],
+                $productDB['category'],
+                $productDB['brand'],
+            );
+
+            $products[] = $product;
+        }
+
+        return $products;
     }
 
     static function getUser(PDO $db, int $id){

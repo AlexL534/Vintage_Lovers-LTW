@@ -56,8 +56,51 @@ class Product{
         return $this->brand;
     }
 
-    static public function getAllProducts(){
-        
+    static public function getProduct(PDO $db, int $id){
+        $stmt = $db->prepare(
+            'SELECT id, price, quantity, name, description, owner, category, brand
+            FROM PRODUCTS
+            WHERE id = ?'
+        );
+
+        $stmt->execute(array($id));
+        $product = $stmt->fetch();
+
+        return new Product(
+            $product['id'],
+            $product['price'],
+            $product['quantity'],
+            $product['name'],
+            $product['description'],
+            $product['owner'],
+            $product['category'],
+            $product['brand'],
+        );
+    }
+
+    static public function getAllProducts(PDO $db){
+        $stmt = $db->prepare(
+            'SELECT *
+            FROM PRODUCTS'
+        );
+
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                $productDB['id'],
+                $productDB['price'],
+                $productDB['quantity'],
+                $productDB['name'],
+                $productDB['description'],
+                $productDB['owner'],
+                $productDB['category'],
+                $productDB['brand'],
+            );
+
+            $products[] = $product;
+        }
+
+        return $products;
     }
 
 
