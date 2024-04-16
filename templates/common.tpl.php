@@ -15,15 +15,17 @@ function drawHeader() { ?>
                         <input type="search" name="search" placeholder="type">
                     <form>
             </header>
+            <?php drawSignUp()?>
             <nav id= "menu">
                 <input type="checkbox" id="menu_button"> 
                 <menu>
-                    <li>shoes</li>
-                    <li>shirts</li>
-                    <li>pants</li>
+                    <li><a href="">shoes</a></li>
+                    <li><a href="">shirts</a></li>
+                    <li><a href="">pants</a></li>
                 </menu>
             </nav>
             <main>
+                
     <?php }
 
 function drawFooter() { ?>
@@ -35,3 +37,10 @@ function drawFooter() { ?>
         </body>
     <html>
 <?php }
+
+function drawSignUp() { ?>
+    <div id="credentials">
+        <a href="">Register</a>
+        <a href="">Login</a>
+    </div>
+<?php } 
