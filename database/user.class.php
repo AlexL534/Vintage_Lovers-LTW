@@ -6,12 +6,14 @@ class User{
     private int $id;
     private string $username;
     private string $email;
+    private string $password;
     private int $isadmin;
 
-    public function __construct(int $id, string $username, string $email, int $isadmin){
+    public function __construct(int $id, string $username, string $email, string $password, int $isadmin){
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
+        $this->password;
         $this->isadmin = $isadmin;
     }
 
@@ -21,6 +23,10 @@ class User{
 
     public function getEmail() : string{
         return $this->email;
+    }
+
+    public function getPassword() : string{
+        return $this->password;    
     }
 
     public function getIsAdmin() : int{
@@ -57,7 +63,7 @@ class User{
 
     static function getUser(PDO $db, int $id){
         $stmt = $db->prepare('
-            SELECT id, username, email, is_admin
+            SELECT id, username, email, password, is_admin
             FROM USERS
             WHERE id = ?
             ');
@@ -69,6 +75,7 @@ class User{
             $user['id'],
             $user['username'],
             $user['email'],
+            $user['password'],
             $user['isadmin']
         );
 
