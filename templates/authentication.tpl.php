@@ -1,22 +1,30 @@
 <?php
 
-function draw_login(){?>
+declare(strict_types=1);
+
+require_once(__DIR__ . '/common.tpl.php');
+
+function drawLogin(Session $session){?>
 
 <section id = "login">
     <header>
         <h1>Login<h2>
     </header>
 
-    <form method="post" action="../actions/action_login.php">
+    <?php
+        displayMessages($session);
+    ?>
+    
+    <form action= "/../actions/action_login.php" method="post" class= "login" >
         <label>
             Email:
-            <input type="text" id="email" name="email" required>
+            <input type="email" name="email" required>
         </label>
         <label>
             Password:
-            <input type = "password" id = "password" name = "password" required>
+            <input type = "password" name = "password" required>
         </label>
-        <input type = "submit" value= "Login">
+        <input type="submit" value="Login">
     </form>
 
     <footer>
@@ -26,7 +34,7 @@ function draw_login(){?>
 
 <?php }
 
-function draw_signup(){?>
+function drawSignup(){?>
 
     <section id = "signup">
         <header>
