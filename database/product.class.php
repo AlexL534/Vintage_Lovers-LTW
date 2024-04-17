@@ -83,7 +83,7 @@ class Product{
             'SELECT *
             FROM PRODUCTS'
         );
-
+        $stmt->execute();
         $products = array();
         while($productDB = $stmt->fetch()){
             $product = new Product(
