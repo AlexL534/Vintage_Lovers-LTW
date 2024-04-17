@@ -32,6 +32,12 @@ function drawFooter() { ?>
             </main>
 
             <footer>
+                <p>Our phone number: 000 000 000</p>
+                <p>Our emial: example@gmail.com</p>
+                <h6>site made by</h6>
+                <p>Alexandre Lopes</p>
+                <p>Lucas Faria</p>
+                <p>Rafael Campeão</p>
                 <p>&copy; Vintage Lovers 2024<p>
             </footer>
         </body>
