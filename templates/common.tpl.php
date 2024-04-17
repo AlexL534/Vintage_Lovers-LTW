@@ -9,13 +9,15 @@ function drawHeader(Session $session) { ?>
         <head>
             <title>Vintage Lovers </title>
             <meta charset="utf-8">
+            <link rel="stylesheet" href="../css/style.css">
+            <link rel="stylesheet" href="../css/layout.css">
         <head>
         <body>
             <header>
-                   <img src="../docs/Logo3.png" alt= "logo">
+                   <img src="../docs/Logo3.png" alt= "logo" id = "logo">
                    <form>
                         <input type="search" name="search" placeholder="Search for a brand, condition, ...">
-                    <form>
+                    </form>
                     <?php
                         if($session->isLoggedIn()) drawLogout($session);
                         else drawHeaderLogin();
@@ -43,10 +45,10 @@ function drawFooter() { ?>
 <?php }
 
 function drawHeaderLogin() { ?>
-
-    <a href="../pages/register.php">Register</a>
-    <a href="../pages/login.php">Login</a>
-
+    <div id= "headerLog" >
+        <a href="../pages/register.php">Register</a>
+        <a href="../pages/login.php">Login</a>
+    </div>
 <?php }
 
 function drawLogout(Session $session){ ?>

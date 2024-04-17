@@ -15,7 +15,7 @@ function drawLogin(Session $session){?>
         displayMessages($session);
     ?>
     
-    <form action= "/../actions/action_login.php" method="post" class= "login" >
+    <form action= "../action_login.php" method="post" class= "login" >
         <label>
             Email:
             <input type="email" name="email" required>
@@ -24,7 +24,7 @@ function drawLogin(Session $session){?>
             Password:
             <input type = "password" name = "password" required>
         </label>
-        <input type="submit" value="Login">
+        <input type="submit" name = "login" value="Login">
     </form>
 
     <footer>
@@ -44,19 +44,19 @@ function drawSignup(){?>
         <form method="post" action = "../actions/action_signup.php">
             <label>
                 Username:
-                <input type = "text" id="username_SU" name = "username" required>
+                <input type = "text" name = "username" required>
             </label>
             <label>
                 Name:
-                <input type = "text" id= "name_SU" name = "name" required>
+                <input type = "text" name = "name" required>
             </label>
             <label>
                 Email:
-                <input type = "email" id= "email_SU" name = "email" required>
+                <input type = "email" name = "email" required>
             </label>
             <label>
                 Password:
-                <input type = "password" id = "password_SU" name = "password" required>
+                <input type = "password" name = "password" required>
             <label>
         </form>
 

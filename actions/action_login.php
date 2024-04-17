@@ -4,8 +4,6 @@
     require_once(__DIR__ . '/../utils/sessions.php');
     
     $session = new Session();
-    header('Location: ../pages/index.php' );
-
 
     require_once(__DIR__ . '/../database/database_connection.db.php');
     require_once(__DIR__ . '/../database/user.class.php');
