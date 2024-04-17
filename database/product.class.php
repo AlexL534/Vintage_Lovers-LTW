@@ -67,14 +67,14 @@ class Product{
         $product = $stmt->fetch();
 
         return new Product(
-            $product['id'],
-            $product['price'],
-            $product['quantity'],
+            intval($product['id']),
+            intval($product['price']),
+            intval($product['quantity']),
             $product['name'],
             $product['description'],
-            $product['owner'],
-            $product['category'],
-            $product['brand'],
+            intval($product['owner']),
+            intval($product['category']),
+            intval($product['brand']),
         );
     }
 
@@ -83,20 +83,20 @@ class Product{
             'SELECT *
             FROM PRODUCTS'
         );
-
+        $stmt->execute();
         $products = array();
         while($productDB = $stmt->fetch()){
             $product = new Product(
-                $productDB['id'],
-                $productDB['price'],
-                $productDB['quantity'],
+                intval($productDB['id']),
+                intval($productDB['price']),
+                intval($productDB['quantity']),
                 $productDB['name'],
                 $productDB['description'],
-                $productDB['owner'],
-                $productDB['category'],
-                $productDB['brand'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
             );
-
+            
             $products[] = $product;
         }
 
