@@ -10,7 +10,13 @@ function drawProfile(PDO $db, User $user){
         <header>
             <h1>Profile</h1>
         </header>
-        <?php drawUserInfo($db, $user); ?>
+        <?php 
+            drawUserInfo($db, $user);
+            drawUserOptions();
+            if($user->getIsAdmin() == 1){
+                drawAdminOptions(); 
+            }
+        ?>
     </section>
 <?php }
 
@@ -33,9 +39,29 @@ function drawUserInfo(PDO $db, User $user){
     </article>
 <?php }
 
-function drawOptions(){
+function drawUserOptions(){
     //draws the user/seller options
     ?>
-    <article
+    <article id="userOptions">
+        <ul>
+            <li><a>Update Profile</a></li>
+            <li><a>Manage owned Products</a></li>
+            <li><a>List a new Procuct</a></li>
+            <li><a>Sold Products</a></li>
+        </ul>
+    </article>
+<?php }
+
+function drawAdminOptions(){
+    //draws the admin options
+    ?>
+    <article id="adminOptions">
+        <ul>
+            <li><a>Add information to the system</a></li>
+            <li><a>Remove user</a></li>
+            <li><a>Remove a product</a></li>
+            <li><a>Promote user to admin</a></li>
+        </ul> 
+    </article>
 <?php }
 ?>
