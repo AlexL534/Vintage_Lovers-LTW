@@ -26,7 +26,7 @@ function drawAddInfoForm($filterType) {
         <h2><?php echo ucfirst($filterType); ?></h2>
     </header>
     <section id="addInfoForm">
-        <form action="/../utils/add_filter.php" method="post">
+        <form action="/../actions/add_filter.php" method="post">
             <input type="hidden" name="type" value="<?php echo $filterType; ?>">
                 <div class="form-group">
                     <label for="name">Name:</label>
@@ -112,7 +112,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo $user->getUsername(); ?></span>
                                 <span class="email"><?php echo $user->getEmail(); ?></span>
-                                <form action="/../utils/elevate_admin.php" method="post">
+                                <form action="/../actions/elevate_admin.php" method="post">
                                     <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
@@ -189,16 +189,14 @@ function displayProductResults($products, $searchEnabled) {
         ?>
         <section id="productList">
             <ul>
-                <?php if (!$searchEnabled) { ?> <!-- Display add button if search is not enabled -->
-                    <li>
-                        <button class="add-product-btn">+</button>
-                    </li>
+                <?php if (!$searchEnabled) { ?> 
+                    <a href="/../pages/seller_add_product.php"><?php echo '+'; ?></a>
                 <?php } ?>
                 <?php foreach ($products as $product) { ?>
                     <li>
                         <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
                         <button class="check-info-btn">Check info</button>
-                        <button class="delete-btn">Delete</button>
+                        <button class="delete-  ">Delete</button>
                         <?php if (!$searchEnabled) { ?> <!-- Display update info button only if search is not enabled -->
                             <button class="update-info-btn" data-product-id="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">Update Info</button>
                         <?php } ?>
@@ -218,7 +216,7 @@ function drawAddProductForm() {
         <h2>Add Product Info</h2>
     </header>
     <section id="addProductForm">
-        <form action="/../utils/add_product.php" method="post">
+        <form action="/../actions/add_product.php" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -231,11 +229,10 @@ function drawAddProductForm() {
                 <label for="price">Price:</label>
                 <input type="number" id="price" name="price" required step="0.01" min="0">
             </div>
-            <button type="submit">Add</button>
+            <button type="submit" name="submit">Add</button>
         </form>
     </section>
     <?php
 }
-
 
 ?>
