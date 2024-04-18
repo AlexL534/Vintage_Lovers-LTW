@@ -20,11 +20,15 @@ body > header img{
     grid-column: 1;
 }
 
-body > header form {
+body > header form{
     grid-column: 2;
 }
 
-body > header #headerLog{
+body > header .login{
+    grid-column: 3;
+}
+
+body > header .logout{
     grid-column: 3;
 }
 

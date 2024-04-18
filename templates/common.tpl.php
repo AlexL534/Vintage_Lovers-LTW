@@ -45,7 +45,7 @@ function drawFooter() { ?>
 <?php }
 
 function drawHeaderLogin() { ?>
-    <div id= "headerLog" >
+    <div class= "login" >
         <a href="../pages/register.php">Register</a>
         <a href="../pages/login.php">Login</a>
     </div>
@@ -53,9 +53,9 @@ function drawHeaderLogin() { ?>
 
 function drawLogout(Session $session){ ?>
     <form action="../actions/action_logout.php" method="post" class="logout">
-    <a href="../pages/profile.php"><?=$session->getUserName()?></a>
-    <button type="submit">Logout</button>
-  </form>
+        <a href="../pages/profile.php"><?=$session->getUserName()?></a>
+        <button type="submit">Logout</button>
+    </form>
 <?php }
 
 function displayMessages(Session $session){ ?>

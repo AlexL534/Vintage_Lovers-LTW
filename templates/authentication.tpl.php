@@ -15,7 +15,7 @@ function drawLogin(Session $session){?>
         displayMessages($session);
     ?>
     
-    <form action= "../action_login.php" method="post" class= "login" >
+    <form action= "../actions/action_login.php" method="post" class= "login" >
         <label>
             Email:
             <input type="email" name="email" required>
