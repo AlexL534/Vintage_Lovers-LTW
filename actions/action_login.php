@@ -17,9 +17,7 @@
         $session->setUsername($user->getUsername());
         $session->addMessage('success', 'Login successful');
 
-        //verifies if we can go back to the origin URL, otherwise we go back to the index
-        $location = '../pages/index.php';
-        header("Location: $location" );
+        header('Location: ../pages/index.php' );
 
     } else{
         $session->addMessage('error', 'Wrong password!');
