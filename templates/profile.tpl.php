@@ -19,15 +19,23 @@ function drawUserInfo(PDO $db, User $user){
     ?>
     <article id="userInfo">
         <!-- Still need to put the image here -->
-        <p>Name</p>
-        <p><?= $user->getName(); ?></p>
-        <p>Username</p>
-        <p><?= $user->getUsername(); ?></p>
-        <p>Email</p>
-        <p><?= $user->getEmail(); ?></p>
-        <p>Number of Owned itens</p>
-        <p><?= count($user->getUserOwnedItens($db)); ?></p>
+        <ul>
+            <li>Name: <?= $user->getName(); ?></li>
+            <li>Username: <?= $user->getUsername(); ?></li>
+            <li>Email: <?= $user->getEmail(); ?></li>
+            <li>User type: <?php 
+                $user->getIsAdmin() == 1 ? $type = "Admin" :  $type = "Seller" ;
+                echo $type;
+            ?></li>
+            <li>Number of Owned itens: <?= count($user->getUserOwnedItens($db)); ?></li>
+
+        </ul>
     </article>
 <?php }
 
+function drawOptions(){
+    //draws the user/seller options
+    ?>
+    <article
+<?php }
 ?>
