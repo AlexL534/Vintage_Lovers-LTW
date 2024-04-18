@@ -138,7 +138,7 @@ CREATE TABLE SOLD_PRODUCTS(
     buyerID INTEGER NOT NULL,
     productID INTEGER NOT NULL,
     adress TEXT,
-    PRIMARY KEY (sellerID,productID,productID),
+    PRIMARY KEY (sellerID,buyerID,productID),
     FOREIGN KEY (sellerID) references USERS(id),
     FOREIGN KEY (buyerID) references USERS(id),
     FOREIGN KEY (productID) references PRODUCTS(id)

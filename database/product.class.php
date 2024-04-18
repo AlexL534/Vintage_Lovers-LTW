@@ -78,6 +78,61 @@ class Product{
         );
     }
 
+    static public function getProductByPrice(PDO $db, int $lowerPrice, int $upperPrice){
+        $stmt = $db->prepare(
+            'SELECT id, price, quantity, name, description, owner, category, brand
+            FROM PRODUCTS
+            WHERE price >= ? AND price <= ?'
+        );
+
+        $stmt->execute(array($lowerPrice, $upperPrice));
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                $productDB['id'],
+                $productDB['price'],
+                $productDB['quantity'],
+                $productDB['name'],
+                $productDB['description'],
+                $productDB['owner'],
+                $productDB['category'],
+                $productDB['brand'],
+            );
+
+            $products[] = $product;
+        }
+
+        return $products;
+    }
+
+    static public function getProductByName(PDO $db, string $name){
+        $stmt = $db->prepare(
+            'SELECT id, price, quantity, name, description, owner, category, brand
+            FROM PRODUCTS
+            WHERE name LIKE ?'
+        );
+
+        $stmt->execute(array('%' . $name . '%'));
+        
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                $productDB['id'],
+                $productDB['price'],
+                $productDB['quantity'],
+                $productDB['name'],
+                $productDB['description'],
+                $productDB['owner'],
+                $productDB['category'],
+                $productDB['brand'],
+            );
+
+            $products[] = $product;
+        }
+
+        return $products;
+    }
+
     static public function getAllProducts(PDO $db){
         $stmt = $db->prepare(
             'SELECT *
