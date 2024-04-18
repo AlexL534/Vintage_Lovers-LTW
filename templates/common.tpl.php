@@ -7,6 +7,7 @@ function drawHeader() { ?>
         <head>
             <title>Vintage Lovers </title>
             <meta charset="utf-8">
+            <link href="../css/generalStyle.css" rel="stylesheet">
         <head>
         <body>
             <header>

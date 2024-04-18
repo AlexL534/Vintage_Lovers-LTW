@@ -14,7 +14,7 @@ drawHeader();
 
         
         <?php 
-            $product = product::getProduct($db,1);
+            
             $products = product::getAllProducts($db);
             foreach($products as $product){ ?>
                 <a href=""><?= $product->getName();  ?></a>
