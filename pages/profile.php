@@ -8,6 +8,10 @@ require_once(__DIR__ . '/../database/database_connection.db.php');
 
 $session = new Session();
 
+if(!isset($_SESSION['Username'])){
+    header('Location: index.php' );
+}
+
 $db = getDatabaseConnection();
 
 $user = User::getUser($db, $session->getId());
