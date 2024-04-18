@@ -13,6 +13,7 @@ function drawLogin(Session $session){?>
 
     <?php
         displayMessages($session);
+
     ?>
     
     <form action= "../actions/action_login.php" method="post" class= "login" >
@@ -28,18 +29,22 @@ function drawLogin(Session $session){?>
     </form>
 
     <footer>
-        <p>If you don't have already an account please register <a href="signup.php">here</a></p>
+        <p>If you don't have already an account please register <a href="register.php">here</a></p>
     </footer>
 </section>
 
 <?php }
 
-function drawSignup(){?>
+function drawSignup(Session $session){?>
 
     <section id = "signup">
         <header>
             <h1>Register</h1>
         </header>
+
+        <?php
+            displayMessages($session);
+        ?>
 
         <form method="post" action = "../actions/action_signup.php">
             <label>
@@ -58,6 +63,7 @@ function drawSignup(){?>
                 Password:
                 <input type = "password" name = "password" required>
             <label>
+            <input type="submit" name = "register" value="Register">
         </form>
 
         <footer>

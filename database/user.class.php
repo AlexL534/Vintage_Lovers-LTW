@@ -4,21 +4,28 @@ declare(strict_types = 1);
 class User{
 
     private int $id;
+
+    private string $name;
     private string $username;
     private string $email;
     private string $password;
     private int $isadmin;
 
-    public function __construct(int $id, string $username, string $email, string $password, int $isadmin){
+    public function __construct(int $id,string $name, string $username, string $email, string $password, int $isadmin){
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->isadmin = $isadmin;
+        $this->name = $name;
     }
 
     public function getID() : int {
         return $this->id;
+    }
+
+    public function getName() : string {
+        return $this->name;
     }
 
     public function getUsername() : string{
@@ -67,7 +74,7 @@ class User{
 
     static function getUser(PDO $db, int $id){
         $stmt = $db->prepare('
-            SELECT id, username, email, password, is_admin
+            SELECT id, name,  username, email, password, is_admin
             FROM USERS
             WHERE id = ?
             ');
@@ -77,6 +84,7 @@ class User{
 
         return new User(
             $user['id'],
+            $user['name'],
             $user['username'],
             $user['email'],
             $user['password'],
@@ -87,7 +95,7 @@ class User{
 
     static function getUserByPassword(PDO $db, string $email, string $password){
         $stmt = $db->prepare(
-            'SELECT id, username, email, password, is_admin
+            'SELECT id, name,  username, email, password, is_admin
             FROM USERS
             WHERE email = ? AND password = ?'
         );
@@ -97,12 +105,60 @@ class User{
 
             return new User(
                 $user['id'],
+                $user['name'],
                 $user['username'],
                 $user['email'],
                 $user['password'],
                 $user['is_admin'],
             );
         } else return null;
+    }
+
+    static function emailExists(PDO $db, string $email) : bool{
+        $stmt = $db->prepare(
+            'SELECT email
+            FROM USERS
+            WHERE email = ?'
+        );
+
+        $stmt->execute(array($email));
+
+        if($stmt->fetch()){
+            //the email already exists
+            return true;
+        }
+        else{
+            //the email doesn´t exists
+            return false;
+        }
+    }
+
+    static function usernameExists(PDO $db, string $username) : bool{
+        $stmt = $db->prepare(
+            'SELECT username
+            FROM USERS
+            WHERE username = ?'
+        );
+
+        $stmt->execute(array($username));
+
+        if($stmt->fetch()){
+            //the username already exists
+            return true;
+        }
+        else{
+            //the username doesn´t exists
+            return false;
+        }
+    }
+
+    static function insertNewUser(PDO $db, string $name, string $username, string $email, string $password){
+        $stmt = $db->prepare(
+            'INSERT INTO USERS(username, name, email, password, is_admin) 
+            VALUES (?, ?, ?, ?, 0)'
+        );
+
+        $stmt->execute(array($username, $name, $email, $password));
     }
 
     

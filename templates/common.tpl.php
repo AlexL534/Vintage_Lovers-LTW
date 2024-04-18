@@ -60,10 +60,10 @@ function drawLogout(Session $session){ ?>
 
 function displayMessages(Session $session){ ?>
     <section id="messages">
-      <?php foreach ($session->getMessages() as $messsage) { ?>
+      <?php foreach ($session->getMessages() as $message) { ?>
 
-        <article class="<?=$messsage['type']?>">
-          <?=$messsage['text']?>
+        <article class="<?=$message['type']?>">
+          <?=$message['text']?>
         </article>
 
       <?php } ?>

@@ -18,8 +18,8 @@
         $session->addMessage('success', 'Login successful');
 
         //verifies if we can go back to the origin URL, otherwise we go back to the index
-        $location = isset($_SERVER['HTTP_REFERER'])? $_SERVER['HTTP_REFERER'] : '../pages/index.php';
-        header('Location: ../pages/index.php' );
+        $location = '../pages/index.php';
+        header("Location: $location" );
 
     } else{
         $session->addMessage('error', 'Wrong password!');
