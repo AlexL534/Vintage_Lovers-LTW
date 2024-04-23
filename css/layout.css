@@ -11,7 +11,7 @@ body{
 
 body > header{
     display: grid;
-    grid-template-columns: 10em auto 15em;
+    grid-template-columns: 10em auto 10em;
     grid-template-rows: 5em;   
 }
 body > header img{
@@ -26,8 +26,13 @@ body > header .login{
     grid-column: 3;
 }
 
-body > header .logout{
+body > header #logged_icons{
     grid-column: 3;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 /* menu */

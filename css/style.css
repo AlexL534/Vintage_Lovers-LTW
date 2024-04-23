@@ -56,20 +56,15 @@ body > header input[type = "search"]{
    margin-bottom: 1em;
 }
 
-.logout {
-   margin: 1em;
-   display: grid;
-   grid-template-rows: auto;
-   grid-template-columns: auto auto auto;
+#logged_icons{
+   margin: 0.5em;
+
 }
 
-.logout img{
+#logged_icons img{
    width: 30px;
 }
-.logout button{
-   grid-column: 3;
-   align-self: center;
-}
+
 
 
 /*Menu*/
@@ -81,7 +76,7 @@ nav{
 nav menu{
    margin: 0;
    padding: 0;
-   max-width: fit-content;
+   max-width: 50em;
 }
 
 nav menu li {
