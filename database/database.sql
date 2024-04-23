@@ -55,7 +55,7 @@ CREATE TABLE SIZE(
 
 CREATE TABLE PRODUCTS(
     id INTEGER PRIMARY KEY NOT NULL ,
-    price INTEGER NOT NULL CHECK (price >0),
+    price DECIMAL(10, 2) NOT NULL CHECK (price > 0),
     quantity INTEGER CHECK (quantity >=0),
     name TEXT,
     description TEXT,
