@@ -83,7 +83,7 @@ function drawFooter() { ?>
                 <p>&copy; Vintage Lovers 2024<p>
             </footer>
         </body>
-    <html>
+    </html>
 <?php }
 
 function drawHeaderLogin() { ?>

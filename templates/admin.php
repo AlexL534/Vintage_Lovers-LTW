@@ -60,7 +60,7 @@ function drawUserList() {
             <h2>User List</h2>
         </header>
         <section id="userSearch">
-            <form action="" method="post">
+            <form method="post">
                 <label for="search">Search for user</label>
                 <input type="text" id="search" name="search">
                 <button type="submit">Search</button>
@@ -150,7 +150,7 @@ function drawProductList($searchEnabled = true) {
         if ($searchEnabled) {
             ?>
             <section id="productSearch">
-                <form action="" method="post">
+                <form  method="post">
                     <label for="search">Search for product</label>
                     <input type="text" id="search" name="search">
                     <button type="submit">Search</button>
