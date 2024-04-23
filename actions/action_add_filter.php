@@ -1,69 +1,61 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../database/database_connection.db.php');
-function addFilterToDatabase(string $type, string $name, string $description = '') {
-    $validTypes = ['category', 'size', 'condition', 'color', 'brand'];
-    if (!in_array($type, $validTypes)) {
-        throw new InvalidArgumentException("Invalid filter type");
+if (isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['add'])) {
+    $db = getDatabaseConnection();
+    $name = $_POST['name'];
+    $filterType = isset($_POST['filter_type']) ? $_POST['filter_type'] : '';
+
+    $description = '';
+    if ($filterType === 'category' || $filterType === 'condition') {
+        $description = isset($_POST['description']) ? $_POST['description'] : '';
     }
-    try {
-        $db = getDatabaseConnection();
-        $stmt = null;
-        switch ($type) {
-            case 'category':
-                $stmt = $db->prepare("INSERT INTO CATEGORY (name, description) VALUES (:name, :description)");
-                break;
-            case 'size':
-                $stmt = $db->prepare("INSERT INTO SIZE (name) VALUES (:name)");
-                break;
-            case 'condition':
-                $stmt = $db->prepare("INSERT INTO CONDITION (name, description) VALUES (:name, :description)");
-                break;
-            case 'color':
-                $stmt = $db->prepare("INSERT INTO COLOR (name) VALUES (:name)");
-                break;
-            case 'brand':
-                $stmt = $db->prepare("INSERT INTO BRAND (name) VALUES (:name)");
-                break;
-        }
 
-        if (!$stmt) {
-            throw new RuntimeException("Failed to prepare SQL statement");
-        }
-
-        $stmt->bindParam(':name', $name);
-        if ($type === 'category' || $type === 'condition') {
-            $stmt->bindParam(':description', $description);
-        }   
-
-        return $stmt->execute();
-    } catch (PDOException $e) {
-        throw new Exception("Database error: " . $e->getMessage());
+    switch ($filterType) {
+        case 'category':
+            $table = 'category';
+            $columns = 'name';
+            break;
+        case 'size':
+            $table = 'size';
+            $columns = 'name';
+            break;
+        case 'condition':
+            $table = 'condition';
+            $columns = 'name, description';
+            break;
+        case 'color':
+            $table = 'color';
+            $columns = 'name';
+            break;
+        case 'brand':
+            $table = 'brand';
+            $columns = 'name';
+            break;
+        default:
+            echo "Invalid filter type.";
+            exit();
     }
-}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-    $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
-    if ($type !== null && $type !== '') {
-        try {
-            if (addFilterToDatabase($type, $name, $description)) {
-                echo "The $type $name was added successfully.";
-                header("Location: admin_specific_filter.php?type=$type");
-                exit();
-            } else {
-                echo "Failed to add $type $name.";
-            }
-        } catch (InvalidArgumentException $e) {
-            echo "Error: " . $e->getMessage();
-        } catch (RuntimeException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+    $sql = "INSERT INTO $table ($columns) VALUES (:name";
+    if ($description) {
+        $sql .= ", :description";
+    }
+    $sql .= ")";
+    $stmt = $db->prepare($sql);
+
+    $stmt->bindParam(':name', $name);
+    if ($description) {
+        $stmt->bindParam(':description', $description);
+    }
+
+    if ($stmt->execute()) {
+        header("Location: ../pages/admin_specific_filter.php?type=$table");
+        exit();
     } else {
-        echo "Error: Filter type is missing or empty.";
+        echo "Error: Unable to add filter.";
     }
 } else {
-    echo "Invalid request method";
+    echo "All fields are required.";
 }
 ?>
