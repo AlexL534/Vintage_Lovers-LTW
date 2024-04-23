@@ -9,7 +9,6 @@ function drawHeader(Session $session) { ?>
         <head>
             <title>Vintage Lovers </title>
             <meta charset="utf-8">
-            <link href="../css/generalStyle.css" rel="stylesheet">
             <link rel="stylesheet" href="../css/style.css">
             <link rel="stylesheet" href="../css/layout.css">
         <head>
@@ -24,14 +23,14 @@ function drawHeader(Session $session) { ?>
                         else drawHeaderLogin();
                     ?>
             </header>
-            <?php drawSignUp()?>
+            
             <nav id= "menu">
                 <input type="checkbox" id="menu_button"> 
                 <menu>
                     <li><a href="">Shoes</a></li>
                     <li><a href="">Shirts</a></li>
                     <li><a href="">Pants</a></li>
-                    <li>All</li>
+                    <li><a href="">All</a></li>
                 </menu>
             </nav>
             <main>

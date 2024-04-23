@@ -89,14 +89,14 @@ class Product{
         $products = array();
         while($productDB = $stmt->fetch()){
             $product = new Product(
-                $productDB['id'],
-                $productDB['price'],
-                $productDB['quantity'],
+                intval($productDB['id']),
+                intval($productDB['price']),
+                intval($productDB['quantity']),
                 $productDB['name'],
                 $productDB['description'],
-                $productDB['owner'],
-                $productDB['category'],
-                $productDB['brand'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
             );
 
             $products[] = $product;
@@ -117,14 +117,14 @@ class Product{
         $products = array();
         while($productDB = $stmt->fetch()){
             $product = new Product(
-                $productDB['id'],
-                $productDB['price'],
-                $productDB['quantity'],
+                intval($productDB['id']),
+                intval($productDB['price']),
+                intval($productDB['quantity']),
                 $productDB['name'],
                 $productDB['description'],
-                $productDB['owner'],
-                $productDB['category'],
-                $productDB['brand'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
             );
 
             $products[] = $product;
