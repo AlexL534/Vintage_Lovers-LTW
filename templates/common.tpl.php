@@ -9,9 +9,9 @@ function drawHeader(Session $session) { ?>
         <head>
             <title>Vintage Lovers </title>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="../css/style.css">
-            <link rel="stylesheet" href="../css/layout.css">
-            <link rel="stylesheet" href="../css/responsive.css">
+            <link rel="stylesheet" href="../css/general_style.css">
+            <link rel="stylesheet" href="../css/general_layout.css">
+            <link rel="stylesheet" href="../css/general_responsive.css">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <head>
         <body>
@@ -48,7 +48,7 @@ function drawFooter() { ?>
                     <div id ="contacts">
                         <h3>Contacts</h3>
                         <p>Our phone number: 000 000 000</p>
-                        <p>Our emial: example@gmail.com</p>
+                        <p>Our email: example@gmail.com</p>
                     </div>
                     <div id = "authors">
                         <h3>Made by</h3>

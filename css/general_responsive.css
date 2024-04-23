@@ -17,12 +17,12 @@
         margin: 1em;
     }
     
-    body > header .login{
+    .login{
         grid-column: 3;
         grid-row: 1;
     }
     
-    body > header #logged_icons{
+    #logged_icons{
         grid-column: 3;
         grid-row: 1;
     }
@@ -38,27 +38,27 @@
     }
 
 
-    body > nav .menu_button{
+    .menu_button{
         align-self: start;
         width: 100%;
         display: block;
-        background-color: #696565;
+        background-color: var(--medium_gray2);
         color: white;
         padding: 1em;
     }
     
-    body > nav .menu_button:before{
+    .menu_button:before{
         content:'\2630';
     }
 
-    body > nav #menu_button:checked + .menu_button + menu li{
+    #menu_button:checked + .menu_button + menu li{
         max-height: 1em;
         padding: 1em;
         margin: 0.5em;
         opacity: 1;
     }
 
-    body > nav #menu_button:checked + .menu_button:before {
+    #menu_button:checked + .menu_button:before {
         content:'\2715';
     }
 
@@ -75,7 +75,7 @@
 
     /*footer*/
 
-    body > footer #footer_contents{
+    #footer_contents{
         flex-direction: column;
         margin: 0;
     }

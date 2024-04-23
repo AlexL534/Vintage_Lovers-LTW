@@ -4,7 +4,6 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
 }
 
 /* header */
@@ -26,7 +25,7 @@ body > header .login{
     grid-column: 3;
 }
 
-body > header #logged_icons{
+#logged_icons{
     grid-column: 3;
     display: grid;
     grid-template-rows: auto;
@@ -37,7 +36,7 @@ body > header #logged_icons{
 
 /* menu */
 
-body > nav #menu_button{
+#menu_button{
     display: none;
 }
 
@@ -66,6 +65,7 @@ body > nav li {
 main{
     flex: 1
 }
+
 /*footer*/
 
 body > footer{
@@ -74,7 +74,7 @@ body > footer{
     grid-template-rows: [start] auto [middle] auto [end];
 }
 
-body > footer #footer_contents{
+#footer_contents{
     grid-row: 1;
     display: flex;
     flex-direction: row;
