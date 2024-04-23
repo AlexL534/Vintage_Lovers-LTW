@@ -7,7 +7,17 @@ body{
    font-family: "Inter";
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+/*header*/
+
+body{
+   font-family: "Inter";
+}
+
 body > header {
+   background-color: #E8E8E8 ; 
    background-color: #E8E8E8 ; 
 }
 
