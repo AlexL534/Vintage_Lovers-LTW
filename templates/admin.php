@@ -25,7 +25,7 @@ function drawAddInfoForm($filterType) {?>
         <header>
             <h2><?php echo ucfirst($filterType); ?></h2>
         </header>
-        <form action="../actions/add_filter.php" method="post">
+        <form action="../actions/action_add_filter.php" method="post">
             <label>Name: <input type="text" name="name" required></label>
             <?php if ($filterType === 'category' || $filterType === 'condition'): ?>
             <label>Description: <input type="text" name="description" required></label>
@@ -104,7 +104,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo $user->getUsername(); ?></span>
                                 <span class="email"><?php echo $user->getEmail(); ?></span>
-                                <form action="../actions/elevate_admin.php" method="post">
+                                <form action="../actions/action_elevate_admin.php" method="post">
                                     <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
@@ -188,7 +188,7 @@ function displayProductResults($products, $searchEnabled) {
                     <li>
                         <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
                         <button class="check-info-btn">Check info</button>
-                        <form action="../actions/delete_product.php" method="post" class="delete-form">
+                        <form action="../actions/action_delete_product.php" method="post" class="delete-form">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">
                             <button type="submit" class="delete-btn">Delete</button>
@@ -212,7 +212,7 @@ function drawAddProductForm() {
         <h2>Add Product</h2>
     </header>
     <section id="addProductForm">
-        <form action="../actions/add_product.php" method="post">
+        <form action="../actions/action_add_product.php" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" required>
