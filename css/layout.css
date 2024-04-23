@@ -2,17 +2,15 @@
 body{
     margin: 0 auto;
 
-    display: grid;
-    grid-template-rows: [header] 5em [menu] 2em [main] auto [footer] 5em;
+    display: flex;
+    flex-direction: column;
 }
 
 /* header */
 
 body > header{
-    grid-row-start: header;
-    grid-row-end: menu;
     display: grid;
-    grid-template-columns: auto auto 8em;
+    grid-template-columns: 10em auto 8em;
     grid-template-rows: 5em;   
 }
 body > header img{
@@ -32,19 +30,23 @@ body > header .logout{
 }
 
 /* menu */
-body > nav{
-    grid-row-start: menu;
-    grid-row-end: main;
-}
 
 body > nav #menu_button{
     display: none;
 }
 
+body > nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
 body > nav menu{
     display: flex;
     flex-direction: row;
-    gap: 2em;
+    justify-content: space-between;
+    flex: 1
+
 }
 
 body > nav li {
@@ -54,11 +56,26 @@ body > nav li {
 
 
 /* main */
-body > main {
-    grid-row-start: main;
-    grid-row-end:  footer;
-}
+
+/*footer*/
 
 body > footer{
-    grid-row: footer
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: [start] auto [middle] auto [end];
+    grid-template-rows: [start] auto [middle] auto [end];
+}
+
+body > footer #contacts{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+body > footer #authors{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+body > footer > p{
+    grid-row: 2;
 }

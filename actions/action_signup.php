@@ -34,9 +34,7 @@ else{
         $session->setUsername($user->getUsername());
         $session->addMessage('success', 'Login successful');
 
-        //verifies if we can go back to the origin URL, otherwise we go back to the index
-        $location = isset($_SESSION['previousPage'])? $_SESSION['previousPage'] : '../pages/index.php';
-        header("Location: $location" );
+        header("Location: '../pages/main_page.php'" );
 
     } else{
         $session->addMessage('error', 'Something went wrong. Try again!');

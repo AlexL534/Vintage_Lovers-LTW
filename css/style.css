@@ -9,12 +9,18 @@ body > header {
    max-height: 100%;
 }
 
+body > header form {
+   align-self: center;
+   text-align: center;
+}
+
 body > header input[type = "search"]{
+
    border-radius: 1em;
    width: 90%;
    min-width: 10em;
+   max-width: 50em;
    min-height: 3em;
-   margin: 1em;
 
    /* content of the input*/
    padding-left: 4em;
@@ -49,11 +55,36 @@ nav{
    background-color: #D9D9D9;
 }
 
-menu{
+nav menu{
    margin: 0;
-   padding: 0.5em
+   padding: 0;
+   max-width: fit-content;
 }
 
 nav menu li {
    background-color: #F08D8D;
+   border-radius: 1em;
+   text-align: center;
+   min-width: 5em;
+   padding: 10px;
+   margin: 10px;
+   max-height: 1em;
+   max-width: 10em;
+}
+
+nav menu li a{
+   text-decoration: none;
+   color: black;
+   font-size: larger;
+   font-weight: bold;
+}
+
+/*footer*/
+
+body > footer{
+   background-color: #333333 ;
+}
+
+body > footer p, body > footer h6{
+   color: white;
 }
