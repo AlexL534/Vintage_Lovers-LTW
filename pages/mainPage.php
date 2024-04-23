@@ -6,13 +6,13 @@ require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../utils/sessions.php');
 $db = getDatabaseConnection();
 $session = new Session();
-drawHeader($session);
+drawHeader2($session);
 
 ?>
 
     <h2>Buy and Sell Pre-loved Clothes</h2>
-    <div id="selectPorducts">
-        <h4>Porducts for you</h4>
+    <div id="selectProducts">
+        <h4>Products for you</h4>
 
         
         <?php 

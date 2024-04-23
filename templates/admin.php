@@ -212,7 +212,7 @@ function drawAddProductForm() {
         <h2>Add Product</h2>
     </header>
     <section id="addProductForm">
-        <form action="../actions/action_add_product.php" method="post">
+        <form action="../actions/add_product.php" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" required>

@@ -29,7 +29,7 @@ function drawLogin(Session $session){?>
     </form>
 
     <footer>
-        <p>If you don't have already an account please register <a href="register.php">here</a></p>
+        <p>If you haven't created an account yet, please register <a href="register.php">here</a></p>
     </footer>
 </section>
 
@@ -67,7 +67,7 @@ function drawSignup(Session $session){?>
         </form>
 
         <footer>
-            <p>If you already already have an account please do the login <a href="login.php">here</a></p>
+            <p>If you already have an account, please login <a href="login.php">here</a></p>
         </footer>
         
     </section>
