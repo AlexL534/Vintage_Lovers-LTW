@@ -195,7 +195,7 @@ function displayProductResults($products, $searchEnabled) {
                             <button type="submit" class="delete-btn">Delete</button>
                         </form>
                         <?php if (!$searchEnabled) { ?>
-                            <button class="update-info-btn" data-product-id="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">Update Info</button>
+                            <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>"><?php echo 'Update Info'; ?></a>
                         <?php } ?>
                     </li>
                 <?php } ?>
@@ -226,7 +226,37 @@ function drawAddProductForm() {
                 <label for="price">Price:</label>
                 <input type="number" name="price" step="0.01" min="0" id="price" required>
             </div>
-            <input type="submit" value="submit">
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </section>
+    <?php
+}
+
+function drawUpdateInfoForm($product_id) {
+    $db = getDatabaseConnection();
+    $product = Product::getProduct($db, $product_id);
+    $productName = $product->getName();
+    $productDescription = $product->getDescription();
+    $productPrice = $product->getPrice();
+    ?>
+    <header>
+        <h2>Update Product</h2>
+    </header>
+    <section id="updateProductForm">
+        <form action="../actions/action_update_product.php" method="post">
+        <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($productName); ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($productDescription); ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" name="price" step="0.01" min="0" id="price" value="<?php echo htmlspecialchars($productPrice); ?>" required>
+            </div>
+            <input type="submit" name="submit" value="Update">
         </form>
     </section>
     <?php
