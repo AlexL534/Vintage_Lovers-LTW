@@ -14,7 +14,7 @@ function drawHeader(Session $session) { ?>
         <head>
         <body>
             <header>
-                   <a href="../pages/index.php"><img src="../docs/Logo3.png" alt= "logo" id = "logo"></a>
+                   <a href="../pages/main_page.php"><img src="../docs/Logo3.png" alt= "logo" id = "logo"></a>
                    <form>
                         <input type="search" name="search" placeholder="Search for a brand, condition, ...">
                     </form>

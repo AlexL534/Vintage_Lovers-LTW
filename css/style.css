@@ -2,24 +2,58 @@
 /*header*/
 
 body > header {
-   background-color: #D9D9D9 ; 
+   background-color: #E8E8E8 ; 
 }
 
 #logo{
    max-height: 100%;
 }
 
-body > header form input{
+body > header input[type = "search"]{
    border-radius: 1em;
    width: 90%;
    min-width: 10em;
    min-height: 3em;
-   margin-top: 1em;
-   margin-bottom: 1em;
+   margin: 1em;
+
+   /* content of the input*/
    padding-left: 4em;
    background-image: url('../assets/search.png');
    background-position:  1em center;
    background-size: 2em;
    background-repeat: no-repeat;
    
+}
+
+.login{
+   margin-top: 1em;
+   margin-bottom: 1em;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+}
+.login a:first-of-type{
+   padding-right: 0.5em;
+   margin-right: 0.1em;
+   border-right: 2px solid black;
+}
+.login a{
+   text-decoration: none;
+   color: black;
+   margin-top: 1em;
+   margin-bottom: 1em;
+}
+
+/*Menu*/
+
+nav{
+   background-color: #D9D9D9;
+}
+
+menu{
+   margin: 0;
+   padding: 0.5em
+}
+
+nav menu li {
+   background-color: #F08D8D;
 }

@@ -12,9 +12,8 @@ body > header{
     grid-row-start: header;
     grid-row-end: menu;
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: 5em ;
-    background-color: #D9D9D9 ;   
+    grid-template-columns: auto auto 8em;
+    grid-template-rows: 5em;   
 }
 body > header img{
     grid-column: 1;
@@ -45,6 +44,7 @@ body > nav #menu_button{
 body > nav menu{
     display: flex;
     flex-direction: row;
+    gap: 2em;
 }
 
 body > nav li {
