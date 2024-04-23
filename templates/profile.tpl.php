@@ -46,6 +46,7 @@ function drawUserOptions(){
         <ul>
             <li><a href = "../actions/action_logout.php" >Logout</a></li>
             <li><a>Update Profile</a></li>
+            <li><a>Wishlist</a></li>
             <li><a>Manage owned Products</a></li>
             <li><a>List a new Procuct</a></li>
             <li><a>Sold Products</a></li>

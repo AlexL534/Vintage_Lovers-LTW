@@ -1,0 +1,52 @@
+@media (max-width: 40em){
+    /*header*/
+
+
+    /*menu*/
+    body > nav {
+        flex-direction: column;
+    }
+
+    body > nav menu{
+        flex-direction: column;
+        width: 100%;
+    }
+
+
+    body > nav .menu_button{
+        align-self: start;
+        width: 100%;
+        display: block;
+        background-color: #696565;
+        color: white;
+        padding: 1em;
+    }
+    
+    body > nav .menu_button:before{
+        content:'\2630';
+    }
+
+    body > nav #menu_button:checked + .menu_button + menu li{
+        max-height: 2em;
+        padding: 1em;
+        margin: 0.5em;
+        opacity: 1;
+    }
+
+    body > nav #menu_button:checked + .menu_button:before {
+        content:'\2715';
+    }
+
+    body > nav menu li{
+        max-height: 0;
+        max-width: 90%;
+        width: 100%;
+        padding: 0 1em;
+        margin: 0;
+        text-align: left;
+        opacity: 0;
+        transition: all .3s ease-in-out;
+    }
+
+
+}
