@@ -12,7 +12,7 @@ drawHeader($session);
 
     <h2>Buy and Sell Pre-loved Clothes</h2>
     <div id="selectPorducts">
-        <h4>Porducts for you</h4>
+        <h4>Products for you</h4>
 
         
         <?php 

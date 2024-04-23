@@ -41,17 +41,20 @@ function drawFooter() { ?>
             </main>
 
             <footer>
-                <div id ="contacts">
-                    <p>Our phone number: 000 000 000</p>
-                    <p>Our emial: example@gmail.com</p>
+                <div id = "footer_contents">
+                    <div id ="contacts">
+                        <h3>Contacts</h3>
+                        <p>Our phone number: 000 000 000</p>
+                        <p>Our emial: example@gmail.com</p>
+                    </div>
+                    <div id = "authors">
+                        <h3>Made by</h3>
+                        <p>Alexandre Lopes</p>
+                        <p>Lucas Faria</p>
+                        <p>Rafael Campeão</p>
+                    </div>
                 </div>
-                <div id = "authors">
-                    <h6>site made by</h6>
-                    <p>Alexandre Lopes</p>
-                    <p>Lucas Faria</p>
-                    <p>Rafael Campeão</p>
-                </div>
-                <p>&copy; Vintage Lovers 2024<p>
+                <p>&copy; Vintage Lovers 2024</p>
             </footer>
         </body>
     <html>

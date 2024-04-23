@@ -85,6 +85,10 @@ body > footer{
    background-color: #333333 ;
 }
 
-body > footer p, body > footer h6{
+body > footer #footer_contents {
+   border-bottom: 1px solid white;
+   margin: 0 10em 1em 10em;
+} 
+body > footer p, body > footer h3{
    color: white;
 }

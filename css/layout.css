@@ -1,9 +1,10 @@
 
 body{
     margin: 0 auto;
-
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+
 }
 
 /* header */
@@ -56,25 +57,26 @@ body > nav li {
 
 
 /* main */
-
+main{
+    flex: 1
+}
 /*footer*/
 
 body > footer{
     margin-top: auto;
     display: grid;
-    grid-template-columns: [start] auto [middle] auto [end];
     grid-template-rows: [start] auto [middle] auto [end];
 }
 
-body > footer #contacts{
-    grid-column: 1;
+body > footer #footer_contents{
     grid-row: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-body > footer #authors{
-    grid-column: 2;
-    grid-row: 1;
-}
+
 
 body > footer > p{
     grid-row: 2;
