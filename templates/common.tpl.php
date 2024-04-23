@@ -12,7 +12,8 @@ function drawHeader2(Session $session) { ?>
             <link rel="stylesheet" href="../css/general_style.css">
             <link rel="stylesheet" href="../css/general_layout.css">
             <link rel="stylesheet" href="../css/general_responsive.css">
-        </head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <head>
         <body>
             <header>
                    <a href="../pages/main_page.php"><img src="../docs/Logo3.png" alt= "logo" id = "logo"></a>
@@ -20,13 +21,14 @@ function drawHeader2(Session $session) { ?>
                         <input type="search" name="search" placeholder="Search for a brand, condition, ...">
                     </form>
                     <?php
-                        if($session->isLoggedIn()) drawLogout($session);
+                        if($session->isLoggedIn()) drawLoggedInIcons();
                         else drawHeaderLogin();
                     ?>
             </header>
             
             <nav id= "menu">
                 <input type="checkbox" id="menu_button"> 
+                <label class="menu_button" for="menu_button"></label>
                 <menu>
                     <li><a href="">Shoes</a></li>
                     <li><a href="">Shirts</a></li>
@@ -75,20 +77,20 @@ function drawFooter() { ?>
             </main>
 
             <footer>
-            <div id = "footer_contents">
-                <div id ="contacts">
-                    <h3>Contacts</h3>
-                    <p>Our phone number: 000 000 000</p>
-                    <p>Our email: example@gmail.com</p>
+                <div id = "footer_contents">
+                    <div id ="contacts">
+                        <h3>Contacts</h3>
+                        <p>Our phone number: 000 000 000</p>
+                        <p>Our email: example@gmail.com</p>
+                    </div>
+                    <div id = "authors">
+                        <h3>Made by</h3>
+                        <p>Alexandre Lopes</p>
+                        <p>Lucas Faria</p>
+                        <p>Rafael Campeão</p>
+                    </div>
                 </div>
-                <div id = "authors">
-                    <h3>Made by</h3>
-                    <p>Alexandre Lopes</p>
-                    <p>Lucas Faria</p>
-                    <p>Rafael Campeão</p>
-                </div>
-            </div>
-            <p>&copy; Vintage Lovers 2024</p>
+                <p>&copy; Vintage Lovers 2024</p>
             </footer>
         </body>
     </html>
@@ -101,11 +103,11 @@ function drawHeaderLogin() { ?>
     </div>
 <?php }
 
-function drawLogout(Session $session){ ?>
-    <form action="../actions/action_logout.php" method="post" class="logout">
-        <a href="../pages/profile.php"><?=$session->getUserName()?></a>
-        <button type="submit">Logout</button>
-    </form>
+function drawLoggedInIcons(){ ?>
+    <div id= "logged_icons">
+        <a href = ""><img src = "../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
+        <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id =" profile_icon" ></a>
+    </div>
 <?php }
 
 function displayMessages(Session $session){ ?>
