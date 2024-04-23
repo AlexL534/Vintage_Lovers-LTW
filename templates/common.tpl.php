@@ -15,7 +15,7 @@ function drawHeader(Session $session) { ?>
         <head>
         <body>
             <header>
-                   <img src="../docs/Logo3.png" alt= "logo" id = "logo">
+                   <a href="../pages/index.php"><img src="../docs/Logo3.png" alt= "logo" id = "logo"></a>
                    <form>
                         <input type="search" name="search" placeholder="Search for a brand, condition, ...">
                     </form>
@@ -28,9 +28,10 @@ function drawHeader(Session $session) { ?>
             <nav id= "menu">
                 <input type="checkbox" id="menu_button"> 
                 <menu>
-                    <li><a href="">shoes</a></li>
-                    <li><a href="">shirts</a></li>
-                    <li><a href="">pants</a></li>
+                    <li><a href="">Shoes</a></li>
+                    <li><a href="">Shirts</a></li>
+                    <li><a href="">Pants</a></li>
+                    <li>All</li>
                 </menu>
             </nav>
             <main>
