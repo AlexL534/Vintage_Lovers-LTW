@@ -11,7 +11,7 @@ body{
 
 body > header{
     display: grid;
-    grid-template-columns: 10em auto 8em;
+    grid-template-columns: 10em auto 15em;
     grid-template-rows: 5em;   
 }
 body > header img{

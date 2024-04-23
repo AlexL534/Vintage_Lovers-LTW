@@ -19,7 +19,7 @@ function drawHeader(Session $session) { ?>
                         <input type="search" name="search" placeholder="Search for a brand, condition, ...">
                     </form>
                     <?php
-                        if($session->isLoggedIn()) drawLogout($session);
+                        if($session->isLoggedIn()) drawLogout();
                         else drawHeaderLogin();
                     ?>
             </header>
@@ -67,9 +67,10 @@ function drawHeaderLogin() { ?>
     </div>
 <?php }
 
-function drawLogout(Session $session){ ?>
+function drawLogout(){ ?>
     <form action="../actions/action_logout.php" method="post" class="logout">
-        <a href="../pages/profile.php"><?=$session->getUserName()?></a>
+        <a href = ""><img src = "../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
+        <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id =" profile_icon" ></a>
         <button type="submit">Logout</button>
     </form>
 <?php }

@@ -56,6 +56,22 @@ body > header input[type = "search"]{
    margin-bottom: 1em;
 }
 
+.logout {
+   margin: 1em;
+   display: grid;
+   grid-template-rows: auto;
+   grid-template-columns: auto auto auto;
+}
+
+.logout img{
+   width: 30px;
+}
+.logout button{
+   grid-column: 3;
+   align-self: center;
+}
+
+
 /*Menu*/
 
 nav{
