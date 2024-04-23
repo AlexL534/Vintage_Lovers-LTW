@@ -28,7 +28,7 @@ function drawAddInfoForm($filterType) {?>
         <form action="../actions/action_add_filter.php" method="post">
             <label>Name: <input type="text" name="name" required></label>
             <?php if ($filterType === 'category' || $filterType === 'condition'): ?>
-            <label>Description: <input type="text" name="description" required></label>
+            <label>Description: <input type="text" name="description"></label>
             <?php endif; ?>
             <input type="submit" name="add" value="Add">
         </form>
@@ -180,10 +180,10 @@ function displayProductResults($products, $searchEnabled) {
     if (!empty($products)) {
         ?>
         <section id="productList">
-            <ul>
-                <?php if (!$searchEnabled) { ?> 
+            <?php if (!$searchEnabled) { ?> 
                     <a href="../pages/seller_add_product.php">+</a>
-                <?php } ?>
+            <?php } ?>
+            <ul>
                 <?php foreach ($products as $product) { ?>
                     <li>
                         <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
@@ -212,7 +212,7 @@ function drawAddProductForm() {
         <h2>Add Product</h2>
     </header>
     <section id="addProductForm">
-        <form action="../actions/add_product.php" method="post">
+        <form action="../actions/action_add_product.php" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" required>

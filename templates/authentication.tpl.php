@@ -35,7 +35,7 @@ function drawLogin(Session $session){?>
 
 <?php }
 
-function drawSignup(Session $session){?>
+function drawSignup2(Session $session){?>
 
     <section id = "signup">
         <header>
@@ -62,7 +62,7 @@ function drawSignup(Session $session){?>
             <label>
                 Password:
                 <input type = "password" name = "password" required>
-            <label>
+            </label>
             <input type="submit" name = "register" value="Register">
         </form>
 

@@ -17,7 +17,7 @@
         $session->setUsername($user->getUsername());
         $session->addMessage('success', 'Login successful');
 
-        header('Location: ../pages/index.php' );
+        header('Location: ../pages/main_page.php' );
 
     } else{
         $session->addMessage('error', 'Wrong password!');

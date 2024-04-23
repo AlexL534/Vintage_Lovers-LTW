@@ -1,64 +1,18 @@
-
-body{
-    margin: 0 auto;
-
-    display: grid;
-    grid-template-rows: [header] 5em [menu] 2em [main] auto [footer] 5em;
-}
-
-/* header */
-
-body > header{
-    grid-row-start: header;
-    grid-row-end: menu;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: 5em ;
-    background-color: #D9D9D9 ;   
-}
-body > header img{
-    grid-column: 1;
-}
-
-body > header form{
-    grid-column: 2;
-}
-
-body > header .login{
-    grid-column: 3;
-}
-
-body > header .logout{
-    grid-column: 3;
-}
-
-/* menu */
-body > nav{
-    grid-row-start: menu;
-    grid-row-end: main;
-}
-
 body > nav #menu_button{
     display: none;
 }
 
+body > nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
 body > nav menu{
     display: flex;
     flex-direction: row;
-}
+    gap: 2em;
+    justify-content: space-between;
+    flex: 1
 
-body > nav li {
-    display: block;
-    flex: 1;
-}
-
-
-/* main */
-body > main {
-    grid-row-start: main;
-    grid-row-end:  footer;
-}
-
-body > footer{
-    grid-row: footer
 }

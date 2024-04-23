@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 
 require_once(__DIR__ . '/../utils/sessions.php');
-//change in name related to problem written down there
+//change in name related to problem written down there, also changed drawSignup2
 function drawHeader2(Session $session) { ?> 
     <!DOCTYPE html>
     <html lang="en-US">
@@ -74,13 +74,20 @@ function drawFooter() { ?>
             </main>
 
             <footer>
-                <p>Our phone number: 000 000 000</p>
-                <p>Our email: example@gmail.com</p>
-                <h6>site made by</h6>
-                <p>Alexandre Lopes</p>
-                <p>Lucas Faria</p>
-                <p>Rafael Campeão</p>
-                <p>&copy; Vintage Lovers 2024<p>
+            <div id = "footer_contents">
+                <div id ="contacts">
+                    <h3>Contacts</h3>
+                    <p>Our phone number: 000 000 000</p>
+                    <p>Our email: example@gmail.com</p>
+                </div>
+                <div id = "authors">
+                    <h3>Made by</h3>
+                    <p>Alexandre Lopes</p>
+                    <p>Lucas Faria</p>
+                    <p>Rafael Campeão</p>
+                </div>
+            </div>
+            <p>&copy; Vintage Lovers 2024</p>
             </footer>
         </body>
     </html>

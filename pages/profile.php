@@ -15,6 +15,6 @@ if(!isset($_SESSION['Username'])){
 $db = getDatabaseConnection();
 
 $user = User::getUser($db, $session->getId());
-drawHeader($session);
+drawHeader2($session);
 drawProfile($db, $user);
 drawFooter();
