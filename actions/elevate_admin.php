@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['user_id'])) {
         $userId = $_POST['user_id'];
 
-        $stmt = $db->prepare("UPDATE users SET is_admin = 1 WHERE id = ?");
+        $stmt = $db->prepare("UPDATE users SET is_admin = 0 WHERE id = ?");
         $stmt->execute([$userId]);
 
         header("Location: {$_SERVER['HTTP_REFERER']}");

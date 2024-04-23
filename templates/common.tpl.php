@@ -13,7 +13,7 @@ function drawHeader() { ?>
                    <img src="../docs/Logo3.png" alt= "logo">
                    <form>
                         <input type="search" name="search" placeholder="type">
-                    <form>
+                    </form>
             </header>
             <?php drawSignUp()?>
             <nav id= "menu">

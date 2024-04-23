@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../database/database_connection.db.php');
-require_once(__DIR__ . '/../database/user.class.php');
-require_once(__DIR__ . '/../database/product.class.php');
+require_once(__DIR__ . '/../classes/user.class.php');
+require_once(__DIR__ . '/../classes/product.class.php');
 
 function drawFilterTypes() {
     ?>
@@ -20,25 +20,17 @@ function drawFilterTypes() {
     <?php
 }
 
-function drawAddInfoForm($filterType) {
-    ?>
-    <header>
-        <h2><?php echo ucfirst($filterType); ?></h2>
-    </header>
+function drawAddInfoForm($filterType) {?>
     <section id="addInfoForm">
-        <form action="/../actions/add_filter.php" method="post">
-            <input type="hidden" name="type" value="<?php echo $filterType; ?>">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <?php if ($filterType === 'category' || $filterType === 'condition'): ?>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" required>
-                </div>
-                <?php endif; ?>
-                <button type="submit">Add</button>
+        <header>
+            <h2><?php echo ucfirst($filterType); ?></h2>
+        </header>
+        <form action="../actions/add_filter.php" method="post">
+            <label>Name: <input type="text" name="name" required></label>
+            <?php if ($filterType === 'category' || $filterType === 'condition'): ?>
+            <label>Description: <input type="text" name="description" required></label>
+            <?php endif; ?>
+            <input type="submit" name="add" value="Add">
         </form>
     </section>
     <?php
@@ -68,7 +60,7 @@ function drawUserList() {
             <h2>User List</h2>
         </header>
         <section id="userSearch">
-            <form action="" method="get">
+            <form action="" method="post">
                 <label for="search">Search for user</label>
                 <input type="text" id="search" name="search">
                 <button type="submit">Search</button>
@@ -77,8 +69,8 @@ function drawUserList() {
         </section>
         <?php
 
-        if (isset($_GET['action']) && $_GET['action'] === 'search') {
-            $searchQuery = $_GET['search'];
+        if (isset($_POST['action']) && $_POST['action'] === 'search') {
+            $searchQuery = $_POST['search'];
             $searchResults = searchUsers($searchQuery);
             
             if (!empty($searchResults)) {
@@ -112,7 +104,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo $user->getUsername(); ?></span>
                                 <span class="email"><?php echo $user->getEmail(); ?></span>
-                                <form action="/../actions/elevate_admin.php" method="post">
+                                <form action="../actions/elevate_admin.php" method="post">
                                     <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
@@ -158,7 +150,7 @@ function drawProductList($searchEnabled = true) {
         if ($searchEnabled) {
             ?>
             <section id="productSearch">
-                <form action="" method="get">
+                <form action="" method="post">
                     <label for="search">Search for product</label>
                     <input type="text" id="search" name="search">
                     <button type="submit">Search</button>
@@ -169,8 +161,8 @@ function drawProductList($searchEnabled = true) {
         }
 
         // Process search or display all products
-        if (isset($_GET['action']) && $_GET['action'] === 'search') {
-            $searchQuery = $_GET['search'];
+        if (isset($_POST['action']) && $_POST['action'] === 'search') {
+            $searchQuery = $_POST['search'];
             $searchResults = searchProducts($searchQuery);
             displayProductResults($searchResults, $searchEnabled); 
         } else {
@@ -190,14 +182,18 @@ function displayProductResults($products, $searchEnabled) {
         <section id="productList">
             <ul>
                 <?php if (!$searchEnabled) { ?> 
-                    <a href="/../pages/seller_add_product.php"><?php echo '+'; ?></a>
+                    <a href="../pages/seller_add_product.php">+</a>
                 <?php } ?>
                 <?php foreach ($products as $product) { ?>
                     <li>
                         <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
                         <button class="check-info-btn">Check info</button>
-                        <button class="delete-  ">Delete</button>
-                        <?php if (!$searchEnabled) { ?> <!-- Display update info button only if search is not enabled -->
+                        <form action="../actions/delete_product.php" method="post" class="delete-form">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                        <?php if (!$searchEnabled) { ?>
                             <button class="update-info-btn" data-product-id="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">Update Info</button>
                         <?php } ?>
                     </li>
@@ -213,23 +209,23 @@ function displayProductResults($products, $searchEnabled) {
 function drawAddProductForm() {
     ?>
     <header>
-        <h2>Add Product Info</h2>
+        <h2>Add Product</h2>
     </header>
     <section id="addProductForm">
-        <form action="/../actions/add_product.php" method="post">
+        <form action="../actions/add_product.php" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" name="name" id="name" required>
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
-                <input type="text" id="description" name="description" required>
+                <input type="text" name="description" id="description" required>
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="number" id="price" name="price" required step="0.01" min="0">
+                <input type="number" name="price" step="0.01" min="0" id="price" required>
             </div>
-            <button type="submit" name="submit">Add</button>
+            <input type="submit" value="submit">
         </form>
     </section>
     <?php

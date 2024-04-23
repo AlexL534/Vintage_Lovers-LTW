@@ -1,11 +1,8 @@
-<?php //NOT WORKING NOT WORKING NOT WORKING NOT WORKING NOT WORKING NOT WORKING NOT WORKING NOT WORKING NOW WORKING NOW WORK
-require_once(__DIR__ . '/../database_connection.db.php');
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $description = isset($_POST['description']) ? $_POST['description'] : '';
-    $type = $_POST['type']; 
-
+<?php
+declare(strict_types=1);
+require_once(__DIR__ . '/../database/database_connection.db.php');
+error_log('1');
+function addFilterToDatabase($type, $name, $description = '') {
     try {
         $db = getDatabaseConnection();
         switch ($type) {
@@ -25,25 +22,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt = $db->prepare("INSERT INTO BRAND (name) VALUES (:name)");
                 break;
             default:
-                echo "Invalid filter type";
-                exit(); // Stop execution
+                throw new Exception("Invalid filter type");
         }
 
         $stmt->bindParam(':name', $name);
         if ($type === 'category' || $type === 'condition') {
             $stmt->bindParam(':description', $description);
-        }
+        }   
 
         if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        throw new Exception("Database error: " . $e->getMessage());
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $description = isset($_POST['description']) ? $_POST['description'] : '';
+    $type = $_POST['type']; 
+
+    try {
+        if (addFilterToDatabase($type, $name, $description)) {
             echo "The " . $type . ' ' . $name . ' was added.    ';
             header("Location: admin_specific_filter.php?type=".$type);
             exit();
-        }   
-        else {
+        } else {
             echo "Failed to add " . $type . ' ' . $name;
         }
-        
-    } catch (PDOException $e) {
+    } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
 } else {

@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     try {
         $db = getDatabaseConnection();
-
         $stmt = $db->prepare("INSERT INTO PRODUCTS (name, description, price) VALUES (?, ?, ?)");
         $stmt->execute([$name, $description, $price]);
         echo $name . " was successfully added.";
