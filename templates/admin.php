@@ -244,6 +244,7 @@ function drawUpdateInfoForm($product_id) {
     </header>
     <section id="updateProductForm">
         <form action="../actions/action_update_product.php" method="post">
+        <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
         <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($productName); ?>" required>
