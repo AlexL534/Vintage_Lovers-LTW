@@ -9,8 +9,9 @@ function drawHeader2(Session $session) { ?>
         <head>
             <title>Vintage Lovers </title>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="../css/style.css">
-            <link rel="stylesheet" href="../css/layout.css">
+            <link rel="stylesheet" href="../css/general_style.css">
+            <link rel="stylesheet" href="../css/general_layout.css">
+            <link rel="stylesheet" href="../css/general_responsive.css">
         </head>
         <body>
             <header>

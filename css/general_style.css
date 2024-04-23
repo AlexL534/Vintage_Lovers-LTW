@@ -5,20 +5,16 @@
 
 body{
    font-family: "Inter";
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-
-/*header*/
-
-body{
-   font-family: "Inter";
+   --light_gray : #E8E8E8;
+   --medium_gray: #D9D9D9;
+   --medium_gray2: #696565;
+   --dark_gray : #333333;
+   --light_red: #F08D8D;
+   --dark_red: #EF5454;
 }
 
 body > header {
-   background-color: #E8E8E8 ; 
-   background-color: #E8E8E8 ; 
+   background-color: var(--light_gray) ; 
 }
 
 #logo{
@@ -66,20 +62,31 @@ body > header input[type = "search"]{
    margin-bottom: 1em;
 }
 
+#logged_icons{
+   margin: 0.5em;
+
+}
+
+#logged_icons img{
+   width: 30px;
+}
+
+
+
 /*Menu*/
 
 nav{
-   background-color: #D9D9D9;
+   background-color: var(--medium_gray);
 }
 
 nav menu{
    margin: 0;
    padding: 0;
-   max-width: fit-content;
+   max-width: 50em;
 }
 
 nav menu li {
-   background-color: #F08D8D;
+   background-color: var(--light_red);
    border-radius: 1em;
    text-align: center;
    min-width: 5em;
@@ -91,8 +98,7 @@ nav menu li {
 }
 
 nav menu li:hover {
-   background-color: #EF5454;
-
+   background-color: var(--dark_red);
    box-shadow: 1px 3px 1px 1px grey;
 }
 
@@ -108,10 +114,10 @@ nav menu li a{
 /*footer*/
 
 body > footer{
-   background-color: #333333 ;
+   background-color: var(--dark_gray) ;
 }
 
-body > footer #footer_contents {
+#footer_contents {
    border-bottom: 1px solid white;
    margin: 0 10em 1em 10em;
 } 
