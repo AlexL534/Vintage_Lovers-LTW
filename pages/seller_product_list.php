@@ -11,7 +11,7 @@ if (!$session->isLoggedIn()) {
     exit;
 }
 
-drawHeader2($session);
+drawHeader($session);
 drawProductList(false); 
 drawFooter(); 
 

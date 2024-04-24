@@ -10,7 +10,7 @@ if (!$session->isLoggedIn()) {
     exit;
 }
 
-drawHeader2($session);
+drawHeader($session);
 drawAddProductForm();
 drawFooter();
 ?>

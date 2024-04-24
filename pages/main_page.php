@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../utils/sessions.php');
 $db = getDatabaseConnection();
 $session = new Session();
-drawHeader2($session);
+drawHeader($session);
 
 ?>
 

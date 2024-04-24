@@ -35,7 +35,7 @@ function drawLogin(Session $session){?>
 
 <?php }
 
-function drawSignup2(Session $session){?>
+function drawSignup(Session $session){?>
 
     <section id = "signup">
         <header>

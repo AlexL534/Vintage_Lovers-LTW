@@ -14,7 +14,7 @@ if (!$session->isLoggedIn() || !$admin) {
     exit; 
 }
 
-drawHeader2($session);
+drawHeader($session);
 drawUserList(); 
 drawFooter();
 

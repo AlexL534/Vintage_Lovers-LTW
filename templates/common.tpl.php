@@ -2,8 +2,7 @@
 declare(strict_types = 1);
 
 require_once(__DIR__ . '/../utils/sessions.php');
-//change in name related to problem written down there, also changed drawSignup2
-function drawHeader2(Session $session) { ?> 
+function drawHeader(Session $session) { ?> 
     <!DOCTYPE html>
     <html lang="en-US">
         <head>
@@ -39,40 +38,7 @@ function drawHeader2(Session $session) { ?>
             <main>
                 
     <?php }
-//this is just because my pages are not ready to use header with session parameter - Alex
-function drawHeader() { ?> 
-    <!DOCTYPE html>
-    <html lang="en-US"> 
-        <head>
-            <title>Vintage Lovers </title>
-            <meta charset="utf-8">
-        </head>
-        <body>
-            <header>
-                    <img src="../docs/Logo3.png" alt= "logo">
-                    <form>
-                        <input type="search" name="search" placeholder="type">
-                    </form>
-            </header>
-            <?php drawSignUp()?>
-            <nav id= "menu">
-                <input type="checkbox" id="menu_button"> 
-                <menu>
-                    <li><a href="">shoes</a></li>
-                    <li><a href="">shirts</a></li>
-                    <li><a href="">pants</a></li>
-                </menu>
-            </nav>
-            <main>
-                
-<?php }
-function drawSignUp() { ?>
-    <div id="credentials">
-        <a href="">Register</a>
-        <a href="">Login</a>
-    </div>
-<?php } 
-//when it's ready, delete from previous comment until this one
+
 function drawFooter() { ?>
             </main>
 

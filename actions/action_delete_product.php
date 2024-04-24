@@ -1,5 +1,9 @@
 <?php
-require_once(__DIR__ . '/../database/database_connection.db.php'); 
+require_once(__DIR__ . '/../database/database_connection.db.php');
+
+$message = '';
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'delete') {
     if (isset($_POST['product_id'])) {
         $db = getDatabaseConnection();
@@ -8,16 +12,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
             $stmt = $db->prepare("DELETE FROM PRODUCTS WHERE id = ?");
             $stmt ->execute([$product_id]);
 
-            echo "Product deleted successfully.";
+            $message = "Product deleted successfully.";
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            $message = "Error: " . $e->getMessage();
         }
     } else {
-        echo "Error: Product ID is missing.";
+        $message = "Error: Product ID is missing.";
         exit();
     }
 } else {
-    echo "Error: Invalid request.";
+    $message = "Error: Invalid request.";
     exit();
 }
+echo $message;
 ?>
