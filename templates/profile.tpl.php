@@ -34,7 +34,7 @@ function drawUserInfo(PDO $db, User $user){
                 $user->getIsAdmin() == 1 ? $type = "Admin" :  $type = "Seller" ;
                 echo $type;
             ?></li>
-            <li>Number of Owned itens: <?= count($user->getUserOwnedItens($db)); ?></li>
+            <li>Number of owned itens: <?= count($user->getUserOwnedItens($db)); ?></li>
         </ul>
     </article>
 <?php }
