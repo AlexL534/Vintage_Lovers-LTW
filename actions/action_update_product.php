@@ -11,11 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $db = getDatabaseConnection();
         $stmt = $db->prepare("UPDATE PRODUCTS SET name = ?, description = ?, price = ? WHERE id = ?");
         $stmt->execute([$name, $description, $price, $product_id]);
-        echo $name . " was successfully updated.";
+        
+        // Redirect back to the previous page
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit();
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
+        exit();
     }
 } else {
     echo "Invalid request method or form submission.";
+    exit();
 }
 ?>

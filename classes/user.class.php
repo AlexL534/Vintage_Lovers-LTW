@@ -55,7 +55,7 @@ class User{
         
         $products = array();
         while($productDB = $stmt->fetch()){
-            $product = new Product(
+                $product = new Product(
                 $productDB['id'],
                 $productDB['price'],
                 $productDB['quantity'],

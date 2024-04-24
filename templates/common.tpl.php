@@ -12,7 +12,7 @@ function drawHeader(Session $session) { ?>
             <link rel="stylesheet" href="../css/general_layout.css">
             <link rel="stylesheet" href="../css/general_responsive.css">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <head>
+        </head>
         <body>
             <header>
                    <a href="../pages/main_page.php"><img src="../docs/Logo3.png" alt= "logo" id = "logo"></a>
@@ -72,7 +72,7 @@ function drawHeaderLogin() { ?>
 function drawLoggedInIcons(){ ?>
     <div id= "logged_icons">
         <a href = ""><img src = "../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
-        <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id =" profile_icon" ></a>
+        <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id ="profile_icon" ></a>
     </div>
 <?php }
 
