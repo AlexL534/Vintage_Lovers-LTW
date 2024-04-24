@@ -208,6 +208,9 @@ function displayProductResults($products, $searchEnabled) {
 }
 
 function drawAddProductForm() {
+    $db = getDatabaseConnection();
+    $brands = $db->query("SELECT brandID, name FROM BRAND")->fetchAll(PDO::FETCH_ASSOC);
+    $categories = $db->query("SELECT categoryID, name FROM CATEGORY")->fetchAll(PDO::FETCH_ASSOC);
     ?>
     <header>
         <h2>Add Product</h2>
@@ -221,6 +224,22 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="description">Description:</label>
                 <input type="text" name="description" id="description" required>
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <select name="brand" id="brand" required>
+                    <?php foreach ($brands as $brand): ?>
+                        <option value="<?= $brand['brandID']; ?>"><?= htmlspecialchars($brand['name']); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select name="category" id="category" required>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?= $category['categoryID']; ?>"><?= htmlspecialchars($category['name']); ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
