@@ -2,8 +2,7 @@
 declare(strict_types = 1);
 
 require_once(__DIR__ . '/../utils/sessions.php');
-
-function drawHeader(Session $session) { ?>
+function drawHeader(Session $session) { ?> 
     <!DOCTYPE html>
     <html lang="en-US">
         <head>
@@ -15,7 +14,7 @@ function drawHeader(Session $session) { ?>
             <link rel="stylesheet" href="../css/main_style.css">
             <link rel="stylesheet" href="../css/general_responsive.css">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <head>
+        </head>
         <body>
             <header>
                    <a href="../pages/main_page.php"><img src="../docs/Logo3.png" alt= "logo" id = "logo"></a>
@@ -62,7 +61,7 @@ function drawFooter() { ?>
                 <p>&copy; Vintage Lovers 2024</p>
             </footer>
         </body>
-    <html>
+    </html>
 <?php }
 
 function drawHeaderLogin() { ?>
@@ -75,7 +74,7 @@ function drawHeaderLogin() { ?>
 function drawLoggedInIcons(){ ?>
     <div id= "logged_icons">
         <a href = ""><img src = "../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
-        <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id =" profile_icon" ></a>
+        <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id ="profile_icon" ></a>
     </div>
 <?php }
 

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types = 1);
+require_once(__DIR__ . '/../classes/product.class.php');
 
 function drawProfile(PDO $db, User $user){
     //draws the user profile (info and user/admin options)
@@ -33,8 +34,7 @@ function drawUserInfo(PDO $db, User $user){
                 $user->getIsAdmin() == 1 ? $type = "Admin" :  $type = "Seller" ;
                 echo $type;
             ?></li>
-            <li>Number of Owned itens: <?= count($user->getUserOwnedItens($db)); ?></li>
-
+            <li>Number of owned items: <?= count($user->getUserOwnedItems($db)); ?></li>
         </ul>
     </article>
 <?php }
