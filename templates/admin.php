@@ -82,7 +82,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo $user['username']; ?></span>
                                 <span class="email"><?php echo $user['email']; ?></span>
-                                <form action="admin_elevate_user.php" method="post">
+                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
                                     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
@@ -105,7 +105,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo $user->getUsername(); ?></span>
                                 <span class="email"><?php echo $user->getEmail(); ?></span>
-                                <form action="../actions/action_elevate_admin.php" method="post">
+                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
                                     <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
