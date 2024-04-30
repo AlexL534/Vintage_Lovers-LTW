@@ -6,7 +6,7 @@
     $session = new Session();
 
     require_once(__DIR__ . '/../database/database_connection.db.php');
-    require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../classes/user.class.php');
 
     $db = getDatabaseConnection();
 
