@@ -55,7 +55,7 @@ class User{
         
         $products = array();
         while($productDB = $stmt->fetch()){
-            $product = new Product(
+                $product = new Product(
                 $productDB['id'],
                 $productDB['price'],
                 $productDB['quantity'],
@@ -92,6 +92,30 @@ class User{
         );
 
     }
+
+    static function getAllUsers(PDO $db): array {
+        $stmt = $db->prepare('
+            SELECT id, name, username, email, password, is_admin
+            FROM USERS
+        ');
+        
+        $stmt->execute();
+        
+        $users = [];
+        while ($user = $stmt->fetch()) {
+            $users[] = new User(
+                $user['id'],
+                $user['name'],
+                $user['username'],
+                $user['email'],
+                $user['password'],
+                $user['is_admin']
+            );
+        }
+    
+        return $users;
+    }
+    
 
     static function getUserByPassword(PDO $db, string $email, string $password){
         $stmt = $db->prepare(
