@@ -8,25 +8,30 @@ $db = getDatabaseConnection();
 $session = new Session();
 drawHeader($session);
 
-?>
+?>  <header id= "main_header">
+        <img src = "../assets/main_image.jpg" alt = "clothes">
+        <h2>Buy and Sell Pre-loved Clothes</h2>
+    </header>
+    <section id = "main_products">
+        <div id="selectProducts">
+            <h4>Products for you</h4>
 
-    <h2>Buy and Sell Pre-loved Clothes</h2>
-    <div id="selectPorducts">
-        <h4>Products for you</h4>
-
-        
-        <?php 
             
-            $products = product::getProductByPrice($db,3,100);
-            foreach($products as $product){ ?>
-                <a href=""><?= $product->getName();  ?></a>
-                <p><?= $product->getPrice(); ?></p>
+            <?php 
+                
+                $products = product::getProductByPrice($db,3,100);
+                foreach($products as $product){ ?>
+                <article>
+                    <a href=""><?= $product->getName();  ?></a>
+                    <p><?= $product->getPrice(); ?></p>
+                </article>    
 
-        <?php } ?>
+            <?php } ?>
+                
             
-        
-        
-    </div>
+            
+        </div>
+    </section>
 
 <?php 
     drawFooter();

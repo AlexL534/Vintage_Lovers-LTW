@@ -11,6 +11,8 @@ function drawHeader(Session $session) { ?>
             <meta charset="utf-8">
             <link rel="stylesheet" href="../css/general_style.css">
             <link rel="stylesheet" href="../css/general_layout.css">
+            <link rel="stylesheet" href="../css/main_layout.css">
+            <link rel="stylesheet" href="../css/main_style.css">
             <link rel="stylesheet" href="../css/general_responsive.css">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <head>
