@@ -16,15 +16,6 @@ drawHeader($session);
         <div id="selectProducts">
             <h4>Products for you</h4>
 
-<<<<<<< HEAD
-=======
-    <h2>Buy and Sell Pre-loved Clothes</h2>
-    <div id="selectProducts">
-        <h4>Products for you</h4>
-
-        
-        <?php 
->>>>>>> 7608cbdd013512caa29fa5ee4eba1d301d08cc8f
             
             <?php 
                 
