@@ -67,6 +67,13 @@ VALUES
     (2,2),
     (3,3);
 
+INSERT INTO IMAGES (path, productID)
+VALUES
+    ("images/canvas-shoes.jpg", 2),
+    ("images/jeans.jpg", 1),
+    ("images/leather_jacket.jpg", 3),
+    ("images/t-shirt.jpg", 4)
+
 
 
 
