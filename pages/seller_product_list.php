@@ -12,7 +12,7 @@ if (!$session->isLoggedIn()) {
 }
 
 drawHeader($session);
-drawProductList(false); 
+drawProductList(false, $session); 
 drawFooter(); 
 
 ?>

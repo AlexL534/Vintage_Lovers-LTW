@@ -140,7 +140,7 @@ function searchProducts($searchQuery) {
     }
 }
 
-function drawProductList($searchEnabled = true) {
+function drawProductList($searchEnabled = true, $session) {
     try {
         ?>
         <header>
@@ -169,14 +169,14 @@ function drawProductList($searchEnabled = true) {
         } else {
             $db = getDatabaseConnection();
             $products = Product::getAllProducts($db);
-            displayProductResults($products, $searchEnabled);
+            displayProductResults($products, $searchEnabled, $session);
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 }
 
-function displayProductResults($products, $searchEnabled) {
+function displayProductResults($products, $searchEnabled, $session) {
     // Display products
     if (!empty($products)) {
         ?>
@@ -185,20 +185,26 @@ function displayProductResults($products, $searchEnabled) {
                     <a href="../pages/seller_add_product.php">+</a>
             <?php } ?>
             <ul>
-                <?php foreach ($products as $product) { ?>
-                    <li>
-                        <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
-                        <button class="check-info-btn">Check info</button>
-                        <form action="../actions/action_delete_product.php" method="post" class="delete-form">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">
-                            <button type="submit" class="delete-btn">Delete</button>
-                        </form>
-                        <?php if (!$searchEnabled) { ?>
-                            <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>"><?php echo 'Update Info'; ?></a>
-                        <?php } ?>
-                    </li>
-                <?php } ?>
+                <?php foreach ($products as $product) {
+                    // Check if the product belongs to the logged-in user
+                    $ownerId = $product instanceof Product ? $product->getOwner() : $product['owner'];
+                    $loggedInUserId = $session->getId(); // Assuming $session is accessible here
+
+                    if ($ownerId === $loggedInUserId) { ?>
+                        <li>
+                            <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
+                            <button class="check-info-btn">Check info</button>
+                            <form action="../actions/action_delete_product.php" method="post" class="delete-form">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                            <?php if (!$searchEnabled) { ?>
+                                <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>"><?php echo 'Update Info'; ?></a>
+                            <?php } ?>
+                        </li>
+                <?php }
+                } ?>
             </ul>
         </section>
         <?php
