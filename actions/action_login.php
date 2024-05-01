@@ -9,10 +9,13 @@
     require_once(__DIR__ . '/../classes/user.class.php');
 
     $db = getDatabaseConnection();
+    $password = $_POST['password'];
+    $email = strtolower($_POST['email']);
 
-    $user = User::getUserByPassword($db, $_POST['email'] , $_POST['password']);
+
+    $user = User::getUserByEmail($db, $email);
   
-    if($user){
+    if($user && password_verify($password, $user->getPassword())){
         $session->setId($user->getID());
         $session->setUsername($user->getUsername());
         $session->addMessage('success', 'Login successful');

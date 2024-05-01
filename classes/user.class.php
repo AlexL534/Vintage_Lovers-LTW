@@ -138,6 +138,27 @@ class User{
         } else return null;
     }
 
+    static function getUserByEmail(PDO $db, string $email){
+        $stmt = $db->prepare(
+            'SELECT id, name,  username, email, password, is_admin
+            FROM USERS
+            WHERE email = ?'
+        );
+        
+        $stmt->execute(array($email));
+        if($user = $stmt->fetch()){
+
+            return new User(
+                $user['id'],
+                $user['name'],
+                $user['username'],
+                $user['email'],
+                $user['password'],
+                $user['is_admin'],
+            );
+        } else return null;
+    }
+
     static function emailExists(PDO $db, string $email) : bool{
         $stmt = $db->prepare(
             'SELECT email
