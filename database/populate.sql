@@ -67,12 +67,17 @@ VALUES
     (2,2),
     (3,3);
 
-INSERT INTO IMAGES (path, productID)
+INSERT INTO IMAGES (path) VALUES ('images/canvas-shoes.jpg');
+INSERT INTO IMAGES (path) VALUES ('images/jeans.jpg');
+INSERT INTO IMAGES (path) VALUES ('images/leather_jacket.jpg');
+INSERT INTO IMAGES (path) VALUES ('images/t-shirt.jpg');
+
+INSERT INTO IMAGES_OF_PRODUCT (imageID, productID)
 VALUES
-    ("images/canvas-shoes.jpg", 2),
-    ("images/jeans.jpg", 1),
-    ("images/leather_jacket.jpg", 3),
-    ("images/t-shirt.jpg", 4)
+    (1,2),
+    (2,1),
+    (3,3),
+    (4,4);
 
 
 
