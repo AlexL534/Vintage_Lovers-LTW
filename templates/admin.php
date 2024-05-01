@@ -80,10 +80,10 @@ function drawUserList() {
                     <ul>
                         <?php foreach ($searchResults as $user) { ?>
                             <li>
-                                <span class="username"><?php echo $user['username']; ?></span>
-                                <span class="email"><?php echo $user['email']; ?></span>
+                                <span class="username"><?php echo htmlentities($user['username']); ?></span>
+                                <span class="email"><?php echo htmlentities($user['email']); ?></span>
                                 <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                    <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
                             </li>
@@ -103,10 +103,10 @@ function drawUserList() {
                     <ul>
                         <?php foreach ($users as $user) { ?>
                             <li>
-                                <span class="username"><?php echo $user->getUsername(); ?></span>
-                                <span class="email"><?php echo $user->getEmail(); ?></span>
+                                <span class="username"><?php echo htmlentities($user->getUsername()); ?></span>
+                                <span class="email"><?php echo htmlentities($user->getEmail()); ?></span>
                                 <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                    <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>">
+                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
                             </li>
@@ -187,15 +187,15 @@ function displayProductResults($products, $searchEnabled, $session) {
                 <?php foreach ($products as $product) {
                     if ($searchEnabled) { ?>
                         <li>
-                            <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
+                            <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
                             <button class="check-info-btn">Check info</button>
                             <form action="../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                 <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">
+                                <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
                                 <button type="submit" class="delete-btn">Delete</button>
                             </form>
                             <?php if (!$searchEnabled) { ?>
-                                <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>"><?php echo 'Update Info'; ?></a>
+                                <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
                             <?php } ?>
                         </li>
                     <?php } else {
@@ -204,15 +204,15 @@ function displayProductResults($products, $searchEnabled, $session) {
 
                         if ($ownerId === $loggedInUserId) { ?>
                             <li>
-                                <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
+                                <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
                                 <button class="check-info-btn">Check info</button>
                                 <form action="../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">
+                                    <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
                                     <button type="submit" class="delete-btn">Delete</button>
                                 </form>
                                 <?php if (!$searchEnabled) { ?>
-                                    <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>"><?php echo 'Update Info'; ?></a>
+                                    <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
                                 <?php } ?>
                             </li>
                     <?php }
