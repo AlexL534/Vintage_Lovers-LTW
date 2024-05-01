@@ -165,7 +165,7 @@ function drawProductList($searchEnabled = true, $session) {
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
             $searchQuery = $_POST['search'];
             $searchResults = searchProducts($searchQuery);
-            displayProductResults($searchResults, $searchEnabled); 
+            displayProductResults($searchResults, $searchEnabled, $session); 
         } else {
             $db = getDatabaseConnection();
             $products = Product::getAllProducts($db);
