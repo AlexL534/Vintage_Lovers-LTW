@@ -123,3 +123,13 @@ body > footer{
 body > footer p, body > footer h3{
    color: white;
 }
+
+/*Style of the text in the product containers"*/
+
+.product_name, .product_price{
+   font-weight: 500;
+}
+
+.product_price::after{
+   content: '\20AC';
+}

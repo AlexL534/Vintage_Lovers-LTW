@@ -12,7 +12,7 @@ body{
 body > header{
     display: grid;
     grid-template-columns: 10em auto 10em;
-    grid-template-rows: 5em;   
+    grid-template-rows: 6em;   
 }
 body > header img{
     grid-column: 1;
