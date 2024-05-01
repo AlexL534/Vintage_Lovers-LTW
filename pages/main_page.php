@@ -27,8 +27,8 @@ drawHeader($session);
                 <a href="">
                     <article>
                         <img src = "../<?= $imagePath ?>" alt = "product image" >
-                        <p class= "product_name"><?= $product->getName();  ?></p>
-                        <p class= "product_price"><?= $product->getPrice(); ?></p>
+                        <p class= "product_name"><?= htmlentities($product->getName());  ?></p>
+                        <p class= "product_price"><?= htmlentities($product->getPrice()); ?></p>
                     </article> 
                 </a>   
 

@@ -27,9 +27,9 @@ function drawUserInfo(PDO $db, User $user){
     <article id="userInfo">
         <!-- Still need to put the image here -->
         <ul>
-            <li>Name: <?= $user->getName(); ?></li>
-            <li>Username: <?= $user->getUsername(); ?></li>
-            <li>Email: <?= $user->getEmail(); ?></li>
+            <li>Name: <?= htmlentities($user->getName()); ?></li>
+            <li>Username: <?= htmlentities($user->getUsername()); ?></li>
+            <li>Email: <?= htmlentities($user->getEmail()); ?></li>
             <li>User type: <?php 
                 $user->getIsAdmin() == 1 ? $type = "Admin" :  $type = "Seller" ;
                 echo $type;
