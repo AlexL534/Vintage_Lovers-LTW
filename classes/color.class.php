@@ -24,12 +24,12 @@ class Color{
 
     //querys
     static public function getColorById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM COLOR WHERE id = ?');
+        $stmt = $db->prepare('SELECT * FROM COLOR WHERE colorID = ?');
         $stmt->execute(array($id));
         $colorDB = $stmt->fetch(); 
 
         return new Color(
-            intval($colorDB['id']),
+            intval($colorDB['colorID']),
             $colorDB['name']
         );
     }
@@ -40,7 +40,7 @@ class Color{
         $colorDB = $stmt->fetch();
         
         return new Color(
-            intval($colorDB['id']),
+            intval($colorDB['colorID']),
             $colorDB['name']
         );
     }
@@ -50,7 +50,7 @@ class Color{
         $stmt->execute();
         $colors = array();
         while($colorDB = $stmt->fetch()){
-            $color= new Color(intval($colorDB['id']),$colorDB['name']);
+            $color= new Color(intval($colorDB['colorID']),$colorDB['name']);
 
             $colors[]=$color;
         }

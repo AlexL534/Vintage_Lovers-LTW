@@ -24,7 +24,7 @@ drawHeader($session);
                     $imagePathArray = getImagesPath($db, $product->getId());
                     $imagePath = $imagePathArray[0];
                 ?>
-                <a href="">
+                <a href="products.php?id=<?= $product->getId();?>">
                     <article>
                         <img src = "../<?= $imagePath ?>" alt = "product image" >
                         <p class= "product_name"><?= htmlentities($product->getName());  ?></p>

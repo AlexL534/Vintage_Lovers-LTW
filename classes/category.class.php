@@ -30,12 +30,12 @@ class Category{
 
     //querys
     static public function getCategoryById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM CATEGORY WHERE id = ?');
+        $stmt = $db->prepare('SELECT * FROM CATEGORY WHERE categoryID = ?');
         $stmt->execute(array($id));
         $categoryDB = $stmt->fetch(); 
 
         return new Category(
-            intval($categoryDB['id']),
+            intval($categoryDB['categoryID']),
             $categoryDB['name'],
             $categoryDB['description']
         );
@@ -47,7 +47,7 @@ class Category{
         $categoryDB = $stmt->fetch();
         
         return new Category(
-            intval($categoryDB['id']),
+            intval($categoryDB['categoryID']),
             $categoryDB['name'],
             $categoryDB['description']
         );
@@ -58,7 +58,7 @@ class Category{
         $stmt->execute();
         $categories = array();
         while($categoryDB = $stmt->fetch()){
-            $category= new Category(intval($categoryDB['id']),$categoryDB['name'],$categoryDB['description']);
+            $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);
 
             $categories[]=$category;
         }
