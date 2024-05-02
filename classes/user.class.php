@@ -44,7 +44,7 @@ class User{
         return $this->isadmin;
     }
 
-   public function getUserOwnedItems(PDO $db){
+    public function getUserOwnedItems(PDO $db){
         $stmt = $db->prepare('
             SELECT *
             FROM PRODUCTS
@@ -70,6 +70,16 @@ class User{
         }
 
         return $products;
+    }
+
+    public function deleteUser(PDO $db): bool {
+        try {
+            $stmt = $db->prepare("DELETE FROM users WHERE id = ?");
+            return $stmt->execute([$this->id]);
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function getUser(PDO $db, int $id){
