@@ -8,12 +8,11 @@ function drawLogin(Session $session){?>
 
 <section id = "login">
     <header>
-        <h1>Login<h2>
+        <h1>Login</h1>
     </header>
 
     <?php
         displayMessages($session);
-
     ?>
     
     <form action= "../actions/action_login.php" method="post" class= "login" >

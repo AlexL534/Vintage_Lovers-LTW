@@ -84,8 +84,8 @@ function displayMessages(Session $session){ ?>
     <section id="messages">
       <?php foreach ($session->getMessages() as $message) { ?>
 
-        <article class="<?=$message['type']?>">
-          <?=$message['text']?>
+        <article class="<?=htmlspecialchars($message['type'])?>">
+          <?=htmlspecialchars($message['text'])?>
         </article>
 
       <?php } ?>

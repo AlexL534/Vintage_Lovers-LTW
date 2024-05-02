@@ -9,33 +9,39 @@ require_once(__DIR__ . '/../classes/size.class.php');
 
 function getColorsOfProduct(PDO $db , int $id){
     $stmt = $db->prepare('SELECT colorID FROM COLORS_OF_PRODUCT WHERE productID = ?');
-    $stmt->execute(array($id));
-    $colors = array();
-    while($colorID=$stmt->fetch()){
+    $stmt->execute([$id]);
+    $colors = [];
+    while($colorID = $stmt->fetchColumn()){
         $color = Color::getColorById($db,intval($colorID));
-        $colors[] = $color;
+        if ($color) {
+            $colors[] = $color;
+        }
     }
     return $colors;
 }
 
 function getConditionsOfProduct(PDO $db , int $id){
     $stmt = $db->prepare('SELECT conditionID FROM CONDITION_OF_PRODUCT WHERE productID = ?');
-    $stmt->execute(array($id));
-    $conditions = array();
-    while($conditionID=$stmt->fetch()){
+    $stmt->execute([$id]);
+    $conditions = [];
+    while($conditionID=$stmt->fetchColumn()){
         $condition = Condition::getConditionById($db,intval($conditionID));
-        $conditions[] = $condition;
+        if ($condition) {
+            $conditions[] = $condition;
+        }
     }
     return $conditions;
 }
 
 function getSizesOfProduct(PDO $db , int $id){
     $stmt = $db->prepare('SELECT sizeID FROM SIZE_OF_PRODUCT WHERE productID = ?');
-    $stmt->execute(array($id));
-    $sizes = array();
-    while($sizeID=$stmt->fetch()){
-        $size = Size::getSizeById($db,intval($sizeID));
-        $sizes[] = $size;
+    $stmt->execute([$id]);
+    $sizes = [];
+    while ($sizeID = $stmt->fetchColumn()) {
+        $size = Size::getSizeById($db, (int)$sizeID);
+        if ($size) {
+            $sizes[] = $size;
+        }
     }
     return $sizes;
 }
@@ -52,25 +58,24 @@ function drawProductInfo(PDO $db, int $id){
     
 ?>
     <section class="productInfo">
-        <p>Price: <?=  $product->getPrice(); ?></p>
-        <p>Brand: <?= $brand->getName(); ?></p>
-        <p>Category: <?= $category->getName(); ?></p>
+        <p>Price: <?= htmlentities($product->getPrice()); ?></p>
+        <p>Brand: <?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p>
+        <p>Category: <?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p>
         <ul>
-            <?php foreach($colors as $color){ ?>
-                <p><?= $color->getName();?></p>
-            <?php }?>
+            <?php foreach ($colors as $color) { ?>
+                <li><?= htmlentities($color->getName()); ?></li>
+            <?php } ?>
         </ul>
         <ul>
-            <?php foreach($conditions as $condition){ ?>
-                <p><?= $condition->getName();?></p>
-            <?php }?>
+            <?php foreach ($conditions as $condition) { ?>
+                <li><?= htmlentities($condition->getName()); ?></li>
+            <?php } ?>
         </ul>
         <ul>
-            <?php foreach($sizes as $size){ ?>
-                <p><?= $size->getName();?></p>
-            <?php }?>
+            <?php foreach ($sizes as $size) { ?>
+                <li><?= htmlentities($size->getName()); ?></li>
+            <?php } ?>
         </ul>
     </section>
-
 <?php } ?>
 

@@ -58,7 +58,7 @@ function drawUserList() {
 
         $db = getDatabaseConnection();
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
-            $searchQuery = $_POST['search'];
+            $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
             $searchResults = User::searchUsers($db, $searchQuery);
             
             if (!empty($searchResults)) {
@@ -113,12 +113,12 @@ function displayAdminOrDeleteButton($user) {
         </form>
         <?php
     }
-        ?>
-        <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-            <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
-            <button type="submit" class="elevate-btn">Elevate to Admin</button>
-        </form>
-        <?php
+    ?>
+    <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
+        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+        <button type="submit" class="elevate-btn">Elevate to Admin</button>
+    </form>
+    <?php
 }
 
 
@@ -146,7 +146,7 @@ function drawProductList($searchEnabled = true, $session) {
 
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
             try {
-                $searchQuery = $_POST['search'];
+                $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
                 $db = getDatabaseConnection();
                 $searchResults = Product::searchProducts($db, $searchQuery);
                 displayProductResults($searchResults, $searchEnabled, $session);
