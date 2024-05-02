@@ -3,19 +3,29 @@ require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/product.class.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $productId = $_POST['product_id'];
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
+    $productId = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+    $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+
+    if (!$productId || !$name || !$description || !$price) {
+        echo "Error: Invalid input data.";
+        exit();
+    }
 
     try {
         $db = getDatabaseConnection();
         
-        if (Product::updateProduct($db, (int)$productId, $name, $description, (float)$price)) {
-            header("Location: " . $_SERVER['HTTP_REFERER']);
-            exit();
+        if (Product::productExists($db, $productId)) {
+            if (Product::updateProduct($db, $productId, $name, $description, $price)) {
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+                exit();
+            } else {
+                echo "Error: Failed to update product.";
+                exit();
+            }
         } else {
-            echo "Error: Failed to update product.";
+            echo "Error: Product does not exist.";
             exit();
         }
     } catch (PDOException $e) {

@@ -3,7 +3,6 @@
 require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/product.class.php');
-require_once(__DIR__ . '/../utils/sessions.php');
 require_once(__DIR__ . '/../database/images.php');
 $db = getDatabaseConnection();
 $session = new Session();
@@ -16,13 +15,11 @@ drawHeader($session);
     <section id = "main_products">
             <h4>Products for you</h4>
             <div id="selectProducts">
-            
             <?php 
-                
                 $products = product::getProductByPrice($db,3,150);
                 foreach($products as $product){ 
                     $imagePathArray = getImagesPath($db, $product->getId());
-                    $imagePath = $imagePathArray[0];
+                    $imagePath = isset($imagePathArray[0]) ? htmlentities($imagePathArray[0]) : '';
                 ?>
                 <a href="products.php?id=<?= $product->getId();?>">
                     <article>
@@ -30,15 +27,10 @@ drawHeader($session);
                         <p class= "product_name"><?= htmlentities($product->getName());  ?></p>
                         <p class= "product_price"><?= htmlentities($product->getPrice()); ?></p>
                     </article> 
-                </a>   
-
-            <?php } ?>
-                
-            
-            
+                </a>
+            <?php } ?> 
         </div>
     </section>
-
 <?php 
     drawFooter();
 ?>

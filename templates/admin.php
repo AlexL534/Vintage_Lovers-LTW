@@ -56,10 +56,10 @@ function drawUserList() {
         </section>
         <?php
 
+        $db = getDatabaseConnection();
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
-            $searchQuery = $_POST['search'];
-            $db = getDatabaseConnection();
-            $searchResults = User::searchUsers($db,$searchQuery);
+            $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
+            $searchResults = User::searchUsers($db, $searchQuery);
             
             if (!empty($searchResults)) {
                 ?>
@@ -69,10 +69,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo htmlentities($user['username']); ?></span>
                                 <span class="email"><?php echo htmlentities($user['email']); ?></span>
-                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
-                                    <button type="submit" class="elevate-btn">Elevate to Admin</button>
-                                </form>
+                                <?php displayAdminOrDeleteButton($user); ?>
                             </li>
                         <?php } ?>
                     </ul>
@@ -82,7 +79,7 @@ function drawUserList() {
                 echo "No users found.";
             }
         } else {
-            $users = User::getAllUsers(getDatabaseConnection());
+            $users = User::getAllUsers($db);
         
             if (!empty($users)) {
                 ?>
@@ -92,10 +89,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo htmlentities($user->getUsername()); ?></span>
                                 <span class="email"><?php echo htmlentities($user->getEmail()); ?></span>
-                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
-                                    <button type="submit" class="elevate-btn">Elevate to Admin</button>
-                                </form>
+                                <?php displayAdminOrDeleteButton($user); ?>
                             </li>
                         <?php } ?>
                     </ul>
@@ -109,6 +103,25 @@ function drawUserList() {
         echo "Error: " . $e->getMessage();
     }
 }
+
+function displayAdminOrDeleteButton($user) {
+    if (!$user->getIsAdmin()) {
+        ?>
+        <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
+            <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+            <button type="submit" class="delete-btn">Delete Account</button>
+        </form>
+        <?php
+    }
+    ?>
+    <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
+        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+        <button type="submit" class="elevate-btn">Elevate to Admin</button>
+    </form>
+    <?php
+}
+
+
 
 function drawProductList($searchEnabled = true, $session) {
     try {
@@ -133,7 +146,7 @@ function drawProductList($searchEnabled = true, $session) {
 
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
             try {
-                $searchQuery = $_POST['search'];
+                $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
                 $db = getDatabaseConnection();
                 $searchResults = Product::searchProducts($db, $searchQuery);
                 displayProductResults($searchResults, $searchEnabled, $session);

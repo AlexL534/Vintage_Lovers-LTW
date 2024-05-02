@@ -30,10 +30,6 @@ function drawUserInfo(PDO $db, User $user){
             <li>Name: <?= htmlentities($user->getName()); ?></li>
             <li>Username: <?= htmlentities($user->getUsername()); ?></li>
             <li>Email: <?= htmlentities($user->getEmail()); ?></li>
-            <li>User type: <?php 
-                $user->getIsAdmin() == 1 ? $type = "Admin" :  $type = "Seller" ;
-                echo $type;
-            ?></li>
             <li>Number of owned items: <?= count($user->getUserOwnedItems($db)); ?></li>
         </ul>
     </article>

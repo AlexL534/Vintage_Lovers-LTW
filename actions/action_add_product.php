@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/product.class.php');
-require_once(__DIR__ . '/../utils/sessions.php');
+require_once(__DIR__ . '/../classes/session.class.php');
 
 $session = new Session();
 
@@ -11,11 +11,11 @@ if (!$session->isLoggedIn()) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $brand = $_POST['brand'];
-    $category = $_POST['category'];
+    $name = $_POST['name'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $price = $_POST['price'] ?? '';
+    $brand = $_POST['brand'] ?? '';
+    $category = $_POST['category'] ?? '';
 
     try {
         $db = getDatabaseConnection();
