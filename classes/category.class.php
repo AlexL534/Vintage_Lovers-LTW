@@ -53,7 +53,7 @@ class Category{
         );
     }
 
-    static public function getAllCategory(PDO $db){
+    static public function getAllCategories(PDO $db){
         $stmt = $db->prepare('SELECT * FROM CATEGORY');
         $stmt->execute();
         $categories = array();

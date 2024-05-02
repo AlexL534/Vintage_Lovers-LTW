@@ -56,6 +56,18 @@ class Product{
         return $this->brand;
     }
 
+    public function save(PDO $db): bool
+    {
+        try {
+            $stmt = $db->prepare("INSERT INTO PRODUCTS (name, description, price, owner, brand, category) VALUES (?, ?, ?, ?, ?, ?)");
+            $result = $stmt->execute([$this->name, $this->description, $this->price, $this->owner, $this->brand, $this->category]);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
     static public function getProduct(PDO $db, int $id){
         $stmt = $db->prepare(
             'SELECT id, price, quantity, name, description, owner, category, brand
@@ -149,5 +161,44 @@ class Product{
         }
 
         return $products;
+    }
+
+    static public function searchProducts(PDO $db, $searchQuery) {
+        try {
+            $stmt = $db->prepare("SELECT * FROM PRODUCTS WHERE NAME LIKE :search_query");
+            $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $searchResults;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }    
+
+    static public function deleteProduct(PDO $db, int $productId): bool
+    {
+        try {
+            $stmt = $db->prepare("DELETE FROM PRODUCTS WHERE id = ?");
+            $result = $stmt->execute([$productId]);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    static public function updateProduct(PDO $db, int $productId, string $name, string $description, float $price): bool
+    {
+        try {
+            $stmt = $db->prepare("UPDATE PRODUCTS SET name = ?, description = ?, price = ? WHERE id = ?");
+            $result = $stmt->execute([$name, $description, $price, $productId]);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }

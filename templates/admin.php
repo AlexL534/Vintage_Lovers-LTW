@@ -2,6 +2,9 @@
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../classes/product.class.php');
+require_once(__DIR__ . '/../classes/brand.class.php');
+require_once(__DIR__ . '/../classes/category.class.php');
+
 
 function drawFilterTypes() {
     ?>
@@ -37,23 +40,6 @@ function drawAddInfoForm($filterType) {?>
     <?php
 }
 
-function searchUsers($searchQuery) {
-    try {
-        $db = getDatabaseConnection();
-        
-        $stmt = $db->prepare("SELECT * FROM users WHERE username LIKE :search_query");
-        $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
-        $stmt->execute();
-        
-        $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $searchResults;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return [];
-    }
-}
-
 function drawUserList() {
     try {
         ?>
@@ -72,7 +58,8 @@ function drawUserList() {
 
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
             $searchQuery = $_POST['search'];
-            $searchResults = searchUsers($searchQuery);
+            $db = getDatabaseConnection();
+            $searchResults = User::searchUsers($db,$searchQuery);
             
             if (!empty($searchResults)) {
                 ?>
@@ -123,23 +110,6 @@ function drawUserList() {
     }
 }
 
-function searchProducts($searchQuery) {
-    try {
-        $db = getDatabaseConnection();
-        
-        $stmt = $db->prepare("SELECT * FROM PRODUCTS WHERE NAME LIKE :search_query");
-        $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
-        $stmt->execute();
-        
-        $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $searchResults;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return [];
-    }
-}
-
 function drawProductList($searchEnabled = true, $session) {
     try {
         ?>
@@ -161,16 +131,25 @@ function drawProductList($searchEnabled = true, $session) {
             <?php
         }
 
-        // Process search or display all products
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
-            $searchQuery = $_POST['search'];
-            $searchResults = searchProducts($searchQuery);
-            displayProductResults($searchResults, $searchEnabled, $session); 
+            try {
+                $searchQuery = $_POST['search'];
+                $db = getDatabaseConnection();
+                $searchResults = Product::searchProducts($db, $searchQuery);
+                displayProductResults($searchResults, $searchEnabled, $session);
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
         } else {
-            $db = getDatabaseConnection();
-            $products = Product::getAllProducts($db);
-            displayProductResults($products, $searchEnabled, $session);
+            try {
+                $db = getDatabaseConnection();
+                $products = Product::getAllProducts($db);
+                displayProductResults($products, $searchEnabled, $session);
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
         }
+        
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -226,11 +205,10 @@ function displayProductResults($products, $searchEnabled, $session) {
     }
 }
 
-
 function drawAddProductForm() {
     $db = getDatabaseConnection();
-    $brands = $db->query("SELECT brandID, name FROM BRAND")->fetchAll(PDO::FETCH_ASSOC);
-    $categories = $db->query("SELECT categoryID, name FROM CATEGORY")->fetchAll(PDO::FETCH_ASSOC);
+    $brands = Brand::getAllBrands($db);
+    $categories = Category::getAllCategories($db);
     ?>
     <header>
         <h2>Add Product</h2>
@@ -249,7 +227,7 @@ function drawAddProductForm() {
                 <label for="brand">Brand:</label>
                 <select name="brand" id="brand" required>
                     <?php foreach ($brands as $brand): ?>
-                        <option value="<?= $brand['brandID']; ?>"><?= htmlspecialchars($brand['name']); ?></option>
+                        <option value="<?= $brand->getId(); ?>"><?= htmlspecialchars($brand->getName()); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -257,7 +235,7 @@ function drawAddProductForm() {
                 <label for="category">Category:</label>
                 <select name="category" id="category" required>
                     <?php foreach ($categories as $category): ?>
-                        <option value="<?= $category['categoryID']; ?>"><?= htmlspecialchars($category['name']); ?></option>
+                        <option value="<?= $category->getId(); ?>"><?= htmlspecialchars($category->getName()); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
