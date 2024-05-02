@@ -11,11 +11,11 @@ if (!$session->isLoggedIn()) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $brand = $_POST['brand'];
-    $category = $_POST['category'];
+    $name = $_POST['name'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $price = $_POST['price'] ?? '';
+    $brand = $_POST['brand'] ?? '';
+    $category = $_POST['category'] ?? '';
 
     try {
         $db = getDatabaseConnection();

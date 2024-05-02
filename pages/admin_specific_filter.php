@@ -17,7 +17,12 @@ drawHeader($session);
 
 if(isset($_GET['type'])) {
     $type = $_GET['type'];
-    drawAddInfoForm($type);
+    $allowedTypes = array('category', 'size', 'condition', 'color', 'brand');
+    if (!in_array($type, $allowedTypes)) {
+        echo "Invalid filter type specified";
+    } else {
+        drawAddInfoForm($type);
+    }
 } else {
     echo "No filter type specified";
 }

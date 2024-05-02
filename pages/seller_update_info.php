@@ -12,8 +12,12 @@ if (!$session->isLoggedIn()) {
 drawHeader($session);
 
 if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-    drawUpdateInfoForm($id);
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+    if ($id === false || $id === null) {
+        echo "Invalid id specified";
+    } else {
+        drawUpdateInfoForm($id);
+    }
 } else {
     echo "No id specified";
 }
