@@ -19,7 +19,7 @@ drawHeader($session);
             
             $products = product::getProductByPrice($db,3,100);
             foreach($products as $product){ ?>
-                <a href=""><?= $product->getName();  ?></a>
+                <a href="products.php?id=<?= $product->getId();?>"><?= $product->getName();  ?></a>
                 <p><?= $product->getPrice(); ?></p>
 
         <?php } ?>

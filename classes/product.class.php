@@ -52,7 +52,7 @@ class Product{
         return $this->category;
     }
 
-    public function getbrand() : int{
+    public function getBrand() : int{
         return $this->brand;
     }
 
