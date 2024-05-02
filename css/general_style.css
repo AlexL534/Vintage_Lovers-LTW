@@ -30,7 +30,6 @@ body > header input[type = "search"]{
 
    border-radius: 1em;
    width: 90%;
-   min-width: 10em;
    max-width: 50em;
    min-height: 3em;
 
@@ -80,7 +79,7 @@ nav{
 }
 
 nav menu{
-   margin: 0;
+   margin: 1;
    padding: 0;
    max-width: 50em;
 }
@@ -123,4 +122,14 @@ body > footer{
 } 
 body > footer p, body > footer h3{
    color: white;
+}
+
+/*Style of the text in the product containers"*/
+
+.product_name, .product_price{
+   font-weight: 500;
+}
+
+.product_price::after{
+   content: '\20AC';
 }

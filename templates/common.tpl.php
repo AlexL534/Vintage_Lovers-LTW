@@ -11,11 +11,15 @@ function drawHeader(Session $session) { ?>
             <link rel="stylesheet" href="../css/general_style.css">
             <link rel="stylesheet" href="../css/general_layout.css">
             <link rel="stylesheet" href="../css/general_responsive.css">
+            <link rel="stylesheet" href="../css/main_layout.css">
+            <link rel="stylesheet" href="../css/main_style.css">
+            <link rel="stylesheet" href="../css/main_responsive.css">
+
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>
             <header>
-                   <a href="../pages/main_page.php"><img src="../docs/Logo3.png" alt= "logo" id = "logo"></a>
+                   <a href="../pages/main_page.php"><img src="../assets/Logo.png" alt= "logo" id = "logo"></a>
                    <form>
                         <input type="search" name="search" placeholder="Search for a brand, condition, ...">
                     </form>

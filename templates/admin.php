@@ -80,10 +80,10 @@ function drawUserList() {
                     <ul>
                         <?php foreach ($searchResults as $user) { ?>
                             <li>
-                                <span class="username"><?php echo $user['username']; ?></span>
-                                <span class="email"><?php echo $user['email']; ?></span>
-                                <form action="admin_elevate_user.php" method="post">
-                                    <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                                <span class="username"><?php echo htmlentities($user['username']); ?></span>
+                                <span class="email"><?php echo htmlentities($user['email']); ?></span>
+                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
+                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
                             </li>
@@ -103,10 +103,10 @@ function drawUserList() {
                     <ul>
                         <?php foreach ($users as $user) { ?>
                             <li>
-                                <span class="username"><?php echo $user->getUsername(); ?></span>
-                                <span class="email"><?php echo $user->getEmail(); ?></span>
-                                <form action="../actions/action_elevate_admin.php" method="post">
-                                    <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>">
+                                <span class="username"><?php echo htmlentities($user->getUsername()); ?></span>
+                                <span class="email"><?php echo htmlentities($user->getEmail()); ?></span>
+                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
+                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
                                     <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                 </form>
                             </li>
@@ -140,7 +140,7 @@ function searchProducts($searchQuery) {
     }
 }
 
-function drawProductList($searchEnabled = true) {
+function drawProductList($searchEnabled = true, $session) {
     try {
         ?>
         <header>
@@ -169,15 +169,14 @@ function drawProductList($searchEnabled = true) {
         } else {
             $db = getDatabaseConnection();
             $products = Product::getAllProducts($db);
-            displayProductResults($products, $searchEnabled);
+            displayProductResults($products, $searchEnabled, $session);
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 }
 
-function displayProductResults($products, $searchEnabled) {
-    // Display products
+function displayProductResults($products, $searchEnabled, $session) {
     if (!empty($products)) {
         ?>
         <section id="productList">
@@ -185,20 +184,40 @@ function displayProductResults($products, $searchEnabled) {
                     <a href="../pages/seller_add_product.php">+</a>
             <?php } ?>
             <ul>
-                <?php foreach ($products as $product) { ?>
-                    <li>
-                        <span class="product_name"><?php echo $product instanceof Product ? $product->getName() : $product['name']; ?></span>
-                        <button class="check-info-btn">Check info</button>
-                        <form action="../actions/action_delete_product.php" method="post" class="delete-form">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>">
-                            <button type="submit" class="delete-btn">Delete</button>
-                        </form>
-                        <?php if (!$searchEnabled) { ?>
-                            <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? $product->getId() : $product['id']; ?>"><?php echo 'Update Info'; ?></a>
-                        <?php } ?>
-                    </li>
-                <?php } ?>
+                <?php foreach ($products as $product) {
+                    if ($searchEnabled) { ?>
+                        <li>
+                            <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
+                            <button class="check-info-btn">Check info</button>
+                            <form action="../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                            <?php if (!$searchEnabled) { ?>
+                                <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
+                            <?php } ?>
+                        </li>
+                    <?php } else {
+                        $ownerId = $product instanceof Product ? $product->getOwner() : $product['owner'];
+                        $loggedInUserId = $session->getId();
+
+                        if ($ownerId === $loggedInUserId) { ?>
+                            <li>
+                                <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
+                                <button class="check-info-btn">Check info</button>
+                                <form action="../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form>
+                                <?php if (!$searchEnabled) { ?>
+                                    <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
+                                <?php } ?>
+                            </li>
+                    <?php }
+                    }
+                } ?>
             </ul>
         </section>
         <?php
@@ -206,6 +225,7 @@ function displayProductResults($products, $searchEnabled) {
         echo "No products found.";
     }
 }
+
 
 function drawAddProductForm() {
     $db = getDatabaseConnection();

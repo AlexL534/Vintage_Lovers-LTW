@@ -44,7 +44,7 @@ class User{
         return $this->isadmin;
     }
 
-   public function getUserOwnedItens(PDO $db){
+   public function getUserOwnedItems(PDO $db){
         $stmt = $db->prepare('
             SELECT *
             FROM PRODUCTS
@@ -55,10 +55,10 @@ class User{
         
         $products = array();
         while($productDB = $stmt->fetch()){
-                $product = new Product(
+            $product = new Product(
                 $productDB['id'],
                 $productDB['price'],
-                $productDB['quantity'],
+                isset($productDB['quantity']) ? $productDB['quantity'] : 1,
                 $productDB['name'],
                 $productDB['description'],
                 $productDB['owner'],
@@ -125,6 +125,27 @@ class User{
         );
         
         $stmt->execute(array($email, $password));
+        if($user = $stmt->fetch()){
+
+            return new User(
+                $user['id'],
+                $user['name'],
+                $user['username'],
+                $user['email'],
+                $user['password'],
+                $user['is_admin'],
+            );
+        } else return null;
+    }
+
+    static function getUserByEmail(PDO $db, string $email){
+        $stmt = $db->prepare(
+            'SELECT id, name,  username, email, password, is_admin
+            FROM USERS
+            WHERE email = ?'
+        );
+        
+        $stmt->execute(array($email));
         if($user = $stmt->fetch()){
 
             return new User(

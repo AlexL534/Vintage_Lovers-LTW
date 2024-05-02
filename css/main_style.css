@@ -1,0 +1,53 @@
+/*main header*/
+
+
+#main_header h2{
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 3rem;
+}
+
+#main_header img{
+    width: 100%;
+    height: 100%;
+    max-width: 100em;
+    max-height: 100%;
+}
+
+/*selected products*/
+
+#selectProducts{
+    max-height: 20%;
+    background-color: var(--medium_gray);
+}
+
+
+#selectProducts a{
+    width: 20%;
+    padding: 1em;
+    object-fit: cover;
+}
+
+#selectProducts img{
+    margin: 0;
+    padding: 0;
+    height: 300px;
+    width: 300px;
+    max-width: 100%;
+    aspect-ratio: auto 200 / 150;
+    object-fit: cover;
+}
+
+#selectProducts a{
+    text-decoration: none;
+    color:black;
+
+}
+
+#selectProducts p{
+    font-size: 1.1em;
+}
+
+#main_products h4{
+    font-size: 2rem;
+}
