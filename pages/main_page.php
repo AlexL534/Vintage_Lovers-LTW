@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../utils/sessions.php');
-require_once(__DIR__ . '/../database/images.php');
+require_once(__DIR__ . '/../classes/image.class.php');
 $db = getDatabaseConnection();
 $session = new Session();
 drawHeader($session);
@@ -21,7 +21,7 @@ drawHeader($session);
                 
                 $products = product::getProductByPrice($db,3,150);
                 foreach($products as $product){ 
-                    $imagePathArray = getImagesPath($db, $product->getId());
+                    $imagePathArray = Image::getImagesPath($db, $product->getId());
                     $imagePath = $imagePathArray[0];
                 ?>
                 <a href="products.php?id=<?= $product->getId();?>">

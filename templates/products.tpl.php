@@ -17,8 +17,10 @@ function drawProductInfo(PDO $db, int $id){
     $colors = Color::getColorsOfProduct($db,$id);
     $conditions = Condition::getConditionsOfProduct($db,$id);
     $sizes = Size::getSizesOfProduct($db,$id);
+    $images = Image::getImagesPath($db,$id);
     
 ?>
+    <h1><?= $product->getName();?></h1>
     <section class="productInfo">
         <p>Price: <?=  $product->getPrice(); ?></p>
         <p>Brand: <?= $brand->getName(); ?></p>
@@ -38,6 +40,12 @@ function drawProductInfo(PDO $db, int $id){
                 <p><?= $size->getName();?></p>
             <?php }?>
         </ul>
+    </section>
+    <section class="product_images">
+                <?php foreach($images as $image){ ?>
+                    
+                    <img src="../<?=$image; ?>" alt="">
+                <?php } ?>
     </section>
 
 <?php } ?>

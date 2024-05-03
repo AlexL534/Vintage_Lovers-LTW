@@ -33,8 +33,8 @@ class Image{
         $imageDB = $stmt->fetch(); 
 
         return new Image(
-            intval($conditionDB['imageID']),
-            $conditionDB['path']
+            intval($imageDB['imageID']),
+            $imageDB['path']
         );
     }
 
@@ -43,7 +43,7 @@ class Image{
         $stmt->execute();
         $images = array();
         while($imageDB = $stmt->fetch()){
-            $image= new Image(intval($conditionDB['imageID']),$conditionDB['path']);
+            $image= new Image(intval($imageDB['imageID']),$imageDB['path']);
 
             $images[]=$image;
         }
@@ -52,13 +52,30 @@ class Image{
     }
 
     static function getImagesOfProduct(PDO $db , int $id){
-        $stmt = $db->prepare('SELECT conditionID FROM IMAGES_OF_PRODUCT WHERE productID = ?');
+        $stmt = $db->prepare('SELECT imageID FROM IMAGES_OF_PRODUCT WHERE productID = ?');
         $stmt->execute(array($id));
         $images = array();
         while($imageID=$stmt->fetch()){
-            $image = Image::getConditionById($db,intval($imageID));
+            $image = Image::getImageById($db,intval($imageID));
             $images[] = $image;
         }
+        return $images;
+    }
+
+    static function getImagesPath(PDO $db, int $productID){
+        $stmt = $db->prepare('
+        SELECT IMAGES.path
+        FROM IMAGES JOIN IMAGES_OF_PRODUCT on IMAGES.imageid = IMAGES_OF_PRODUCT.imageid
+        WHERE   IMAGES_OF_PRODUCT.productid = ?
+        ');
+        $stmt->execute(array($productID));
+    
+        $images = array();
+        while($imageDB = $stmt->fetch()){
+            $image = $imageDB['path'];
+            $images[] = $image;
+        }
+    
         return $images;
     }
 }
