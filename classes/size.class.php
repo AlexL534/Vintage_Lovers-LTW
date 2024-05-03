@@ -24,12 +24,12 @@ class Size{
 
     //querys
     static public function getSizeById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM SIZE WHERE id = ?');
+        $stmt = $db->prepare('SELECT * FROM SIZE WHERE sizeID = ?');
         $stmt->execute(array($id));
         $sizeDB = $stmt->fetch(); 
 
         return new Size(
-            intval($sizeDB['id']),
+            intval($sizeDB['sizeID']),
             $sizeDB['name']
         );
     }
@@ -40,7 +40,7 @@ class Size{
         $sizeDB = $stmt->fetch();
         
         return new Size(
-            intval($sizeDB['id']),
+            intval($sizeDB['sizeID']),
             $sizeDB['name']
         );
     }
@@ -50,11 +50,22 @@ class Size{
         $stmt->execute();
         $sizes = array();
         while($sizeDB = $stmt->fetch()){
-            $size= new Size(intval($sizeDB['id']),$sizeDB['name']);
+            $size= new Size(intval($sizeDB['sizeID']),$sizeDB['name']);
 
             $sizes[]=$size;
         }
 
+        return $sizes;
+    }
+
+    static function getSizesOfProduct(PDO $db , int $id){
+        $stmt = $db->prepare('SELECT sizeID FROM SIZE_OF_PRODUCT WHERE productID = ?');
+        $stmt->execute(array($id));
+        $sizes = array();
+        while($sizeID=$stmt->fetch()){
+            $size = Size::getSizeById($db,intval($sizeID));
+            $sizes[] = $size;
+        }
         return $sizes;
     }
 }

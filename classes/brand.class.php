@@ -9,7 +9,6 @@ class Brand{
     public function __construct(int $id, string $name){
         $this->id= $id;
         $this->name= $name;
-
     }
 
 
@@ -24,12 +23,12 @@ class Brand{
 
     //querys
     static public function getBrandById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM BRAND WHERE id = ?');
+        $stmt = $db->prepare('SELECT * FROM BRAND WHERE brandID = ?');
         $stmt->execute(array($id));
         $brandDB = $stmt->fetch(); 
 
         return new Brand(
-            intval($brandDB['id']),
+            intval($brandDB['brandID']),
             $brandDB['name']
         );
     }
@@ -40,7 +39,7 @@ class Brand{
         $brandDB = $stmt->fetch();
         
         return new Brand(
-            intval($brandDB['id']),
+            intval($brandDB['brandID']),
             $brandDB['name']
         );
     }
@@ -50,7 +49,7 @@ class Brand{
         $stmt->execute();
         $brands = array();
         while($brandDB = $stmt->fetch()){
-            $brand= new Brand(intval($brandDB['id']),$brandDB['name']);
+            $brand= new Brand(intval($brandDB['brandID']),$brandDB['name']);
 
             $brands[]=$brand;
         }

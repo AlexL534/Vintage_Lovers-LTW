@@ -30,12 +30,12 @@ class Condition{
 
     //querys
     static public function getConditionById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM CONDITION WHERE id = ?');
+        $stmt = $db->prepare('SELECT * FROM CONDITION WHERE conditionID = ?');
         $stmt->execute(array($id));
         $conditionDB = $stmt->fetch(); 
 
         return new Condition(
-            intval($conditionDB['id']),
+            intval($conditionDB['conditionID']),
             $conditionDB['name'],
             $conditionDB['description']
         );
@@ -47,7 +47,7 @@ class Condition{
         $conditionDB = $stmt->fetch();
         
         return new Condition(
-            intval($conditionDB['id']),
+            intval($conditionDB['conditionID']),
             $conditionDB['name'],
             $conditionDB['description']
         );
@@ -58,11 +58,22 @@ class Condition{
         $stmt->execute();
         $conditions = array();
         while($conditionDB = $stmt->fetch()){
-            $condition= new Condition(intval($conditionDB['id']),$conditionDB['name'],$conditionDB['description']);
+            $condition= new Condition(intval($conditionDB['conditionID']),$conditionDB['name'],$conditionDB['description']);
 
             $conditions[]=$condition;
         }
 
+        return $conditions;
+    }
+
+    static function getConditionsOfProduct(PDO $db , int $id){
+        $stmt = $db->prepare('SELECT conditionID FROM CONDITION_OF_PRODUCT WHERE productID = ?');
+        $stmt->execute(array($id));
+        $conditions = array();
+        while($conditionID=$stmt->fetch()){
+            $condition = Condition::getConditionById($db,intval($conditionID));
+            $conditions[] = $condition;
+        }
         return $conditions;
     }
 }

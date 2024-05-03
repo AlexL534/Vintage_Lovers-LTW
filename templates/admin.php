@@ -2,6 +2,9 @@
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../classes/product.class.php');
+require_once(__DIR__ . '/../classes/brand.class.php');
+require_once(__DIR__ . '/../classes/category.class.php');
+
 
 function drawFilterTypes() {
     ?>
@@ -37,23 +40,6 @@ function drawAddInfoForm($filterType) {?>
     <?php
 }
 
-function searchUsers($searchQuery) {
-    try {
-        $db = getDatabaseConnection();
-        
-        $stmt = $db->prepare("SELECT * FROM users WHERE username LIKE :search_query");
-        $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
-        $stmt->execute();
-        
-        $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $searchResults;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return [];
-    }
-}
-
 function drawUserList() {
     try {
         ?>
@@ -70,9 +56,10 @@ function drawUserList() {
         </section>
         <?php
 
+        $db = getDatabaseConnection();
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
-            $searchQuery = $_POST['search'];
-            $searchResults = searchUsers($searchQuery);
+            $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
+            $searchResults = User::searchUsers($db, $searchQuery);
             
             if (!empty($searchResults)) {
                 ?>
@@ -82,10 +69,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo htmlentities($user['username']); ?></span>
                                 <span class="email"><?php echo htmlentities($user['email']); ?></span>
-                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
-                                    <button type="submit" class="elevate-btn">Elevate to Admin</button>
-                                </form>
+                                <?php displayAdminOrDeleteButton($user); ?>
                             </li>
                         <?php } ?>
                     </ul>
@@ -95,7 +79,7 @@ function drawUserList() {
                 echo "No users found.";
             }
         } else {
-            $users = User::getAllUsers(getDatabaseConnection());
+            $users = User::getAllUsers($db);
         
             if (!empty($users)) {
                 ?>
@@ -105,10 +89,7 @@ function drawUserList() {
                             <li>
                                 <span class="username"><?php echo htmlentities($user->getUsername()); ?></span>
                                 <span class="email"><?php echo htmlentities($user->getEmail()); ?></span>
-                                <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                    <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
-                                    <button type="submit" class="elevate-btn">Elevate to Admin</button>
-                                </form>
+                                <?php displayAdminOrDeleteButton($user); ?>
                             </li>
                         <?php } ?>
                     </ul>
@@ -123,22 +104,24 @@ function drawUserList() {
     }
 }
 
-function searchProducts($searchQuery) {
-    try {
-        $db = getDatabaseConnection();
-        
-        $stmt = $db->prepare("SELECT * FROM PRODUCTS WHERE NAME LIKE :search_query");
-        $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
-        $stmt->execute();
-        
-        $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $searchResults;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return [];
+function displayAdminOrDeleteButton($user) {
+    if (!$user->getIsAdmin()) {
+        ?>
+        <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
+            <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+            <button type="submit" class="delete-btn">Delete Account</button>
+        </form>
+        <?php
     }
+    ?>
+    <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
+        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+        <button type="submit" class="elevate-btn">Elevate to Admin</button>
+    </form>
+    <?php
 }
+
+
 
 function drawProductList($searchEnabled = true, $session) {
     try {
@@ -161,16 +144,25 @@ function drawProductList($searchEnabled = true, $session) {
             <?php
         }
 
-        // Process search or display all products
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
-            $searchQuery = $_POST['search'];
-            $searchResults = searchProducts($searchQuery);
-            displayProductResults($searchResults, $searchEnabled); 
+            try {
+                $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
+                $db = getDatabaseConnection();
+                $searchResults = Product::searchProducts($db, $searchQuery);
+                displayProductResults($searchResults, $searchEnabled, $session);
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
         } else {
-            $db = getDatabaseConnection();
-            $products = Product::getAllProducts($db);
-            displayProductResults($products, $searchEnabled, $session);
+            try {
+                $db = getDatabaseConnection();
+                $products = Product::getAllProducts($db);
+                displayProductResults($products, $searchEnabled, $session);
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
         }
+        
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -226,11 +218,10 @@ function displayProductResults($products, $searchEnabled, $session) {
     }
 }
 
-
 function drawAddProductForm() {
     $db = getDatabaseConnection();
-    $brands = $db->query("SELECT brandID, name FROM BRAND")->fetchAll(PDO::FETCH_ASSOC);
-    $categories = $db->query("SELECT categoryID, name FROM CATEGORY")->fetchAll(PDO::FETCH_ASSOC);
+    $brands = Brand::getAllBrands($db);
+    $categories = Category::getAllCategories($db);
     ?>
     <header>
         <h2>Add Product</h2>
@@ -249,7 +240,7 @@ function drawAddProductForm() {
                 <label for="brand">Brand:</label>
                 <select name="brand" id="brand" required>
                     <?php foreach ($brands as $brand): ?>
-                        <option value="<?= $brand['brandID']; ?>"><?= htmlspecialchars($brand['name']); ?></option>
+                        <option value="<?= $brand->getId(); ?>"><?= htmlspecialchars($brand->getName()); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -257,7 +248,7 @@ function drawAddProductForm() {
                 <label for="category">Category:</label>
                 <select name="category" id="category" required>
                     <?php foreach ($categories as $category): ?>
-                        <option value="<?= $category['categoryID']; ?>"><?= htmlspecialchars($category['name']); ?></option>
+                        <option value="<?= $category->getId(); ?>"><?= htmlspecialchars($category->getName()); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

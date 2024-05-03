@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../templates/admin.php');
-require_once(__DIR__ . '/../utils/sessions.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../database/database_connection.db.php');
 
@@ -18,7 +17,12 @@ drawHeader($session);
 
 if(isset($_GET['type'])) {
     $type = $_GET['type'];
-    drawAddInfoForm($type);
+    $allowedTypes = array('category', 'size', 'condition', 'color', 'brand');
+    if (!in_array($type, $allowedTypes)) {
+        echo "Invalid filter type specified";
+    } else {
+        drawAddInfoForm($type);
+    }
 } else {
     echo "No filter type specified";
 }
