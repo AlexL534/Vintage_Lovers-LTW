@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 $db = getDatabaseConnection();
 $session = new Session();
 drawHeader($session);
-//arranjar id nas classes todas
+
 drawProductInfo($db,intval($_GET['id']));
 
 drawFooter($session);

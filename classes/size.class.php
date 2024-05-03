@@ -57,5 +57,16 @@ class Size{
 
         return $sizes;
     }
+
+    static function getSizesOfProduct(PDO $db , int $id){
+        $stmt = $db->prepare('SELECT sizeID FROM SIZE_OF_PRODUCT WHERE productID = ?');
+        $stmt->execute(array($id));
+        $sizes = array();
+        while($sizeID=$stmt->fetch()){
+            $size = Size::getSizeById($db,intval($sizeID));
+            $sizes[] = $size;
+        }
+        return $sizes;
+    }
 }
 ?>

@@ -65,5 +65,16 @@ class Condition{
 
         return $conditions;
     }
+
+    static function getConditionsOfProduct(PDO $db , int $id){
+        $stmt = $db->prepare('SELECT conditionID FROM CONDITION_OF_PRODUCT WHERE productID = ?');
+        $stmt->execute(array($id));
+        $conditions = array();
+        while($conditionID=$stmt->fetch()){
+            $condition = Condition::getConditionById($db,intval($conditionID));
+            $conditions[] = $condition;
+        }
+        return $conditions;
+    }
 }
 ?>

@@ -57,5 +57,16 @@ class Color{
 
         return $colors;
     }
+
+    static function getColorsOfProduct(PDO $db , int $id){
+        $stmt = $db->prepare('SELECT colorID FROM COLORS_OF_PRODUCT WHERE productID = ?');
+        $stmt->execute(array($id));
+        $colors = array();
+        while($colorID=$stmt->fetch()){
+            $color = Color::getColorById($db,intval($colorID));
+            $colors[] = $color;
+        }
+        return $colors;
+    }
 }
 ?>
