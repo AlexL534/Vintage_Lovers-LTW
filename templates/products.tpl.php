@@ -7,6 +7,7 @@ require_once(__DIR__ . '/../classes/color.class.php');
 require_once(__DIR__ . '/../classes/condition.class.php');
 require_once(__DIR__ . '/../classes/size.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
+require_once(__DIR__ . '/../utils/sessions.php');
 
 function drawProductInfo(PDO $db, int $id){
     $product = product::getProduct($db,$id);
@@ -47,6 +48,16 @@ function drawProductInfo(PDO $db, int $id){
                     <img src="../<?=$image; ?>" alt="">
                 <?php } ?>
     </section>
+
+<?php } ?>
+
+<?php function drawAddToShoppingCart(Session $session){ 
+    if($session->isLoggedIn()){
+        ?>
+        <button>Add to the shopping cart</button>
+    <?php } ?>    
+
+
 
 <?php } ?>
 
