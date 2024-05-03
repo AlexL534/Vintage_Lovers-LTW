@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../classes/category.class.php');
 require_once(__DIR__ . '/../classes/color.class.php');
 require_once(__DIR__ . '/../classes/condition.class.php');
 require_once(__DIR__ . '/../classes/size.class.php');
+require_once(__DIR__ . '/../classes/image.class.php');
 
 function drawProductInfo(PDO $db, int $id){
     $product = product::getProduct($db,$id);
