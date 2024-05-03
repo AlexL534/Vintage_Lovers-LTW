@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/product.class.php');
-require_once(__DIR__ . '/../utils/sessions.php');
+require_once(__DIR__ . '/../classes/session.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
 $db = getDatabaseConnection();
 $session = new Session();
