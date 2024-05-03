@@ -1,7 +1,7 @@
 <?php 
 declare(strict_types = 1);
 
-require_once(__DIR__ . '/../utils/sessions.php');
+require_once(__DIR__ . '/../classes/session.class.php');
 function drawHeader(Session $session) { ?> 
     <!DOCTYPE html>
     <html lang="en-US">
@@ -84,8 +84,8 @@ function displayMessages(Session $session){ ?>
     <section id="messages">
       <?php foreach ($session->getMessages() as $message) { ?>
 
-        <article class="<?=$message['type']?>">
-          <?=$message['text']?>
+        <article class="<?=htmlspecialchars($message['type'])?>">
+          <?=htmlspecialchars($message['text'])?>
         </article>
 
       <?php } ?>

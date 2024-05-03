@@ -1,24 +1,23 @@
 <?php
 require_once(__DIR__ . '/../database/database_connection.db.php');
-$db = getDatabaseConnection();
+require_once(__DIR__ . '/../classes/user.class.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['user_id'])) {
-        try {
-            $userId = $_POST['user_id'];
-
-            $stmt = $db->prepare("UPDATE users SET is_admin = 1 WHERE id = ?");
-            $stmt->execute([$userId]);
-
+    if (isset($_POST['user_id']) && is_numeric($_POST['user_id'])) {
+        $userId = (int)$_POST['user_id'];
+        $db = getDatabaseConnection();
+        
+        if (User::updateAdminStatus($db, (int)$userId)) {
             header("Location: {$_SERVER['HTTP_REFERER']}");
             exit();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+        } else {
+            echo "Error: Failed to update admin status.";
+            exit();
         }
     } else {
-        echo "User ID is not set.";
+        echo "Error: Invalid user ID.";
     }
 } else {
-    echo "Form is not submitted.";
+    echo "Error: Form is not submitted.";
 }
 ?>

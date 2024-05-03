@@ -23,23 +23,23 @@ function drawProductInfo(PDO $db, int $id){
 ?>
     <h1><?= $product->getName();?></h1>
     <section class="productInfo">
-        <p>Price: <?=  $product->getPrice(); ?></p>
-        <p>Brand: <?= $brand->getName(); ?></p>
-        <p>Category: <?= $category->getName(); ?></p>
+        <p>Price: <?= htmlentities($product->getPrice()); ?></p>
+        <p>Brand: <?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p>
+        <p>Category: <?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p>
         <ul>
-            <?php foreach($colors as $color){ ?>
-                <p><?= $color->getName();?></p>
-            <?php }?>
+            <?php foreach ($colors as $color) { ?>
+                <li><?= htmlentities($color->getName()); ?></li>
+            <?php } ?>
         </ul>
         <ul>
-            <?php foreach($conditions as $condition){ ?>
-                <p><?= $condition->getName();?></p>
-            <?php }?>
+            <?php foreach ($conditions as $condition) { ?>
+                <li><?= htmlentities($condition->getName()); ?></li>
+            <?php } ?>
         </ul>
         <ul>
-            <?php foreach($sizes as $size){ ?>
-                <p><?= $size->getName();?></p>
-            <?php }?>
+            <?php foreach ($sizes as $size) { ?>
+                <li><?= htmlentities($size->getName()); ?></li>
+            <?php } ?>
         </ul>
     </section>
     <section class="product_images">

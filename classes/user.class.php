@@ -44,7 +44,7 @@ class User{
         return $this->isadmin;
     }
 
-   public function getUserOwnedItems(PDO $db){
+    public function getUserOwnedItems(PDO $db){
         $stmt = $db->prepare('
             SELECT *
             FROM PRODUCTS
@@ -70,6 +70,16 @@ class User{
         }
 
         return $products;
+    }
+
+    public function deleteUser(PDO $db): bool {
+        try {
+            $stmt = $db->prepare("DELETE FROM users WHERE id = ?");
+            return $stmt->execute([$this->id]);
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function getUser(PDO $db, int $id){
@@ -206,5 +216,30 @@ class User{
         $stmt->execute(array($username, $name, $email, $password));
     }
 
-    
+    static function searchUsers(PDO $db, string $searchQuery) {
+        try {
+            $stmt = $db->prepare("SELECT * FROM users WHERE username LIKE :search_query");
+            $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $searchResults;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    static public function updateAdminStatus(PDO $db, int $userId): bool
+    {
+        try {
+            $stmt = $db->prepare("UPDATE users SET is_admin = 1 WHERE id = ?");
+            $result = $stmt->execute([$userId]);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }

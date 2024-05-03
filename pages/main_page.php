@@ -16,13 +16,11 @@ drawHeader($session);
     <section id = "main_products">
             <h4>Products for you</h4>
             <div id="selectProducts">
-            
             <?php 
-                
                 $products = product::getProductByPrice($db,3,150);
                 foreach($products as $product){ 
                     $imagePathArray = Image::getImagesPath($db, $product->getId());
-                    $imagePath = $imagePathArray[0];
+                    $imagePath = isset($imagePathArray[0]) ? htmlentities($imagePathArray[0]) : '';
                 ?>
                 <a href="products.php?id=<?= $product->getId();?>">
                     <article>
@@ -30,15 +28,10 @@ drawHeader($session);
                         <p class= "product_name"><?= htmlentities($product->getName());  ?></p>
                         <p class= "product_price"><?= htmlentities($product->getPrice()); ?></p>
                     </article> 
-                </a>   
-
-            <?php } ?>
-                
-            
-            
+                </a>
+            <?php } ?> 
         </div>
     </section>
-
 <?php 
     drawFooter();
 ?>
