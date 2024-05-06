@@ -160,8 +160,8 @@ main{
 body > footer{
    background-color: var(--dark_gray) ;
    margin-top: auto;
-    display: grid;
-    grid-template-rows: [start] auto [middle] auto [end];
+   display: grid;
+   grid-template-rows: [start] auto [middle] auto [end];
 }
 
 #footer_contents {

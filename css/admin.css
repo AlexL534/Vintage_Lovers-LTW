@@ -1,0 +1,187 @@
+/* Header */
+header h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Filter Types */
+#filterTypes {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#filterTypes ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%; 
+}
+
+#filterTypes li {
+    background-color: var(--light_gray);
+    margin: 10px 0;
+    width: 95%;
+    max-width: 50em;
+    border-radius: 1em;
+    box-shadow: 0px 33px 15px -18px rgba(0, 0, 0, 0.15);
+}
+
+#filterTypes a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 1.1em;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+
+/* Specific Filter */
+#addInfoForm {
+    margin-top: 20px;
+}
+
+#addInfoForm header {
+    display: flex;
+    justify-content: center;
+}
+
+#addInfoForm header h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#addInfoForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#addInfoForm .form-group {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#addInfoForm label {
+    width: 100%;
+}
+
+#addInfoForm input[type="text"],
+#addInfoForm input[type="number"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#addInfoForm input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 150px;
+}
+
+/*====================== Manage User =========================== */
+/* Header */
+header h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* User Search Form */
+#userSearch form {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+#userSearch form input[type="text"] {
+    padding: 10px;
+    margin-right: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* User List */
+#userList {
+    margin-top: 20px;
+}
+
+#userList ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-item {
+    background-color: var(--light_gray);
+    margin: 10px 20px;
+    border-radius: 1em;
+    box-shadow: 0px 33px 15px -18px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto 1fr auto; /* Six columns: labels, username, email, user type, buttons */
+        grid-gap: 10px;
+    align-items: center;
+}
+
+.user-label {
+    font-size: 12px;
+    color: #999;
+}
+
+.username,
+.email {
+    font-size: 16px;
+    color: #333;
+}
+
+.user-details {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Prevent username and email from wrapping */
+}
+
+.username-light,
+.email-light {
+    font-size: 12px;
+    color: #999;
+    margin-right: 10px; /* Adjust spacing between light and actual text */
+}
+
+.options-menu {
+    grid-column: 7; /* Buttons in the fifth column */
+    display: flex;
+    align-items: center;
+}
+
+.options-menu form {
+    margin-left: 10px;
+}
+
+.options-menu button {
+    padding: 8px 12px;
+    text-align: right;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.options-menu button:hover {
+    background-color: #f9f9f9;
+}
