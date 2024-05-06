@@ -21,6 +21,38 @@ function drawProfile(PDO $db, User $user){
     </section>
 <?php }
 
+function drawEditProfile(PDO $db, User $user, Session $session){
+    ?>
+
+    <section class = "editProfile">
+        <header>
+            <h1>Edit Your Profile</h1>
+        </header>
+
+        <?php
+        displayMessages($session);
+        ?>
+
+        <form action= "../actions/action_edit_profile.php" method="post" >
+            <label>
+                <p>Username:</p>
+                <input type = "text" name = "username" placeholder= <?= htmlentities($user->getUsername())?>>
+            </label>
+            <label>
+                <p>Name:</p>
+                <input type = "text" name = "name" placeholder= <?= htmlentities($user->getName())?> >
+            </label>
+            <label>
+            <p> Password:</p>
+                <input type = "password" name = "password" >
+            </label>
+            <input type="submit" name = "login" value="Update">
+        </form>
+
+
+    </section>
+<?php }
+
 function drawUserInfo(PDO $db, User $user){ 
     //draws the user info 
     ?>
@@ -41,7 +73,7 @@ function drawUserOptions(){
     ?>
     <article class = "profileOptions" id="userOptions">
         <ul>
-            <li><a><p>Update Profile</p></a></li>
+            <li><a href= "../pages/edit_profile.php"><p>Update Profile</p></a></li>
             <li><a><p>Wishlist</p></a></li>
             <li><a><p>Manage owned Products</p></a></li>
             <li><a><p>List a new Procuct</p></a></li>
@@ -64,4 +96,3 @@ function drawAdminOptions(){
         </ul> 
     </article>
 <?php }
-?>
