@@ -93,12 +93,12 @@ class User{
         $user = $stmt->fetch();
 
         return new User(
-            $user['id'],
+            intval($user['id']),
             $user['name'],
             $user['username'],
             $user['email'],
             $user['password'],
-            $user['is_admin']
+            intval($user['is_admin'])
         );
 
     }
@@ -114,12 +114,12 @@ class User{
         $users = [];
         while ($user = $stmt->fetch()) {
             $users[] = new User(
-                $user['id'],
+                intval($user['id']),
                 $user['name'],
                 $user['username'],
                 $user['email'],
                 $user['password'],
-                $user['is_admin']
+                intval($user['is_admin'])
             );
         }
     
@@ -138,12 +138,12 @@ class User{
         if($user = $stmt->fetch()){
 
             return new User(
-                $user['id'],
+                intval($user['id']),
                 $user['name'],
                 $user['username'],
                 $user['email'],
                 $user['password'],
-                $user['is_admin'],
+                intval($user['is_admin']),
             );
         } else return null;
     }
@@ -159,12 +159,12 @@ class User{
         if($user = $stmt->fetch()){
 
             return new User(
-                $user['id'],
+                intval($user['id']),
                 $user['name'],
                 $user['username'],
                 $user['email'],
                 $user['password'],
-                $user['is_admin'],
+                intval($user['is_admin']),
             );
         } else return null;
     }
