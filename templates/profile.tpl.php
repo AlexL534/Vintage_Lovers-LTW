@@ -43,8 +43,8 @@ function drawUserOptions(){
         <ul>
             <li><a><p>Update Profile</p></a></li>
             <li><a><p>Wishlist</p></a></li>
-            <li><a><p>Manage owned Products</p></a></li>
-            <li><a><p>List a new Procuct</p></a></li>
+            <li><a href="../pages/seller_product_list.php"><p>Manage owned Products</p></a></li>
+            <li><a href="../pages/seller_add_product.php"><p>List a new Procuct</p></a></li>
             <li><a><p>Sold Products</p></a></li>
             <li id="logoutButton"><a href = "../actions/action_logout.php"><p>Logout</p></a></li>
         </ul>
@@ -57,10 +57,9 @@ function drawAdminOptions(){
         <h2>Admin Options</h2>
     <article class = "profileOptions" id="adminOptions">
         <ul>
-            <li><a><p>Add information to the system</p></a></li>
-            <li><a><p>Remove user</p></a></li>
-            <li><a><p>Remove a product</p></a></li>
-            <li><a><p>Promote user to admin</p></a></li>
+            <li><a href="../pages/admin_filters.php"><p>Add information to the system</p></a></li>
+            <li><a href="../pages/admin_manage_user.php"><p>Manage users</p></a></li>
+            <li><a href="../pages/admin_delete_product.php"><p>Remove a product</p></a></li>
         </ul> 
     </article>
 <?php }
