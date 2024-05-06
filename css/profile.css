@@ -9,14 +9,16 @@
     align-self: center;
 }
 
-
+/*user profile information section
+*/
 #userInfo {
     display: flex;
     flex-direction: column;
     background-color: var(--light_gray);
-    width: 100%;
+    width: 95%;
     max-width: 50em;
     border-radius: 1em;
+    box-shadow: 0px 33px 15px -18px rgba(0, 0, 0, 0.15);
 }
 
 #userInfo table{
@@ -25,14 +27,81 @@
 
 #userInfo table{
     padding: 1em;
+
+    /*text content*/
     font-size: 1.1em;
     font-weight: 500;
 }
 
 #userInfo table tr td{
     padding: 1em;
-    background-color: var(--drak_gray);
+    margin: 0;
     border-bottom: 1px solid;
+}
+
+/*profile options*/
+
+.profileOptions{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Options customization*/
+.profile ul{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    width: 95%;  
+    padding: 0;
+}
+
+.profile li{
+    background-color: var(--light_gray);
+    margin: 1em;
+    width: 100%;
+    max-width: 50em;
+    border-radius: 1em;
+    box-shadow: 0px 33px 15px -18px rgba(0, 0, 0, 0.15);
+}
+
+.profile li a{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+    align-items: center;
+
+    /*text*/
+    text-decoration: none;
+    color: black;
+    font-size: 1.1em;
+    font-weight: 500;
+
+}
+
+.profile li a p{
+    padding-left: 1em;
+}
+
+.profile li a::after{
+    grid-column: 2;
+    padding-right: 1em;
+    justify-self: self-end;
+    font-size: 2em;
+    content: '>';
+}
+
+/*logout Button specific custumization*/
+
+#logoutButton{
+    background-color: var(--dark_red);
+}
+#logoutButton a{
+    color: white;
 }
 
 

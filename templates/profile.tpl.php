@@ -39,14 +39,14 @@ function drawUserInfo(PDO $db, User $user){
 function drawUserOptions(){
     //draws the user/seller options
     ?>
-    <article id="userOptions">
+    <article class = "profileOptions" id="userOptions">
         <ul>
-            <li><a href = "../actions/action_logout.php" >Logout</a></li>
-            <li><a>Update Profile</a></li>
-            <li><a>Wishlist</a></li>
-            <li><a>Manage owned Products</a></li>
-            <li><a>List a new Procuct</a></li>
-            <li><a>Sold Products</a></li>
+            <li><a><p>Update Profile</p></a></li>
+            <li><a><p>Wishlist</p></a></li>
+            <li><a><p>Manage owned Products</p></a></li>
+            <li><a><p>List a new Procuct</p></a></li>
+            <li><a><p>Sold Products</p></a></li>
+            <li id="logoutButton"><a href = "../actions/action_logout.php"><p>Logout</p></a></li>
         </ul>
     </article>
 <?php }
@@ -54,12 +54,13 @@ function drawUserOptions(){
 function drawAdminOptions(){
     //draws the admin options
     ?>
-    <article id="adminOptions">
+        <h2>Admin Options</h2>
+    <article class = "profileOptions" id="adminOptions">
         <ul>
-            <li><a>Add information to the system</a></li>
-            <li><a>Remove user</a></li>
-            <li><a>Remove a product</a></li>
-            <li><a>Promote user to admin</a></li>
+            <li><a><p>Add information to the system</p></a></li>
+            <li><a><p>Remove user</p></a></li>
+            <li><a><p>Remove a product</p></a></li>
+            <li><a><p>Promote user to admin</p></a></li>
         </ul> 
     </article>
 <?php }

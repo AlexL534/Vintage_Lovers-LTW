@@ -130,7 +130,7 @@ nav menu li {
    max-width: 10em;
    transition: background-color 1s, box-shadow 1s;
    display: block;
-    flex: 1;
+   flex: 1;
 }
 
 nav menu li:hover {
