@@ -104,5 +104,64 @@
     color: white;
 }
 
+/*====================================== edit profile =================================================*/
+
+/*header*/
+
+.editProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.editProfile header{
+    align-self: center;
+}
+
+/*form*/
+.editProfile form{
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto auto auto auto auto;
+}
+
+.editProfile form label{
+    display: grid;
+    margin: 1em;
+}
+
+.editProfile form label p{
+    grid-row: 1;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+
+.editProfile form label input{
+    align-self: center;
+    justify-self: center;
+    border-radius: 1em;
+    width: 80%;
+    max-width: 30em;
+    height: 2em;
+}
+
+.editProfile form > input[type=submit]{
+    margin: 1em;
+    align-self: center;
+    justify-self: center;
+    background-color: var(--light_red);
+    width: 8em;
+    height: 3em;
+    border-radius: 1em;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+
+
+
 
 
