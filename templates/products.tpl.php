@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../classes/color.class.php');
 require_once(__DIR__ . '/../classes/condition.class.php');
 require_once(__DIR__ . '/../classes/size.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
-require_once(__DIR__ . '/../utils/sessions.php');
+require_once(__DIR__ . '/../classes/session.class.php');
 
 function drawProductInfo(PDO $db, int $id){
     $product = product::getProduct($db,$id);
@@ -23,7 +23,7 @@ function drawProductInfo(PDO $db, int $id){
 ?>
     <h1><?= $product->getName();?></h1>
     <section class="productInfo">
-        <p>Price: <?= htmlentities($product->getPrice()); ?></p>
+        <p>Price: <?= $product->getPrice(); ?></p>
         <p>Brand: <?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p>
         <p>Category: <?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p>
         <ul>
