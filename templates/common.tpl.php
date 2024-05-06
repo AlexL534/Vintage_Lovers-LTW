@@ -8,12 +8,9 @@ function drawHeader(Session $session) { ?>
         <head>
             <title>Vintage Lovers </title>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="../css/general_style.css">
-            <link rel="stylesheet" href="../css/general_layout.css">
-            <link rel="stylesheet" href="../css/general_responsive.css">
-            <link rel="stylesheet" href="../css/main_layout.css">
-            <link rel="stylesheet" href="../css/main_style.css">
-            <link rel="stylesheet" href="../css/main_responsive.css">
+            <link rel="stylesheet" href="../css/general.css">
+            <link rel="stylesheet" href="../css/auth.css">
+            <link rel="stylesheet" href="../css/main.css">
 
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>

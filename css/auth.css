@@ -1,0 +1,85 @@
+.auth  {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+}
+
+
+/*header*/
+
+.auth header{
+    justify-self: center;
+    align-content: center;
+}
+
+.auth header h1{
+    text-align: center;
+}
+
+/*messages*/
+
+#messages{
+    background-color: rgba(255,0,0,0.1);
+    border-radius: 0.5em;
+    max-width: 30em;
+    align-self: center;
+}
+
+#messages article{
+    text-align: center;
+    padding: 1em;
+    color: red
+}
+
+/*form*/
+.auth form{
+    display: grid;
+    grid-template-rows: auto auto auto auto auto;
+}
+
+.auth form label{
+    display: grid;
+    margin: 1em;
+}
+
+.auth form label p{
+    grid-row: 1;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+
+.auth form label input{
+    align-self: center;
+    justify-self: center;
+    border-radius: 1em;
+    width: 80%;
+    max-width: 30em;
+    height: 2em;
+}
+
+.auth form > input[type=submit]{
+    margin: 1em;
+    align-self: center;
+    justify-self: center;
+    background-color: var(--light_red);
+    width: 8em;
+    height: 3em;
+    border-radius: 1em;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/*footer*/
+.auth footer{
+    margin: 1em;
+}
+
+.auth footer a{
+    text-decoration: none;
+    color: var(--dark_red);
+    font-weight: 600;
+}
