@@ -26,12 +26,13 @@ function drawUserInfo(PDO $db, User $user){
     ?>
     <article id="userInfo">
         <!-- Still need to put the image here -->
-        <ul>
-            <li>Name: <?= htmlentities($user->getName()); ?></li>
-            <li>Username: <?= htmlentities($user->getUsername()); ?></li>
-            <li>Email: <?= htmlentities($user->getEmail()); ?></li>
-            <li>Number of owned items: <?= count($user->getUserOwnedItems($db)); ?></li>
-        </ul>
+
+        <table>
+            <tr><td>Name: </td><td><?= htmlentities($user->getName()); ?></td></tr>
+            <tr><td>Username:</td> <td><?= htmlentities($user->getUsername()); ?></td></tr>
+            <tr><td>Email:</td> <td><?= htmlentities($user->getEmail()); ?></td></tr>
+            <tr><td>Number of owned items:</td> <td><?= count($user->getUserOwnedItems($db)); ?></td></tr>
+        </table>
     </article>
 <?php }
 

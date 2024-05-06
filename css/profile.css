@@ -1,0 +1,39 @@
+ .profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.profile header{
+    align-self: center;
+}
+
+
+#userInfo {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light_gray);
+    width: 100%;
+    max-width: 50em;
+    border-radius: 1em;
+}
+
+#userInfo table{
+    align-self: center;
+}
+
+#userInfo table{
+    padding: 1em;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+#userInfo table tr td{
+    padding: 1em;
+    background-color: var(--drak_gray);
+    border-bottom: 1px solid;
+}
+
+
+
