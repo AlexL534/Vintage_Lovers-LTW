@@ -242,4 +242,22 @@ class User{
             return false;
         }
     }
+
+    static public function updateUsername(PDO $db, int $id, string $username ) : bool{
+        $stmt = $db->prepare("UPDATE users SET username = ? WHERE id = ?");
+        $result = $stmt->execute(array($username, $id));
+        return $result;
+    }
+
+    static public function updateName(PDO $db, int $id, string $name ) : bool{
+        $stmt = $db->prepare("UPDATE users SET name = ? WHERE id = ?");
+        $result = $stmt->execute(array($name, $id));
+        return $result;
+    }
+
+    static public function updatePassword(PDO $db, int $id, string $password) : bool{
+        $stmt = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
+        $result = $stmt->execute(array($password, $id));
+        return $result;
+    }
 }

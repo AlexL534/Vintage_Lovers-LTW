@@ -6,7 +6,7 @@ require_once(__DIR__ . '/common.tpl.php');
 
 function drawLogin(Session $session){?>
 
-<section id = "login">
+<section class = "auth">
     <header>
         <h1>Login</h1>
     </header>
@@ -17,11 +17,11 @@ function drawLogin(Session $session){?>
     
     <form action= "../actions/action_login.php" method="post" class= "login" >
         <label>
-            Email:
+            <p>Email:</p>
             <input type="email" name="email" required>
         </label>
         <label>
-            Password:
+           <p> Password:</p>
             <input type = "password" name = "password" required>
         </label>
         <input type="submit" name = "login" value="Login">
@@ -36,7 +36,7 @@ function drawLogin(Session $session){?>
 
 function drawSignup(Session $session){?>
 
-    <section id = "signup">
+    <section class = "auth">
         <header>
             <h1>Register</h1>
         </header>
@@ -47,19 +47,19 @@ function drawSignup(Session $session){?>
 
         <form method="post" action = "../actions/action_signup.php">
             <label>
-                Username:
+                <p>Username:</p>
                 <input type = "text" name = "username" required>
             </label>
             <label>
-                Name:
+                <p>Name:</p>
                 <input type = "text" name = "name" required>
             </label>
             <label>
-                Email:
+                <p>Email:</p>
                 <input type = "email" name = "email" required>
             </label>
             <label>
-                Password:
+                <p>Password:</p>
                 <input type = "password" name = "password" required>
             </label>
             <input type="submit" name = "register" value="Register">
