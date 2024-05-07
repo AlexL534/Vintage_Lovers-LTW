@@ -41,7 +41,7 @@ function drawEditProfile(PDO $db, User $user, Session $session){
             <label>
                 <p>Name:</p>
                 <input type = "text" name = "name" placeholder= <?= htmlentities($user->getName())?> >
-            </label>
+            </label>    
             <label>
             <p> Password:</p>
                 <input type = "password" name = "password" >
@@ -73,7 +73,7 @@ function drawUserOptions(){
     ?>
     <article class = "profileOptions" id="userOptions">
         <ul>
-            <li><a href= "../pages/edit_profile.php"><p>Update Profile</p></a></li>
+            <li><a href= "../pages/edit_profile.php"><p>Edit Profile</p></a></li>
             <li><a><p>Wishlist</p></a></li>
             <li><a href="../pages/seller_product_list.php"><p>Manage owned Products</p></a></li>
             <li><a href="../pages/seller_add_product.php"><p>List a new Procuct</p></a></li>
