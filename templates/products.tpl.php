@@ -61,3 +61,13 @@ function drawProductInfo(PDO $db, int $id){
 
 <?php } ?>
 
+<?php function drawAddToWishlist(Session $session){ 
+    if($session->isLoggedIn()){
+        ?>
+        <button>Add to the Wishlist</button>
+    <?php } ?>    
+
+
+
+<?php } ?>
+

@@ -11,5 +11,7 @@ drawProductInfo($db,intval($_GET['id']));
 
 drawAddToShoppingCart($session);
 
+drawAddToWishlist($session);
+
 drawFooter();
 ?>
