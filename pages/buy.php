@@ -11,6 +11,5 @@ if(!isset($_SESSION['Username'])){
 }
 
 drawHeader($session);
-drawShoppingCart($db, $session);
+drawBuy();
 drawFooter();
-?>

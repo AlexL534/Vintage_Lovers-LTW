@@ -28,7 +28,7 @@ function drawShoppingCart(PDO $db, $session){
             drawProductsListInCart($products);
             ?>
             <div id = "buyButton">
-            <a href = "">BUY</a>
+            <a href = "../pages/buy.php">BUY</a>
         </div>
        <?php } ?>
         
@@ -48,4 +48,33 @@ function drawProductsListInCart($products){
                 <tr><th>Total</th><td id="totalPrice"><?= calculatePrice($products) ?></td><td></td></tr>
             </table>
         </article>
+<?php }
+
+function drawBuy(){
+    ?>
+    <section id="buy">
+        <header>
+            <h1>Finalize the buy</h1>
+        </header>
+        <article>
+            <form action = "../actions/action_buy.php" method = "post" id = "payment">
+                <label>
+                    <p>Payment Method</p>
+                    <select name= "payment" id = "paymentMethod">
+                        <option value="account">Bank Account</option>
+                        <option value="card">Card</option>
+                    </select>
+                </label>
+                <label>
+                    <p>Account number</p>
+                    <input type="text">
+                </label>
+                <label>
+                    <p>Address</p>
+                    <input type="text" name = "address">
+                </label>
+                <input type="submit" value = "Buy">
+            </form>
+        </article>
+    </section>
 <?php }

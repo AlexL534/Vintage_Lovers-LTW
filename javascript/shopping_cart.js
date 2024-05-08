@@ -6,8 +6,8 @@ function encodeForAjax(data) {
 
 function removeItens(){
     const buttons = document.querySelectorAll('#shoppingCart tr button');
-
-    if(buttons == null){
+    console.log(buttons);
+    if(buttons.length == 0){
         //the current page doesn't have this section
         return;
     }
@@ -38,4 +38,37 @@ function removeItens(){
     
 }
 
+function addOptionsToPay(){
+  const selectElement = document.querySelector("#paymentMethod");
+
+  if(selectElement == null){
+    //this isn't the correct section
+    return;
+  }
+  const paymentlabel = document.querySelector("#payment label:nth-child(2");
+
+
+  //create the input exclusive of credit option
+  const newLabel = document.createElement('label');
+  const newP = document.createElement('p');
+  const newInput = document.createElement('input');
+  newInput.setAttribute("type", "text");
+  newP.innerHTML = "Security Code";
+  newLabel.appendChild(newP);
+  newLabel.appendChild(newInput);
+
+
+  selectElement.addEventListener("change", (event) => {
+    if(event.target.value == "card"){
+      paymentlabel.querySelector('p').innerHTML = "Card Number";
+      paymentlabel.append(newLabel);
+    }
+    else{
+      newLabel.remove();
+      paymentlabel.querySelector('p').innerHTML = "Account number";
+    }
+  });
+}
+
 removeItens();
+addOptionsToPay();
