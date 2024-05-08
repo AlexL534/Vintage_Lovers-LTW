@@ -17,7 +17,6 @@ function drawShoppingCart(PDO $db, $session){
         }
     }
     ?>
-    <script src = "../javascript/shoppingCart.js" defer></script>
     <section id = "shoppingCart">
         <header>
             <h1>Your Cart</h1>
@@ -27,24 +26,26 @@ function drawShoppingCart(PDO $db, $session){
             <article><p>No products in cart</p></article>
         <?php } else{
             drawProductsListInCart($products);
-        } ?>
-        <div id = "buyButton">
+            ?>
+            <div id = "buyButton">
             <a href = "">BUY</a>
         </div>
+       <?php } ?>
+        
 
     </section>
 <?php }
 
 function drawProductsListInCart($products){
     ?>
-    <article id = "productsTable">
+    <article class = "productsTable">
             <table>
-                <tr><th>Name</th><th>Price</th></tr>
+                <tr><th>Name</th><th>Price</th><th>Delete</th></tr>
                 <?php foreach($products as $product){
                     ?>
-                    <tr id = "<?= $product->getId()?>"><td><?= $product->getName() ?></td><td class = "price"><?= $product->getPrice()?></td><td><button>Delete</button></td></tr>
+                    <tr id = "<?= $product->getId()?>"><td><?= $product->getName() ?></td><td class = "price"><?= $product->getPrice()?></td><td><button class="delButton">Delete</button></td></tr>
                 <?php } ?>
-                <tr><th>Total</th><td id="totalPrice"><?= calculatePrice($products) ?></td></tr>
+                <tr><th>Total</th><td id="totalPrice"><?= calculatePrice($products) ?></td><td></td></tr>
             </table>
         </article>
 <?php }

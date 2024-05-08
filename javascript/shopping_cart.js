@@ -5,7 +5,13 @@ function encodeForAjax(data) {
   }
 
 function removeItens(){
-    const buttons = document.querySelectorAll('tr button');
+    const buttons = document.querySelectorAll('#shoppingCart tr button');
+
+    if(buttons == null){
+        //the current page doesn't have this section
+        return;
+    }
+    
     const totalPriceElem = document.getElementById("totalPrice");
     let totalPrice = parseFloat(totalPriceElem.innerHTML);
 

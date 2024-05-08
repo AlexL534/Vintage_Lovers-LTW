@@ -23,9 +23,7 @@
 
 #userInfo table{
     align-self: center;
-}
-
-#userInfo table{
+    border-collapse: collapse;
     padding: 1em;
 
     /*text content*/
@@ -33,10 +31,15 @@
     font-weight: 500;
 }
 
+
 #userInfo table tr td{
     padding: 1em;
     margin: 0;
     border-bottom: 1px solid;
+}
+
+#userInfo table tr:last-of-type td {
+    border-bottom: 0px solid;
 }
 
 /*profile options*/
