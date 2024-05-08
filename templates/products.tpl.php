@@ -13,6 +13,7 @@ function drawProductInfo(PDO $db, int $id, Session $session){
     $product = product::getProduct($db,$id);
     //var_dump($product);
     
+
     $brand = Brand::getBrandById($db,$product->getBrand());
     $category = Category::getCategoryById($db,$product->getCategory());
     $colors = Color::getColorsOfProduct($db,$id);
@@ -26,24 +27,21 @@ function drawProductInfo(PDO $db, int $id, Session $session){
             <h1><?= $product->getName();?></h1>
         </header>
         <section id="productInfo">
-            <p>Price: <?= $product->getPrice(); ?></p>
-            <p>Brand: <?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p>
-            <p>Category: <?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p>
-            <ul>
-                <?php foreach ($colors as $color) { ?>
-                    <li><?= htmlentities($color->getName()); ?></li>
-                <?php } ?>
-            </ul>
-            <ul>
-                <?php foreach ($conditions as $condition) { ?>
-                    <li><?= htmlentities($condition->getName()); ?></li>
-                <?php } ?>
-            </ul>
-            <ul>
-                <?php foreach ($sizes as $size) { ?>
-                    <li><?= htmlentities($size->getName()); ?></li>
-                <?php } ?>
-            </ul>
+            <table>
+                <tr><th><p>Price: </p></th><td><p><?= $product->getPrice(); ?></p></td></tr>
+                <tr><th><p>Brand:</p></th><td><p><?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p></td></tr>
+                <tr><th><p>Category: </p></th><td><p><?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p></td></tr>
+                <tr><th><p> Color: </p></th><td><?php foreach ($colors as $color) { ?>
+                        <p><?= htmlentities($color->getName()); ?></p>
+                <?php } ?></td></tr>
+                <tr><th><p> Condition: </p></th><td><?php foreach ($conditions as $condition) { ?>
+                        <p><?= htmlentities($condition->getName()); ?></p>
+                <?php } ?></td></tr>
+                <tr><th><p> Size: </p></th><td><?php foreach ($sizes as $size) { ?>
+                        <p><?= htmlentities($size->getName()); ?></p>
+                <?php } ?></td></tr>
+
+            </table>
         </section>
         <section id="productImages">
                     <?php foreach($images as $image){ ?>
@@ -52,19 +50,20 @@ function drawProductInfo(PDO $db, int $id, Session $session){
                     <?php } ?>
         </section>
         <div id = "productButtons">
-            <?php drawAddToShoppingCart($session) ?>
-            <?php drawAddToWishlist($session) ?>
+            <?php drawProductPageButtons($session, $id) ?>
         </div>
         
     </section>
 
 <?php } ?>
 
-<?php function drawAddToShoppingCart(Session $session){ 
+<?php function drawProductPageButtons(Session $session, int $id){ 
     if($session->isLoggedIn()){
         ?>
-        <form action="../actions/action_add_shopping_cart.php" id = "addShoppingCart">
-            <button >Add to the Cart</button>
+        <form>
+            <input type="hidden" name = "productID" value = "<?= $id ?>">
+            <button formaction="../actions/action_add_whishlist.php" formmethod="post" type="submit" >Add to the Wishlist</button>
+            <button formaction="../actions/action_add_shopping_cart.php" formmethod="post" type="submit" >Add to the Cart</button>
         </form>  
     <?php } ?>    
 
@@ -72,15 +71,4 @@ function drawProductInfo(PDO $db, int $id, Session $session){
 
 <?php } ?>
 
-<?php function drawAddToWishlist(Session $session){ 
-    if($session->isLoggedIn()){
-        ?>
-        <form action="../actions/action_add_wishlist.php " id = "addWishlist">
-            <button >Add to the Wishlist</button>
-        </form>
-    <?php } ?>    
-
-
-
-<?php } ?>
 
