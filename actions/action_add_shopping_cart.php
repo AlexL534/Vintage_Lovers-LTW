@@ -1,16 +1,19 @@
 <?php
 require_once(__DIR__ . '/../database/database_connection.db.php');
-require_once(__DIR__ . '../classes/session.class.php');
+require_once(__DIR__ . '/../classes/session.class.php');
+require_once(__DIR__ . '/../classes/shopping_cart.class.php');
 
 
 $db = getDatabaseConnection();
 
 $session = new Session();
 
-$id = intval($_GET['id']);
+$id = intval($_POST['productID']);
 
-$stmt=$db->prepare('INSERT INTO SHOPPINGCART VALUES (?,?)');
+if(!ShoppingCart::isProductInShoppingCart($db, $session->getId(), $id)){
+    ShoppingCart::insertProductInShoppingCart($db, $session->getId(), $id);
+}
 
-$stmt->execute(array($session->getId(),$id));
+header("Location: {$_SERVER['HTTP_REFERER']}");
 
 ?>

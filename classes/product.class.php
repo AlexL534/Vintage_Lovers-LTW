@@ -78,6 +78,10 @@ class Product{
         $stmt->execute(array($id));
         $product = $stmt->fetch();
 
+        if(empty($product)){
+            return null;
+        }
+
         return new Product(
             intval($product['id']),
             floatval($product['price']),

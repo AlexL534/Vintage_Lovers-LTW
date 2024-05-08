@@ -29,7 +29,7 @@ function drawProductInfo(PDO $db, int $id, Session $session){
         <header>
             <h1><?= $product->getName();?></h1>
         </header>
-        <section id="productInfo">
+        <article id="productInfo">
             <table>
                 <tr><th><p>Price: </p></th><td><p><?= $product->getPrice(); ?>€</p></td></tr>
                 <tr><th><p>Brand:</p></th><td><p><?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p></td></tr>
@@ -56,14 +56,15 @@ function drawProductInfo(PDO $db, int $id, Session $session){
 
                 <tr><th><p>Owner: </p></th><td><p><?= $owner->getUsername(); ?></p></td></tr>
             </table>
-        </section>
-        <section id="productImages">
+        </article>
+        <article id="productImages">
                     <?php $image = $images[0]?>    
                     <img src="../<?=$image; ?>" alt="product image" id= "<?= $productID?>">
                     <button>Next Image</button>
-        </section>
+        </article>
         <div id = "productButtons">
-            <?php drawProductPageButtons($session, $id) ?>
+            
+            <?php drawProductPageButtons($session, $productID) ?>
         </div>
         
     </section>

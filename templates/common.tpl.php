@@ -76,7 +76,7 @@ function drawHeaderLogin() { ?>
 
 function drawLoggedInIcons(){ ?>
     <div id= "logged_icons">
-        <a href = ""><img src = "../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
+        <a href = "../pages/shopping_cart.php"><img src = "../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
         <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id ="profile_icon" ></a>
     </div>
 <?php }
