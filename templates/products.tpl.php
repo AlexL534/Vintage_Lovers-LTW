@@ -12,7 +12,7 @@ require_once(__DIR__ . '/../classes/user.class.php');
 
 function drawProductInfo(PDO $db, int $id, Session $session){
     $product = product::getProduct($db,$id);
-    //var_dump($product);
+    $productID = $product->getId();
     
     $ownerID = $product->getOwner();
     $owner = User::getUser($db, $ownerID);
@@ -24,6 +24,7 @@ function drawProductInfo(PDO $db, int $id, Session $session){
     $images = Image::getImagesPath($db,$id);
     
 ?>
+
     <section id="productPage">
         <header>
             <h1><?= $product->getName();?></h1>
@@ -52,15 +53,14 @@ function drawProductInfo(PDO $db, int $id, Session $session){
                             foreach ($sizes as $size) { ?>
                                     <p><?= htmlentities($size->getName()); ?></p>
                             <?php }} ?></td></tr>
-                            
+
                 <tr><th><p>Owner: </p></th><td><p><?= $owner->getUsername(); ?></p></td></tr>
             </table>
         </section>
         <section id="productImages">
-                    <?php foreach($images as $image){ ?>
-                        
-                        <img src="../<?=$image; ?>" alt="">
-                    <?php } ?>
+                    <?php $image = $images[0]?>    
+                    <img src="../<?=$image; ?>" alt="product image" id= "<?= $productID?>">
+                    <button>Next Image</button>
         </section>
         <div id = "productButtons">
             <?php drawProductPageButtons($session, $id) ?>

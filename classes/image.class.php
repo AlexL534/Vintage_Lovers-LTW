@@ -66,7 +66,7 @@ class Image{
         $stmt = $db->prepare('
         SELECT IMAGES.path
         FROM IMAGES JOIN IMAGES_OF_PRODUCT on IMAGES.imageid = IMAGES_OF_PRODUCT.imageid
-        WHERE   IMAGES_OF_PRODUCT.productid = ?
+        WHERE  IMAGES_OF_PRODUCT.productid = ?
         ');
         $stmt->execute(array($productID));
     
