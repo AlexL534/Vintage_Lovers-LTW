@@ -51,10 +51,12 @@ function drawProductInfo(PDO $db, int $id){
 
 <?php } ?>
 
-<?php function drawAddToShoppingCart(Session $session){ 
+<?php function drawAddToShoppingCart(Session $session,int $id){ 
     if($session->isLoggedIn()){
         ?>
-        <button>Add to the shopping cart</button>
+        <button formaction="../actions/action_add_shopping_cart.php?id=<?= $id ?>" formmethod="get" type="submit">
+            Add to the shopping cart
+        </button>
     <?php } ?>    
 
 

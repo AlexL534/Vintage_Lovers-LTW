@@ -9,7 +9,7 @@ drawHeader($session);
 
 drawProductInfo($db,intval($_GET['id']));
 
-drawAddToShoppingCart($session);
+drawAddToShoppingCart($session,intval($_GET['id']));
 
 drawAddToWishlist($session);
 
