@@ -71,7 +71,7 @@ function drawBuy(){
                 </label>
                 <label>
                     <p>Address</p>
-                    <input type="text" name = "address">
+                    <input type="text" name = "address" required>
                 </label>
                 <input type="submit" value = "Buy">
             </form>
