@@ -53,6 +53,7 @@ function addOptionsToPay(){
   const newP = document.createElement('p');
   const newInput = document.createElement('input');
   newInput.setAttribute("type", "text");
+  newInput.setAttribute("required", "true");
   newP.innerHTML = "Security Code";
   newLabel.appendChild(newP);
   newLabel.appendChild(newInput);
@@ -61,7 +62,7 @@ function addOptionsToPay(){
   selectElement.addEventListener("change", (event) => {
     if(event.target.value == "card"){
       paymentlabel.querySelector('p').innerHTML = "Card Number";
-      paymentlabel.append(newLabel);
+      paymentlabel.insertAdjacentElement( "afterend", newLabel);
     }
     else{
       newLabel.remove();

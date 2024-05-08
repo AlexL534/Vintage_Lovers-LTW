@@ -58,7 +58,7 @@
     border-radius: 1em;
     width: 80%;
     max-width: 30em;
-    height: 2em;
+    height: 2.5em;
 }
 
 .auth form > input[type=submit]{

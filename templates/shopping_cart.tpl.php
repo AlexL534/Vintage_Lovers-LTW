@@ -67,7 +67,7 @@ function drawBuy(){
                 </label>
                 <label>
                     <p>Account number</p>
-                    <input type="text">
+                    <input type="text" required = "true">
                 </label>
                 <label>
                     <p>Address</p>

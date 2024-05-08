@@ -85,3 +85,69 @@
     font-size: 1.1em;
     font-weight: bold;
 }
+
+/* =============================================== finalize the buy =======================================================*/
+
+#buy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#buy article{
+    width: 100%;
+}
+#buy form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+#buy form label{
+    display: grid;
+    width: 100%;
+    margin: 1em;
+    font-weight: 500;
+    place-items: center;
+}
+
+#buy form label input{
+    border-radius: 1em;
+    width: 80%;
+    max-width: 30em;
+    height: 2em;
+}
+
+#buy form label input{
+    align-self: center;
+    justify-self: center;
+    border-radius: 1em;
+    width: 80%;
+    max-width: 30em;
+    height: 2.5em;
+    border-color: black;
+}
+
+#buy select{
+    width: 80%;
+    max-width: 30em;
+    height: 2.5em;
+    border-radius: 1em;
+    border-width: 2px;
+    border-color: black;
+    font-weight: 500;
+}
+
+#buy input[type = "submit"]{
+    margin: 1em;
+    align-self: center;
+    justify-self: center;
+    background-color: var(--light_red);
+    width: 8em;
+    height: 3em;
+    border-radius: 1em;
+    font-weight: 700;
+    font-size: 1.1em;
+}
