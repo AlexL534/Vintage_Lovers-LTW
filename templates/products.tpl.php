@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../classes/size.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
 
-function drawProductInfo(PDO $db, int $id){
+function drawProductInfo(PDO $db, int $id, Session $session){
     $product = product::getProduct($db,$id);
     //var_dump($product);
     
@@ -21,32 +21,41 @@ function drawProductInfo(PDO $db, int $id){
     $images = Image::getImagesPath($db,$id);
     
 ?>
-    <h1><?= $product->getName();?></h1>
-    <section class="productInfo">
-        <p>Price: <?= $product->getPrice(); ?></p>
-        <p>Brand: <?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p>
-        <p>Category: <?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p>
-        <ul>
-            <?php foreach ($colors as $color) { ?>
-                <li><?= htmlentities($color->getName()); ?></li>
-            <?php } ?>
-        </ul>
-        <ul>
-            <?php foreach ($conditions as $condition) { ?>
-                <li><?= htmlentities($condition->getName()); ?></li>
-            <?php } ?>
-        </ul>
-        <ul>
-            <?php foreach ($sizes as $size) { ?>
-                <li><?= htmlentities($size->getName()); ?></li>
-            <?php } ?>
-        </ul>
-    </section>
-    <section class="product_images">
-                <?php foreach($images as $image){ ?>
-                    
-                    <img src="../<?=$image; ?>" alt="">
+    <section id="productPage">
+        <header>
+            <h1><?= $product->getName();?></h1>
+        </header>
+        <section id="productInfo">
+            <p>Price: <?= $product->getPrice(); ?></p>
+            <p>Brand: <?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p>
+            <p>Category: <?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p>
+            <ul>
+                <?php foreach ($colors as $color) { ?>
+                    <li><?= htmlentities($color->getName()); ?></li>
                 <?php } ?>
+            </ul>
+            <ul>
+                <?php foreach ($conditions as $condition) { ?>
+                    <li><?= htmlentities($condition->getName()); ?></li>
+                <?php } ?>
+            </ul>
+            <ul>
+                <?php foreach ($sizes as $size) { ?>
+                    <li><?= htmlentities($size->getName()); ?></li>
+                <?php } ?>
+            </ul>
+        </section>
+        <section id="productImages">
+                    <?php foreach($images as $image){ ?>
+                        
+                        <img src="../<?=$image; ?>" alt="">
+                    <?php } ?>
+        </section>
+        <div id = "productButtons">
+            <?php drawAddToShoppingCart($session) ?>
+            <?php drawAddToWishlist($session) ?>
+        </div>
+        
     </section>
 
 <?php } ?>
@@ -54,7 +63,9 @@ function drawProductInfo(PDO $db, int $id){
 <?php function drawAddToShoppingCart(Session $session){ 
     if($session->isLoggedIn()){
         ?>
-        <button>Add to the shopping cart</button>
+        <form action="../actions/action_add_shopping_cart.php" id = "addShoppingCart">
+            <button >Add to the Cart</button>
+        </form>  
     <?php } ?>    
 
 
@@ -64,7 +75,9 @@ function drawProductInfo(PDO $db, int $id){
 <?php function drawAddToWishlist(Session $session){ 
     if($session->isLoggedIn()){
         ?>
-        <button>Add to the Wishlist</button>
+        <form action="../actions/action_add_wishlist.php " id = "addWishlist">
+            <button >Add to the Wishlist</button>
+        </form>
     <?php } ?>    
 
 

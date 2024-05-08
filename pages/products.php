@@ -7,11 +7,7 @@ $db = getDatabaseConnection();
 $session = new Session();
 drawHeader($session);
 
-drawProductInfo($db,intval($_GET['id']));
-
-drawAddToShoppingCart($session);
-
-drawAddToWishlist($session);
+drawProductInfo($db,intval($_GET['id']), $session);
 
 drawFooter();
 ?>
