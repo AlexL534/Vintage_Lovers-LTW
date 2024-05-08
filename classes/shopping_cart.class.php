@@ -49,4 +49,9 @@ class ShoppingCart{
         $stmt=$db->prepare('INSERT INTO SHOPPINGCART VALUES (?,?)');
         $stmt->execute(array($idUser,$idProduct));
     }
+
+    static function deleteProductInShoppingCart(PDO $db, int $idUser, int $idProduct){
+        $stmt = $db->prepare("DELETE FROM SHOPPINGCART WHERE productID = ? and userID = ? ");
+        $stmt->execute(array($idProduct, $idUser));
+    }
 }

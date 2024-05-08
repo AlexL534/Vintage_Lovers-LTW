@@ -16,6 +16,7 @@ function drawShoppingCart(PDO $db, $session){
         }
     }
     ?>
+    <script src = "../javascript/shoppingCart.js" defer></script>
     <section id = "shoppingCart">
         <header>
             <h1>Your Cart</h1>
@@ -37,7 +38,7 @@ function drawProductsListInCart($products){
                 <tr><th>Name</th><th>Price</th></tr>
                 <?php foreach($products as $product){
                     ?>
-                    <tr><td><?= $product->getName() ?></td><td><?= $product->getPrice()?></td><td><button>Eliminate</button></td></tr>
+                    <tr id = "<?= $product->getId()?>"><td><?= $product->getName() ?></td><td><?= $product->getPrice()?></td><td><button>Delete</button></td></tr>
                 <?php } ?>
             </table>
         </article>
