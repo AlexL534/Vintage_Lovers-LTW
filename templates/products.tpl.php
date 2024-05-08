@@ -8,12 +8,14 @@ require_once(__DIR__ . '/../classes/condition.class.php');
 require_once(__DIR__ . '/../classes/size.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
+require_once(__DIR__ . '/../classes/user.class.php');
 
 function drawProductInfo(PDO $db, int $id, Session $session){
     $product = product::getProduct($db,$id);
     //var_dump($product);
     
-
+    $ownerID = $product->getOwner();
+    $owner = User::getUser($db, $ownerID);
     $brand = Brand::getBrandById($db,$product->getBrand());
     $category = Category::getCategoryById($db,$product->getCategory());
     $colors = Color::getColorsOfProduct($db,$id);
@@ -28,19 +30,30 @@ function drawProductInfo(PDO $db, int $id, Session $session){
         </header>
         <section id="productInfo">
             <table>
-                <tr><th><p>Price: </p></th><td><p><?= $product->getPrice(); ?></p></td></tr>
+                <tr><th><p>Price: </p></th><td><p><?= $product->getPrice(); ?>€</p></td></tr>
                 <tr><th><p>Brand:</p></th><td><p><?= $brand ? htmlentities($brand->getName()) : 'Unknown'; ?></p></td></tr>
                 <tr><th><p>Category: </p></th><td><p><?= $category ? htmlentities($category->getName()) : 'Unknown'; ?></p></td></tr>
-                <tr><th><p> Color: </p></th><td><?php foreach ($colors as $color) { ?>
-                        <p><?= htmlentities($color->getName()); ?></p>
-                <?php } ?></td></tr>
-                <tr><th><p> Condition: </p></th><td><?php foreach ($conditions as $condition) { ?>
-                        <p><?= htmlentities($condition->getName()); ?></p>
-                <?php } ?></td></tr>
-                <tr><th><p> Size: </p></th><td><?php foreach ($sizes as $size) { ?>
-                        <p><?= htmlentities($size->getName()); ?></p>
-                <?php } ?></td></tr>
+                <tr><th><p> Color: </p></th><td><?php 
+                        if(empty($colors)) {echo "Unknown";} 
+                        else{ foreach ($colors as $color) { ?>
+                            <p><?= htmlentities($color->getName()); ?></p>
+                        <?php  } } ?></td></tr>
 
+                <tr><th><p> Condition: </p></th><td><?php 
+                        if(empty($conditions)) {echo "Unknown";} 
+                        else{
+                            foreach ($conditions as $condition) { ?>
+                                    <p><?= htmlentities($condition->getName()); ?></p>
+                            <?php } }?></td></tr>
+
+                <tr><th><p> Size: </p></th><td><?php 
+                        if(empty($sizes)) {echo "Unknown";} 
+                        else{
+                            foreach ($sizes as $size) { ?>
+                                    <p><?= htmlentities($size->getName()); ?></p>
+                            <?php }} ?></td></tr>
+                            
+                <tr><th><p>Owner: </p></th><td><p><?= $owner->getUsername(); ?></p></td></tr>
             </table>
         </section>
         <section id="productImages">
