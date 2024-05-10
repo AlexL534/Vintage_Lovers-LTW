@@ -17,9 +17,9 @@ function drawUserQuestion(Session $session, PDO $db){
         $pid=$questionDB['productID'];
         $receiver = User::getUser($db,intval($rid));
         $product = Product::getProduct($db,intval($pid)); ?>
-        <a href="../pages/messages_page.php?sid=<?= $currentUserID?>&rid=<?=$rid ?>&pid=<?=$pid?>">
+        <li><a href="../pages/messages_page.php?sid=<?= $currentUserID?>&rid=<?=$rid ?>&pid=<?=$pid?>">
             <p>You asked User <?= htmlentities($receiver->getUserName());?> about the <?= htmlentities($product->getName()); ?></p>
-        </a>
+        </a></li>
     <?php } ?>
     
     </ul>
@@ -39,9 +39,9 @@ function drawQuestionsToUser(Session $session, PDO $db){
         $pid=$questionDB['productID'];
         $sender = User::getUser($db,intval($sid));
         $product = Product::getProduct($db,intval($pid)); ?>
-        <a href="../pages/messages_page.php?sid=<?= $sid?>&rid=<?= $currentUserID?>&pid=<?=$pid?>">
+        <li><a href="../pages/messages_page.php?sid=<?= $sid?>&rid=<?= $currentUserID?>&pid=<?=$pid?>">
             <p>User <?= htmlentities($sender->getUserName());?> asked about the <?= htmlentities($product->getName()); ?></p>
-        </a>
+        </a></li>
     <?php } ?>
     
     </ul>
@@ -78,12 +78,12 @@ function drawProductInfo(int $pid, PDO $db){
 
 <?php
 function drawMessageForm(int $sid, int $rid, int $pid){ ?>
-    <form>
+    <form id="messageForm">
         <input type="hidden" name = "senderID" value = "<?= $sid ?>">
         <input type="hidden" name = "receiverID" value = "<?= $rid ?>">
         <input type="hidden" name = "productID" value = "<?= $pid ?>">
         <input type="text" name = "messageText">
-        <button formaction="../actions/action_send_message.php" formmethod="post" type="submit">Send</button>
+        <button>Send</button>
     </form>
 <?php } ?>
 
