@@ -122,12 +122,12 @@ CREATE TABLE CONDITION_OF_PRODUCT(
 );
 
 CREATE TABLE MESSAGES(
+    id INTEGER PRIMARY KEY NOT NULL,
     senderID INTEGER NOT NULL,
     receiverID INTEGER NOT NULL,
     productID INTEGER NOT NULL,
     messageText TEXT NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (senderID,receiverID,productID),
     FOREIGN KEY (senderID) references USERS(id),
     FOREIGN KEY (receiverID) references USERS(id),
     FOREIGN KEY (productID) references PRODUCTS(id)

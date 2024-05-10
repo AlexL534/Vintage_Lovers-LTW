@@ -19,6 +19,7 @@ function drawProfile(PDO $db, User $user){
             }
         ?>
     </section>
+    <a href="../pages/inbox.php">Inbox</a>
 <?php }
 
 function drawEditProfile(PDO $db, User $user, Session $session){

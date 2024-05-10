@@ -56,6 +56,20 @@ class UserMessage{
         return $messages;
     }
 
+    static public function getQuestions(PDO $db,int $sid){
+        $stmt = $db->prepare('SELECT DISTINCT receiverID , productID FROM MESSAGES WHERE senderID = ?');
+        $stmt->execute(array($sid));
+        $questions = $stmt->fetchAll();
+        return $questions;
+    }
+
+    static public function getQuestionsForSeller(PDO $db, int $rid){
+        $stmt = $db->prepare('SELECT DISTINCT senderID , productID FROM MESSAGES WHERE receiverID = ?');
+        $stmt->execute(array($rid));
+        $questions = $stmt->fetchAll();
+        return $questions;
+    }
+
     static public function insertMessage(int $sid, int $rid, int $pid, string $text, PDO $db){
         $stmt = $db->prepare('INSERT INTO MESSAGES(senderID,receiverID,productID,messageText) VALUES (?,?,?,?)');
         $stmt->execute(array($sid,$rid,$pid,$text));
