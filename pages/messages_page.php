@@ -10,16 +10,18 @@ $db = getDatabaseConnection();
 
 
 if(!$session->isLoggedIn()){
-    header('Location: index.php' );
+    header('Location: ../pages/main_page.php' );
 }
+
 $sid = intval($_GET['sid']);
 $rid = intval($_GET['rid']);
 $pid = intval($_GET['pid']);
 
-if($session->getId() !== $sid && $session->getId() !== $rid){
-    header('Location: index.php' ); 
+/*
+if(($session->getId() !== $sid) && ($session->getId() !== $rid)){
+    header('Location: ../pages/main_page.php' ); 
 }
-
+*/
 drawHeader($session);
 drawMessages($db,$rid,$sid,$pid,$session);
 drawProductInfo($pid,$db);

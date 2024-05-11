@@ -13,8 +13,8 @@ function drawUserQuestion(Session $session, PDO $db){
     </h3>
     <ul class = "questionsAsked">
     <?php foreach($questions as $questionDB){
-        $rid=$questionDB['receiverID'];
-        $pid=$questionDB['productID'];
+        $rid=$questionDB->getReceiverID();
+        $pid=$questionDB->getProductID();
         $receiver = User::getUser($db,intval($rid));
         $product = Product::getProduct($db,intval($pid)); ?>
         <li><a href="../pages/messages_page.php?sid=<?= $currentUserID?>&rid=<?=$rid ?>&pid=<?=$pid?>">
@@ -35,8 +35,8 @@ function drawQuestionsToUser(Session $session, PDO $db){
     </h3>
     <ul class = "questionsToUser">
     <?php foreach($questions as $questionDB){
-        $sid=$questionDB['senderID'];
-        $pid=$questionDB['productID'];
+        $sid=$questionDB->getSenderID();
+        $pid=$questionDB->getProduct();
         $sender = User::getUser($db,intval($sid));
         $product = Product::getProduct($db,intval($pid)); ?>
         <li><a href="../pages/messages_page.php?sid=<?= $sid?>&rid=<?= $currentUserID?>&pid=<?=$pid?>">
@@ -67,7 +67,9 @@ function drawMessages(PDO $db, int $rid , int $sid, int $pid, Session $session){
 
 <?php
 function drawProductInfo(int $pid, PDO $db){
-    $product = Product::getProduct($db,$pid); ?>
+    $product = Product::getProduct($db,$pid);
+    echo "$pid";
+     ?>
     <div id="productInfo">
         
         <a href="../pages/product.php?id=<?= $pid ?>" id ="productName"><?= htmlentities($product->getName());?></a>
