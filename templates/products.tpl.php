@@ -65,7 +65,7 @@ function drawProductInfo(PDO $db, int $id, Session $session){
         <div id = "productButtons">
             
             <?php drawProductPageButtons($session, $productID) ?>
-            <a href="../pages/messages_page.php?sid=<?= $session->getId()?>&rid=<?=$ownerID?>&pid=<?=$id?>">Send a message</a>
+            <a href="../pages/messages_page.php?senderID=<?= $session->getId()?>&receiverID=<?=$ownerID?>&productID=<?=$id?>">Send a message</a>
         </div>
         
     </section>

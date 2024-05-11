@@ -16,7 +16,8 @@ function sendMessage(){
     }
     console.log(form['messageText'])
 
-    button.addEventListener('click',async function(){
+    button.addEventListener('click',async function(event){
+        event.preventDefault();
         
         const form = button.parentElement;
         const newMessage = document.createElement('p');
@@ -26,7 +27,7 @@ function sendMessage(){
 
         
         const request = new XMLHttpRequest();
-        request.open('post','../actions/action_send_message.php',true);
+        request.open('post','/../actions/action_send_message.php',true);
         request.setRequestHeader('Content-Type', 
         'application/x-www-form-urlencoded')
         request.send(encodeForAjax({senderID : form.elements['senderID'].value,

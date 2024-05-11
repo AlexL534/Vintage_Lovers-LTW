@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     try {
         $db = getDatabaseConnection();
         
-        if (Product::productExists($db, $productId)) {
+        if (Product::getProduct($db, $productId) !== null) {
             if (Product::updateProduct($db, $productId, $name, $description, $price)) {
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();

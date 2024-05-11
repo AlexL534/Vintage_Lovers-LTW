@@ -15,6 +15,6 @@ $text = $_POST['messageText'];
 
 UserMessage::insertMessage($sid,$rid,$pid,$text,$db);
 
-header("Location: ../pages/messages_page.php?sid=$sid&rid=$rid&pid=$pid");
+//header("Location: ../pages/messages_page.php?sid=$sid&rid=$rid&pid=$pid");
 //exit();
 ?>
