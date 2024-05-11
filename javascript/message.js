@@ -22,7 +22,7 @@ function sendMessage(){
         const form = button.parentElement;
         const newMessage = document.createElement('p');
         newMessage.innerHTML = form.elements['messageText'].value;
-        
+        newMessage.classList.add("sender");
         messagesDiv.appendChild(newMessage);
 
         

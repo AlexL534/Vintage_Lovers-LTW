@@ -13,8 +13,15 @@ function drawUserQuestion(Session $session, PDO $db){
     </h3>
     <ul class = "questionsAsked">
     <?php foreach($questions as $questionDB){
+        $sid=$questionDB['senderID'];
         $rid=$questionDB['receiverID'];
         $pid=$questionDB['productID'];
+        if($currentUserID == $rid && isset($sid) ){
+            $rid = $sid;
+        }
+        if(!isset($rid)){
+            continue;
+        }
         $receiver = User::getUser($db,intval($rid));
         $product = Product::getProduct($db,intval($pid)); ?>
         <li><a href="../pages/messages_page.php?sid=<?= $currentUserID?>&rid=<?=$rid ?>&pid=<?=$pid?>">
@@ -39,7 +46,7 @@ function drawQuestionsToUser(Session $session, PDO $db){
         $pid=$questionDB['productID'];
         $sender = User::getUser($db,intval($sid));
         $product = Product::getProduct($db,intval($pid)); ?>
-        <li><a href="../pages/messages_page.php?sid=<?= $sid?>&rid=<?= $currentUserID?>&pid=<?=$pid?>">
+        <li><a href="../pages/messages_page.php?sid=<?= $currentUserID?>&rid=<?= $sid?>&pid=<?=$pid?>">
             <p>User <?= htmlentities($sender->getUserName());?> asked about the <?= htmlentities($product->getName()); ?></p>
         </a></li>
     <?php } ?>
@@ -50,17 +57,17 @@ function drawQuestionsToUser(Session $session, PDO $db){
 <?php
 function drawInbox(Session $session, PDO $db){
     drawUserQuestion($session,$db);
-    drawQuestionsToUser($session,$db);
+    //drawQuestionsToUser($session,$db);
 }
 ?>
 
 <?php
-function drawMessages(PDO $db, int $rid , int $sid, int $pid, Session $session){ ?>
+function drawMessages(PDO $db,int $pid, Session $session,int $rid){ ?>
     <div id = "messages">
         <?php
-        $messages = UserMessage::getMessages($sid,$rid,$pid,$db);
+        $messages = UserMessage::getMessages($session->getId(),$rid,$pid,$db);
         foreach($messages as $message){ ?>
-            <p class= <?= ($session->getId() === $sid) ? "sender" : "receiver" ?>><?= htmlentities($message->getText());?></p>
+            <p class= <?= ($session->getId() == $message->getSenderID()) ? "sender" : "receiver" ?>><?= htmlentities($message->getText());?></p>
         <?php } ?>
     </div>
 <?php } ?>

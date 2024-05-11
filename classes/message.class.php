@@ -37,9 +37,9 @@ class UserMessage{
         return $this->timestamp;
     }
 
-    static public function getMessages(int $sid, int $rid, int $pid, PDO $db){
-        $stmt = $db->prepare('SELECT * FROM MESSAGES WHERE senderID = ? AND receiverID = ? AND productID = ? ORDER BY timestamp');
-        $stmt->execute(array($sid,$rid,$pid));
+    static public function getMessages(int $id,int $id2, int $pid, PDO $db){
+        $stmt = $db->prepare('SELECT * FROM MESSAGES WHERE (senderID = ? OR receiverID = ?) AND (senderID = ? OR receiverID = ?) AND productID = ? ORDER BY timestamp');
+        $stmt->execute(array($id,$id,$id2,$id2,$pid));
         $messages = array();
         while($mesDB = $stmt->fetch()){
             $mes = new UserMessage(
@@ -60,11 +60,18 @@ class UserMessage{
         $stmt = $db->prepare('SELECT DISTINCT receiverID , productID FROM MESSAGES WHERE senderID = ?');
         $stmt->execute(array($sid));
         $questions = $stmt->fetchAll();
+        $stmt = $db->prepare('SELECT DISTINCT senderID , productID FROM MESSAGES WHERE receiverID = ?');
+        $stmt->execute(array($sid));
+        while($qDB=$stmt->fetch()){
+            if(!in_array($qDB,$questions)){
+                $questions [] = $qDB;
+            }
+        }
         return $questions;
     }
 
     static public function getQuestionsForSeller(PDO $db, int $rid){
-        $stmt = $db->prepare('SELECT DISTINCT senderID , productID FROM MESSAGES WHERE receiverID = ?');
+        
         $stmt->execute(array($rid));
         $questions = $stmt->fetchAll();
         return $questions;

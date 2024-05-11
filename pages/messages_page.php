@@ -25,7 +25,7 @@ if($session->getId() != $sid && $session->getId() != $rid){
 
 
 drawHeader($session);
-drawMessages($db,$rid,$sid,$pid,$session);
+drawMessages($db,$pid,$session,$rid);
 drawProductInfo($pid,$db);
 drawMessageForm($sid,$rid,$pid);
 drawFooter();
