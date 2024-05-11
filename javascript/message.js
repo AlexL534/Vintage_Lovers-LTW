@@ -21,7 +21,7 @@ function sendMessage(){
         
         const form = button.parentElement;
         const newMessage = document.createElement('p');
-        newMessage.innerHTML = form['messageText'];
+        newMessage.innerHTML = form.elements['messageText'].value;
         
         messagesDiv.appendChild(newMessage);
 

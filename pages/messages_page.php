@@ -13,14 +13,16 @@ if(!$session->isLoggedIn()){
     header('Location: ../pages/main_page.php' );
 }
 
-$sid = intval($_GET['senderID']);
-$rid = intval($_GET['receiverID']);
-$pid = intval($_GET['productID']);
+$sid = intval($_GET['sid']);
+$rid = intval($_GET['rid']);
+$pid = intval($_GET['pid']);
 
 
-if(($session->getId() !== $sid) && ($session->getId() !== $rid)){
+if($session->getId() != $sid && $session->getId() != $rid){
     header('Location: ../pages/main_page.php' ); 
 }
+
+
 
 drawHeader($session);
 drawMessages($db,$rid,$sid,$pid,$session);
