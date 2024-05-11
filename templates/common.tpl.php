@@ -8,23 +8,23 @@ function drawHeader(Session $session) { ?>
         <head>
             <title>Vintage Lovers </title>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="../css/general.css">
-            <link rel="stylesheet" href="../css/auth.css">
-            <link rel="stylesheet" href="../css/main.css">
-            <link rel="stylesheet" href="../css/profile.css">
-            <link rel="stylesheet" href="../css/admin.css">
-            <link rel="stylesheet" href="../css/product.css">
-            <link rel="stylesheet" href="../css/shopping_cart.css">
-            <link rel="stylesheet" href="../css/wishlist.css">
-            <script src = "../javascript/img.js" defer></script>
-            <script src = "../javascript/shopping_cart.js" defer></script>
-            <script src = "../javascript/wishlist.js" defer></script>
+            <link rel="stylesheet" href="/../css/general.css">
+            <link rel="stylesheet" href="/../css/auth.css">
+            <link rel="stylesheet" href="/../css/main.css">
+            <link rel="stylesheet" href="/../css/profile.css">
+            <link rel="stylesheet" href="/../css/admin.css">
+            <link rel="stylesheet" href="/../css/product.css">
+            <link rel="stylesheet" href="/../css/shopping_cart.css">
+            <link rel="stylesheet" href="/../css/wishlist.css">
+            <script src = "/../javascript/img.js" defer></script>
+            <script src = "/../javascript/shopping_cart.js" defer></script>
+            <script src = "/../javascript/wishlist.js" defer></script>
 
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>
             <header>
-                   <a href="../pages/main_page.php"><img src="../assets/Logo.png" alt= "logo" id = "logo"></a>
+                   <a href="/../pages/main_page.php"><img src="/../assets/Logo.png" alt= "logo" id = "logo"></a>
                    <form>
                         <input type="search" name="search" placeholder="Search for a brand, condition, ...">
                     </form>
@@ -80,8 +80,8 @@ function drawHeaderLogin() { ?>
 
 function drawLoggedInIcons(){ ?>
     <div id= "logged_icons">
-        <a href = "../pages/shopping_cart.php"><img src = "../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
-        <a href="../pages/profile.php"><img src= "../assets/profile_icon.png" alt= "profile icon" id ="profile_icon" ></a>
+        <a href = "/../pages/shopping_cart.php"><img src = "/../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
+        <a href="/../pages/profile.php"><img src= "/../assets/profile_icon.png" alt= "profile icon" id ="profile_icon" ></a>
     </div>
 <?php }
 
