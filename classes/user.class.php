@@ -222,8 +222,18 @@ class User{
             $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
             $stmt->execute();
             
-            $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+            $searchResults = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $user = new User(
+                    intval($row['id']),
+                    $row['name'],
+                    $row['username'],
+                    $row['email'],
+                    $row['password'],
+                    intval($row['is_admin'])
+                );
+                $searchResults[] = $user;
+            }
             return $searchResults;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
