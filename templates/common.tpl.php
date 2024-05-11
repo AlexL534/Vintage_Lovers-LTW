@@ -15,8 +15,10 @@ function drawHeader(Session $session) { ?>
             <link rel="stylesheet" href="../css/admin.css">
             <link rel="stylesheet" href="../css/product.css">
             <link rel="stylesheet" href="../css/shopping_cart.css">
+            <link rel="stylesheet" href="../css/wishlist.css">
             <script src = "../javascript/img.js" defer></script>
             <script src = "../javascript/shopping_cart.js" defer></script>
+            <script src = "../javascript/wishlist.js" defer></script>
 
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>

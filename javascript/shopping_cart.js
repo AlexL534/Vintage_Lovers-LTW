@@ -4,7 +4,7 @@ function encodeForAjax(data) {
     }).join('&')
   }
 
-function removeItens(){
+function removeItensCart(){
     const buttons = document.querySelectorAll('#shoppingCart tr button');
     console.log(buttons);
     if(buttons.length == 0){
@@ -71,5 +71,5 @@ function addOptionsToPay(){
   });
 }
 
-removeItens();
+removeItensCart();
 addOptionsToPay();
