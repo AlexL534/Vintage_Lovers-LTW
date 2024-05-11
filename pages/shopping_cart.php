@@ -7,7 +7,7 @@ $db = getDatabaseConnection();
 $session = new Session();
 
 if(!isset($_SESSION['Username'])){
-    header('Location: index.php' );
+    header('Location: ../pages/main_page.php' );
 }
 
 drawHeader($session);
