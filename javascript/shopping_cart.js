@@ -4,7 +4,7 @@ function encodeForAjax(data) {
     }).join('&')
   }
 
-function removeItens(){
+function removeItensCart(){
     const buttons = document.querySelectorAll('#shoppingCart tr button');
     console.log(buttons);
     if(buttons.length == 0){
@@ -30,7 +30,7 @@ function removeItens(){
 
         //sends a request to delete the product from the cart in the db
         const request = new XMLHttpRequest();
-        request.open("get", "../js_actions/api_remove_shopping_cart.php?" + encodeForAjax({productID: product}), true);
+        request.open("get", "/../js_actions/api_remove_shopping_cart.php?" + encodeForAjax({productID: product}), true);
         request.send();
 
         row.remove();
@@ -71,5 +71,5 @@ function addOptionsToPay(){
   });
 }
 
-removeItens();
+removeItensCart();
 addOptionsToPay();

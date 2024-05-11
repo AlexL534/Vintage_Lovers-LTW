@@ -59,7 +59,7 @@ function drawProductInfo(PDO $db, int $id, Session $session){
         </article>
         <article id="productImages">
                     <?php $image = $images[0]?>    
-                    <img src="../<?=$image; ?>" alt="product image" id= "<?= $productID?>">
+                    <img src="/../<?=$image; ?>" alt="product image" id= "<?= $productID?>">
                     <button>Next Image</button>
         </article>
         <div id = "productButtons">
@@ -76,8 +76,8 @@ function drawProductInfo(PDO $db, int $id, Session $session){
         ?>
         <form>
             <input type="hidden" name = "productID" value = "<?= $id ?>">
-            <button formaction="../actions/action_add_whishlist.php" formmethod="post" type="submit" >Add to the Wishlist</button>
-            <button formaction="../actions/action_add_shopping_cart.php" formmethod="post" type="submit" >Add to the Cart</button>
+            <button formaction="/../actions/action_add_wishlist.php" formmethod="post" type="submit" >Add to the Wishlist</button>
+            <button formaction="/../actions/action_add_shopping_cart.php" formmethod="post" type="submit" >Add to the Cart</button>
         </form>  
     <?php } ?>    
 

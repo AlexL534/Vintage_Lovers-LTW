@@ -1,0 +1,15 @@
+#whislist {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+#whislist .productsTable tr:last-child td:first-of-type{
+    border-bottom-left-radius: 1em;
+}
+
+
+
+/*all the other itens in the wishlist have the same css has the shopping_cart*/

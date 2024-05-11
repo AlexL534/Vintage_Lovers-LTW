@@ -3,6 +3,8 @@
     gap: 3em;
     flex-direction: column;
     align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 /*products table*/
@@ -52,6 +54,11 @@
 
 .productsTable th{
     font-weight: bold;
+}
+
+.productsTable a{
+    text-decoration: none;
+    color:black;
 }
 
 .productsTable button{
