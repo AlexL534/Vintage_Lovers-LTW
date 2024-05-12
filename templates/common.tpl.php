@@ -2,7 +2,8 @@
 declare(strict_types = 1);
 
 require_once(__DIR__ . '/../classes/session.class.php');
-function drawHeader(Session $session) { ?> 
+require_once(__DIR__ . '/../classes/category.class.php');
+function drawHeader(Session $session, array $menuCategories) { ?> 
     <!DOCTYPE html>
     <html lang="en-US">
         <head>
@@ -39,10 +40,13 @@ function drawHeader(Session $session) { ?>
                 <input type="checkbox" id="menu_button"> 
                 <label class="menu_button" for="menu_button"></label>
                 <menu>
-                    <li><a href="">Shoes</a></li>
-                    <li><a href="">Shirts</a></li>
-                    <li><a href="">Pants</a></li>
-                    <li><a href="../pages/filter_page.php">All</a></li>
+                    <?php
+                    foreach($menuCategories as $category){
+                        ?>
+                             <li><a href="/../pages/filter_page.php/?categoryID=<?=$category->getId()?>"><?=htmlentities($category->getName())?></a></li>
+                    <?php }
+                    ?>
+                    <li><a href="/../pages/filter_page.php">All</a></li>
                 </menu>
             </nav>
             <main>

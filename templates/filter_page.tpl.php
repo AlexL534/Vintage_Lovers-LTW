@@ -100,7 +100,7 @@ function drawProductArticle(PDO $db, Product $product){ ?>
             <?php
                 $images = Image::getImagesPath($db,$product->getId());
                 $name = $product->getName();?>
-                <img src="../<?=$images[0]?>" alt="productImage" class="productImage">
+                <img src="/../<?=$images[0]?>" alt="productImage" class="productImage">
                 <p class= "product_name"><?=htmlentities($product->getName());?></p>
                 <p class= "product_price"><?=$product->getPrice();?></p>
 

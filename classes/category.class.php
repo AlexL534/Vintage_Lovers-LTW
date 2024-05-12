@@ -65,5 +65,18 @@ class Category{
 
         return $categories;
     }
+
+    static public function getCategoriesLimit(PDO $db, int $limit){
+        $stmt = $db->prepare('SELECT * FROM CATEGORY limit ?');
+        $stmt->execute(array($limit));
+        $categories = array();
+        while($categoryDB = $stmt->fetch()){
+            $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);
+
+            $categories[]=$category;
+        }
+
+        return $categories;
+    }
 }
 ?>

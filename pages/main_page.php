@@ -5,9 +5,12 @@ require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
+require_once(__DIR__ . '/../utils/header_menu_utils.php');
+
 $db = getDatabaseConnection();
 $session = new Session();
-drawHeader($session);
+$categories = getCategoriesForMenu();
+drawHeader($session, $categories);
 
 ?>  <header id= "main_header">
         <img src = "../assets/main_image.jpg" alt = "clothes">
