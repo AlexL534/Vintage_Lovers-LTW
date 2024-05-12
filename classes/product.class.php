@@ -144,9 +144,9 @@ class Product{
 
     static public function getProductByColor(PDO $db, int $colorID){
         $stmt = $db->prepare(
-            'SELECT id, price, quantity, name, description, owner, category, brand
-            FROM PRODUCTS
-            WHERE color = ?'
+            'SELECT p.id, p.price, p.quantity, p.name, p.description, p.owner, p.category, p.brand
+            FROM PRODUCTS p join colors_of_product c on c.productID = p.id
+            WHERE c.colorid = ?'
         );
         $stmt->execute(array($colorID));
         $products = array();

@@ -6,15 +6,13 @@ function verifyCheckbox(){
     //adds a listen to every checkbox
     checkboxes.forEach(function(checkbox){
         checkbox.addEventListener('change', async function(){
-
+            let products = await getAllProducts();
             //if a change occurs and every checkbos is disable, insert all products
             if(isEveryBoxUnchecked()){
-                drawAllProducts();
+                drawProducts(products);
             }
             else{
             //query the products depending on the boxes checked
-            
-            let products = await getAllProducts();
             const productsBrands = await verifyBrands();
             const productsCategories = await verifyCategories();
             const productsColors = await verifyColors();
@@ -36,16 +34,12 @@ function verifyCheckbox(){
             if(productsSizes.length != 0){
                 products = filterProducts(products, productsSizes);
             }
-            console.log(productsSizes.length);
+            
             console.log(products);
-            drawSelectedProducts(products);
+            await drawProducts(products);
             }
         });
     });
-
-    if(isEveryBoxUnchecked()){
-
-    }
 
 }
 
@@ -111,10 +105,12 @@ async function verifyConditions(){
             conditionsIDs.push(checkbox.name);
         }
     });
+    console.log(conditionsIDs);
     for(let i = 0; i < conditionsIDs.length; i++){
         const response = await fetch("/../js_actions/api_get_products_from_filters.php/?conditionID=" + conditionsIDs[i]);
         const productsRes = await response.json();
         productsRes.forEach( element => products.push(element));
+        console.log(productsRes);
     }
     return products;
 }
@@ -134,16 +130,62 @@ async function verifySizes(){
         productsRes.forEach( element => products.push(element));
         
     }
-    console.log(products);
     return products;
 }
 
 
-function drawAllProducts(){
 
-}
+async function drawProducts(products){
+    //draw the filtered products
 
-function drawSelectedProducts(products){
+    const filterPage = document.querySelector("#filterPage");
+    const productsSection = document.querySelector("#filterPage .products");
+    productsSection.remove();
+
+    const newProductSection = document.createElement("section");
+    newProductSection.setAttribute("class", "products");
+
+    for(let i = 0; i < products.length; i++){
+        //creates the elements that are used to represent the product
+        const link = document.createElement("a");
+        const article = document.createElement("article");
+        const pName = document.createElement("p");
+        const pPrice = document.createElement("p");
+        const img = document.createElement("img");
+
+        //fetches the product image
+        const response = await fetch("/../js_actions/api_images.php/?id=" + products[i].id);
+        const imagesPath = await response.json();
+        img.setAttribute("src", "/../" + imagesPath[0]);
+        img.setAttribute("class", "productImage");
+        img.setAttribute("alt", "productImage");
+
+        //alter the link atributes
+        link.setAttribute("href", "/../pages/products.php?id=" + products[i].id);
+        link.setAttribute("class", "product");
+
+        //alter the name paragraph atributes
+        pName.setAttribute("class", "product_name");
+        pName.innerHTML = products[i].name;
+        
+        //alter the price paragraph atributes
+        pPrice.setAttribute("class", "product_price");
+        pPrice.innerHTML = products[i].price;
+
+        //appends everyting to the product article
+        article.appendChild(img);
+        article.appendChild(pName);
+        article.appendChild(pPrice);
+
+        //appends the article to the link to the product page
+        link.appendChild(article);
+
+        //inserts the link to the product section
+        newProductSection.appendChild(link);
+
+    }
+
+    filterPage.appendChild(newProductSection);
 
 }
 
