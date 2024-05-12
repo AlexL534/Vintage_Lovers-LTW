@@ -15,7 +15,7 @@ drawHeader($session);
     </header>
     <section id = "main_products">
             <h4>Products for you</h4>
-            <div id="selectProducts">
+            <div class="products">
             <?php 
                 $products = product::getProductByPrice($db,3,150);
                 foreach($products as $product){ 

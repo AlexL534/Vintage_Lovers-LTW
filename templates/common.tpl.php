@@ -16,6 +16,7 @@ function drawHeader(Session $session) { ?>
             <link rel="stylesheet" href="/../css/product.css">
             <link rel="stylesheet" href="/../css/shopping_cart.css">
             <link rel="stylesheet" href="/../css/wishlist.css">
+            <link rel="stylesheet" href="/../css/all_filters.css">
             <script src = "/../javascript/img.js" defer></script>
             <script src = "/../javascript/shopping_cart.js" defer></script>
             <script src = "/../javascript/wishlist.js" defer></script>
