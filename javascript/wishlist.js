@@ -1,6 +1,5 @@
 function removeItensList(){
     const buttons = document.querySelectorAll('#whislist tr button');
-    console.log(buttons);
     if(buttons.length == 0){
         //the current page doesn't have this section
         return;
