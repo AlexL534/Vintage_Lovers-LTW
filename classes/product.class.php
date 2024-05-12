@@ -117,6 +117,31 @@ class Product{
         }
         return $products;
     }
+
+    static public function getProductByCategory(PDO $db, int $categoryID){
+        $stmt = $db->prepare(
+            'SELECT id, price, quantity, name, description, owner, category, brand
+            FROM PRODUCTS
+            WHERE category = ?'
+        );
+        $stmt->execute(array($categoryID));
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                intval($productDB['id']),
+                floatval($productDB['price']),
+                intval($productDB['quantity']),
+                $productDB['name'],
+                $productDB['description'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
+            );
+            $products[] = $product;
+        }
+        return $products;
+    }
+    
     static public function getProductByName(PDO $db, string $name){
         $stmt = $db->prepare(
             'SELECT id, price, quantity, name, description, owner, category, brand

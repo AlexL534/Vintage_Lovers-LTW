@@ -9,10 +9,10 @@ require_once(__DIR__ . '/../utils/header_menu_utils.php');
 $session = new Session();
 $db = getDatabaseConnection();
 $categories = getCategoriesForMenu();
-
+$categoryID = intval($_GET['categoryID']);
 drawHeader($session,$categories);
-drawFilterSection($db);
-drawProductSection($db);
+drawFilterSection($db,$categoryID);
+drawProductSection($db, $categoryID);
 drawFooter();
 
 ?>

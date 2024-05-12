@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../classes/image.class.php');
 
 
 
-function drawFilterSection(PDO $db){ 
+function drawFilterSection(PDO $db, $categoryID){ 
     $brands = Brand::getAllBrands($db);
     $sizes = Size::getAllSizes($db);
     $conditions = Condition::getAllCondition($db);
@@ -30,7 +30,7 @@ function drawFilterSection(PDO $db){
                     <?php foreach($brands as $brand){?>
                         <li>
                             <label><p><?=htmlentities($brand->getName());?></p>
-                                <input type="checkbox" name="<?=$brand->getName()?>" class="filter">
+                                <input type="checkbox" name="<?=$brand->getName()?>" class="filter" >
                             </label>
                         </li>
                     <?php } ?>
@@ -43,7 +43,7 @@ function drawFilterSection(PDO $db){
                     <?php foreach($categories as $category){?>
                         <li>
                             <label><p><?=htmlentities($category->getName());?></p>
-                                <input type="checkbox" name="<?=$category->getName()?>" class="filter">
+                                <input type="checkbox" name="<?=$category->getName()?>" class="filter" <?= ($categoryID === $category->getId()) ? "checked": ""?>>
                             </label>
                         </li>
                     <?php } ?>
@@ -95,13 +95,13 @@ function drawFilterSection(PDO $db){
 <?php }
 
 function drawProductArticle(PDO $db, Product $product){ ?>
-    <a href="../pages/products.php?id=<?=$product->getId();?>" class="product">
+    <a href="/../pages/products.php?id=<?=$product->getId();?>" class="product">
         <article>
             <?php
                 $images = Image::getImagesPath($db,$product->getId());
                 $name = $product->getName();?>
                 <img src="/../<?=$images[0]?>" alt="productImage" class="productImage">
-                <p class= "product_name"><?=htmlentities($product->getName());?></p>
+                <p class= "product_name"><?=htmlentities($name);?></p>
                 <p class= "product_price"><?=$product->getPrice();?></p>
 
         </article>
@@ -110,8 +110,14 @@ function drawProductArticle(PDO $db, Product $product){ ?>
 <?php }
 ?>
 
-<?php function drawProductSection(PDO $db){
-    $products = Product::getAllProducts($db);?>
+<?php function drawProductSection(PDO $db, $categoryID){
+    $products = [];
+    if($categoryID !== 0){
+        $products = Product::getProductByCategory($db, $categoryID);
+    }
+    else{
+        $products = Product::getAllProducts($db);
+    }?>
     <section class="products">
         <?php foreach($products as $product)
             drawProductArticle($db,$product);
