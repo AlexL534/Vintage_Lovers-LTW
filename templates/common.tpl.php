@@ -41,7 +41,7 @@ function drawHeader(Session $session) { ?>
                     <li><a href="">Shoes</a></li>
                     <li><a href="">Shirts</a></li>
                     <li><a href="">Pants</a></li>
-                    <li><a href="">All</a></li>
+                    <li><a href="../pages/filter_page.php">All</a></li>
                 </menu>
             </nav>
             <main>
