@@ -63,7 +63,7 @@ class Color{
         $stmt->execute(array($id));
         $colors = array();
         while($colorID=$stmt->fetch()){
-            $color = Color::getColorById($db,intval($colorID));
+            $color = Color::getColorById($db,intval($colorID['colorID']));
             $colors[] = $color;
         }
         return $colors;

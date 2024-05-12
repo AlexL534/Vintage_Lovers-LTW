@@ -30,7 +30,7 @@ function drawFilterSection(PDO $db, $categoryID){
                     <?php foreach($brands as $brand){?>
                         <li>
                             <label><p><?=htmlentities($brand->getName());?></p>
-                                <input type="checkbox" name="<?=$brand->getName()?>" class="filter" >
+                                <input type="checkbox" name="<?=$brand->getId()?>" class="filter" >
                             </label>
                         </li>
                     <?php } ?>
@@ -43,7 +43,7 @@ function drawFilterSection(PDO $db, $categoryID){
                     <?php foreach($categories as $category){?>
                         <li>
                             <label><p><?=htmlentities($category->getName());?></p>
-                                <input type="checkbox" name="<?=$category->getName()?>" class="filter" <?= ($categoryID === $category->getId()) ? "checked": ""?>>
+                                <input type="checkbox" name="<?=$category->getId()?>" class="filter" <?= ($categoryID === $category->getId()) ? "checked": ""?>>
                             </label>
                         </li>
                     <?php } ?>
@@ -56,7 +56,7 @@ function drawFilterSection(PDO $db, $categoryID){
                     <?php foreach($colors as $color){?>
                         <li>
                             <label><p><?=htmlentities($color->getName());?></p>
-                                <input type="checkbox" name="<?=$color->getName()?>" class="filter">
+                                <input type="checkbox" name="<?=$color->getId()?>" class="filter">
                             </label>
                         </li>
                     <?php } ?>
@@ -69,7 +69,7 @@ function drawFilterSection(PDO $db, $categoryID){
                     <?php foreach($conditions as $condition){?>
                         <li>
                             <label><p><?=htmlentities($condition->getName());?></p>
-                                <input type="checkbox" name="<?=$condition->getName()?>" class="filter">
+                                <input type="checkbox" name="<?=$condition->getId()?>" class="filter">
                             </label>
                         </li>
                     <?php } ?>
@@ -82,7 +82,7 @@ function drawFilterSection(PDO $db, $categoryID){
                     <?php foreach($sizes as $size){?>
                         <li>
                             <label><p><?=htmlentities($size->getName());?></p>
-                                <input type="checkbox" name="<?=$size->getName()?>" class="filter">
+                                <input type="checkbox" name="<?=$size->getId()?>" class="filter">
                             </label>
                         </li>
                     <?php } ?>

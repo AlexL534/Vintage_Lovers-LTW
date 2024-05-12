@@ -9,7 +9,6 @@ $session = new Session();
 $categories = getCategoriesForMenu();
 drawHeader($session,$categories);
 
-
 drawProductInfo($db,intval($_GET['id']), $session);
 
 drawFooter();

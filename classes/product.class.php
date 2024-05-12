@@ -141,7 +141,103 @@ class Product{
         }
         return $products;
     }
-    
+
+    static public function getProductByColor(PDO $db, int $colorID){
+        $stmt = $db->prepare(
+            'SELECT id, price, quantity, name, description, owner, category, brand
+            FROM PRODUCTS
+            WHERE color = ?'
+        );
+        $stmt->execute(array($colorID));
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                intval($productDB['id']),
+                floatval($productDB['price']),
+                intval($productDB['quantity']),
+                $productDB['name'],
+                $productDB['description'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
+            );
+            $products[] = $product;
+        }
+        return $products;
+    }
+
+    static public function getProductByBrand(PDO $db, int $brandID){
+        $stmt = $db->prepare(
+            'SELECT id, price, quantity, name, description, owner, category, brand
+            FROM PRODUCTS
+            WHERE brand= ?'
+        );
+        $stmt->execute(array($brandID));
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                intval($productDB['id']),
+                floatval($productDB['price']),
+                intval($productDB['quantity']),
+                $productDB['name'],
+                $productDB['description'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
+            );
+            $products[] = $product;
+        }
+        return $products;
+    }
+
+    static public function getProductByCondition(PDO $db, int $conditionID){
+        $stmt = $db->prepare(
+            'SELECT p.id, p.price, p.quantity, p.name, p.description, p.owner, p.category, p.brand
+            FROM PRODUCTS p join condition_of_product c on c.productID = p.id
+            WHERE c.conditionid = ?'
+        );
+        $stmt->execute(array($conditionID));
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                intval($productDB['id']),
+                floatval($productDB['price']),
+                intval($productDB['quantity']),
+                $productDB['name'],
+                $productDB['description'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
+            );
+            $products[] = $product;
+        }
+        return $products;
+    }
+
+    static public function getProductBySize(PDO $db, int $sizeID){
+        $stmt = $db->prepare(
+            'SELECT p.id, p.price, p.quantity, p.name, p.description, p.owner, p.category, p.brand
+            FROM PRODUCTS p join size_of_product s on s.productID = p.id
+            WHERE s.sizeID = ?'
+        );
+        $stmt->execute(array($sizeID));
+        $products = array();
+        while($productDB = $stmt->fetch()){
+            $product = new Product(
+                intval($productDB['id']),
+                floatval($productDB['price']),
+                intval($productDB['quantity']),
+                $productDB['name'],
+                $productDB['description'],
+                intval($productDB['owner']),
+                intval($productDB['category']),
+                intval($productDB['brand'])
+            );
+            $products[] = $product;
+        }
+        return $products;
+    }
+
     static public function getProductByName(PDO $db, string $name){
         $stmt = $db->prepare(
             'SELECT id, price, quantity, name, description, owner, category, brand

@@ -13,7 +13,7 @@ require_once(__DIR__ . '/../classes/user.class.php');
 function drawProductInfo(PDO $db, int $id, Session $session){
     $product = product::getProduct($db,$id);
     $productID = $product->getId();
-    
+    echo $id;
     $ownerID = $product->getOwner();
     $owner = User::getUser($db, $ownerID);
     $brand = Brand::getBrandById($db,$product->getBrand());

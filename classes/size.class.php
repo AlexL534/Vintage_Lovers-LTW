@@ -62,8 +62,8 @@ class Size{
         $stmt = $db->prepare('SELECT sizeID FROM SIZE_OF_PRODUCT WHERE productID = ?');
         $stmt->execute(array($id));
         $sizes = array();
-        while($sizeID=$stmt->fetch()){
-            $size = Size::getSizeById($db,intval($sizeID));
+        while($sizeID = $stmt->fetch()){
+            $size = Size::getSizeById($db,intval($sizeID['sizeID']));
             $sizes[] = $size;
         }
         return $sizes;

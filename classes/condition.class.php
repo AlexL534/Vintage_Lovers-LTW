@@ -71,7 +71,7 @@ class Condition{
         $stmt->execute(array($id));
         $conditions = array();
         while($conditionID=$stmt->fetch()){
-            $condition = Condition::getConditionById($db,intval($conditionID));
+            $condition = Condition::getConditionById($db,intval($conditionID['conditionID']));
             $conditions[] = $condition;
         }
         return $conditions;
