@@ -22,6 +22,7 @@ function drawProfile(PDO $db, User $user){
 <?php }
 
 function drawEditProfile(PDO $db, User $user, Session $session){
+    //draws the edit profile page (subpage of the profile page)
     ?>
 
     <section class = "editProfile">

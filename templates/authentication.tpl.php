@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/common.tpl.php');
 
-function drawLogin(Session $session){?>
+function drawLogin(Session $session){
+    //draws the login page main content
+    ?>
 
 <section class = "auth">
     <header>
@@ -34,7 +36,9 @@ function drawLogin(Session $session){?>
 
 <?php }
 
-function drawSignup(Session $session){?>
+function drawSignup(Session $session){
+    //draws the signup page main content
+    ?>
 
     <section class = "auth">
         <header>

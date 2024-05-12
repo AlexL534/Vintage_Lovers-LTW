@@ -11,6 +11,8 @@ require_once(__DIR__ . '/../classes/image.class.php');
 
 
 function drawFilterSection(PDO $db, $categoryID){ 
+    //draws the filters filters section (sidebar)
+
     $brands = Brand::getAllBrands($db);
     $sizes = Size::getAllSizes($db);
     $conditions = Condition::getAllCondition($db);
@@ -94,7 +96,9 @@ function drawFilterSection(PDO $db, $categoryID){
 
 <?php }
 
-function drawProductArticle(PDO $db, Product $product){ ?>
+function drawProductArticle(PDO $db, Product $product){ 
+    //draws the  a given product article with his information
+    ?>
     <a href="/../pages/products.php?id=<?=$product->getId();?>" class="product">
         <article>
             <?php
@@ -111,6 +115,8 @@ function drawProductArticle(PDO $db, Product $product){ ?>
 ?>
 
 <?php function drawProductSection(PDO $db, $categoryID){
+    //draws the products section 
+
     $products = [];
     if($categoryID !== 0){
         $products = Product::getProductByCategory($db, $categoryID);

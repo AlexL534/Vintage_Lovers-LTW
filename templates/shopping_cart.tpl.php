@@ -7,6 +7,8 @@ require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../utils/product_utils.php');
 
 function drawShoppingCart(PDO $db, $session){
+    //draws the shopping cart page
+
     $userID = $session->getId();
     $productsInCart = ShoppingCart::getUserShoppingCart($db, $userID);
     $products = array();
@@ -37,6 +39,7 @@ function drawShoppingCart(PDO $db, $session){
 <?php }
 
 function drawProductsListInCart($products){
+    //draws the list of products in the cart
     ?>
     <article class = "productsTable">
             <table>
@@ -51,6 +54,7 @@ function drawProductsListInCart($products){
 <?php }
 
 function drawBuy(){
+    //draws the buy page (subpage inside the shopping cart)
     ?>
     <section id="buy">
         <header>

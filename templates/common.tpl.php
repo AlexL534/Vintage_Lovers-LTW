@@ -3,7 +3,9 @@ declare(strict_types = 1);
 
 require_once(__DIR__ . '/../classes/session.class.php');
 require_once(__DIR__ . '/../classes/category.class.php');
-function drawHeader(Session $session, array $menuCategories) { ?> 
+function drawHeader(Session $session, array $menuCategories) { 
+    //draws the website header
+    ?> 
     <!DOCTYPE html>
     <html lang="en-US">
         <head>
@@ -54,7 +56,9 @@ function drawHeader(Session $session, array $menuCategories) { ?>
                 
     <?php }
 
-function drawFooter() { ?>
+function drawFooter() { 
+    //draws the website footer
+    ?>
             </main>
 
             <footer>
@@ -77,21 +81,27 @@ function drawFooter() { ?>
     </html>
 <?php }
 
-function drawHeaderLogin() { ?>
+function drawHeaderLogin() { 
+    //draws the website header login
+    ?>
     <div class= "login" >
         <a href="/../pages/register.php">Register</a>
         <a href="/../pages/login.php">Login</a>
     </div>
 <?php }
 
-function drawLoggedInIcons(){ ?>
+function drawLoggedInIcons(){ 
+    //draws the website icons when the user is loggedIn
+    ?>
     <div id= "logged_icons">
         <a href = "/../pages/shopping_cart.php"><img src = "/../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
         <a href="/../pages/profile.php"><img src= "/../assets/profile_icon.png" alt= "profile icon" id ="profile_icon" ></a>
     </div>
 <?php }
 
-function displayMessages(Session $session){ ?>
+function displayMessages(Session $session){ 
+    //draws the error messages 
+    ?>
     <section id="messages">
       <?php foreach ($session->getMessages() as $message) { ?>
 
