@@ -224,15 +224,11 @@ class User{
             
             $searchResults = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $user = new User(
-                    intval($row['id']),
-                    $row['name'],
-                    $row['username'],
-                    $row['email'],
-                    $row['password'],
-                    intval($row['is_admin'])
-                );
-                $searchResults[] = $user;
+                $searchResults[] = [
+                    'username' => $row['username'],
+                    'email' => $row['email'],
+                    'isAdmin' => intval($row['is_admin'])
+                ];
             }
             return $searchResults;
         } catch (PDOException $e) {
@@ -240,6 +236,7 @@ class User{
             return [];
         }
     }
+    
 
     static public function updateAdminStatus(PDO $db, int $userId): bool
     {
@@ -270,4 +267,5 @@ class User{
         $result = $stmt->execute(array($password, $id));
         return $result;
     }
+    
 }

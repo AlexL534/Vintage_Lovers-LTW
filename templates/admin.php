@@ -52,15 +52,16 @@ function drawUserList() {
                 <input type="hidden" name="action" value="search">
             </form>
         </section>
-        <section id="userList">
-            <?php
-            $db = getDatabaseConnection();
-            if (isset($_POST['action']) && $_POST['action'] === 'search') {
-                $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
-                $searchResults = User::searchUsers($db, $searchQuery);
+        <?php
 
-                if (!empty($searchResults)) {
-                    ?>
+        $db = getDatabaseConnection();
+        if (isset($_POST['action']) && $_POST['action'] === 'search') {
+            $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
+            $searchResults = User::searchUsers($db, $searchQuery);
+            
+            if (!empty($searchResults)) {
+                ?>
+                <section id="userList">
                     <ul>
                         <?php foreach ($searchResults as $user) { ?>
                             <li class="user-item">
@@ -74,7 +75,7 @@ function drawUserList() {
                                 </div>
                                 <div class="user-label">User Type</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getIsAdmin() ? 'Admin' : 'Normal User'); ?></span>
+                                    <span><?php echo htmlentities($user->getIsAdmin()) ? 'Admin' : 'Normal User'; ?></span>
                                 </div>
                                 <div class="options-menu">
                                     <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
@@ -89,15 +90,17 @@ function drawUserList() {
                             </li>
                         <?php } ?>
                     </ul>
-                    <?php
-                } else {
-                    echo "No users found.";
-                }
+                </section>
+                <?php
             } else {
-                $users = User::getAllUsers($db);
-
-                if (!empty($users)) {
-                    ?>
+                echo "No users found.";
+            }
+        } else {
+            $users = User::getAllUsers($db);
+        
+            if (!empty($users)) {
+                ?>
+                <section id="userList">
                     <ul>
                         <?php foreach ($users as $user) { ?>
                             <li class="user-item">
@@ -111,7 +114,7 @@ function drawUserList() {
                                 </div>
                                 <div class="user-label">User Type</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getIsAdmin() ? 'Admin' : 'Normal User'); ?></span>
+                                    <span><?php echo htmlentities($user->getIsAdmin()) ? 'Admin' : 'Normal User'; ?></span>
                                 </div>
                                 <div class="options-menu">
                                     <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
@@ -126,19 +129,16 @@ function drawUserList() {
                             </li>
                         <?php } ?>
                     </ul>
-                    <?php
-                } else {
-                    echo "No users found.";
-                }
+                </section>
+                <?php
+            } else {
+                echo "No users found.";
             }
-            ?>
-        </section>
-        <?php
+        }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 }
-
 
 function drawProductList($searchEnabled = true, $session) {
     try {
