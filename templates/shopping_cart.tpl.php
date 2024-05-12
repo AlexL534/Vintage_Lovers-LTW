@@ -28,7 +28,7 @@ function drawShoppingCart(PDO $db, $session){
             drawProductsListInCart($products);
             ?>
             <div id = "buyButton">
-            <a href = "../pages/buy.php">BUY</a>
+            <a href = "/../pages/buy.php">BUY</a>
         </div>
        <?php } ?>
         
@@ -57,7 +57,7 @@ function drawBuy(){
             <h1>Finalize the buy</h1>
         </header>
         <article>
-            <form action = "../actions/action_buy.php" method = "post" id = "payment">
+            <form action = "/../actions/action_buy.php" method = "post" id = "payment">
                 <label>
                     <p>Payment Method</p>
                     <select name= "payment" id = "paymentMethod">

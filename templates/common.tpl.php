@@ -78,8 +78,8 @@ function drawFooter() { ?>
 
 function drawHeaderLogin() { ?>
     <div class= "login" >
-        <a href="../pages/register.php">Register</a>
-        <a href="../pages/login.php">Login</a>
+        <a href="/../pages/register.php">Register</a>
+        <a href="/../pages/login.php">Login</a>
     </div>
 <?php }
 

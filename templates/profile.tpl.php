@@ -73,12 +73,12 @@ function drawUserOptions(){
     ?>
     <article class = "profileOptions" id="userOptions">
         <ul>
-            <li><a href= "../pages/edit_profile.php"><p>Edit Profile</p></a></li>
-            <li><a href = "../pages/wishlist.php"><p>Wishlist</p></a></li>
-            <li><a href="../pages/seller_product_list.php"><p>Manage owned Products</p></a></li>
-            <li><a href="../pages/seller_add_product.php"><p>List a new Procuct</p></a></li>
+            <li><a href= "/../pages/edit_profile.php"><p>Edit Profile</p></a></li>
+            <li><a href = "/../pages/wishlist.php"><p>Wishlist</p></a></li>
+            <li><a href="/../pages/seller_product_list.php"><p>Manage owned Products</p></a></li>
+            <li><a href="/../pages/seller_add_product.php"><p>List a new Procuct</p></a></li>
             <li><a><p>Sold Products</p></a></li>
-            <li id="logoutButton"><a href = "../actions/action_logout.php"><p>Logout</p></a></li>
+            <li id="logoutButton"><a href = "/../actions/action_logout.php"><p>Logout</p></a></li>
         </ul>
     </article>
 <?php }
@@ -89,9 +89,9 @@ function drawAdminOptions(){
         <h2>Admin Options</h2>
     <article class = "profileOptions" id="adminOptions">
         <ul>
-            <li><a href="../pages/admin_filters.php"><p>Add information to the system</p></a></li>
-            <li><a href="../pages/admin_manage_user.php"><p>Manage users</p></a></li>
-            <li><a href="../pages/admin_delete_product.php"><p>Remove a product</p></a></li>
+            <li><a href="/../pages/admin_filters.php"><p>Add information to the system</p></a></li>
+            <li><a href="/../pages/admin_manage_user.php"><p>Manage users</p></a></li>
+            <li><a href="/../pages/admin_delete_product.php"><p>Remove a product</p></a></li>
         </ul> 
     </article>
 <?php }
