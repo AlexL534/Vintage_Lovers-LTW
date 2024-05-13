@@ -90,6 +90,7 @@ function drawAdminOptions(){
     <article class = "profileOptions" id="adminOptions">
         <ul>
             <li><a href="../pages/admin_filters.php"><p>Add information to the system</p></a></li>
+            <li><a href="../pages/admin_remove_filters.php"><p>Remove information from the system</p></a></li>
             <li><a href="../pages/admin_manage_user.php"><p>Manage users</p></a></li>
             <li><a href="../pages/admin_delete_product.php"><p>Remove a product</p></a></li>
         </ul> 

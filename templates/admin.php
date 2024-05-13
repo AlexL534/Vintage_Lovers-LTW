@@ -23,6 +23,23 @@ function drawFilterTypes() {
     <?php
 }
 
+function drawRemoveFilterTypes() {
+    ?>
+    <header>
+        <h2>Remove info from the system</h2>
+    </header>
+    <section id="removeFilterTypes">
+        <ul>
+            <li><a href="admin_remove_specific_filter.php?type=category"><?php echo 'Categories'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=size"><?php echo 'Sizes'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=condition"><?php echo 'Conditions'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=color"><?php echo 'Colors'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=brand"><?php echo 'Brands'; ?></a></li>
+        </ul>
+    </section>
+    <?php
+}
+
 function drawAddInfoForm($filterType) {?>
     <section id="addInfoForm">
         <header>
@@ -39,6 +56,42 @@ function drawAddInfoForm($filterType) {?>
     </section>
     <?php
 }
+
+function drawRemoveInfoForm($filterType, $db) {
+    $tableName = strtoupper($filterType);
+    $columnName = $tableName . 'ID';
+    $query = "SELECT $columnName, name FROM $filterType";
+
+    $stmt = $db->query($query);
+
+    if ($stmt) {
+        ?>
+        <section id="removeInfoForm">
+            <header>
+                <h2>Remove <?php echo ucfirst($filterType); ?></h2>
+            </header>
+            <form action="../actions/action_remove_filter.php" method="post">
+                <label>Select <?php echo ucfirst($filterType); ?> to remove:</label>
+                <select name="filter_name" required>
+                    <option value="" disabled selected>Select <?php echo ucfirst($filterType); ?></option> 
+                    <?php
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                            <option value="<?php echo htmlspecialchars($row['name'] ?? '', ENT_QUOTES); ?>"><?php echo htmlspecialchars($row['name'] ?? '', ENT_QUOTES); ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+                <input type="hidden" name="filter_type" value="<?php echo $filterType; ?>">
+                <input type="submit" name="remove" value="Remove">
+            </form>
+        </section>
+        <?php
+    } else {
+        echo "Failed to retrieve data from the database.";
+    }
+}
+
 
 function drawUserList() {
     try {
