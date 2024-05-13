@@ -10,9 +10,10 @@ $session = new Session();
 $db = getDatabaseConnection();
 $categories = getCategoriesForMenu();
 $categoryID = intval($_GET['categoryID']);
+$search = $_GET['search'];
 drawHeader($session,$categories);
-drawFilterSection($db,$categoryID);
-drawProductSection($db, $categoryID);
+drawFilterSection($db,$categoryID, $search);
+drawProductSection($db, $categoryID, $search);
 drawFooter();
 
 ?>

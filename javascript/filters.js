@@ -6,7 +6,17 @@ function verifyCheckbox(){
     //adds a listen to every checkbox
     checkboxes.forEach(function(checkbox){
         checkbox.addEventListener('change', async function(){
-            let products = await getAllProducts();
+            let searchQuery = document.querySelector("#filterPage > header span").innerHTML;
+            let products = [];
+
+            //gets the products according to the search content
+            if(searchQuery !== null){
+                products = await getSearchProducts(searchQuery);
+                
+            }
+            else{
+                products = await getAllProducts();
+            }
             //if a change occurs and every checkbos is disable, insert all products
             if(isEveryBoxUnchecked()){
                 drawProducts(products);
@@ -196,6 +206,15 @@ async function getAllProducts(){
     //gets all the products from the db
     let products = [];
     const response = await fetch("/../js_actions/api_get_all_products.php");
+    const productsRes = await response.json();
+    productsRes.forEach( element => products.push(element));
+    return products;
+}
+
+async function getSearchProducts(search){
+    //gets the products tha correspond to the search
+    let products = [];
+    const response = await fetch("/../js_actions/api_get_products_search.php/?search=" + search);
     const productsRes = await response.json();
     productsRes.forEach( element => products.push(element));
     return products;

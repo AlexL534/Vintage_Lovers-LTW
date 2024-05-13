@@ -1,9 +1,18 @@
 #filterPage{
     margin-top: 1em;
     display: grid;
+    grid-template-rows: auto auto;
     grid-template-columns: 10em auto;
 }
 
+#filterPage header{
+    grid-row:1;
+    grid-column: span 2;
+}
+#filterMenu{
+    grid-column: 1;
+    grid-row: span 2;
+}
 #filterMenu header{
     background-color: var(--medium_gray);
     display: flex;
@@ -26,7 +35,6 @@
 /*filter aside section*/
 
 #filterPage aside{
-    grid-column: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,6 +78,7 @@
 /*products section*/
 #filterPage .products{
     grid-column: 2;
+    grid-row: span 2;
     height: 100%;
     background-color: white;
 }

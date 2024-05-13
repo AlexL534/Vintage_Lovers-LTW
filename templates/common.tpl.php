@@ -30,8 +30,8 @@ function drawHeader(Session $session, array $menuCategories) {
         <body>
             <header>
                    <a href="/../pages/main_page.php"><img src="/../assets/Logo.png" alt= "logo" id = "logo"></a>
-                   <form>
-                        <input type="search" name="search" placeholder="Search for a brand, condition, ...">
+                   <form action="/../pages/filter_page.php" method="get">
+                        <input type="search" name="search" placeholder="Search for a product">
                     </form>
                     <?php
                         if($session->isLoggedIn()) drawLoggedInIcons();
