@@ -25,12 +25,25 @@ class SoldProducts{
         return $this->sellerID;
     }
 
+    public function getSellID() : int{
+        return $this->sellID;
+    }
+
+
     public function getProductID() : int{
         return $this->productID;
     }
 
-    public function getAddressID() : string{
+    public function getAddress() : string{
         return $this->address;
+    }
+
+    static function getProductSold(PDO $db,int $id){
+        $stmt = $db->prepare('SELECT * FROM SOLD_PRODUCTS WHERE sellID =  ?');
+        $stmt->execute(array($id));
+        $soldProductDB = $stmt->fetch();
+        $soldProduct = new SoldProducts(intval($soldProductDB['sellID']),intval($soldProductDB['buyerID']), intval($soldProductDB['sellerID']), intval($soldProductDB['productID']), $soldProductDB['address']);
+        return $soldProduct;
     }
 
     static function getProductsSoldSeller(PDO $db,int $sellerID ){

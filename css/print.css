@@ -1,0 +1,33 @@
+#print{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#print p{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:  ellipsis;
+}
+
+/*print specific css*/
+@media print {
+    body > header, nav, body > footer{
+        display:none;
+    }
+
+    main{
+        justify-content: center;
+    }
+
+    h1{
+        font-size: 2.5em;
+    }
+    h2{
+        font-size: 2em;
+    }
+    p{
+        font-size: 1.2em;
+    }
+}

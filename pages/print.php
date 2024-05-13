@@ -9,8 +9,7 @@ $db = getDatabaseConnection();
 $session = new Session();
 $categories = getCategoriesForMenu();
 
-$buyerID = $_GET['buyerID'];
-$productID = $_GET['productID'];
+$soldProductID = $_GET['id'];
 drawHeader($session,$categories);
-drawPrintSoldProduct( $db,  $buyerID , $productID);
+drawPrintSoldProduct( $db,  $soldProductID);
 drawFooter();
