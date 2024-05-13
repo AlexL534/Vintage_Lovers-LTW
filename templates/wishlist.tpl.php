@@ -43,7 +43,7 @@ function drawProductsListInWhislist($products){
                 <tr><th>Name</th><th>Price</th><th>Delete</th></tr>
                 <?php foreach($products as $product){
                     ?>
-                    <tr id = "<?= $product->getId()?>"><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td class = "price"><?= $product->getPrice()?></td><td><button class="delButton">Delete</button></td></tr>
+                    <tr id = "<?= $product->getId()?>"><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td class = "price"><?= $product->getPrice()?></td><td><button type="button" class="delButton">Delete</button></td></tr>
                 <?php } ?>
             </table>
         </article>

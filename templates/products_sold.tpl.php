@@ -28,7 +28,7 @@ function drawSoldProductsTable(PDO $db, int $sellerID){
                     $buyer = User::getUser($db, $productSold->getBuyerID());
                     $product = Product::getProduct($db, $productSold->getProductID());
                     ?>
-                    <tr><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td><?= $buyer->getName()?></td><td><button>Print</button></td></tr>
+                    <tr><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td><?= $buyer->getName()?></td><td><button type="button" onclick = "window.location='/../pages/print.php/?buyerID=<?=$buyer->getID()?>&productID=<?= $product->getID()?>';">Print</button></td></tr>
                 <?php } ?>
             </table>
        <?php } 
@@ -37,3 +37,7 @@ function drawSoldProductsTable(PDO $db, int $sellerID){
     </section>
 
 <?php }
+
+function drawPrintSoldProduct(PDO $db, int $buyerID ,int $productID){
+
+}

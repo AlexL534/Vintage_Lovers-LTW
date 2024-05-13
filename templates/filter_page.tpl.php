@@ -28,7 +28,7 @@ function drawFilterSection(PDO $db, $categoryID, $search){
         <?php } ?>
         <div id = "filterMenu">
             <header>
-                <button><img src="/../assets/filter_icon.png" alt = "filter icon"></button>
+                <button type="button"><img src="/../assets/filter_icon.png" alt = "filter icon"></button>
                 <h3>Filters</h3>
             </header>
             <aside>
