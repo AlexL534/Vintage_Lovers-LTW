@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../classes/sold_products.class.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 
 function drawSoldProductsTable(PDO $db, int $sellerID){
-
+    //draws the table with seller's the sold products
     $productsSold = SoldProducts::getProductsSoldSeller($db, $sellerID);
     ?>
 
@@ -39,6 +39,7 @@ function drawSoldProductsTable(PDO $db, int $sellerID){
 <?php }
 
 function drawPrintSoldProduct(PDO $db, int $soldProductID){
+    //draws the shipping form
     $soldProduct = SoldProducts::getProductSold($db, $soldProductID);
     $product = Product::getProduct($db, $soldProduct->getProductID());
     $receiver = User::getUser($db, $soldProduct->getBuyerID());
