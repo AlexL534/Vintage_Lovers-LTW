@@ -12,10 +12,14 @@ $session = new Session();
 $categories = getCategoriesForMenu();
 drawHeader($session, $categories);
 
-?>  <header id= "main_header">
+?>  
+    <?php  displayMessages($session);
+        ?>
+    <header id= "main_header">
         <img src = "../assets/main_image.jpg" alt = "clothes">
         <h2>Buy and Sell Pre-loved Clothes</h2>
     </header>
+    
     <section id = "main_products">
             <h4>Products for you</h4>
             <div class="products">
