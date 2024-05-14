@@ -12,6 +12,7 @@ require_once(__DIR__ . '/../classes/session.class.php');
 
 
 function drawFilterTypes() {
+    //draws the filter selection page used to insert new filters
     ?>
     <header>
         <h2>Add info to the system</h2>
@@ -28,7 +29,9 @@ function drawFilterTypes() {
     <?php
 }
 
-function drawAddInfoForm($filterType) {?>
+function drawAddInfoForm($filterType) {
+    //draws the add information page
+    ?>
     <section id="addInfoForm">
         <header>
             <h2><?php echo ucfirst($filterType); ?></h2>
@@ -48,6 +51,7 @@ function drawAddInfoForm($filterType) {?>
 }
 
 function drawUserList($session) {
+    //draws the website's users list
     try {
         ?>
         <header>
@@ -162,6 +166,7 @@ function drawUserList($session) {
 }
 
 function drawProductList($searchEnabled = true, $session) {
+    //draws the section where the owned products are content of the page where the products are showned
     try {
         ?>
         <header>
@@ -217,6 +222,8 @@ function drawProductList($searchEnabled = true, $session) {
 }
 
 function displayProductResults($products, $searchEnabled, $session) {
+    //draws the section where the owned products are showned
+
     if (!empty($products)) {
         ?>
         <section id="productList">
@@ -269,6 +276,8 @@ function displayProductResults($products, $searchEnabled, $session) {
 }
 
 function drawAddProductForm() {
+    //draws the section where the user can add a product
+
     $db = getDatabaseConnection();
     $brands = Brand::getAllBrands($db);
     $categories = Category::getAllCategories($db);
@@ -342,11 +351,14 @@ function drawAddProductForm() {
 }
 
 function drawUpdateInfoForm($product_id) {
+    //draws the section where the user can update the product info
+
     $db = getDatabaseConnection();
     $product = Product::getProduct($db, $product_id);
     $productName = $product->getName();
     $productDescription = $product->getDescription();
     $productPrice = $product->getPrice();
+
     ?>
     <header>
         <h2>Update Product</h2>
@@ -374,6 +386,7 @@ function drawUpdateInfoForm($product_id) {
 }
 
 function drawAddImages($productId, $session){
+    //draws the add images section where the user can insert images to the products
     ?>
     <section id = "insertImages"></section>
     <?php displayMessages($session)?>
