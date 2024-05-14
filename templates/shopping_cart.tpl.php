@@ -78,6 +78,7 @@ function drawBuy(){
                     <input type="text" name = "address" required>
                 </label>
                 <input type="submit" value = "Buy">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             </form>
         </article>
     </section>

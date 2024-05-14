@@ -9,6 +9,12 @@ require_once(__DIR__ . '/../database/database_connection.db.php');
 $db = getDatabaseConnection();
 $session = new Session();
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 $userId = $session->getId();
 
 $userProductsCart = ShoppingCart::getUserShoppingCart($db, $userId);

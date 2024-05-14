@@ -34,7 +34,9 @@ function drawAddInfoForm($filterType) {?>
             <label>Description: <input type="text" name="description"></label>
             <?php endif; ?>
             <input type="hidden" name="filter_type" value="<?php echo $filterType; ?>">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="submit" name="add" value="Add">
+            
         </form>
     </section>
     <?php
@@ -50,6 +52,7 @@ function drawUserList() {
             <form method="post">
                 <input type="text" id="search" name="search" placeholder="Search for user">
                 <input type="hidden" name="action" value="search">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             </form>
         </section>
         <?php
@@ -80,10 +83,12 @@ function drawUserList() {
                                 <div class="options-menu">
                                     <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                         <button type="submit" class="delete-btn">Delete Account</button>
                                     </form>
                                     <form action="/../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                         <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                     </form>
                                 </div>
@@ -119,10 +124,12 @@ function drawUserList() {
                                 <div class="options-menu">
                                     <form action="/../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                         <button type="submit" class="delete-btn">Delete Account</button>
                                     </form>
                                     <form action="/../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                         <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                     </form>
                                 </div>
@@ -155,6 +162,7 @@ function drawProductList($searchEnabled = true, $session) {
                     <label for="search">Search for product</label>
                     <input type="text" id="search" name="search">
                     <button type="submit">Search</button>
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="action" value="search">
                 </form>
             </section>
@@ -201,6 +209,7 @@ function displayProductResults($products, $searchEnabled, $session) {
                             <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
+                                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                 <button type="submit" class="delete-btn">Delete</button>
                             </form>
                             <?php if (!$searchEnabled) { ?>
@@ -218,6 +227,7 @@ function displayProductResults($products, $searchEnabled, $session) {
                                 <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
+                                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                     <button type="submit" class="delete-btn">Delete</button>
                                 </form>
                                 <?php if (!$searchEnabled) { ?>
@@ -273,6 +283,7 @@ function drawAddProductForm() {
                 <label for="price">Price:</label>
                 <input type="number" name="price" step="0.01" min="0" id="price" required>
             </div>
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="submit" name="submit" value="Submit">
         </form>
     </section>
@@ -304,6 +315,7 @@ function drawUpdateInfoForm($product_id) {
                 <label for="price">Price:</label>
                 <input type="number" name="price" step="0.01" min="0" id="price" value="<?php echo htmlspecialchars($productPrice); ?>" required>
             </div>
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="submit" name="submit" value="Update">
         </form>
     </section>
