@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../database/database_connection.db.php');
+require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../classes/brand.class.php');
@@ -372,18 +373,19 @@ function drawUpdateInfoForm($product_id) {
     <?php
 }
 
-function drawAddImages($productId){
+function drawAddImages($productId, $session){
     ?>
-    <section id = "inserImages"></section>
+    <section id = "insertImages"></section>
+    <?php displayMessages($session)?>
     <header>
-        <h2>Insert images for your product</h2>
+        <h2>Insert images for your product <?=$productId?></h2>
     </header>
     <form action="/../actions/action_add_image.php" method="post" enctype="multipart/form-data">
         <label>Title:
-          <input type="text" name="title">
+          <input type="text" name="title" required>
         </label>
-        <input type="file" name="image[]" multiple="multiple">
-        <input type = "hidden" name="productID" value = "<?=$productId?>">
+        <input type="file" name="image[]" multiple="multiple" required>
+        <input type="hidden" name="productID" value ="<?=$productId?>">
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <input type="submit" value="Upload">
       </form>

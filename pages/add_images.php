@@ -18,5 +18,5 @@ if (!$session->isLoggedIn() || !$admin) {
 $productId = $_GET['productID'];
 
 drawHeader($session,$categories);
-drawAddImages($productId);
+drawAddImages($productId, $session);
 drawFooter(); 

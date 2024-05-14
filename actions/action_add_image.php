@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ .'/../classes/image.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
+require_once(__DIR__ . '/../utils/register_utils.php');
 
 $session = new Session();
 $db = getDatabaseConnection();
@@ -13,12 +14,18 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
     exit();
 }
 
-$productId = $_POST['productID'];
+$productID = $_POST['productID'];
 
 if (isset($_FILES['image'])){
     $total = count($_FILES['image']['tmp_name']);
     $target_dir = "/../images/";  
-    $title = htmlentities($_POST['title']);  
+    $title = htmlentities($_POST['title']);
+    
+    if(hasNumbers($title) == 1){
+        $session->addMessage('error', 'the title cannot have numbers');
+        header("Location: /../pages/add_images.php/?productID=$productID");
+        exit();
+    }
     
     for($i=0 ; $i < $total ; $i++ ){
         $tmpname = $_FILES["image"]["tmp_name"][$i];
@@ -35,7 +42,7 @@ if (isset($_FILES['image'])){
         //inserts the paths into the db
         Image::insertImageToProduct($db,$customFileName);
         $imageId = Image::getLastInsertedImageID($db);
-        Image::insertImageOfProduct($db,$imageId, $productId);
+        Image::insertImageOfProduct($db,$imageId, $productID);
 
         imagejpeg($original, $originalFileName);
     }

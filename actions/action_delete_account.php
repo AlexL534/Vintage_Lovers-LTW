@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
+require_once(__DIR__ . '/../classes/sold_products.class.php');
 
 $session = new Session();
 if ($_SESSION['csrf'] !== $_POST['csrf']) {
@@ -23,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
     $user = User::getUser($db, $userId);
     if ($user && !$user->getIsAdmin()) {
         if ($user->deleteUser($db)) {
+            SoldProducts::deleteProductSoldUser($db,$user->getID());
             header("Location: ../pages/admin_manage_user.php");
             exit();
         } else {

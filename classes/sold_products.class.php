@@ -66,6 +66,16 @@ class SoldProducts{
         
     }
 
+    static function deleteProductSoldProduct(PDO $db, int $productID){
+        $stmt = $db->prepare('DELETE FROM SOLD_PRODUCTS where productID = ?');
+        $stmt->execute(array($productID));
+    }
+
+    static function deleteProductSoldUser(PDO $db, int $userID){
+        $stmt = $db->prepare('DELETE FROM SOLD_PRODUCTS where sellerID = ? or buyerID = ?');
+        $stmt->execute(array($userID, $userID));
+    }
+
 
 
 }

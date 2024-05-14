@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../classes/size.class.php');
 require_once(__DIR__ . '/../classes/condition.class.php');
 require_once(__DIR__ . '/../classes/color.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
+require_once(__DIR__ . '/../classes/sold_products.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
 
 $session = new Session();
@@ -28,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
         Size::deleteSizeOfProduct($db, $productId);
         Condition::deleteConditionOfProduct($db, $productId);
         Color::deleteColorOfProduct($db, $productId);
+        SoldProducts::deleteProductSoldProduct($db, $productId);
         $imagesIDs = Image::getImagesIdFromImageOfProduct($db, $productId);
         $imagesPath = Image::getImagesPath($db, $productId);
         foreach($imagesIDs as $imageId){
