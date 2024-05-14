@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../database/database_connection.db.php');
 $session = new Session();
 
 if(!isset($_SESSION['Username'])){
-    header('Location: ../pages/main_page.php' );
+    header('Location: /../pages/main_page.php' );
 }
 
 $db = getDatabaseConnection();

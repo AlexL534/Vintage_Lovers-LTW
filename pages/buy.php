@@ -9,7 +9,7 @@ $session = new Session();
 $categories = getCategoriesForMenu();
 
 if(!isset($_SESSION['Username'])){
-    header('Location: ../pages/main_page.php' );
+    header('Location: /../pages/main_page.php' );
 }
 
 drawHeader($session,$categories);

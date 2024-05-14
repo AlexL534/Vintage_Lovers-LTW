@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['remove'])) {
     $filterTypeHandler = new FilterType($db);
 
     if ($filterTypeHandler->removeFilterType($filter_type, $filter_name)) {
-        header("Location: ../pages/admin_remove_specific_filter.php?type=$filter_type");
+        header("Location: /../pages/admin_remove_specific_filter.php?type=$filter_type");
         exit();
     } else {
         echo "Error: Unable to remove filter.";
