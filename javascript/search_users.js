@@ -39,7 +39,7 @@ function searchUsers() {
     async function performSearch() {
         const userType = encodeURIComponent(userTypeSelect.value);
         const searchQuery = encodeURIComponent(searchInput.value);
-        const query = `../js_actions/api_search_users.php?search=${searchQuery}&userType=${userType}`;
+        const query = `/../js_actions/api_search_users.php?search=${searchQuery}&userType=${userType}`;
         const response = await fetch(query);
         const users = await response.json();
 

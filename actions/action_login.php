@@ -12,13 +12,13 @@
         $password = $_POST['password'];
         if (!$email) {
             $session->addMessage('error', 'Invalid email format');
-            header('Location: ../pages/login.php');
+            header('Location: /../pages/login.php');
             exit();
         }
     }
     else {
         $session->addMessage('error', 'Invalid request');
-    header('Location: ../pages/login.php');
+    header('Location: /../pages/login.php');
     exit();
     }
         

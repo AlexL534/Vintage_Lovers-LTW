@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
     $user = User::getUser($db, $userId);
     if ($user && !$user->getIsAdmin()) {
         if ($user->deleteUser($db)) {
-            header("Location: ../pages/admin_manage_user.php");
+            header("Location: /../pages/admin_manage_user.php");
             exit();
         } else {
             echo "Error: Failed to delete user.";

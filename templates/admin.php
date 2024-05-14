@@ -92,7 +92,6 @@ function drawRemoveInfoForm($filterType, $db) {
     }
 }
 
-
 function drawUserList(PDO $db) {
     try {
         $userType = isset($_POST['userType']) ? filter_input(INPUT_POST, 'userType', FILTER_SANITIZE_STRING) : 'all';
@@ -199,7 +198,6 @@ function drawUserList(PDO $db) {
         echo "An error occurred. Please try again later.";
     }
 }
-
 
 function drawProductList($searchEnabled = true, $session) {
     try {
