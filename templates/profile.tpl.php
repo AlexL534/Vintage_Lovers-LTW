@@ -78,7 +78,7 @@ function drawUserOptions($user){
             <li><a href= "/../pages/edit_profile.php"><p>Edit Profile</p></a></li>
             <li><a href = "/../pages/wishlist.php"><p>Wishlist</p></a></li>
             <li><a href="/../pages/seller_product_list.php"><p>Manage owned Products</p></a></li>
-            <li><a href="/../pages/seller_add_product.php"><p>List a new Procuct</p></a></li>
+            <li><a href="/../pages/seller_add_product.php"><p>List a new Product</p></a></li>
             <li><a  href="/../pages/products_sold.php/?id=<?= $user->getId() ?>"><p>Sold Products</p></a></li>
             <li id="logoutButton"><a href = "/../actions/action_logout.php"><p>Logout</p></a></li>
         </ul>
