@@ -68,5 +68,10 @@ class Color{
         }
         return $colors;
     }
+
+    static function insertColorOfProduct(PDO $db , int $idProduct, int $idColor){
+        $stmt = $db->prepare('INSERT INTO COLORS_OF_PRODUCT (colorID, productID) VALUES (?, ?)');
+        $stmt->execute(array($idColor, $idProduct));
+    }
 }
 ?>

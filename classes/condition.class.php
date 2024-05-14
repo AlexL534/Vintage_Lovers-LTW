@@ -76,5 +76,10 @@ class Condition{
         }
         return $conditions;
     }
+
+    static function insertConditionOfProduct(PDO $db , int $idProduct, int $idCondition){
+        $stmt = $db->prepare('INSERT INTO Condition_OF_PRODUCT (conditionID, productID) VALUES (?, ?)');
+        $stmt->execute(array($idCondition, $idProduct));
+    }
 }
 ?>

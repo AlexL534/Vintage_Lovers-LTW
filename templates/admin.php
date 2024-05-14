@@ -4,6 +4,9 @@ require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../classes/brand.class.php');
 require_once(__DIR__ . '/../classes/category.class.php');
+require_once(__DIR__ . '/../classes/color.class.php');
+require_once(__DIR__ . '/../classes/condition.class.php');
+require_once(__DIR__ . '/../classes/size.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
 
 
@@ -268,6 +271,10 @@ function drawAddProductForm() {
     $db = getDatabaseConnection();
     $brands = Brand::getAllBrands($db);
     $categories = Category::getAllCategories($db);
+    $colors = Color::getAllColors($db);
+    $sizes = Size::getAllSizes($db);
+    $conditions = Condition::getAllCondition($db);
+
     ?>
     <header>
         <h2>Add Product</h2>
@@ -295,6 +302,30 @@ function drawAddProductForm() {
                 <select name="category" id="category" required>
                     <?php foreach ($categories as $category): ?>
                         <option value="<?= $category->getId(); ?>"><?= htmlspecialchars($category->getName()); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Color">Color:</label>
+                <select name="color" id="color" required>
+                    <?php foreach ($colors as $color): ?>
+                        <option value="<?= $color->getId(); ?>"><?= htmlspecialchars($color->getName()); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Condition">Condition:</label>
+                <select name="condition" id="condition" required>
+                    <?php foreach ($conditions as $condition): ?>
+                        <option value="<?= $condition->getId(); ?>"><?= htmlspecialchars($condition->getName()); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sizes">Sizes:</label>
+                <select name="size" id="size" required>
+                    <?php foreach ($sizes as $size): ?>
+                        <option value="<?= $size->getId(); ?>"><?= htmlspecialchars($size->getName()); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

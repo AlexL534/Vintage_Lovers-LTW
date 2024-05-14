@@ -68,5 +68,10 @@ class Size{
         }
         return $sizes;
     }
+
+    static function insertSizeOfProduct(PDO $db , int $idProduct, int $idSize){
+        $stmt = $db->prepare('INSERT INTO Size_OF_PRODUCT (sizeID, productID) VALUES (?, ?)');
+        $stmt->execute(array($idSize, $idProduct));
+    }
 }
 ?>

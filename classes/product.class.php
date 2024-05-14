@@ -326,4 +326,16 @@ class Product{
             return false;
         }
     }
+
+    static public function getLastInsertedID(PDO $db){
+        try {
+            $stmt = $db->prepare("SELECT id FROM PRODUCTS ORDER BY id DESC LIMIT 1");
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result['id'];
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }

@@ -10,7 +10,7 @@
             unset($_SESSION['messages']);
             if (!isset($_SESSION['csrf'])) {
                 $_SESSION['csrf'] = $this->generate_random_token();
-              }
+            }
         }
 
         public function isLoggedIn() : bool {
