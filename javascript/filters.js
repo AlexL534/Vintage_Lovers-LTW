@@ -6,7 +6,14 @@ function verifyCheckbox(){
     //adds a listen to every checkbox
     checkboxes.forEach(function(checkbox){
         checkbox.addEventListener('change', async function(){
-            let searchQuery = document.querySelector("#filterPage > header span").innerHTML;
+
+            let searchQuery = null;
+
+            if(document.querySelector("#filterPage > header span") != null){
+                console.log("here");
+                searchQuery = document.querySelector("#filterPage > header span").innerHTML;
+
+            }
             let products = [];
 
             //gets the products according to the search content
@@ -15,6 +22,7 @@ function verifyCheckbox(){
                 
             }
             else{
+                console.log("here");
                 products = await getAllProducts();
             }
             //if a change occurs and every checkbos is disable, insert all products

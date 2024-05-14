@@ -16,8 +16,8 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 
 $db = getDatabaseConnection();
 $categories = getCategoriesForMenu();
-$categoryID = intval($_GET['categoryID']);
-$search = $_GET['search'];
+$categoryID = intval($_POST['categoryID']);
+$search = $_POST['search'];
 drawHeader($session,$categories);
 drawFilterSection($db,$categoryID, $search);
 drawProductSection($db, $categoryID, $search);
