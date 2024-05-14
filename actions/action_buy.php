@@ -30,4 +30,4 @@ foreach($userProductsCart as $productCart){
 
 
 
-header("Location: ../pages/shopping_cart.php");
+header("Location: /../pages/shopping_cart.php");

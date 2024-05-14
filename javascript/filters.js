@@ -25,7 +25,7 @@ function verifyCheckbox(){
                 console.log("here");
                 products = await getAllProducts();
             }
-            //if a change occurs and every checkbos is disable, insert all products
+            //if a change occurs and every checkbox is disabled, insert all products
             if(isEveryBoxUnchecked()){
                 drawProducts(products);
             }
@@ -61,7 +61,7 @@ function verifyCheckbox(){
 }
 
  async function verifyBrands(){
-    //verifies the brands checkboxes that are active
+    //Checks which brand checkboxes are active
     const brandsCheckBoxes = document.querySelectorAll("#filterPage #brands input[type=checkbox]");
     let brandsIDs = [];
     let products = [];
@@ -79,7 +79,7 @@ function verifyCheckbox(){
 }
 
 async function verifyCategories(){
-    //verifies the categories checkboxes that are active
+    //Checks which category checkboxes are active
     const categoriesCheckBoxes = document.querySelectorAll("#filterPage #categories input[type=checkbox]");
     let categoriesIDs = [];
     let products = [];
@@ -99,7 +99,7 @@ async function verifyCategories(){
 
 
 async function verifyColors(){
-    //verifies the colors checkboxes that are active
+    //Checks which color checkboxes are active
     const colorsCheckBoxes = document.querySelectorAll("#filterPage #colors input[type=checkbox]");
     let colorsIDs = [];
     let products = [];
@@ -117,7 +117,7 @@ async function verifyColors(){
 }
 
 async function verifyConditions(){
-    //verifies the conditions checkboxes that are active
+    //Checks which condition checkboxes are active
     const conditionsCheckBoxes = document.querySelectorAll("#filterPage #conditions input[type=checkbox]");
     let conditionsIDs = [];
     let products = [];
@@ -136,7 +136,7 @@ async function verifyConditions(){
 }
 
 async function verifySizes(){
-    //verifies the sizes checkboxes that are active
+    //Checks which size checkboxes are active
     const sizesCheckBoxes = document.querySelectorAll("#filterPage #sizes input[type=checkbox]");
     let sizesIDs = [];
     let products = [];
@@ -220,7 +220,7 @@ async function getAllProducts(){
 }
 
 async function getSearchProducts(search){
-    //gets the products tha correspond to the search
+    //gets the products that correspond to the search
     let products = [];
     const response = await fetch("/../js_actions/api_get_products_search.php/?search=" + search);
     const productsRes = await response.json();

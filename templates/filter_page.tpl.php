@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../classes/image.class.php');
 
 
 function drawFilterSection(PDO $db, $categoryID, $search){ 
-    //draws the filters filters section (sidebar)
+    //draws the filters section (sidebar)
 
     $brands = Brand::getAllBrands($db);
     $sizes = Size::getAllSizes($db);
@@ -103,7 +103,7 @@ function drawFilterSection(PDO $db, $categoryID, $search){
 <?php }
 
 function drawProductArticle(PDO $db, Product $product){ 
-    //draws the  a given product article with his information
+    //draws the given product article with its information
     ?>
     <a href="/../pages/products.php?id=<?=$product->getId();?>" class="product">
         <article>

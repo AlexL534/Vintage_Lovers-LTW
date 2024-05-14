@@ -26,7 +26,7 @@ class Image{
 
     
 
-    //querys
+    //queries
     static public function getImageById(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM IMAGES WHERE imageID = ?');
         $stmt->execute(array($id));

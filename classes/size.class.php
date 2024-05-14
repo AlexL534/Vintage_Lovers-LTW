@@ -22,7 +22,7 @@ class Size{
         return $this->name;
     }
 
-    //querys
+    //queries
     static public function getSizeById(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM SIZE WHERE sizeID = ?');
         $stmt->execute(array($id));

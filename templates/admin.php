@@ -46,6 +46,23 @@ function drawRemoveFilterTypes() {
     <?php
 }
 
+function drawRemoveFilterTypes() {
+    ?>
+    <header>
+        <h2>Remove info from the system</h2>
+    </header>
+    <section id="removeFilterTypes">
+        <ul>
+            <li><a href="admin_remove_specific_filter.php?type=category"><?php echo 'Categories'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=size"><?php echo 'Sizes'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=condition"><?php echo 'Conditions'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=color"><?php echo 'Colors'; ?></a></li>
+            <li><a href="admin_remove_specific_filter.php?type=brand"><?php echo 'Brands'; ?></a></li>
+        </ul>
+    </section>
+    <?php
+}
+
 function drawRemoveInfoForm($filterType, $db) {
     $tableName = strtoupper($filterType);
     $columnName = $tableName . 'ID';
@@ -117,6 +134,11 @@ function drawUserList($session) {
                     <option value="admin" <?= ($userType === 'admin') ? 'selected' : '' ?>>Admin</option>
                     <option value="normal" <?= ($userType === 'normal') ? 'selected' : '' ?>>Normal User</option>
                 </select>
+                <select name="userType" id="userType">
+                    <option value="all" <?= ($userType === 'all') ? 'selected' : '' ?>>All</option>
+                    <option value="admin" <?= ($userType === 'admin') ? 'selected' : '' ?>>Admin</option>
+                    <option value="normal" <?= ($userType === 'normal') ? 'selected' : '' ?>>Normal User</option>
+                </select>
                 <input type="text" id="search" name="search" placeholder="Search for user">
                 <input type="hidden" name="action" value="search">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
@@ -126,7 +148,8 @@ function drawUserList($session) {
 
 
 
-        $db = getDatabaseConnection();
+
+
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
 
             if ($_SESSION['csrf'] !== $_POST['csrf']) {
@@ -136,7 +159,7 @@ function drawUserList($session) {
             }
 
             $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
-            $searchResults = User::searchUsers($db, $searchQuery);
+            $searchResults = User::searchUsers($db, $searchQuery, $userType);
             
             if (!empty($searchResults)) {
                 ?>
@@ -187,15 +210,15 @@ function drawUserList($session) {
                             <li class="user-item">
                                 <div class="user-label username-light">Username</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getUsername()); ?></span>
+                                    <span><?= htmlspecialchars($user->getUsername()) ?></span>
                                 </div>
                                 <div class="user-label email-light">Email</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getEmail()); ?></span>
+                                    <span><?= htmlspecialchars($user->getEmail()) ?></span>
                                 </div>
                                 <div class="user-label">User Type</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getIsAdmin()) ? 'Admin' : 'Normal User'; ?></span>
+                                    <span><?= htmlspecialchars($user->getIsAdmin()) ? 'Admin' : 'Normal User' ?></span>
                                 </div>
                                 <div class="options-menu">
                                     <form action="/../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
@@ -219,7 +242,8 @@ function drawUserList($session) {
             }
         }
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        error_log("Error: " . $e->getMessage());
+        echo "An error occurred. Please try again later.";
     }
 }
 
@@ -293,7 +317,6 @@ function displayProductResults($products, $searchEnabled, $session) {
                     if ($searchEnabled) { ?>
                         <li>
                             <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
-                            <button class="check-info-btn">Check info</button>
                             <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
@@ -311,7 +334,6 @@ function displayProductResults($products, $searchEnabled, $session) {
                         if ($ownerId === $loggedInUserId) { ?>
                             <li>
                                 <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
-                                <button class="check-info-btn">Check info</button>
                                 <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">

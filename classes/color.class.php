@@ -22,7 +22,7 @@ class Color{
         return $this->name;
     }
 
-    //querys
+    //queries
     static public function getColorById(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM COLOR WHERE colorID = ?');
         $stmt->execute(array($id));
