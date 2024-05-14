@@ -46,23 +46,6 @@ function drawRemoveFilterTypes() {
     <?php
 }
 
-function drawRemoveFilterTypes() {
-    ?>
-    <header>
-        <h2>Remove info from the system</h2>
-    </header>
-    <section id="removeFilterTypes">
-        <ul>
-            <li><a href="admin_remove_specific_filter.php?type=category"><?php echo 'Categories'; ?></a></li>
-            <li><a href="admin_remove_specific_filter.php?type=size"><?php echo 'Sizes'; ?></a></li>
-            <li><a href="admin_remove_specific_filter.php?type=condition"><?php echo 'Conditions'; ?></a></li>
-            <li><a href="admin_remove_specific_filter.php?type=color"><?php echo 'Colors'; ?></a></li>
-            <li><a href="admin_remove_specific_filter.php?type=brand"><?php echo 'Brands'; ?></a></li>
-        </ul>
-    </section>
-    <?php
-}
-
 function drawRemoveInfoForm($filterType, $db) {
     $tableName = strtoupper($filterType);
     $columnName = $tableName . 'ID';
@@ -119,7 +102,7 @@ function drawAddInfoForm($filterType) {
     <?php
 }
 
-function drawUserList($session) {
+function drawUserList($db, $session) {
     //draws the website's users list
     try {
         $userType = isset($_POST['userType']) ? filter_input(INPUT_POST, 'userType', FILTER_SANITIZE_STRING) : 'all';
