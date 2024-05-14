@@ -19,6 +19,7 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 $db = getDatabaseConnection();
 $password = $_POST['password'];
 $email = strtolower($_POST['email']);
+$name = $_POST['name'];
 
 if(hasEnoughLen($password)){
     //checks if the lenght of the password is enough
@@ -56,10 +57,16 @@ else if(User::usernameExists($db, $_POST['username'])){
     header('Location: /../pages/register.php');
 }
 
+else if(hasOnlyLetters($name) != 1){
+    //checks if the name has only letters
+    $session->addMessage("error", "Name can only contain letters");
+    header('Location: /../pages/register.php');
+}
+
 else{
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    User::insertNewUser($db, $_POST['name'], $_POST['username'], $email, $hashedPassword);
+    User::insertNewUser($db, $name, $_POST['username'], $email, $hashedPassword);
 
     //check if the user was inserted correctly  and executes the login
     $user = User::getUserByPassword($db, $email , $hashedPassword);

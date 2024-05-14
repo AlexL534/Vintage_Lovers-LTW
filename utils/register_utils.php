@@ -7,6 +7,11 @@ function hasEnoughLen(string $password) : bool{
     return strlen($password) < 8;
 }
 
+function hasOnlyLetters(string $name){
+    //verifies if the name has only letters
+    return preg_match ("/^[a-zA-Z\s]+$/", $name);
+}
+
 function hasUpperCaseCharacters(string $password){
     //verify if the password has upper case characters
 
