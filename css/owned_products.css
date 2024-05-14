@@ -124,7 +124,6 @@
 }
 
 /*responsive*/
-
 @media (max-width : 25em){
     #productSearch form{
         flex-direction: column;
