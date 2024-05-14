@@ -73,5 +73,10 @@ class Size{
         $stmt = $db->prepare('INSERT INTO Size_OF_PRODUCT (sizeID, productID) VALUES (?, ?)');
         $stmt->execute(array($idSize, $idProduct));
     }
+
+    static function deleteSizeOfProduct(PDO $db , int $idProduct){
+        $stmt = $db->prepare('Delete from Size_OF_PRODUCT where productID = ?');
+        $stmt->execute(array($idProduct));
+    }
 }
 ?>

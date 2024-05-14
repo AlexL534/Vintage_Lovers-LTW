@@ -81,5 +81,10 @@ class Condition{
         $stmt = $db->prepare('INSERT INTO Condition_OF_PRODUCT (conditionID, productID) VALUES (?, ?)');
         $stmt->execute(array($idCondition, $idProduct));
     }
+
+    static function deleteConditionOfProduct(PDO $db , int $idProduct){
+        $stmt = $db->prepare('Delete from Condition_OF_PRODUCT where productID = ?');
+        $stmt->execute(array($idProduct));
+    }
 }
 ?>

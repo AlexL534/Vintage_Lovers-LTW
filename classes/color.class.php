@@ -73,5 +73,10 @@ class Color{
         $stmt = $db->prepare('INSERT INTO COLORS_OF_PRODUCT (colorID, productID) VALUES (?, ?)');
         $stmt->execute(array($idColor, $idProduct));
     }
+
+    static function deleteColorOfProduct(PDO $db , int $idProduct){
+        $stmt = $db->prepare('Delete from COLORS_OF_PRODUCT where productID = ?');
+        $stmt->execute(array($idProduct));
+    }
 }
 ?>
