@@ -27,6 +27,7 @@ function drawLogin(Session $session){
             <input type = "password" name = "password" required>
         </label>
         <input type="submit" name = "login" value="Login">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
     </form>
 
     <footer>
@@ -67,6 +68,7 @@ function drawSignup(Session $session){
                 <input type = "password" name = "password" required>
             </label>
             <input type="submit" name = "register" value="Register">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         </form>
 
         <footer>

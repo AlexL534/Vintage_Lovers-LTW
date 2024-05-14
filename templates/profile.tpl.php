@@ -48,6 +48,7 @@ function drawEditProfile(PDO $db, User $user, Session $session){
                 <input type = "password" name = "password" >
             </label>
             <input type="submit" name = "login" value="Update">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         </form>
 
 

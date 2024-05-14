@@ -32,8 +32,9 @@ function drawHeader(Session $session, array $menuCategories) {
         <body>
             <header>
                    <a href="/../pages/main_page.php"><img src="/../assets/Logo.png" alt= "logo" id = "logo"></a>
-                   <form action="/../pages/filter_page.php" method="get">
+                   <form action="/../pages/filter_page.php" method="post">
                         <input type="search" name="search" placeholder="Search for a product">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     </form>
                     <?php
                         if($session->isLoggedIn()) drawLoggedInIcons();
@@ -48,10 +49,21 @@ function drawHeader(Session $session, array $menuCategories) {
                     <?php
                     foreach($menuCategories as $category){
                         ?>
-                             <li><a href="/../pages/filter_page.php/?categoryID=<?=$category->getId()?>"><?=htmlentities($category->getName())?></a></li>
+                             <li>
+                                <form action ="/../pages/filter_page.php" method = "post">
+                                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                    <input type="hidden" name="categoryID" value="<?=$category->getId()?>">
+                                    <input type="submit" value="<?=htmlentities($category->getName())?>">
+                                </form>
+                            </li>
                     <?php }
                     ?>
-                    <li><a href="/../pages/filter_page.php">All</a></li>
+                    <li>
+                        <form action ="/../pages/filter_page.php" method = "post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="submit" value="All">
+                        </form>
+                    </li>
                 </menu>
             </nav>
             <main>

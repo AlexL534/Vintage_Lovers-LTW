@@ -7,6 +7,13 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../utils/header_menu_utils.php');
 
 $session = new Session();
+
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 $db = getDatabaseConnection();
 $categories = getCategoriesForMenu();
 $categoryID = intval($_GET['categoryID']);

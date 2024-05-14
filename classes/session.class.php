@@ -8,6 +8,9 @@
       
             $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
             unset($_SESSION['messages']);
+            if (!isset($_SESSION['csrf'])) {
+                $_SESSION['csrf'] = $this->generate_random_token();
+              }
         }
 
         public function isLoggedIn() : bool {
@@ -40,5 +43,9 @@
     
         public function getMessages() {
             return $this->messages;
+        }
+
+        function generate_random_token() {
+            return bin2hex(openssl_random_pseudo_bytes(32));
         }
     }

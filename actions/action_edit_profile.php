@@ -10,6 +10,11 @@ $userId = $session->getId();
 $db = getDatabaseConnection();
 $hasError = false;
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
     echo "This is not a post request";

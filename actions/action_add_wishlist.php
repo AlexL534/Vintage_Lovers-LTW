@@ -8,6 +8,12 @@ $db = getDatabaseConnection();
 
 $session = new Session();
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 $id = intval($_POST['productID']);
 
 if(!Wishlist::isProductInWishlist($db, $session->getId(), $id)){

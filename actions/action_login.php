@@ -7,18 +7,23 @@
     
     $session = new Session();
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        $session->addMessage('error', 'Suspicious activity found');
+        header('Location: /../pages/login.php');
+        exit();
+    }
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['email'], $_POST['password'])) {
         $email = filter_var(strtolower($_POST['email']), FILTER_VALIDATE_EMAIL);
         $password = $_POST['password'];
         if (!$email) {
             $session->addMessage('error', 'Invalid email format');
-            header('Location: ../pages/login.php');
+            header('Location: /../pages/login.php');
             exit();
         }
     }
     else {
         $session->addMessage('error', 'Invalid request');
-    header('Location: ../pages/login.php');
+    header('Location: /../pages/login.php');
     exit();
     }
         
@@ -31,11 +36,11 @@
         $session->setUsername($user->getUsername());
         $session->addMessage('Success', 'Login successful');
 
-        header('Location: ../pages/main_page.php' );
+        header('Location: /../pages/main_page.php' );
         exit();
     } else{
         $session->addMessage('error', 'Wrong email or password!');
-        header('Location: ../pages/login.php');
+        header('Location: /../pages/login.php');
         exit();
     }
 ?>
