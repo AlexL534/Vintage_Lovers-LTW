@@ -1,0 +1,130 @@
+#addProduct{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#addProductForm{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#addProductForm h1{
+    font-weight: bold;
+    text-align: center;
+}
+
+#addProductForm > form{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin: 1em;
+    align-items: center;
+}
+
+#addProductForm .form-group{
+    margin:1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#addProductForm .form-group label{
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 1em;
+}
+
+#addProductForm input[type=text], #addProductForm input[type=number],#addProductForm select {
+    border-radius: 1em;
+    border-color:black ;
+    border-width: 2px;
+    width: 80%;
+    max-width: 30em;
+    height: 2.5em;
+}
+
+#addProductForm select{
+    height: 3em;  
+}
+
+#addProductForm input[type=submit]{
+    margin: 1em;
+    align-self: center;
+    justify-self: center;
+    background-color: var(--light_red);
+    width: 8em;
+    height: 3em;
+    border-radius: 1em;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/*add image*/
+
+#insertImages{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#insertImages h1{
+    font-weight: bold;
+    text-align: center;
+}
+
+#insertImages form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 2em;
+}
+
+#insertImages p{
+    text-align: center;
+    font-weight: 500;
+}
+
+#insertImages label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+}
+
+#insertImages input, #insertImages label input{
+    border-radius: 1em;
+    border-color: black;
+    border-width: 2px;
+    width: 80%;
+    max-width: 30em;
+    height: 2.5em;
+}
+
+#insertImages input[type="file"]::file-selector-button{
+    border-radius: 1em;
+    border-color: black;
+    border-width: 2px;
+    width: 50%;
+    max-width: 30em;
+    height: 2.5em;
+}
+
+#insertImages input[type=submit]{
+    margin: 1em;
+    align-self: center;
+    justify-self: center;
+    background-color: var(--light_red);
+    width: 8em;
+    height: 3em;
+    border-radius: 1em;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+

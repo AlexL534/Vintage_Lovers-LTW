@@ -286,8 +286,9 @@ function drawAddProductForm() {
     $conditions = Condition::getAllCondition($db);
 
     ?>
+    <section id="addProduct">
     <header>
-        <h2>Add Product</h2>
+        <h1>Add Product</h1>
     </header>
     <section id="addProductForm">
         <form action="/../actions/action_add_product.php" method="post">
@@ -316,7 +317,7 @@ function drawAddProductForm() {
                 </select>
             </div>
             <div class="form-group">
-                <label for="Color">Color:</label>
+                <label for="color">Color:</label>
                 <select name="color" id="color" required>
                     <?php foreach ($colors as $color): ?>
                         <option value="<?= $color->getId(); ?>"><?= htmlspecialchars($color->getName()); ?></option>
@@ -324,7 +325,7 @@ function drawAddProductForm() {
                 </select>
             </div>
             <div class="form-group">
-                <label for="Condition">Condition:</label>
+                <label for="condition">Condition:</label>
                 <select name="condition" id="condition" required>
                     <?php foreach ($conditions as $condition): ?>
                         <option value="<?= $condition->getId(); ?>"><?= htmlspecialchars($condition->getName()); ?></option>
@@ -332,7 +333,7 @@ function drawAddProductForm() {
                 </select>
             </div>
             <div class="form-group">
-                <label for="sizes">Sizes:</label>
+                <label for="size">Sizes:</label>
                 <select name="size" id="size" required>
                     <?php foreach ($sizes as $size): ?>
                         <option value="<?= $size->getId(); ?>"><?= htmlspecialchars($size->getName()); ?></option>
@@ -346,6 +347,7 @@ function drawAddProductForm() {
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="submit" name="submit" value="Submit">
         </form>
+    </section>
     </section>
     <?php
 }
@@ -388,16 +390,17 @@ function drawUpdateInfoForm($product_id) {
 function drawAddImages($productId, $session){
     //draws the add images section where the user can insert images to the products
     ?>
-    <section id = "insertImages"></section>
+    <section id = "insertImages">
     <?php displayMessages($session)?>
     <header>
-        <h2>Insert images for your product <?=$productId?></h2>
+        <h1>Insert images for your product</h1>
     </header>
     <form action="/../actions/action_add_image.php" method="post" enctype="multipart/form-data">
-        <label>Title:
-          <input type="text" name="title" required>
+        <label>
+            <p>Title:</p>
+            <input type="text" name="title" required>
         </label>
-        <input type="file" name="image[]" multiple="multiple" required>
+        <input type="file" name="image[]" multiple="multiple"  required>
         <input type="hidden" name="productID" value ="<?=$productId?>">
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <input type="submit" value="Upload">

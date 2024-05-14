@@ -22,6 +22,7 @@ function drawHeader(Session $session, array $menuCategories) {
             <link rel="stylesheet" href="/../css/all_filters.css">
             <link rel="stylesheet" href="/../css/sold_products.css">
             <link rel="stylesheet" href="/../css/print.css">
+            <link rel="stylesheet" href="/../css/add_products.css">
             <script src = "/../javascript/img.js" defer></script>
             <script src = "/../javascript/shopping_cart.js" defer></script>
             <script src = "/../javascript/wishlist.js" defer></script>
