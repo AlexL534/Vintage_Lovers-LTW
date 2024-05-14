@@ -229,8 +229,9 @@ function drawProductList($searchEnabled = true, $session) {
     //draws the section where the owned products are content of the page where the products are showned
     try {
         ?>
+        <section id = "products-del-info-page" >
         <header>
-            <h2><?php echo $searchEnabled ? "Product List" : "Your Product List"; ?></h2>
+            <h1><?php echo $searchEnabled ? "Product List" : "Your Product List"; ?></h1>
         </header>
         <?php
 
@@ -279,6 +280,10 @@ function drawProductList($searchEnabled = true, $session) {
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
+
+    ?>
+        </section> 
+    <?php
 }
 
 function displayProductResults($products, $searchEnabled, $session) {
@@ -302,7 +307,7 @@ function displayProductResults($products, $searchEnabled, $session) {
                                 <button type="submit" class="delete-btn">Delete</button>
                             </form>
                             <?php if (!$searchEnabled) { ?>
-                                <a href="/../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
+                                <a href="/../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><p><?php echo 'Update Info'; ?></p></a>
                             <?php } ?>
                         </li>
                     <?php } else {
@@ -311,7 +316,7 @@ function displayProductResults($products, $searchEnabled, $session) {
 
                         if ($ownerId === $loggedInUserId) { ?>
                             <li>
-                                <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
+                                <span class="product_name"><p><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></p></span>
                                 <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
@@ -319,7 +324,7 @@ function displayProductResults($products, $searchEnabled, $session) {
                                     <button type="submit" class="delete-btn">Delete</button>
                                 </form>
                                 <?php if (!$searchEnabled) { ?>
-                                    <a href="/../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
+                                    <a href="/../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><p><?php echo 'Update Info'; ?></p></a>
                                 <?php } ?>
                             </li>
                     <?php }
@@ -420,27 +425,29 @@ function drawUpdateInfoForm($product_id) {
     $productPrice = $product->getPrice();
 
     ?>
+    <section id="updateProduct">
     <header>
-        <h2>Update Product</h2>
+        <h1>Update Product</h1>
     </header>
     <section id="updateProductForm">
         <form action="/../actions/action_update_product.php" method="post">
         <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
         <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name"><p>Name:</p></label>
                 <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($productName); ?>" required>
             </div>
             <div class="form-group">
-                <label for="description">Description:</label>
+                <label for="description"><p>Description:</p></label>
                 <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($productDescription); ?>" required>
             </div>
             <div class="form-group">
-                <label for="price">Price:</label>
+                <label for="price"><p>Price:</p></label>
                 <input type="number" name="price" step="0.01" min="0" id="price" value="<?php echo htmlspecialchars($productPrice); ?>" required>
             </div>
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="submit" name="submit" value="Update">
         </form>
+    </section>
     </section>
     <?php
 }

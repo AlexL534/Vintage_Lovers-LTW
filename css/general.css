@@ -20,6 +20,9 @@ body{
    
 }
 
+h1, h2{
+   font-weight: bold;
+}
 body > header {
    background-color: var(--light_gray) ; 
    display: grid;

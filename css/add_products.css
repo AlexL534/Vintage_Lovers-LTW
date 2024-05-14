@@ -13,7 +13,6 @@
 }
 
 #addProductForm h1{
-    font-weight: bold;
     text-align: center;
 }
 
@@ -64,7 +63,7 @@
     font-size: 1.1em;
 }
 
-/*add image*/
+/*======================================add image =========================================*/
 
 #insertImages{
     display: flex;
@@ -73,7 +72,6 @@
 }
 
 #insertImages h1{
-    font-weight: bold;
     text-align: center;
 }
 
