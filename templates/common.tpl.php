@@ -2,7 +2,10 @@
 declare(strict_types = 1);
 
 require_once(__DIR__ . '/../classes/session.class.php');
-function drawHeader(Session $session) { ?> 
+require_once(__DIR__ . '/../classes/category.class.php');
+function drawHeader(Session $session, array $menuCategories) { 
+    //draws the website header
+    ?> 
     <!DOCTYPE html>
     <html lang="en-US">
         <head>
@@ -16,18 +19,22 @@ function drawHeader(Session $session) { ?>
             <link rel="stylesheet" href="/../css/product.css">
             <link rel="stylesheet" href="/../css/shopping_cart.css">
             <link rel="stylesheet" href="/../css/wishlist.css">
+            <link rel="stylesheet" href="/../css/all_filters.css">
+            <link rel="stylesheet" href="/../css/sold_products.css">
+            <link rel="stylesheet" href="/../css/print.css">
             <script src = "/../javascript/img.js" defer></script>
             <script src = "/../javascript/shopping_cart.js" defer></script>
             <script src = "/../javascript/wishlist.js" defer></script>
             <script src = "/../javascript/search_users.js" defer></script>
-
+            <script src = "/../javascript/sidebar.js" defer></script>
+            <script src = "/../javascript/filters.js" defer></script>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>
             <header>
                    <a href="/../pages/main_page.php"><img src="/../assets/Logo.png" alt= "logo" id = "logo"></a>
-                   <form>
-                        <input type="search" name="search" placeholder="Search for a brand, condition, ...">
+                   <form action="/../pages/filter_page.php" method="get">
+                        <input type="search" name="search" placeholder="Search for a product">
                     </form>
                     <?php
                         if($session->isLoggedIn()) drawLoggedInIcons();
@@ -39,17 +46,22 @@ function drawHeader(Session $session) { ?>
                 <input type="checkbox" id="menu_button"> 
                 <label class="menu_button" for="menu_button"></label>
                 <menu>
-                    <li><a href="">Shoes</a></li>
-                    <li><a href="">Shirts</a></li>
-                    <li><a href="">Pants</a></li>
-                    <li><a href="">All</a></li>
+                    <?php
+                    foreach($menuCategories as $category){
+                        ?>
+                             <li><a href="/../pages/filter_page.php/?categoryID=<?=$category->getId()?>"><?=htmlentities($category->getName())?></a></li>
+                    <?php }
+                    ?>
+                    <li><a href="/../pages/filter_page.php">All</a></li>
                 </menu>
             </nav>
             <main>
                 
     <?php }
 
-function drawFooter() { ?>
+function drawFooter() { 
+    //draws the website footer
+    ?>
             </main>
 
             <footer>
@@ -72,21 +84,27 @@ function drawFooter() { ?>
     </html>
 <?php }
 
-function drawHeaderLogin() { ?>
+function drawHeaderLogin() { 
+    //draws the website header login
+    ?>
     <div class= "login" >
-        <a href="../pages/register.php">Register</a>
-        <a href="../pages/login.php">Login</a>
+        <a href="/../pages/register.php">Register</a>
+        <a href="/../pages/login.php">Login</a>
     </div>
 <?php }
 
-function drawLoggedInIcons(){ ?>
+function drawLoggedInIcons(){ 
+    //draws the website icons when the user is loggedIn
+    ?>
     <div id= "logged_icons">
         <a href = "/../pages/shopping_cart.php"><img src = "/../assets/shopping_cart.png" alt = "shopping cart icon" id = "cart_icon"></a>
         <a href="/../pages/profile.php"><img src= "/../assets/profile_icon.png" alt= "profile icon" id ="profile_icon" ></a>
     </div>
 <?php }
 
-function displayMessages(Session $session){ ?>
+function displayMessages(Session $session){ 
+    //draws the error messages 
+    ?>
     <section id="messages">
       <?php foreach ($session->getMessages() as $message) { ?>
 

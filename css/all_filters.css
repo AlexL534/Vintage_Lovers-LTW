@@ -1,0 +1,129 @@
+#filterPage{
+    margin-top: 1em;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 10em auto;
+}
+
+#filterPage header{
+    grid-row:1;
+    grid-column: span 2;
+}
+#filterMenu{
+    grid-column: 1;
+    grid-row: span 2;
+}
+#filterMenu header{
+    background-color: var(--medium_gray);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#filterMenu img {
+    display: none;
+    width: 35px;
+    padding: 1em
+}
+
+#filterMenu button{
+    display: none;
+    border-width: 0;
+    background-color: var(--medium_gray);
+}
+
+/*filter aside section*/
+
+#filterPage aside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--light_gray);
+
+}
+
+#filterPage aside ul{
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+    max-height: 10em;
+}
+
+#filterPage aside label{
+    display: grid;
+    grid-template-columns: 4em 4em;
+    text-align: center;
+    
+}
+
+#filterPage aside p{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:  ellipsis;
+}
+
+
+#filterPage aside input[type="checkbox"]{
+    justify-self: center;
+    width: 2em;
+    border-radius: 10em;
+}
+
+/*allow scrollable itens in the filtersection*/
+.scrollable{
+    overflow-y: scroll;
+    max-height: 10em;
+}
+
+/*products section*/
+#filterPage .products{
+    grid-column: 2;
+    grid-row: span 2;
+    height: 100%;
+    background-color: white;
+}
+
+
+#filterPage .products a{
+    background-color: var(--light_gray);
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em;
+    max-height: 30em;
+}
+
+/*responsive*/
+@media (max-width: 40em){
+    #filterPage{
+        margin-top: 0em;
+        display: flex;
+        flex-direction: column;
+    }
+    #filtersSection label{
+        display: grid;
+        grid-template-columns: 10em 10em;
+        text-align: center;
+    }
+    .scrollable 
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    #filterMenu img{
+        display: block;
+    }
+    #filterMenu button{
+        display: block;
+    }
+
+    #filterPage aside{
+        max-height: 0;
+    }
+
+    #filterPage .open{
+        max-height: 100%;
+    }
+}
+

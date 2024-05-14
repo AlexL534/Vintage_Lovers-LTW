@@ -22,7 +22,7 @@ class Color{
         return $this->name;
     }
 
-    //querys
+    //queries
     static public function getColorById(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM COLOR WHERE colorID = ?');
         $stmt->execute(array($id));
@@ -63,7 +63,7 @@ class Color{
         $stmt->execute(array($id));
         $colors = array();
         while($colorID=$stmt->fetch()){
-            $color = Color::getColorById($db,intval($colorID));
+            $color = Color::getColorById($db,intval($colorID['colorID']));
             $colors[] = $color;
         }
         return $colors;

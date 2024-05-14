@@ -6,7 +6,6 @@ function encodeForAjax(data) {
 
 function removeItensCart(){
     const buttons = document.querySelectorAll('#shoppingCart tr button');
-    console.log(buttons);
     if(buttons.length == 0){
         //the current page doesn't have this section
         return;

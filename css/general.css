@@ -17,6 +17,7 @@ body{
    flex-direction: column;
    min-height: 100vh;
    width: 100%;
+   
 }
 
 body > header {
@@ -120,6 +121,7 @@ nav menu{
 }
 
 nav menu li {
+   display: flex;
    background-color: var(--light_red);
    border-radius: 1em;
    text-align: center;
@@ -130,7 +132,6 @@ nav menu li {
    max-width: 10em;
    box-shadow: 0px 20px 15px -5px rgba(0, 0, 0, 0.15);
    transition: background-color 1s, box-shadow 1s;
-   display: block;
    flex: 1;
   
 }
@@ -145,6 +146,8 @@ nav menu li a{
    color: black;
    font-size: larger;
    font-weight: bold;
+   width: 100%;
+   height: 100%;
 }
 
 /* main */
@@ -181,7 +184,7 @@ body > footer > p{
    grid-row: 2;
 }
 
-/*Style of the text in the product containers"*/
+/*Style of the text in the product containers used in several pages*/
 
 .product_name, .product_price{
    font-weight: 500;
@@ -189,6 +192,50 @@ body > footer > p{
 
 .product_price::after{
    content: '\20AC';
+}
+
+.products{
+   display: flex;
+
+   justify-content: center;
+   flex-wrap: wrap;
+   flex-direction: row;
+   background-color: var(--medium_gray);
+}
+
+.products a{
+   width: 20%;
+   min-width: 10em;
+   padding: 1em;
+   object-fit: cover;
+   text-decoration: none;
+   color:black;
+}
+
+
+.products article{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   flex: 1;
+}
+
+.products img{
+   margin: 0;
+   padding: 0;
+   height: 300px;
+   width: 300px;
+   max-width: 100%;
+   aspect-ratio: auto 200 / 150;
+   border-radius: 1em;
+   object-fit: cover;
+   box-shadow: 0px 33px 15px -18px rgba(0, 0, 0, 0.15);
+   
+}
+
+.products p{
+   font-size: 1.1em;
 }
 
 /*responsive */
@@ -271,6 +318,24 @@ body > footer > p{
        opacity: 0;
        transition: all .3s ease-in-out;
    }
+
+   /*products*/
+   .products a{
+      min-width: 300px;
+      max-height: 35%;
+  }
+
+  .products img{
+      margin: 0;
+      padding: 0;
+      height: 300px;
+      width: 300px;
+      max-height: 100%;
+      min-width: 300px;
+      max-width: 100%;
+      aspect-ratio: auto 200 / 150;
+      object-fit: cover;
+  }
 
    /*footer*/
 

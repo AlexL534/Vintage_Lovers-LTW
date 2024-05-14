@@ -11,9 +11,10 @@ require_once(__DIR__ . '/../classes/session.class.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 
 function drawProductInfo(PDO $db, int $id, Session $session){
+    //draws the product info in the product page
+
     $product = product::getProduct($db,$id);
     $productID = $product->getId();
-    
     $ownerID = $product->getOwner();
     $owner = User::getUser($db, $ownerID);
     $brand = Brand::getBrandById($db,$product->getBrand());
@@ -72,6 +73,8 @@ function drawProductInfo(PDO $db, int $id, Session $session){
 <?php } ?>
 
 <?php function drawProductPageButtons(Session $session, int $id){ 
+    //draws the buttons used to add the product to the wishlist and to the shopping cart
+    
     if($session->isLoggedIn()){
         ?>
         <form>

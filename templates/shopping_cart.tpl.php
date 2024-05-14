@@ -7,6 +7,8 @@ require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../utils/product_utils.php');
 
 function drawShoppingCart(PDO $db, $session){
+    //draws the shopping cart page
+
     $userID = $session->getId();
     $productsInCart = ShoppingCart::getUserShoppingCart($db, $userID);
     $products = array();
@@ -28,7 +30,7 @@ function drawShoppingCart(PDO $db, $session){
             drawProductsListInCart($products);
             ?>
             <div id = "buyButton">
-            <a href = "../pages/buy.php">BUY</a>
+            <a href = "/../pages/buy.php">BUY</a>
         </div>
        <?php } ?>
         
@@ -37,13 +39,14 @@ function drawShoppingCart(PDO $db, $session){
 <?php }
 
 function drawProductsListInCart($products){
+    //draws the list of products in the cart
     ?>
     <article class = "productsTable">
             <table>
                 <tr><th>Name</th><th>Price</th><th>Delete</th></tr>
                 <?php foreach($products as $product){
                     ?>
-                    <tr id = "<?= $product->getId()?>"><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td class = "price"><?= $product->getPrice()?></td><td><button class="delButton">Delete</button></td></tr>
+                    <tr id = "<?= $product->getId()?>"><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td class = "price"><?= $product->getPrice()?></td><td><button type="button" class="delButton">Delete</button></td></tr>
                 <?php } ?>
                 <tr><th>Total</th><td id="totalPrice"><?= calculatePrice($products) ?></td><td></td></tr>
             </table>
@@ -51,13 +54,14 @@ function drawProductsListInCart($products){
 <?php }
 
 function drawBuy(){
+    //draws the buy page (subpage inside the shopping cart)
     ?>
     <section id="buy">
         <header>
             <h1>Finalize the buy</h1>
         </header>
         <article>
-            <form action = "../actions/action_buy.php" method = "post" id = "payment">
+            <form action = "/../actions/action_buy.php" method = "post" id = "payment">
                 <label>
                     <p>Payment Method</p>
                     <select name= "payment" id = "paymentMethod">

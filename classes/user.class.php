@@ -183,7 +183,7 @@ class User{
             return true;
         }
         else{
-            //the email doesn´t exists
+            //the email doesn't exist
             return false;
         }
     }
@@ -202,7 +202,7 @@ class User{
             return true;
         }
         else{
-            //the username doesn´t exists
+            //the username doesn't exist
             return false;
         }
     }

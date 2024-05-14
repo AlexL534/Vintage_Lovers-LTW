@@ -28,7 +28,7 @@ class Category{
         return $this->description;
     }
 
-    //querys
+    //queries
     static public function getCategoryById(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM CATEGORY WHERE categoryID = ?');
         $stmt->execute(array($id));
@@ -56,6 +56,19 @@ class Category{
     static public function getAllCategories(PDO $db){
         $stmt = $db->prepare('SELECT * FROM CATEGORY');
         $stmt->execute();
+        $categories = array();
+        while($categoryDB = $stmt->fetch()){
+            $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);
+
+            $categories[]=$category;
+        }
+
+        return $categories;
+    }
+
+    static public function getCategoriesLimit(PDO $db, int $limit){
+        $stmt = $db->prepare('SELECT * FROM CATEGORY limit ?');
+        $stmt->execute(array($limit));
         $categories = array();
         while($categoryDB = $stmt->fetch()){
             $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);

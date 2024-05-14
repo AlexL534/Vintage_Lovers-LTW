@@ -7,6 +7,8 @@ require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../utils/product_utils.php');
 
 function drawWishlist(PDO $db, $session){
+    //draws the wishlist
+    
     $userID = $session->getId();
     $productsInList = Wishlist::getUserWishlist($db, $userID);
     $products = array();
@@ -34,13 +36,14 @@ function drawWishlist(PDO $db, $session){
 <?php }
 
 function drawProductsListInWhislist($products){
+    //draws the list of products in the wishlist
     ?>
     <article class = "productsTable">
             <table>
                 <tr><th>Name</th><th>Price</th><th>Delete</th></tr>
                 <?php foreach($products as $product){
                     ?>
-                    <tr id = "<?= $product->getId()?>"><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td class = "price"><?= $product->getPrice()?></td><td><button class="delButton">Delete</button></td></tr>
+                    <tr id = "<?= $product->getId()?>"><td><a href = "/../pages/products.php/?id=<?=$product->getId()?>"><?= $product->getName() ?></a></td><td class = "price"><?= $product->getPrice()?></td><td><button type="button" class="delButton">Delete</button></td></tr>
                 <?php } ?>
             </table>
         </article>

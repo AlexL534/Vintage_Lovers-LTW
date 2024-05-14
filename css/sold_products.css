@@ -1,0 +1,12 @@
+#productsSold{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#productsSold .productsTable tr:last-child td:first-of-type{
+    border-bottom-left-radius: 1em;
+}
+
+/*all the other itens in the products sold have the same css as the shopping_cart and whislist*/
