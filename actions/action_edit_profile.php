@@ -75,6 +75,7 @@ if(isset($_POST["password"])  && $_POST["password"] !== ""){
 
 
     else if(User::updatePassword($db, $userId, $hashedPassword) === false){
+        //updates the password
         $hasError = true;
         $session->addMessage("error", "Could not update the password. Database error");
         header('Location: ../pages/edit_profile.php');

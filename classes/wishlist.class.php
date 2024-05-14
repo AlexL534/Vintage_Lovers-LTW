@@ -12,14 +12,17 @@ class Wishlist{
 
     }
 
+    //getters
     public function getUserID() : int{
         return $this->userID;
     }
 
+    //setters
     public function getProductID() : int{
         return $this->productID;
     }
 
+    //querys
     static function getUserWishlist(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM WISHLIST where userID = ?');
         $stmt->execute(array($id));

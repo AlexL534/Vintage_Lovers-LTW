@@ -24,6 +24,7 @@ class Product{
         $this->brand = $brand;
     }
 
+    //getters
     public function getId() : int{
         return $this->id;
     }
@@ -56,6 +57,7 @@ class Product{
         return $this->brand;
     }
 
+    //querys
     public function save(PDO $db): bool
     {
         try {

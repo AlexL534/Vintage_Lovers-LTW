@@ -50,17 +50,6 @@ class Image{
 
         return $images;
     }
-    // não funciona corretamente
-    static function getImagesOfProduct(PDO $db , int $id){
-        $stmt = $db->prepare('SELECT imageID FROM IMAGES_OF_PRODUCT WHERE productID = ?');
-        $stmt->execute(array($id));
-        $images = array();
-        while($imageID=$stmt->fetch()){
-            $image = Image::getImageById($db,intval($imageID));
-            $images[] = $image;
-        }
-        return $images;
-    }
 
     static function getImagesPath(PDO $db, int $productID){
         $stmt = $db->prepare('

@@ -12,6 +12,7 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 }
 
 if (isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['add'])) {
+    //continues only if everything is set
     $db = getDatabaseConnection();
     $name = $_POST['name'];
     $filterType = isset($_POST['filter_type']) ? $_POST['filter_type'] : '';

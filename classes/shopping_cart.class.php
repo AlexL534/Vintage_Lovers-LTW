@@ -12,6 +12,7 @@ class ShoppingCart{
 
     }
 
+    //getters
     public function getUserID() : int{
         return $this->userID;
     }
@@ -20,6 +21,7 @@ class ShoppingCart{
         return $this->productID;
     }
 
+    //querys
     static function getUserShoppingCart(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM SHOPPINGCART where userID = ?');
         $stmt->execute(array($id));

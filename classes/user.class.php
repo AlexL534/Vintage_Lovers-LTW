@@ -20,6 +20,7 @@ class User{
         $this->name = $name;
     }
 
+    //getters
     public function getID() : int {
         return $this->id;
     }
@@ -44,6 +45,7 @@ class User{
         return $this->isadmin;
     }
 
+    //querys
     public function getUserOwnedItems(PDO $db){
         $stmt = $db->prepare('
             SELECT *

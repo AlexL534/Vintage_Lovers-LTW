@@ -12,6 +12,7 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    //only continues if everything is set
     $productId = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);

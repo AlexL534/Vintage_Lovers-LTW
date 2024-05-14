@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../classes/session.class.php');
 require_once(__DIR__ . '/../classes/sold_products.class.php');
 
 $session = new Session();
+
 if ($_SESSION['csrf'] !== $_POST['csrf']) {
     $session->addMessage('error', 'Suspicious activity found');
     header('Location: /../pages/main_page.php');
@@ -19,11 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
         exit();
     }
 
-    $db = getDatabaseConnection();
     
+    $db = getDatabaseConnection();
     $user = User::getUser($db, $userId);
     if ($user && !$user->getIsAdmin()) {
         if ($user->deleteUser($db)) {
+            //deletes the sells that where related to this user
             SoldProducts::deleteProductSoldUser($db,$user->getID());
             header("Location: ../pages/admin_manage_user.php");
             exit();

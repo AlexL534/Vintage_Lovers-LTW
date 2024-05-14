@@ -17,6 +17,7 @@ class SoldProducts{
         $this->address = $address;
     }
 
+    //getters
     public function getBuyerID() : int{
         return $this->buyerID;
     }
@@ -38,6 +39,7 @@ class SoldProducts{
         return $this->address;
     }
 
+    //querys
     static function getProductSold(PDO $db,int $id){
         $stmt = $db->prepare('SELECT * FROM SOLD_PRODUCTS WHERE sellID =  ?');
         $stmt->execute(array($id));

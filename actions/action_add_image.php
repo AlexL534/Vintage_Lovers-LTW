@@ -47,4 +47,9 @@ if (isset($_FILES['image'])){
         imagejpeg($original, $originalFileName);
     }
     header("location: /../pages/seller_add_product.php");
+    exit();
 }
+
+$session->addMessage('error', 'could not upload the images');
+header("Location: /../pages/add_images.php/?productID=$productID");
+exit();

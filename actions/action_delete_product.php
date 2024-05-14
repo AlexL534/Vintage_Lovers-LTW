@@ -26,6 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
     $db = getDatabaseConnection();
 
     if (Product::deleteProduct($db, $productId)) {
+        
+        //deletes all the related information to the product
         Size::deleteSizeOfProduct($db, $productId);
         Condition::deleteConditionOfProduct($db, $productId);
         Color::deleteColorOfProduct($db, $productId);
