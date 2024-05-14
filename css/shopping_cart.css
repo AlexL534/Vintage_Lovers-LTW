@@ -57,8 +57,16 @@
 }
 
 .productsTable a{
+    display: block;
     text-decoration: none;
     color:black;
+    width: 4em;
+}
+
+.productsTable a p{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:  ellipsis;
 }
 
 .productsTable button{
