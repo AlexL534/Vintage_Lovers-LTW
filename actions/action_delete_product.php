@@ -4,6 +4,7 @@ require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../classes/size.class.php');
 require_once(__DIR__ . '/../classes/condition.class.php');
 require_once(__DIR__ . '/../classes/color.class.php');
+require_once(__DIR__ . '/../classes/image.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
 
 $session = new Session();
@@ -27,6 +28,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
         Size::deleteSizeOfProduct($db, $productId);
         Condition::deleteConditionOfProduct($db, $productId);
         Color::deleteColorOfProduct($db, $productId);
+        $imagesIDs = Image::getImagesIdFromImageOfProduct($db, $productId);
+        $imagesPath = Image::getImagesPath($db, $productId);
+        foreach($imagesIDs as $imageId){
+            Image::deleteImage($db, $imageId);
+        }
+        foreach($imagesPath as $path){
+            unlink(__DIR__ . "/../$path");
+        }
+        Image::deleteImageOfProduct($db, $productId);
+
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
     } else {

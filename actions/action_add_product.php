@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             Color::insertColorOfProduct($db, $id, $color);
             Condition::insertConditionOfProduct($db, $id, $condition);
             
-            header("Location: " . $_SERVER['HTTP_REFERER']);
+            header("Location: " . "/../pages/add_images.php/?productID=$id");
         } else {
             echo "Failed to add product.";
         }

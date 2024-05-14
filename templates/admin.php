@@ -372,4 +372,23 @@ function drawUpdateInfoForm($product_id) {
     <?php
 }
 
+function drawAddImages($productId){
+    ?>
+    <section id = "inserImages"></section>
+    <header>
+        <h2>Insert images for your product</h2>
+    </header>
+    <form action="/../actions/action_add_image.php" method="post" enctype="multipart/form-data">
+        <label>Title:
+          <input type="text" name="title">
+        </label>
+        <input type="file" name="image[]" multiple="multiple">
+        <input type = "hidden" name="productID" value = "<?=$productId?>">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+        <input type="submit" value="Upload">
+      </form>
+    </section>
+
+<?php }
+
 ?>

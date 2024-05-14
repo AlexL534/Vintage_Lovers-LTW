@@ -78,5 +78,47 @@ class Image{
     
         return $images;
     }
+
+    static function insertImageToProduct(PDO $db, string $path){
+        $stmt = $db->prepare('Insert into images(path) values (?)');
+        $stmt->execute(array($path));
+    }
+
+    static function getLastInsertedImageID(PDO $db){
+        try {
+            $stmt = $db->prepare("SELECT imageID FROM IMAGES ORDER BY imageID DESC LIMIT 1");
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result['imageID'];
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    static function insertImageOfProduct(PDO $db, int $imageID, int $productID){
+        $stmt = $db->prepare('Insert into images_of_product(imageID, productID) values (?,?)');
+        $stmt->execute(array($imageID, $productID));
+    }
+
+    static function deleteImageOfProduct(PDO $db, int $productID){
+        $stmt = $db->prepare('Delete from images_of_product where productID = ?');
+        $stmt->execute(array($productID));
+    }
+
+    static function deleteImage(PDO $db, int $imageID){
+        $stmt = $db->prepare('Delete from images where imageID = ?');
+        $stmt->execute(array($imageID));
+    }
+
+    static function getImagesIdFromImageOfProduct(PDO $db, int $productID){
+        $stmt = $db->prepare('SELECT imageID FROM IMAGES_OF_PRODUCT WHERE productID = ?');
+        $stmt->execute(array($productID));
+        $images = array();
+        while($image = $stmt->fetch()){
+            $images[] = $image['imageID'];
+        }
+        return $images;
+    }
 }
 ?>
