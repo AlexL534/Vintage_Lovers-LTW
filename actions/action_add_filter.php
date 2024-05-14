@@ -2,6 +2,14 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/filter_type.class.php');
+require_once(__DIR__ . '/../classes/session.class.php');
+
+$session = new Session();
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
 
 if (isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['add'])) {
     $db = getDatabaseConnection();

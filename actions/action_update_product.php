@@ -2,6 +2,15 @@
 require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/product.class.php');
 
+require_once(__DIR__ . '/../classes/session.class.php');
+
+$session = new Session();
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $productId = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
@@ -16,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     try {
         $db = getDatabaseConnection();
         
-        if (Product::productExists($db, $productId)) {
+        if (Product::getProduct($db, $productId) !== null) {
             if (Product::updateProduct($db, $productId, $name, $description, $price)) {
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();

@@ -5,6 +5,12 @@ require_once(__DIR__ . '/../classes/session.class.php');
 
 $session = new Session();
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 if (!$session->isLoggedIn()) {
     header("Location: /");
     exit;

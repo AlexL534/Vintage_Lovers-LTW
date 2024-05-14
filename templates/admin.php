@@ -4,6 +4,7 @@ require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../classes/product.class.php');
 require_once(__DIR__ . '/../classes/brand.class.php');
 require_once(__DIR__ . '/../classes/category.class.php');
+require_once(__DIR__ . '/../classes/session.class.php');
 
 
 function drawFilterTypes() {
@@ -42,7 +43,7 @@ function drawAddInfoForm($filterType) {?>
     <?php
 }
 
-function drawUserList() {
+function drawUserList($session) {
     try {
         ?>
         <header>
@@ -57,8 +58,17 @@ function drawUserList() {
         </section>
         <?php
 
+
+
         $db = getDatabaseConnection();
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
+
+            if ($_SESSION['csrf'] !== $_POST['csrf']) {
+                $session->addMessage('error', 'Suspicious activity found');
+                header('Location: /../pages/main_page.php');
+                exit();
+            }
+
             $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
             $searchResults = User::searchUsers($db, $searchQuery);
             
@@ -70,24 +80,24 @@ function drawUserList() {
                             <li class="user-item">
                                 <div class="user-label username-light">Username</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getUsername()); ?></span>
+                                    <span><?php echo htmlentities($user['username']); ?></span>
                                 </div>
                                 <div class="user-label email-light">Email</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getEmail()); ?></span>
+                                    <span><?php echo htmlentities($user['email']); ?></span>
                                 </div>
                                 <div class="user-label">User Type</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getIsAdmin()) ? 'Admin' : 'Normal User'; ?></span>
+                                    <span><?php echo htmlentities($user['is_admin']) ? 'Admin' : 'Normal User'; ?></span>
                                 </div>
                                 <div class="options-menu">
                                     <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
-                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
                                         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                         <button type="submit" class="delete-btn">Delete Account</button>
                                     </form>
                                     <form action="/../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
                                         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                         <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                     </form>
@@ -169,7 +179,16 @@ function drawProductList($searchEnabled = true, $session) {
             <?php
         }
 
+
+
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
+
+            if ($_SESSION['csrf'] !== $_POST['csrf']) {
+                $session->addMessage('error', 'Suspicious activity found');
+                header('Location: /../pages/main_page.php');
+                exit();
+            }
+            
             try {
                 $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
                 $db = getDatabaseConnection();
