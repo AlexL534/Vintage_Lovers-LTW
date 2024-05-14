@@ -7,7 +7,7 @@ function searchUsers() {
         return;
     }
 
-    const deleteAccount = async (userId) => {
+    const deleteAccount = async (userId, token) => {
         const confirmDelete = confirm('Are you sure you want to delete this account?');
         if (confirmDelete) {
             const response = await fetch(`/../actions/action_delete_account.php`, {
@@ -15,13 +15,13 @@ function searchUsers() {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: `user_id=${userId}`
+                body: `user_id=${userId}&csrf=${token}`
             });
             location.reload();
         }
     };
     
-    const elevateToAdmin = async (userId) => {
+    const elevateToAdmin = async (userId, token) => {
         const confirmElevate = confirm('Are you sure you want to elevate this user to admin?');
         if (confirmElevate) {
             const response = await fetch(`/../actions/action_elevate_admin.php`, {
@@ -29,7 +29,7 @@ function searchUsers() {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: `user_id=${userId}`
+                body: `user_id=${userId}&csrf=${token}`
             });
             location.reload();
         }
@@ -111,13 +111,16 @@ function searchUsers() {
 
     userListSection.addEventListener('click', function(event) {
         const target = event.target;
+        const tokenEle = document.querySelector(".token");
+        const token = tokenEle.value;
         if (target && target.tagName === 'BUTTON') {
             if (target.classList.contains('delete-btn')) {
                 const userId = target.closest('.user-item').dataset.userId;
-                deleteAccount(userId);
+                
+                deleteAccount(userId, token);
             } else if (target.classList.contains('elevate-btn')) {
                 const userId = target.closest('.user-item').dataset.userId;
-                elevateToAdmin(userId);
+                elevateToAdmin(userId, token);
             }
         }
     });

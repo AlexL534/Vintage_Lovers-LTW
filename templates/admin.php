@@ -117,14 +117,9 @@ function drawUserList($db, $session) {
                     <option value="admin" <?= ($userType === 'admin') ? 'selected' : '' ?>>Admin</option>
                     <option value="normal" <?= ($userType === 'normal') ? 'selected' : '' ?>>Normal User</option>
                 </select>
-                <select name="userType" id="userType">
-                    <option value="all" <?= ($userType === 'all') ? 'selected' : '' ?>>All</option>
-                    <option value="admin" <?= ($userType === 'admin') ? 'selected' : '' ?>>Admin</option>
-                    <option value="normal" <?= ($userType === 'normal') ? 'selected' : '' ?>>Normal User</option>
-                </select>
                 <input type="text" id="search" name="search" placeholder="Search for user">
                 <input type="hidden" name="action" value="search">
-                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>" class = "token">
             </form>
         </section>
         <?php
@@ -163,14 +158,14 @@ function drawUserList($db, $session) {
                                     <span><?php echo htmlentities($user['is_admin']) ? 'Admin' : 'Normal User'; ?></span>
                                 </div>
                                 <div class="options-menu">
-                                    <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
+                                    <form action="/../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
-                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>" class = "token">
                                         <button type="submit" class="delete-btn">Delete Account</button>
                                     </form>
                                     <form action="/../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
-                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>" class = "token">
                                         <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                     </form>
                                 </div>
@@ -206,12 +201,12 @@ function drawUserList($db, $session) {
                                 <div class="options-menu">
                                     <form action="/../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
-                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>" class = "token">
                                         <button type="submit" class="delete-btn">Delete Account</button>
                                     </form>
                                     <form action="/../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
                                         <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
-                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>" class = "token">
                                         <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                     </form>
                                 </div>
