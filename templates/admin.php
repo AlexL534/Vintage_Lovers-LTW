@@ -45,7 +45,7 @@ function drawAddInfoForm($filterType) {?>
         <header>
             <h2><?php echo ucfirst($filterType); ?></h2>
         </header>
-        <form action="../actions/action_add_filter.php" method="post">
+        <form action="/../actions/action_add_filter.php" method="post">
             <label>Name: <input type="text" name="name" required></label>
             <?php if ($filterType === 'category' || $filterType === 'condition'): ?>
             <label>Description: <input type="text" name="description"></label>
@@ -70,7 +70,7 @@ function drawRemoveInfoForm($filterType, $db) {
             <header>
                 <h2>Remove <?php echo ucfirst($filterType); ?></h2>
             </header>
-            <form action="../actions/action_remove_filter.php" method="post">
+            <form action="/../actions/action_remove_filter.php" method="post">
                 <label>Select <?php echo ucfirst($filterType); ?> to remove:</label>
                 <select name="filter_name" required>
                     <option value="" disabled selected>Select <?php echo ucfirst($filterType); ?></option> 
@@ -93,24 +93,30 @@ function drawRemoveInfoForm($filterType, $db) {
 }
 
 
-function drawUserList() {
+function drawUserList(PDO $db) {
     try {
+        $userType = isset($_POST['userType']) ? filter_input(INPUT_POST, 'userType', FILTER_SANITIZE_STRING) : 'all';
+
         ?>
         <header>
             <h2>User List</h2>
         </header>
         <section id="userSearch">
             <form method="post">
+                <select name="userType" id="userType">
+                    <option value="all" <?= ($userType === 'all') ? 'selected' : '' ?>>All</option>
+                    <option value="admin" <?= ($userType === 'admin') ? 'selected' : '' ?>>Admin</option>
+                    <option value="normal" <?= ($userType === 'normal') ? 'selected' : '' ?>>Normal User</option>
+                </select>
                 <input type="text" id="search" name="search" placeholder="Search for user">
                 <input type="hidden" name="action" value="search">
             </form>
         </section>
         <?php
 
-        $db = getDatabaseConnection();
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
             $searchQuery = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
-            $searchResults = User::searchUsers($db, $searchQuery);
+            $searchResults = User::searchUsers($db, $searchQuery, $userType);
             
             if (!empty($searchResults)) {
                 ?>
@@ -120,23 +126,23 @@ function drawUserList() {
                             <li class="user-item">
                                 <div class="user-label username-light">Username</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getUsername()); ?></span>
+                                    <span><?= htmlspecialchars($user['username']) ?></span>
                                 </div>
                                 <div class="user-label email-light">Email</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getEmail()); ?></span>
+                                    <span><?= htmlspecialchars($user['email']) ?></span>
                                 </div>
                                 <div class="user-label">User Type</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getIsAdmin()) ? 'Admin' : 'Normal User'; ?></span>
+                                    <span><?= htmlspecialchars($user['isAdmin']) ? 'Admin' : 'Normal User' ?></span>
                                 </div>
                                 <div class="options-menu">
-                                    <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
-                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                    <form action="/../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
+                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
                                         <button type="submit" class="delete-btn">Delete Account</button>
                                     </form>
-                                    <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                    <form action="/../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
+                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user['id']); ?>">
                                         <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                     </form>
                                 </div>
@@ -159,23 +165,23 @@ function drawUserList() {
                             <li class="user-item">
                                 <div class="user-label username-light">Username</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getUsername()); ?></span>
+                                    <span><?= htmlspecialchars($user->getUsername()) ?></span>
                                 </div>
                                 <div class="user-label email-light">Email</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getEmail()); ?></span>
+                                    <span><?= htmlspecialchars($user->getEmail()) ?></span>
                                 </div>
                                 <div class="user-label">User Type</div>
                                 <div class="user-details">
-                                    <span><?php echo htmlentities($user->getIsAdmin()) ? 'Admin' : 'Normal User'; ?></span>
+                                    <span><?= htmlspecialchars($user->getIsAdmin()) ? 'Admin' : 'Normal User' ?></span>
                                 </div>
                                 <div class="options-menu">
-                                    <form action="../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
-                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                    <form action="/../actions/action_delete_account.php" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
+                                        <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getId()) ?>">
                                         <button type="submit" class="delete-btn">Delete Account</button>
                                     </form>
-                                    <form action="../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
-                                        <input type="hidden" name="user_id" value="<?php echo htmlentities($user->getId()); ?>">
+                                    <form action="/../actions/action_elevate_admin.php" method="post" onsubmit="return confirm('Are you sure you want to elevate this user to admin?');">
+                                        <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getId()) ?>">
                                         <button type="submit" class="elevate-btn">Elevate to Admin</button>
                                     </form>
                                 </div>
@@ -189,9 +195,11 @@ function drawUserList() {
             }
         }
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        error_log("Error: " . $e->getMessage());
+        echo "An error occurred. Please try again later.";
     }
 }
+
 
 function drawProductList($searchEnabled = true, $session) {
     try {
@@ -243,21 +251,20 @@ function displayProductResults($products, $searchEnabled, $session) {
         ?>
         <section id="productList">
             <?php if (!$searchEnabled) { ?> 
-                    <a href="../pages/seller_add_product.php">+</a>
+                    <a href="/../pages/seller_add_product.php">+</a>
             <?php } ?>
             <ul>
                 <?php foreach ($products as $product) {
                     if ($searchEnabled) { ?>
                         <li>
                             <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
-                            <button class="check-info-btn">Check info</button>
-                            <form action="../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                            <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
                                 <button type="submit" class="delete-btn">Delete</button>
                             </form>
                             <?php if (!$searchEnabled) { ?>
-                                <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
+                                <a href="/../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
                             <?php } ?>
                         </li>
                     <?php } else {
@@ -267,14 +274,13 @@ function displayProductResults($products, $searchEnabled, $session) {
                         if ($ownerId === $loggedInUserId) { ?>
                             <li>
                                 <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
-                                <button class="check-info-btn">Check info</button>
-                                <form action="../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
                                     <button type="submit" class="delete-btn">Delete</button>
                                 </form>
                                 <?php if (!$searchEnabled) { ?>
-                                    <a href="../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
+                                    <a href="/../pages/seller_update_info.php?id=<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>"><?php echo 'Update Info'; ?></a>
                                 <?php } ?>
                             </li>
                     <?php }
@@ -297,7 +303,7 @@ function drawAddProductForm() {
         <h2>Add Product</h2>
     </header>
     <section id="addProductForm">
-        <form action="../actions/action_add_product.php" method="post">
+        <form action="/../actions/action_add_product.php" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" required>
@@ -343,7 +349,7 @@ function drawUpdateInfoForm($product_id) {
         <h2>Update Product</h2>
     </header>
     <section id="updateProductForm">
-        <form action="../actions/action_update_product.php" method="post">
+        <form action="/../actions/action_update_product.php" method="post">
         <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
         <div class="form-group">
                 <label for="name">Name:</label>

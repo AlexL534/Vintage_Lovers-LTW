@@ -1,17 +1,45 @@
 function searchUsers() {
     const searchInput = document.querySelector("#search");
+    const userTypeSelect = document.querySelector("#userType");
+    const userListSection = document.querySelector('#userList');
 
-    if (!searchInput) {
+    if (!searchInput || !userTypeSelect) {
         return;
     }
 
-    searchInput.addEventListener('input', async function(event) {
-        event.preventDefault();
+    const deleteAccount = async (userId) => {
+        const confirmDelete = confirm('Are you sure you want to delete this account?');
+        if (confirmDelete) {
+            const response = await fetch(`/../actions/action_delete_account.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `user_id=${userId}`
+            });
+        }
+    };
+    
+    const elevateToAdmin = async (userId) => {
+        const confirmElevate = confirm('Are you sure you want to elevate this user to admin?');
+        if (confirmElevate) {
+            const response = await fetch(`/../actions/action_elevate_admin.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `user_id=${userId}`
+            });
+        }
+    };
+    
 
-        const query = '../js_actions/api_search_users.php?search=' + encodeURIComponent(searchInput.value);
+    async function performSearch() {
+        const userType = encodeURIComponent(userTypeSelect.value);
+        const searchQuery = encodeURIComponent(searchInput.value);
+        const query = `../js_actions/api_search_users.php?search=${searchQuery}&userType=${userType}`;
         const response = await fetch(query);
         const users = await response.json();
-        const userListSection = document.querySelector('#userList');
 
         if (userListSection) {
             userListSection.innerHTML = '';
@@ -27,7 +55,8 @@ function searchUsers() {
                 users.forEach(user => {
                     const userItem = document.createElement('li');
                     userItem.className = "user-item";
-                
+                    userItem.dataset.userId = user.id; 
+
                     const userLabelUsername = document.createElement('div');
                     userLabelUsername.className = "user-label username-light";
                     userLabelUsername.textContent = "Username";
@@ -54,29 +83,48 @@ function searchUsers() {
                     userDetailsUserType.innerHTML = `<span>${user.isAdmin ? 'Admin' : 'Normal User'}</span>`;
                     userItem.appendChild(userLabelUserType);
                     userItem.appendChild(userDetailsUserType);
-                
+
                     const optionsMenu = document.createElement('div');
                     optionsMenu.className = "options-menu";
+
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = "Delete Account";
-                    deleteButton.onclick = function() {
-                    };
+                    deleteButton.classList.add('delete-btn'); 
+                    optionsMenu.appendChild(deleteButton);
+
                     const elevateButton = document.createElement('button');
                     elevateButton.textContent = "Elevate to Admin";
-                    elevateButton.onclick = function() {
-                    };
-                    optionsMenu.appendChild(deleteButton);
+                    elevateButton.classList.add('elevate-btn'); 
                     optionsMenu.appendChild(elevateButton);
+
                     userItem.appendChild(optionsMenu);
-                
+
                     userList.appendChild(userItem);
                 });
 
                 userListSection.appendChild(userList);
             }
+        }
+    }
 
+    // Re-attach event listeners after each search
+    userListSection.addEventListener('click', function(event) {
+        const target = event.target;
+        if (target && target.tagName === 'BUTTON') {
+            if (target.classList.contains('delete-btn')) {
+                const userId = target.closest('.user-item').dataset.userId;
+                deleteAccount(userId);
+            } else if (target.classList.contains('elevate-btn')) {
+                const userId = target.closest('.user-item').dataset.userId;
+                elevateToAdmin(userId);
+            }
         }
     });
+
+    performSearch();
+
+    searchInput.addEventListener('input', performSearch);
+    userTypeSelect.addEventListener('change', performSearch);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
