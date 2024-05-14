@@ -17,6 +17,7 @@ function searchUsers() {
                 },
                 body: `user_id=${userId}`
             });
+            location.reload();
         }
     };
     
@@ -30,6 +31,7 @@ function searchUsers() {
                 },
                 body: `user_id=${userId}`
             });
+            location.reload();
         }
     };
     
@@ -107,7 +109,6 @@ function searchUsers() {
         }
     }
 
-    // Re-attach event listeners after each search
     userListSection.addEventListener('click', function(event) {
         const target = event.target;
         if (target && target.tagName === 'BUTTON') {
