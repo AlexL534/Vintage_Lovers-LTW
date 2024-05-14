@@ -15,19 +15,19 @@ $password = $_POST['password'];
 $email = strtolower($_POST['email']);
 
 if(hasEnoughLen($password)){
-    //checks if the lenght of the password is enough
+    //checks if the length of the password is enough
     $session->addMessage("error", "The password needs to have 8 characters at least");
     header('Location: ../pages/register.php');
 }
 
 else if(hasUpperCaseCharacters($password) != 1){
-    //checks the strenght of the password by checking if it has Upper case letters
+    //checks the strength of the password by checking if it has upper case letters
     $session->addMessage("error", "The password doesn't have Upper case characters");
     header('Location: ../pages/register.php');
 }
 
 else if(hasNumbers($password) != 1){
-    //checks the strenght of the password by checking if it has numbers
+    //checks the strength of the password by checking if it has numbers
     $session->addMessage("error", "The password doesn't have numbers");
     header('Location: ../pages/register.php');
 }
@@ -55,7 +55,7 @@ else{
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     User::insertNewUser($db, $_POST['name'], $_POST['username'], $email, $hashedPassword);
 
-    //check if the user was inserted correctly  and executes the login
+    //checks if the user was inserted correctly and executes the login
     $user = User::getUserByPassword($db, $email , $hashedPassword);
   
     if($user){

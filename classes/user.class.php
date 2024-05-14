@@ -20,7 +20,7 @@ class User{
         $this->name = $name;
     }
 
-    public function getID() : int {
+    public function getId() : int {
         return $this->id;
     }
 
@@ -183,7 +183,7 @@ class User{
             return true;
         }
         else{
-            //the email doesn´t exists
+            //the email doesn't exist
             return false;
         }
     }
@@ -202,7 +202,7 @@ class User{
             return true;
         }
         else{
-            //the username doesn´t exists
+            //the username doesn't exist
             return false;
         }
     }
@@ -216,20 +216,47 @@ class User{
         $stmt->execute(array($username, $name, $email, $password));
     }
 
-    static function searchUsers(PDO $db, string $searchQuery) {
+    static function searchUsers(PDO $db, string $searchQuery, string $userType = 'all') {
         try {
-            $stmt = $db->prepare("SELECT * FROM users WHERE username LIKE :search_query");
+            if (!in_array($userType, ['all', 'admin', 'normal'])) {
+                throw new InvalidArgumentException("Invalid user type");
+            }
+    
+            $query = "SELECT * FROM users WHERE username LIKE :search_query";
+            
+            if ($userType !== 'all') {
+                $query .= " AND is_admin = :is_admin";
+            }
+    
+            $stmt = $db->prepare($query);
             $stmt->bindValue(':search_query', '%' . $searchQuery . '%', PDO::PARAM_STR);
+            
+            if ($userType !== 'all') {
+                $isAdmin = ($userType === 'admin') ? 1 : 0;
+                $stmt->bindValue(':is_admin', $isAdmin, PDO::PARAM_INT);
+            }   
+    
             $stmt->execute();
             
-            $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+            $searchResults = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $searchResults[] = [
+                    'id' => $row['id'],
+                    'username' => $row['username'],
+                    'email' => $row['email'],
+                    'isAdmin' => intval($row['is_admin'])
+                ];
+            }
             return $searchResults;
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            error_log("Database Error: " . $e->getMessage());
+            return [];
+        } catch (InvalidArgumentException $e) {
+            error_log("Invalid Argument: " . $e->getMessage());
             return [];
         }
     }
+      
 
     static public function updateAdminStatus(PDO $db, int $userId): bool
     {
@@ -260,4 +287,5 @@ class User{
         $result = $stmt->execute(array($password, $id));
         return $result;
     }
+    
 }

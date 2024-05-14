@@ -28,7 +28,7 @@ class Condition{
         return $this->description;
     }
 
-    //querys
+    //queries
     static public function getConditionById(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM CONDITION WHERE conditionID = ?');
         $stmt->execute(array($id));

@@ -21,7 +21,7 @@ class Brand{
         return $this->name;
     }
 
-    //querys
+    //queries
     static public function getBrandById(PDO $db, int $id){
         $stmt = $db->prepare('SELECT * FROM BRAND WHERE brandID = ?');
         $stmt->execute(array($id));

@@ -18,5 +18,26 @@ class FilterType {
 
         return $stmt->execute(array_values($data));
     }
+
+    public function removeFilterType($filter_type, $filter_name) {
+        error_log('1');
+        try {
+            $tableName = strtoupper($filter_type);
+            $query = "DELETE FROM $tableName WHERE name = :filter_name";
+    
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':filter_name', $filter_name, PDO::PARAM_STR);
+    
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                print_r($stmt->errorInfo());
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }    
 }
 ?>

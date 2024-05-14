@@ -17,7 +17,7 @@ if (!$session->isLoggedIn() || !$admin) {
 }
 
 drawHeader($session,$categories);
-drawProductList(true, $session); //according to figma, it should have product image, but database still doesn't support that
-drawFooter(); //also, didn't implement check info button (don't know what info should be displayed)
+drawProductList(true, $session);
+drawFooter();
 
 ?>
