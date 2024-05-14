@@ -8,6 +8,26 @@
     text-align: center;
 }
 
+/*search bar product*/
+
+#productSearch form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+}
+
+#productSearch form input[type="text"]{
+    border-radius: 1em;
+    height: 2.5em;
+}
+
+#productSearch form button{
+    border-radius: 1em;
+    width: 5em;
+    height: 2.5em;
+}
+
 /*product list section*/
 
 #productList{
@@ -101,6 +121,14 @@
     min-width: 5em;
     font-weight: bold;
     padding: 0.5em;
+}
+
+/*responsive*/
+
+@media (max-width : 25em){
+    #productSearch form{
+        flex-direction: column;
+    }
 }
 
 /*================================ update Info owned product ====================================*/
