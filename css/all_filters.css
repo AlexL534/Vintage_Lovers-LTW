@@ -73,6 +73,10 @@
 .scrollable{
     overflow-y: scroll;
     max-height: 10em;
+    margin-bottom: 1em;
+    border: 2px inset var(--medium_gray);
+    border-radius: 1em;
+    padding: 0.2em
 }
 
 /*products section*/

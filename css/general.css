@@ -247,9 +247,16 @@ body > footer > p{
    
 }
 
+
 .products p{
+   width: 10em;
+   text-align: center;
+   overflow:hidden;
+   white-space:nowrap;
+   text-overflow:  ellipsis;
    font-size: 1.1em;
-}
+  }
+
 
 /*responsive */
 
@@ -349,6 +356,7 @@ body > footer > p{
       aspect-ratio: auto 200 / 150;
       object-fit: cover;
   }
+
 
    /*footer*/
 

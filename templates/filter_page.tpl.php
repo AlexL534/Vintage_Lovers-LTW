@@ -148,6 +148,7 @@ function drawProductArticle(PDO $db, Product $product){
     else{
         $products = Product::getAllProducts($db);
     }
+    usort($products, fn($a, $b) => $a->getPrice() - $b->getPrice());
     ?>
     <section class="products">
         <?php foreach($products as $product)
