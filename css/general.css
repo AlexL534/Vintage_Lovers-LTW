@@ -191,6 +191,7 @@ body > footer{
 
 body > footer p, body > footer h3{
    color: white;
+   text-align: center;
 }
 
 body > footer > p{
