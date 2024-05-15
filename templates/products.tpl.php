@@ -61,7 +61,9 @@ function drawProductInfo(PDO $db, int $id, Session $session){
         <article id="productImages">
                     <?php $image = $images[0]?>    
                     <img src="/../<?=$image; ?>" alt="product image" id= "<?= $productID?>">
-                    <button>Next Image</button>
+                    <?php if(count($images) > 1){ ?>
+                        <button>Next Image</button>
+                   <?php } ?>       
         </article>
         <div id = "productButtons">
             
