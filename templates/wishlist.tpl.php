@@ -21,11 +21,11 @@ function drawWishlist(PDO $db, $session){
     ?>
     <section id = "whislist">
         <header>
-            <h1>Your Whislist</h1>
+            <h1>Your Wishlist</h1>
         </header>
         <?php if(empty($products)){
             ?>
-            <article><p>No products in Whislist</p></article>
+            <article><p>No products in Wishlist</p></article>
         <?php } else{
             drawProductsListInWhislist($products);
             ?>

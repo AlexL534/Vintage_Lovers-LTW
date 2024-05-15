@@ -6,6 +6,7 @@ function encodeForAjax(data) {
 
 function removeItensCart(){
     const buttons = document.querySelectorAll('#shoppingCart tr button');
+    
     if(buttons.length == 0){
         //the current page doesn't have this section
         return;
@@ -33,6 +34,23 @@ function removeItensCart(){
         request.send();
 
         row.remove();
+
+        //check if there is still any item in the shopping cart
+        const root = document.querySelector('#shoppingCart');
+        const rows = document.querySelectorAll('#shoppingCart tr');
+        if(rows.length === 2){
+          const table = document.querySelector('.productsTable');
+          const buyButton = document.querySelector('#buyButton');
+          buyButton.remove();
+          table.remove();
+
+
+          const newArticle = document.createElement('article');
+          const newP = document.createElement('p');
+          newP.innerHTML = "No products in the cart";
+          newArticle.appendChild(newP);
+          root.appendChild(newArticle);
+        }
       });
     
 }

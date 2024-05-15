@@ -25,7 +25,7 @@ function drawShoppingCart(PDO $db, $session){
         </header>
         <?php if(empty($products)){
             ?>
-            <article><p>No products in cart</p></article>
+            <article><p>No products in the cart</p></article>
         <?php } else{
             drawProductsListInCart($products);
             ?>

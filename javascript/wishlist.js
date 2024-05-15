@@ -19,6 +19,21 @@ function removeItensList(){
         request.send();
 
         row.remove();
+
+        //check if there is still any item in the wishlist
+        const root = document.querySelector('#whislist');
+        const rows = document.querySelectorAll('#whislist tr');
+        if(rows.length === 1){
+          const table = document.querySelector('.productsTable');
+          table.remove();
+
+
+          const newArticle = document.createElement('article');
+          const newP = document.createElement('p');
+          newP.innerHTML = "No products in the wishlist";
+          newArticle.appendChild(newP);
+          root.appendChild(newArticle);
+        }
       });
     
 }
