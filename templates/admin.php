@@ -30,6 +30,7 @@ function drawFilterTypes() {
 }
 
 function drawRemoveFilterTypes() {
+    //draws the filter selection page used to remove existing filters
     ?>
     <header>
         <h2>Remove info from the system</h2>
@@ -47,6 +48,7 @@ function drawRemoveFilterTypes() {
 }
 
 function drawRemoveInfoForm($filterType, $db) {
+    //draws the remove information page
     $tableName = strtoupper($filterType);
     $columnName = $tableName . 'ID';
     $query = "SELECT $columnName, name FROM $filterType";

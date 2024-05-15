@@ -48,7 +48,7 @@
 }
 
 .productsTable td, .productsTable th{
-    padding: 1em;
+    padding: 0.8em;
     font-size: 1.1em;
 }
 
@@ -60,7 +60,7 @@
     display: block;
     text-decoration: none;
     color:black;
-    width: 4em;
+    width: 10em;
 }
 
 .productsTable a p{
@@ -99,6 +99,18 @@
     color: black;
     font-size: 1.1em;
     font-weight: bold;
+}
+
+@media (max-width: 40em){
+    .productsTable a{
+        width: 6em;
+    }
+}
+
+@media (max-width: 25em){
+    .productsTable a{
+        width: 3em;
+    }
 }
 
 /* =============================================== Complete purchase =======================================================*/
