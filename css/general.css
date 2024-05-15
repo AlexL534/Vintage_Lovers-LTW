@@ -209,8 +209,9 @@ body > footer > p{
 
 .products{
    display: flex;
-
    justify-content: center;
+   align-content: flex-start;
+   align-items: flex-start;
    flex-wrap: wrap;
    flex-direction: row;
    background-color: var(--medium_gray);
@@ -218,7 +219,7 @@ body > footer > p{
 
 .products a{
    width: 20%;
-   min-width: 10em;
+   min-width: 15em;
    padding: 1em;
    object-fit: cover;
    text-decoration: none;

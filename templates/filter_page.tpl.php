@@ -99,6 +99,13 @@ function drawFilterSection(PDO $db, $categoryID, $search){
                 </div>
             </aside>
         </div>
+        <div id="priceOrder">
+            <label for="order"><p>Order by Price</p></label>
+            <select name="order" id = "order">
+                <option value="Asc">Ascending</option>
+                <option value="Desc">Descending</option>
+            </select>
+        </div>
 
 <?php }
 
@@ -151,6 +158,7 @@ function drawProductArticle(PDO $db, Product $product){
     usort($products, fn($a, $b) => $a->getPrice() - $b->getPrice());
     ?>
     <section class="products">
+       
         <?php foreach($products as $product)
             drawProductArticle($db,$product);
         ?>

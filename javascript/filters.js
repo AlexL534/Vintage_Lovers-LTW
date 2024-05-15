@@ -1,33 +1,44 @@
-function verifyCheckbox(){
-
-    const productsSection = document.querySelectorAll("#filterPage .products");
+async function verifyCheckbox(){
     const checkboxes = document.querySelectorAll("#filterMenu input[type=checkbox]");
+    const orderSelect = document.querySelector("#priceOrder select");
 
-    //adds a listen to every checkbox
+    if(orderSelect == null){
+        return;
+    }
+
+    let searchQuery = null;
+
+    if(document.querySelector("#filterPage > header span") != null){
+        console.log("here");
+        searchQuery = document.querySelector("#filterPage > header span").innerHTML;
+
+    }
+    let products = [];
+
+    //gets the products according to the search content
+    if(searchQuery !== null){
+        products = await getSearchProducts(searchQuery);
+        
+    }
+    else{
+        products = await getAllProducts();
+    }
+
+    //adds a listener to the order select element
+    orderSelect.addEventListener("change", function(){
+        products = sortProducts(products);
+        drawProducts(products);
+    });
+
+    //adds a listener to every checkbox
     checkboxes.forEach(function(checkbox){
         checkbox.addEventListener('change', async function(){
-
-            let searchQuery = null;
-
-            if(document.querySelector("#filterPage > header span") != null){
-                console.log("here");
-                searchQuery = document.querySelector("#filterPage > header span").innerHTML;
-
-            }
-            let products = [];
-
-            //gets the products according to the search content
-            if(searchQuery !== null){
-                products = await getSearchProducts(searchQuery);
-                
-            }
-            else{
-                console.log("here");
-                products = await getAllProducts();
-            }
+            products = await getAllProducts();
+            products = sortProducts(products);
+            
             //if a change occurs and every checkbox is disabled, insert all products
             if(isEveryBoxUnchecked()){
-                drawProducts(products);
+                //products = await getAllProducts();
             }
             else{
             //query the products depending on the boxes checked
@@ -52,9 +63,12 @@ function verifyCheckbox(){
             if(productsSizes.length != 0){
                 products = filterProducts(products, productsSizes);
             }
+
+           
+            }
+            products = sortProducts(products);
             
             await drawProducts(products);
-            }
         });
     });
 
@@ -74,6 +88,7 @@ function verifyCheckbox(){
         const response = await fetch("/../js_actions/api_get_products_from_filters.php/?brandID=" + brandsIDs[i]);
         const productsRes = await response.json();
         productsRes.forEach( element => products.push(element));
+        console.log("here");
     }
     return products;
 }
@@ -225,6 +240,24 @@ async function getSearchProducts(search){
     const response = await fetch("/../js_actions/api_get_products_search.php/?search=" + search);
     const productsRes = await response.json();
     productsRes.forEach( element => products.push(element));
+    return products;
+}
+
+function sortProducts(products){
+    //sorts the products depending on the option selected
+    const orderSelect = document.querySelector("#priceOrder select");
+
+    if(orderSelect.value === "Asc"){
+        products.sort(function(a,b){
+            return a.price - b.price;
+        });
+    }
+    else{
+        products.sort(function(a,b){
+            return b.price - a.price;
+        });
+    }
+
     return products;
 }
 

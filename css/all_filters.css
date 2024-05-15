@@ -79,6 +79,27 @@
     padding: 0.2em
 }
 
+/*filters order price*/
+#priceOrder{
+    grid-row:1;
+    grid-column: 2;
+    justify-self: end;
+    display:flex;
+    align-items: center;
+    gap: 1em;
+    margin:1em;
+}
+
+#priceOrder p{
+    font-weight: 500;
+}
+
+#priceOrder select{
+    height: 2em;
+    border-radius: 2px;
+    border-color: var(--dark_gray);
+    border-radius: 1em;
+}
 /*products section*/
 #filterPage .products{
     grid-column: 2;
@@ -124,10 +145,15 @@
 
     #filterPage aside{
         max-height: 0;
+        overflow: hidden;
     }
 
     #filterPage .open{
         max-height: 100%;
+    }
+
+    #priceOrder{
+        align-self: center;
     }
 }
 
