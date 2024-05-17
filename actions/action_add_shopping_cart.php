@@ -17,7 +17,11 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 $id = intval($_POST['productID']);
 
 if(!ShoppingCart::isProductInShoppingCart($db, $session->getId(), $id)){
-    ShoppingCart::insertProductInShoppingCart($db, $session->getId(), $id);
+    if(ShoppingCart::insertProductInShoppingCart($db, $session->getId(), $id) === false){
+        $session->addMessage('error', 'could not insert product into the shopping cart');
+        header('Location: /../pages/main_page.php');
+        exit();
+    }
 }
 
 header("Location: {$_SERVER['HTTP_REFERER']}");

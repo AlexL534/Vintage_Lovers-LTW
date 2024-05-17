@@ -48,9 +48,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             }
 
 
-            Size::insertSizeOfProduct($db, $id, $size);
-            Color::insertColorOfProduct($db, $id, $color);
-            Condition::insertConditionOfProduct($db, $id, $condition);
+            if(Size::insertSizeOfProduct($db, $id, $size) === false){
+                $session->addMessage('error', 'could not insert the product');
+                header('Location: /../pages/main_page.php');
+                exit();
+            }
+            if(Color::insertColorOfProduct($db, $id, $color) === false){
+                $session->addMessage('error', 'could not insert the product');
+                header('Location: /../pages/main_page.php');
+                exit();
+            }
+            if(Condition::insertConditionOfProduct($db, $id, $condition) === false){
+                $session->addMessage('error', 'could not insert the product');
+                header('Location: /../pages/main_page.php');
+                exit();
+            }
             
             header("Location: " . "/../pages/add_images.php/?productID=$id");
         } else {

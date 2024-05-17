@@ -119,13 +119,13 @@
     max-height: 30em;
 }
 
+/*responsive*/
 @media (max-width: 60em){
     #filterPage{
         grid-template-columns: 10em auto auto 12em;
     }
 }
 
-/*responsive*/
 @media (max-width: 40em){
     #filterPage{
         margin-top: 0em;

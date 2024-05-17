@@ -17,7 +17,11 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 $id = intval($_POST['productID']);
 
 if(!Wishlist::isProductInWishlist($db, $session->getId(), $id)){
-    Wishlist::insertProductInWishlist($db, $session->getId(), $id);
+    if(Wishlist::insertProductInWishlist($db, $session->getId(), $id) === false){
+        $session->addMessage('error', 'could not insert the product into the wishlist');
+        header('Location: /../pages/main_page.php');
+        exit();
+    }
 }
 
 header("Location: {$_SERVER['HTTP_REFERER']}");

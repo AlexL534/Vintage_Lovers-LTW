@@ -35,16 +35,36 @@ if (isset($_FILES['image'])){
         if (!$original) $original = @imagecreatefrompng($tmpname);
         if (!$original) $original = @imagecreatefromgif($tmpname);
 
-        if (!$original) die('Unknown image format!');
+        if (!$original){
+            $session->addMessage('error', 'unknown image format');
+            header("Location: /../pages/add_images.php/?productID=$productID");
+            exit();
+        } 
         $originalFileName = __DIR__ . "/../images/$title" . "$productID" . "$i" .'.jpg';
         $customFileName = "images/$title" . "$productID" . "$i" .'.jpg';
 
         //inserts the paths into the db
-        Image::insertImageToProduct($db,$customFileName);
+        if(Image::insertImageToProduct($db,$customFileName) === false){
+            $session->addMessage('error', 'could not upload the images');
+            header("Location: /../pages/add_images.php/?productID=$productID");
+            exit();
+        }
         $imageId = Image::getLastInsertedImageID($db);
-        Image::insertImageOfProduct($db,$imageId, $productID);
-
-        imagejpeg($original, $originalFileName);
+        if($imageID === false){
+            $session->addMessage('error', 'could not upload the images');
+            header("Location: /../pages/add_images.php/?productID=$productID");
+            exit();
+        }
+        if(Image::insertImageOfProduct($db,$imageId, $productID) === false){
+            $session->addMessage('error', 'could not upload the images');
+            header("Location: /../pages/add_images.php/?productID=$productID");
+            exit();
+        }
+        if(imagejpeg($original, $originalFileName) === false){
+            $session->addMessage('error', 'could not upload the images');
+            header("Location: /../pages/add_images.php/?productID=$productID");
+            exit();
+        }
     }
     header("location: /../pages/seller_add_product.php");
     exit();
@@ -53,3 +73,4 @@ if (isset($_FILES['image'])){
 $session->addMessage('error', 'could not upload the images');
 header("Location: /../pages/add_images.php/?productID=$productID");
 exit();
+

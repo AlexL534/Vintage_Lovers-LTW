@@ -20,12 +20,29 @@ $userId = $session->getId();
 $userProductsCart = ShoppingCart::getUserShoppingCart($db, $userId);
 
 foreach($userProductsCart as $productCart){
-    ShoppingCart::deleteProductInShoppingCart($db, $userId, $productCart->getProductID());
+    if(ShoppingCart::deleteProductInShoppingCart($db, $userId, $productCart->getProductID()) === false){
+        $session->addMessage('error', 'could not delete the product from the shopping cart');
+        header('Location: /../pages/main_page.php');
+        exit();
+    }
 }
 
 foreach($userProductsCart as $productCart){
     $product = Product::getProduct($db, $productCart->getProductID());
-    SoldProducts::addProductSold($db, $userId, $product->getOwner(), $product->getId(), $_POST['address']);
+    if($product === null){
+        continue;
+    }
+    else if($product === false){
+        $session->addMessage('error', 'could not add the product to the sold products');
+        header('Location: /../pages/main_page.php');
+        exit();
+    }
+    
+    if(SoldProducts::addProductSold($db, $userId, $product->getOwner(), $product->getId(), $_POST['address']) === false){
+        $session->addMessage('error', 'could not add the product to the sold products');
+        header('Location: /../pages/main_page.php');
+        exit();
+    }
 }
 
 

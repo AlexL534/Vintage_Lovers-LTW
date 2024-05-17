@@ -28,19 +28,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
     if (Product::deleteProduct($db, $productId)) {
         
         //deletes all the related information to the product
-        Size::deleteSizeOfProduct($db, $productId);
-        Condition::deleteConditionOfProduct($db, $productId);
-        Color::deleteColorOfProduct($db, $productId);
-        SoldProducts::deleteProductSoldProduct($db, $productId);
+        if(Size::deleteSizeOfProduct($db, $productId) === false){
+            $session->addMessage('error', 'could not delete the product size properly');
+            header('Location: /../pages/main_page.php');
+        }
+        if(Condition::deleteConditionOfProduct($db, $productId) === false){
+            $session->addMessage('error', 'could not delete the product condition properly');
+            header('Location: /../pages/main_page.php');
+        }
+        if(Color::deleteColorOfProduct($db, $productId) === false){
+            $session->addMessage('error', 'could not delete the product color properly');
+            header('Location: /../pages/main_page.php');
+        }
+        if(SoldProducts::deleteProductSoldProduct($db, $productId) === false){
+            $session->addMessage('error', 'could not delete the product from the products sold properly');
+            header('Location: /../pages/main_page.php');
+        }
         $imagesIDs = Image::getImagesIdFromImageOfProduct($db, $productId);
+        if($imagesIDS === false){
+            $session->addMessage('error', 'could not get images id properly');
+            header('Location: /../pages/main_page.php');
+        }
         $imagesPath = Image::getImagesPath($db, $productId);
+        if($imagesPath === false){
+            $session->addMessage('error', 'could not get the images path properly');
+            header('Location: /../pages/main_page.php');
+        }
         foreach($imagesIDs as $imageId){
-            Image::deleteImage($db, $imageId);
+            if(Image::deleteImage($db, $imageId) === false){
+                $session->addMessage('error', 'could not delete the images properly');
+                header('Location: /../pages/main_page.php');
+            }
         }
         foreach($imagesPath as $path){
             unlink(__DIR__ . "/../$path");
         }
-        Image::deleteImageOfProduct($db, $productId);
+        if(Image::deleteImageOfProduct($db, $productId) === false){
+            $session->addMessage('error', 'could not delete the images of product properly');
+            header('Location: /../pages/main_page.php');
+        }
 
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
