@@ -6,6 +6,7 @@
 
 #products-del-info-page h1{
     text-align: center;
+    font-size: 2em;
 }
 
 /*search bar product*/
@@ -26,6 +27,7 @@
     border-radius: 1em;
     width: 5em;
     height: 2.5em;
+
 }
 
 /*product list section*/
@@ -38,20 +40,16 @@
 }
 
 /*plus button*/
-#productList > a{
-    align-self: flex-start;
-    margin:1em;
-    padding: 0.2em;
+#productList > a {
+    align-self: flex-end; /* Align to the right side */
+    margin-right: 1em;
     text-decoration: none;
     color: black;
     font-weight: bold;
-    font-size: 2em;
-    background-color: var(--light_gray);
-    border-radius: 2em;
+    font-size: 3em;
     width: 1em;
-    text-align: center;
-    box-shadow: 0px 20px 15px -5px rgba(0, 0, 0, 0.15);
 }
+
 
 /*products list*/
 #productList ul{
@@ -72,8 +70,7 @@
     width: 90%;
     margin-bottom: 2em;
     border-radius: 1em;
-    box-shadow: 0px 20px 15px -5px rgba(0, 0, 0, 0.15);
-    
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);    
 }
 
 #productList li .product_name{
@@ -86,8 +83,6 @@
     white-space:nowrap;
     text-overflow:  ellipsis;
 }
-
-
 
 #productList li form{
     grid-column: 2;
@@ -113,7 +108,7 @@
 
 #productList li button{
     background-color: var(--dark_red);
-    box-shadow: 0px 20px 15px -5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
     border: none;
     border-radius: 1em;
     font-size: 1em;
@@ -121,6 +116,7 @@
     min-width: 5em;
     font-weight: bold;
     padding: 0.5em;
+    cursor: pointer;
 }
 
 /*responsive*/

@@ -131,6 +131,54 @@ header h2 {
     text-align: center;
 }
 
+/* Remove Specific Filter */
+#removeInfoForm header {
+    display: flex;
+    justify-content: center;
+}
+
+#removeInfoForm header h2 {
+    font-size: 24px;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#removeInfoForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#removeInfoForm label {
+    width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#removeInfoForm select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#removeInfoForm input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 150px;
+    position: relative;
+    top: -10px;
+}
 /*====================== Manage User =========================== */
 
 
@@ -219,3 +267,4 @@ header h2 {
 .options-menu button:hover {
     background-color: #f9f9f9;
 }
+
