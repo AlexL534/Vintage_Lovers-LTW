@@ -10,4 +10,8 @@ $session = new Session();
 $productId = $_GET['productID'];
 $userId = $session->getId();
 
-Wishlist::deleteProductInWishlist($db, $userId, $productId);
+if(Wishlist::deleteProductInWishlist($db, $userId, $productId) === false){
+    $session->addMessage('error', 'could not delete the product from the wishlist');
+    header('Location: /../pages/main_page.php');
+    exit();
+}

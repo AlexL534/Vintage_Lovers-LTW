@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 exit();
             }
 
-
+            //inserts the info into the other auxiliary tables
             if(Size::insertSizeOfProduct($db, $id, $size) === false){
                 $session->addMessage('error', 'could not insert the product');
                 header('Location: /../pages/main_page.php');

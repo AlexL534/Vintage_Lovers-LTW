@@ -16,6 +16,7 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['action'] === 'delete') {
+    //only conitnues if everything is set
     if (!isset($_POST['product_id']) || !is_numeric($_POST['product_id'])) {
         echo "Error: Invalid product ID.";
         exit();

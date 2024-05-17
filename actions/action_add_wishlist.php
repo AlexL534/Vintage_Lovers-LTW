@@ -17,6 +17,7 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 $id = intval($_POST['productID']);
 
 if(!Wishlist::isProductInWishlist($db, $session->getId(), $id)){
+    //inserts the products into the wishlist only if it hasn't there yet
     if(Wishlist::insertProductInWishlist($db, $session->getId(), $id) === false){
         $session->addMessage('error', 'could not insert the product into the wishlist');
         header('Location: /../pages/main_page.php');

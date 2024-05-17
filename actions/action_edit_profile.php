@@ -21,9 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"){
 }
 
 if(isset($_POST['username']) && $_POST['username'] !== "" ){
+    //check if the user wants to change the username
     $username = $_POST['username'];
-
-    echo $username;
 
     if(User::usernameExists($db, $username)){
         $hasError = true;
@@ -39,6 +38,7 @@ if(isset($_POST['username']) && $_POST['username'] !== "" ){
 }
 
 if(isset($_POST["name"])  && $_POST["name"] !== ""){
+    //checks if the user wants to change the name
     $name = $_POST["name"];
 
     if(User::updateName($db, $userId, $name) === false){
@@ -49,6 +49,8 @@ if(isset($_POST["name"])  && $_POST["name"] !== ""){
 }
 
 if(isset($_POST["password"])  && $_POST["password"] !== ""){
+    //checks if the user wants to change the password
+    
     $password = $_POST["password"];
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 

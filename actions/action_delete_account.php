@@ -14,6 +14,7 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
+    //only continues if everytinh is set
     $userId = filter_var($_POST['user_id'], FILTER_VALIDATE_INT);
     if ($userId === false || $userId <= 0) {
         echo "Error: Invalid user ID.";

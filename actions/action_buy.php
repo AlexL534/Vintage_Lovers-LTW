@@ -20,6 +20,7 @@ $userId = $session->getId();
 $userProductsCart = ShoppingCart::getUserShoppingCart($db, $userId);
 
 foreach($userProductsCart as $productCart){
+    //delete every product from the shopping cart of the user
     if(ShoppingCart::deleteProductInShoppingCart($db, $userId, $productCart->getProductID()) === false){
         $session->addMessage('error', 'could not delete the product from the shopping cart');
         header('Location: /../pages/main_page.php');
@@ -28,6 +29,7 @@ foreach($userProductsCart as $productCart){
 }
 
 foreach($userProductsCart as $productCart){
+    //adds the products that where on the shopping cart to the sold products
     $product = Product::getProduct($db, $productCart->getProductID());
     if($product === null){
         continue;

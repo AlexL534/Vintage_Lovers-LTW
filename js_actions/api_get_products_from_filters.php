@@ -33,6 +33,12 @@ if(isset($_GET['sizesID'])){
     $products = Product::getProductBySize($db, $id);
 }
 
+if($products === false){
+    $session->addMessage('error', 'could not get the products from the database');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 $productsForJson= [];
 
 foreach($products as $product){

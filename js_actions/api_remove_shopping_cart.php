@@ -10,5 +10,9 @@ $session = new Session();
 $productId = $_GET['productID'];
 $userId = $session->getId();
 
-ShoppingCart::deleteProductInShoppingCart($db, $userId, $productId);
+if(ShoppingCart::deleteProductInShoppingCart($db, $userId, $productId) === false){
+    $session->addMessage('error', 'could not delete the product from the shopping cart');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
 

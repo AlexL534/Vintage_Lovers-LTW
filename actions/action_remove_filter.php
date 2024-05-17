@@ -3,6 +3,7 @@ require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/filter_type.class.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['remove'])) {
+    //only continues if everything is set
 
     $filter_name = filter_input(INPUT_POST, 'filter_name', FILTER_SANITIZE_STRING);
     $filter_type = filter_input(INPUT_POST, 'filter_type', FILTER_SANITIZE_STRING);

@@ -8,5 +8,11 @@ $id = $_GET['id'];
 
 $images = Image::getImagesPath($db,$id);
 
+if($images === false){
+    $session->addMessage('error', 'error while loading the images');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 echo json_encode($images);
 

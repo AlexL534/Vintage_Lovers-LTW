@@ -12,6 +12,8 @@ if ($_SESSION['csrf'] !== $_POST['csrf']) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['user_id']) && is_numeric($_POST['user_id'])) {
+        //only continues if everything is ok
+
         $userId = (int)$_POST['user_id'];
         $db = getDatabaseConnection();
         
