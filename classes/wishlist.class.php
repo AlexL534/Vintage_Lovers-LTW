@@ -24,37 +24,57 @@ class Wishlist{
 
     //querys
     static function getUserWishlist(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM WISHLIST where userID = ?');
-        $stmt->execute(array($id));
-        $listItens = array();
+        try{
+            $stmt = $db->prepare('SELECT * FROM WISHLIST where userID = ?');
+            $stmt->execute(array($id));
+            $listItens = array();
 
-        while($listDB = $stmt->fetch()){
-            $list = new Wishlist(intval($listDB['userID']), intval($listDB['productID']));
-            $listItens[] = $list;
+            while($listDB = $stmt->fetch()){
+                $list = new Wishlist(intval($listDB['userID']), intval($listDB['productID']));
+                $listItens[] = $list;
+            }
+
+            return $listItens;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $listItens;
     }
 
     static function isProductInWishlist(PDO $db,int $idUser, int $idProduct){
-        $stmt = $db->prepare('SELECT * FROM WISHLIST where productID = ? and userID = ?');
-        $stmt->execute(array($idProduct, $idUser));
-        $product = $stmt->fetchAll();
+        try{
+            $stmt = $db->prepare('SELECT * FROM WISHLIST where productID = ? and userID = ?');
+            $stmt->execute(array($idProduct, $idUser));
+            $product = $stmt->fetchAll();
 
-        if(empty($product)){
+            if(empty($product)){
+                return false;
+            }
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false;
         }
-
-        return true;
     }
 
     static function insertProductInWishlist(PDO $db, int $idUser, int $idProduct){
-        $stmt=$db->prepare('INSERT INTO WISHLIST VALUES (?,?)');
-        $stmt->execute(array($idUser,$idProduct));
+        try{
+            $stmt=$db->prepare('INSERT INTO WISHLIST VALUES (?,?)');
+            $stmt->execute(array($idUser,$idProduct));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function deleteProductInWishlist(PDO $db, int $idUser, int $idProduct){
+        try{
         $stmt = $db->prepare("DELETE FROM WISHLIST WHERE productID = ? and userID = ? ");
         $stmt->execute(array($idProduct, $idUser));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }

@@ -23,38 +23,53 @@ class Brand{
 
     //queries
     static public function getBrandById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM BRAND WHERE brandID = ?');
-        $stmt->execute(array($id));
-        $brandDB = $stmt->fetch(); 
+        try{
+            $stmt = $db->prepare('SELECT * FROM BRAND WHERE brandID = ?');
+            $stmt->execute(array($id));
+            $brandDB = $stmt->fetch(); 
 
-        return new Brand(
-            intval($brandDB['brandID']),
-            $brandDB['name']
-        );
+            return new Brand(
+                intval($brandDB['brandID']),
+                $brandDB['name']
+            );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function getBrandByName(PDO $db, string $name){
-        $stmt = $db->prepare('SELECT * FROM BRAND WHERE name = ?');
-        $stmt->execute(array($name));
-        $brandDB = $stmt->fetch();
-        
-        return new Brand(
-            intval($brandDB['brandID']),
-            $brandDB['name']
-        );
+        try{
+            $stmt = $db->prepare('SELECT * FROM BRAND WHERE name = ?');
+            $stmt->execute(array($name));
+            $brandDB = $stmt->fetch();
+            
+            return new Brand(
+                intval($brandDB['brandID']),
+                $brandDB['name']
+            );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function getAllBrands(PDO $db){
-        $stmt = $db->prepare('SELECT * FROM BRAND');
-        $stmt->execute();
-        $brands = array();
-        while($brandDB = $stmt->fetch()){
-            $brand= new Brand(intval($brandDB['brandID']),$brandDB['name']);
+        try{
+            $stmt = $db->prepare('SELECT * FROM BRAND');
+            $stmt->execute();
+            $brands = array();
+            while($brandDB = $stmt->fetch()){
+                $brand= new Brand(intval($brandDB['brandID']),$brandDB['name']);
 
-            $brands[]=$brand;
+                $brands[]=$brand;
+            }
+
+            return $brands;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $brands;
     }
 }
 ?>

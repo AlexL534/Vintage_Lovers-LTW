@@ -47,31 +47,36 @@ class User{
 
     //querys
     public function getUserOwnedItems(PDO $db){
-        $stmt = $db->prepare('
-            SELECT *
-            FROM PRODUCTS
-            WHERE owner = ?
-            ');
-        
-        $stmt->execute(array($this->id));
-        
-        $products = array();
-        while($productDB = $stmt->fetch()){
-            $product = new Product(
-                $productDB['id'],
-                $productDB['price'],
-                isset($productDB['quantity']) ? $productDB['quantity'] : 1,
-                $productDB['name'],
-                $productDB['description'],
-                $productDB['owner'],
-                $productDB['category'],
-                $productDB['brand'],
-            );
+        try{
+            $stmt = $db->prepare('
+                SELECT *
+                FROM PRODUCTS
+                WHERE owner = ?
+                ');
+            
+            $stmt->execute(array($this->id));
+            
+            $products = array();
+            while($productDB = $stmt->fetch()){
+                $product = new Product(
+                    $productDB['id'],
+                    $productDB['price'],
+                    isset($productDB['quantity']) ? $productDB['quantity'] : 1,
+                    $productDB['name'],
+                    $productDB['description'],
+                    $productDB['owner'],
+                    $productDB['category'],
+                    $productDB['brand'],
+                );
 
-            $products[] = $product;
+                $products[] = $product;
+            }
+
+            return $products;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $products;
     }
 
     public function deleteUser(PDO $db): bool {
@@ -85,37 +90,17 @@ class User{
     }
 
     static function getUser(PDO $db, int $id){
-        $stmt = $db->prepare('
-            SELECT id, name,  username, email, password, is_admin
-            FROM USERS
-            WHERE id = ?
-            ');
-        
-        $stmt->execute(array($id));
-        $user = $stmt->fetch();
+        try{
+            $stmt = $db->prepare('
+                SELECT id, name,  username, email, password, is_admin
+                FROM USERS
+                WHERE id = ?
+                ');
+            
+            $stmt->execute(array($id));
+            $user = $stmt->fetch();
 
-        return new User(
-            intval($user['id']),
-            $user['name'],
-            $user['username'],
-            $user['email'],
-            $user['password'],
-            intval($user['is_admin'])
-        );
-
-    }
-
-    static function getAllUsers(PDO $db): array {
-        $stmt = $db->prepare('
-            SELECT id, name, username, email, password, is_admin
-            FROM USERS
-        ');
-        
-        $stmt->execute();
-        
-        $users = [];
-        while ($user = $stmt->fetch()) {
-            $users[] = new User(
+            return new User(
                 intval($user['id']),
                 $user['name'],
                 $user['username'],
@@ -123,99 +108,154 @@ class User{
                 $user['password'],
                 intval($user['is_admin'])
             );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-    
-        return $users;
+
+    }
+
+    static function getAllUsers(PDO $db): array {
+        try{
+            $stmt = $db->prepare('
+                SELECT id, name, username, email, password, is_admin
+                FROM USERS
+            ');
+            
+            $stmt->execute();
+            
+            $users = [];
+            while ($user = $stmt->fetch()) {
+                $users[] = new User(
+                    intval($user['id']),
+                    $user['name'],
+                    $user['username'],
+                    $user['email'],
+                    $user['password'],
+                    intval($user['is_admin'])
+                );
+            }
+        
+            return $users;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
     }
     
 
     static function getUserByPassword(PDO $db, string $email, string $password){
-        $stmt = $db->prepare(
-            'SELECT id, name,  username, email, password, is_admin
-            FROM USERS
-            WHERE email = ? AND password = ?'
-        );
-        
-        $stmt->execute(array($email, $password));
-        if($user = $stmt->fetch()){
-
-            return new User(
-                intval($user['id']),
-                $user['name'],
-                $user['username'],
-                $user['email'],
-                $user['password'],
-                intval($user['is_admin']),
+        try{
+            $stmt = $db->prepare(
+                'SELECT id, name,  username, email, password, is_admin
+                FROM USERS
+                WHERE email = ? AND password = ?'
             );
-        } else return null;
+            
+            $stmt->execute(array($email, $password));
+            if($user = $stmt->fetch()){
+
+                return new User(
+                    intval($user['id']),
+                    $user['name'],
+                    $user['username'],
+                    $user['email'],
+                    $user['password'],
+                    intval($user['is_admin']),
+                );
+            } else return null;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function getUserByEmail(PDO $db, string $email){
-        $stmt = $db->prepare(
-            'SELECT id, name,  username, email, password, is_admin
-            FROM USERS
-            WHERE email = ?'
-        );
-        
-        $stmt->execute(array($email));
-        if($user = $stmt->fetch()){
-
-            return new User(
-                intval($user['id']),
-                $user['name'],
-                $user['username'],
-                $user['email'],
-                $user['password'],
-                intval($user['is_admin']),
+        try{
+            $stmt = $db->prepare(
+                'SELECT id, name,  username, email, password, is_admin
+                FROM USERS
+                WHERE email = ?'
             );
-        } else return null;
+            
+            $stmt->execute(array($email));
+            if($user = $stmt->fetch()){
+
+                return new User(
+                    intval($user['id']),
+                    $user['name'],
+                    $user['username'],
+                    $user['email'],
+                    $user['password'],
+                    intval($user['is_admin']),
+                );
+            } else return null;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function emailExists(PDO $db, string $email) : bool{
-        $stmt = $db->prepare(
-            'SELECT email
-            FROM USERS
-            WHERE email = ?'
-        );
+        try{
+            $stmt = $db->prepare(
+                'SELECT email
+                FROM USERS
+                WHERE email = ?'
+            );
 
-        $stmt->execute(array($email));
+            $stmt->execute(array($email));
 
-        if($stmt->fetch()){
-            //the email already exists
-            return true;
-        }
-        else{
-            //the email doesn't exist
+            if($stmt->fetch()){
+                //the email already exists
+                return true;
+            }
+            else{
+                //the email doesn't exist
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }
 
     static function usernameExists(PDO $db, string $username) : bool{
-        $stmt = $db->prepare(
-            'SELECT username
-            FROM USERS
-            WHERE username = ?'
-        );
+        try{
+            $stmt = $db->prepare(
+                'SELECT username
+                FROM USERS
+                WHERE username = ?'
+            );
 
-        $stmt->execute(array($username));
+            $stmt->execute(array($username));
 
-        if($stmt->fetch()){
-            //the username already exists
-            return true;
-        }
-        else{
-            //the username doesn't exist
+            if($stmt->fetch()){
+                //the username already exists
+                return true;
+            }
+            else{
+                //the username doesn't exist
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }
 
     static function insertNewUser(PDO $db, string $name, string $username, string $email, string $password){
-        $stmt = $db->prepare(
-            'INSERT INTO USERS(username, name, email, password, is_admin) 
-            VALUES (?, ?, ?, ?, 0)'
-        );
+        try{
+            $stmt = $db->prepare(
+                'INSERT INTO USERS(username, name, email, password, is_admin) 
+                VALUES (?, ?, ?, ?, 0)'
+            );
 
-        $stmt->execute(array($username, $name, $email, $password));
+            $stmt->execute(array($username, $name, $email, $password));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function searchUsers(PDO $db, string $searchQuery, string $userType = 'all') {
@@ -273,21 +313,36 @@ class User{
     }
 
     static public function updateUsername(PDO $db, int $id, string $username ) : bool{
-        $stmt = $db->prepare("UPDATE users SET username = ? WHERE id = ?");
-        $result = $stmt->execute(array($username, $id));
-        return $result;
+        try{
+            $stmt = $db->prepare("UPDATE users SET username = ? WHERE id = ?");
+            $result = $stmt->execute(array($username, $id));
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function updateName(PDO $db, int $id, string $name ) : bool{
-        $stmt = $db->prepare("UPDATE users SET name = ? WHERE id = ?");
-        $result = $stmt->execute(array($name, $id));
-        return $result;
+        try{
+            $stmt = $db->prepare("UPDATE users SET name = ? WHERE id = ?");
+            $result = $stmt->execute(array($name, $id));
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function updatePassword(PDO $db, int $id, string $password) : bool{
+        try{
         $stmt = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
         $result = $stmt->execute(array($password, $id));
         return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
     
 }

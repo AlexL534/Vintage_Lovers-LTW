@@ -24,59 +24,89 @@ class Color{
 
     //queries
     static public function getColorById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM COLOR WHERE colorID = ?');
-        $stmt->execute(array($id));
-        $colorDB = $stmt->fetch(); 
+        try{
+            $stmt = $db->prepare('SELECT * FROM COLOR WHERE colorID = ?');
+            $stmt->execute(array($id));
+            $colorDB = $stmt->fetch(); 
 
-        return new Color(
-            intval($colorDB['colorID']),
-            $colorDB['name']
-        );
+            return new Color(
+                intval($colorDB['colorID']),
+                $colorDB['name']
+            );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function getColorByName(PDO $db, string $name){
-        $stmt = $db->prepare('SELECT * FROM COLOR WHERE name = ?');
-        $stmt->execute(array($name));
-        $colorDB = $stmt->fetch();
-        
-        return new Color(
-            intval($colorDB['colorID']),
-            $colorDB['name']
-        );
+        try{
+            $stmt = $db->prepare('SELECT * FROM COLOR WHERE name = ?');
+            $stmt->execute(array($name));
+            $colorDB = $stmt->fetch();
+            
+            return new Color(
+                intval($colorDB['colorID']),
+                $colorDB['name']
+            );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function getAllColors(PDO $db){
-        $stmt = $db->prepare('SELECT * FROM COLOR');
-        $stmt->execute();
-        $colors = array();
-        while($colorDB = $stmt->fetch()){
-            $color= new Color(intval($colorDB['colorID']),$colorDB['name']);
+        try{
+            $stmt = $db->prepare('SELECT * FROM COLOR');
+            $stmt->execute();
+            $colors = array();
+            while($colorDB = $stmt->fetch()){
+                $color= new Color(intval($colorDB['colorID']),$colorDB['name']);
 
-            $colors[]=$color;
+                $colors[]=$color;
+            }
+
+            return $colors;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $colors;
     }
 
     static function getColorsOfProduct(PDO $db , int $id){
-        $stmt = $db->prepare('SELECT colorID FROM COLORS_OF_PRODUCT WHERE productID = ?');
-        $stmt->execute(array($id));
-        $colors = array();
-        while($colorID=$stmt->fetch()){
-            $color = Color::getColorById($db,intval($colorID['colorID']));
-            $colors[] = $color;
+        try{
+            $stmt = $db->prepare('SELECT colorID FROM COLORS_OF_PRODUCT WHERE productID = ?');
+            $stmt->execute(array($id));
+            $colors = array();
+            while($colorID=$stmt->fetch()){
+                $color = Color::getColorById($db,intval($colorID['colorID']));
+                $colors[] = $color;
+            }
+            return $colors;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-        return $colors;
     }
 
     static function insertColorOfProduct(PDO $db , int $idProduct, int $idColor){
-        $stmt = $db->prepare('INSERT INTO COLORS_OF_PRODUCT (colorID, productID) VALUES (?, ?)');
-        $stmt->execute(array($idColor, $idProduct));
+        try{
+            $stmt = $db->prepare('INSERT INTO COLORS_OF_PRODUCT (colorID, productID) VALUES (?, ?)');
+            $stmt->execute(array($idColor, $idProduct));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function deleteColorOfProduct(PDO $db , int $idProduct){
-        $stmt = $db->prepare('Delete from COLORS_OF_PRODUCT where productID = ?');
-        $stmt->execute(array($idProduct));
+        try{
+            $stmt = $db->prepare('Delete from COLORS_OF_PRODUCT where productID = ?');
+            $stmt->execute(array($idProduct));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }
 ?>

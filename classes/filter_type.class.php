@@ -10,13 +10,18 @@ class FilterType {
     }
 
     public function addFilterType(string $table, array $data): bool {
-        $columns = implode(', ', array_keys($data));
-        $placeholders = implode(', ', array_fill(0, count($data), '?'));
+        try{
+            $columns = implode(', ', array_keys($data));
+            $placeholders = implode(', ', array_fill(0, count($data), '?'));
 
-        $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-        $stmt = $this->db->prepare($sql);
+            $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+            $stmt = $this->db->prepare($sql);
 
-        return $stmt->execute(array_values($data));
+            return $stmt->execute(array_values($data));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     public function removeFilterType($filter_type, $filter_name) {

@@ -23,37 +23,57 @@ class ShoppingCart{
 
     //querys
     static function getUserShoppingCart(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM SHOPPINGCART where userID = ?');
-        $stmt->execute(array($id));
-        $cartItens = array();
+        try{
+            $stmt = $db->prepare('SELECT * FROM SHOPPINGCART where userID = ?');
+            $stmt->execute(array($id));
+            $cartItens = array();
 
-        while($cartDB = $stmt->fetch()){
-            $cart = new ShoppingCart(intval($cartDB['userID']), intval($cartDB['productID']));
-            $cartItens[] = $cart;
+            while($cartDB = $stmt->fetch()){
+                $cart = new ShoppingCart(intval($cartDB['userID']), intval($cartDB['productID']));
+                $cartItens[] = $cart;
+            }
+
+            return $cartItens;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $cartItens;
     }
 
     static function isProductInShoppingCart(PDO $db,int $idUser, int $idProduct){
-        $stmt = $db->prepare('SELECT * FROM SHOPPINGCART where productID = ? and userID = ?');
-        $stmt->execute(array($idProduct, $idUser));
-        $product = $stmt->fetchAll();
+        try{
+            $stmt = $db->prepare('SELECT * FROM SHOPPINGCART where productID = ? and userID = ?');
+            $stmt->execute(array($idProduct, $idUser));
+            $product = $stmt->fetchAll();
 
-        if(empty($product)){
+            if(empty($product)){
+                return false;
+            }
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false;
         }
-
-        return true;
     }
 
     static function insertProductInShoppingCart(PDO $db, int $idUser, int $idProduct){
-        $stmt=$db->prepare('INSERT INTO SHOPPINGCART VALUES (?,?)');
-        $stmt->execute(array($idUser,$idProduct));
+        try{
+            $stmt=$db->prepare('INSERT INTO SHOPPINGCART VALUES (?,?)');
+            $stmt->execute(array($idUser,$idProduct));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function deleteProductInShoppingCart(PDO $db, int $idUser, int $idProduct){
-        $stmt = $db->prepare("DELETE FROM SHOPPINGCART WHERE productID = ? and userID = ? ");
-        $stmt->execute(array($idProduct, $idUser));
+        try{
+            $stmt = $db->prepare("DELETE FROM SHOPPINGCART WHERE productID = ? and userID = ? ");
+            $stmt->execute(array($idProduct, $idUser));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }

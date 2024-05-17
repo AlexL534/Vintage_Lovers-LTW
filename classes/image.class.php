@@ -28,49 +28,69 @@ class Image{
 
     //queries
     static public function getImageById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM IMAGES WHERE imageID = ?');
-        $stmt->execute(array($id));
-        $imageDB = $stmt->fetch(); 
+        try{
+            $stmt = $db->prepare('SELECT * FROM IMAGES WHERE imageID = ?');
+            $stmt->execute(array($id));
+            $imageDB = $stmt->fetch(); 
 
-        return new Image(
-            intval($imageDB['imageID']),
-            $imageDB['path']
-        );
+            return new Image(
+                intval($imageDB['imageID']),
+                $imageDB['path']
+            );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function getAllImages(PDO $db){
-        $stmt = $db->prepare('SELECT * FROM IMAGES');
-        $stmt->execute();
-        $images = array();
-        while($imageDB = $stmt->fetch()){
-            $image= new Image(intval($imageDB['imageID']),$imageDB['path']);
+        try{
+            $stmt = $db->prepare('SELECT * FROM IMAGES');
+            $stmt->execute();
+            $images = array();
+            while($imageDB = $stmt->fetch()){
+                $image= new Image(intval($imageDB['imageID']),$imageDB['path']);
 
-            $images[]=$image;
+                $images[]=$image;
+            }
+
+            return $images;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $images;
     }
 
     static function getImagesPath(PDO $db, int $productID){
-        $stmt = $db->prepare('
-        SELECT IMAGES.path
-        FROM IMAGES JOIN IMAGES_OF_PRODUCT on IMAGES.imageid = IMAGES_OF_PRODUCT.imageid
-        WHERE  IMAGES_OF_PRODUCT.productid = ?
-        ');
-        $stmt->execute(array($productID));
-    
-        $images = array();
-        while($imageDB = $stmt->fetch()){
-            $image = $imageDB['path'];
-            $images[] = $image;
+        try{
+            $stmt = $db->prepare('
+            SELECT IMAGES.path
+            FROM IMAGES JOIN IMAGES_OF_PRODUCT on IMAGES.imageid = IMAGES_OF_PRODUCT.imageid
+            WHERE  IMAGES_OF_PRODUCT.productid = ?
+            ');
+            $stmt->execute(array($productID));
+        
+            $images = array();
+            while($imageDB = $stmt->fetch()){
+                $image = $imageDB['path'];
+                $images[] = $image;
+            }
+        
+            return $images;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-    
-        return $images;
     }
 
     static function insertImageToProduct(PDO $db, string $path){
-        $stmt = $db->prepare('Insert into images(path) values (?)');
-        $stmt->execute(array($path));
+        try{
+            $stmt = $db->prepare('Insert into images(path) values (?)');
+            $stmt->execute(array($path));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function getLastInsertedImageID(PDO $db){
@@ -86,28 +106,48 @@ class Image{
     }
 
     static function insertImageOfProduct(PDO $db, int $imageID, int $productID){
-        $stmt = $db->prepare('Insert into images_of_product(imageID, productID) values (?,?)');
-        $stmt->execute(array($imageID, $productID));
+        try{
+            $stmt = $db->prepare('Insert into images_of_product(imageID, productID) values (?,?)');
+            $stmt->execute(array($imageID, $productID));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function deleteImageOfProduct(PDO $db, int $productID){
-        $stmt = $db->prepare('Delete from images_of_product where productID = ?');
-        $stmt->execute(array($productID));
+        try{
+            $stmt = $db->prepare('Delete from images_of_product where productID = ?');
+            $stmt->execute(array($productID));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function deleteImage(PDO $db, int $imageID){
-        $stmt = $db->prepare('Delete from images where imageID = ?');
-        $stmt->execute(array($imageID));
+        try{
+            $stmt = $db->prepare('Delete from images where imageID = ?');
+            $stmt->execute(array($imageID));
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static function getImagesIdFromImageOfProduct(PDO $db, int $productID){
-        $stmt = $db->prepare('SELECT imageID FROM IMAGES_OF_PRODUCT WHERE productID = ?');
-        $stmt->execute(array($productID));
-        $images = array();
-        while($image = $stmt->fetch()){
-            $images[] = $image['imageID'];
+        try{
+            $stmt = $db->prepare('SELECT imageID FROM IMAGES_OF_PRODUCT WHERE productID = ?');
+            $stmt->execute(array($productID));
+            $images = array();
+            while($image = $stmt->fetch()){
+                $images[] = $image['imageID'];
+            }
+            return $images;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-        return $images;
     }
 }
 ?>

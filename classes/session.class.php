@@ -8,6 +8,8 @@
       
             $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
             unset($_SESSION['messages']);
+            
+            //token for increase security
             if (!isset($_SESSION['csrf'])) {
                 $_SESSION['csrf'] = $this->generate_random_token();
             }

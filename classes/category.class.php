@@ -30,53 +30,73 @@ class Category{
 
     //queries
     static public function getCategoryById(PDO $db, int $id){
-        $stmt = $db->prepare('SELECT * FROM CATEGORY WHERE categoryID = ?');
-        $stmt->execute(array($id));
-        $categoryDB = $stmt->fetch(); 
+        try{
+            $stmt = $db->prepare('SELECT * FROM CATEGORY WHERE categoryID = ?');
+            $stmt->execute(array($id));
+            $categoryDB = $stmt->fetch(); 
 
-        return new Category(
-            intval($categoryDB['categoryID']),
-            $categoryDB['name'],
-            $categoryDB['description']
-        );
+            return new Category(
+                intval($categoryDB['categoryID']),
+                $categoryDB['name'],
+                $categoryDB['description']
+            );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function getCategoryByName(PDO $db, string $name){
-        $stmt = $db->prepare('SELECT * FROM CATEGORY WHERE name = ?');
-        $stmt->execute(array($name));
-        $categoryDB = $stmt->fetch();
-        
-        return new Category(
-            intval($categoryDB['categoryID']),
-            $categoryDB['name'],
-            $categoryDB['description']
-        );
+        try{
+            $stmt = $db->prepare('SELECT * FROM CATEGORY WHERE name = ?');
+            $stmt->execute(array($name));
+            $categoryDB = $stmt->fetch();
+            
+            return new Category(
+                intval($categoryDB['categoryID']),
+                $categoryDB['name'],
+                $categoryDB['description']
+            );
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     static public function getAllCategories(PDO $db){
-        $stmt = $db->prepare('SELECT * FROM CATEGORY');
-        $stmt->execute();
-        $categories = array();
-        while($categoryDB = $stmt->fetch()){
-            $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);
+        try{
+            $stmt = $db->prepare('SELECT * FROM CATEGORY');
+            $stmt->execute();
+            $categories = array();
+            while($categoryDB = $stmt->fetch()){
+                $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);
 
-            $categories[]=$category;
+                $categories[]=$category;
+            }
+
+            return $categories;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $categories;
     }
 
     static public function getCategoriesLimit(PDO $db, int $limit){
-        $stmt = $db->prepare('SELECT * FROM CATEGORY limit ?');
-        $stmt->execute(array($limit));
-        $categories = array();
-        while($categoryDB = $stmt->fetch()){
-            $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);
+        try{
+            $stmt = $db->prepare('SELECT * FROM CATEGORY limit ?');
+            $stmt->execute(array($limit));
+            $categories = array();
+            while($categoryDB = $stmt->fetch()){
+                $category= new Category(intval($categoryDB['categoryID']),$categoryDB['name'],$categoryDB['description']);
 
-            $categories[]=$category;
+                $categories[]=$category;
+            }
+
+            return $categories;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        return $categories;
     }
 }
 ?>
