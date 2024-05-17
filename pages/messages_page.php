@@ -22,6 +22,10 @@ if($session->getId() != $sid && $session->getId() != $rid){
     header('Location: ../pages/main_page.php' ); 
 }
 
+if($sid == $rid){
+    header('Location: ../pages/main_page.php' ); 
+}
+
 
 
 drawHeader($session);

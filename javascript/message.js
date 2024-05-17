@@ -14,6 +14,7 @@ function sendMessage(){
     if(button == null){
         return;
     }
+    messagesDiv.scrollTo(0,messagesDiv.scrollHeight);
     console.log(form['messageText'])
 
     button.addEventListener('click',async function(event){
@@ -24,6 +25,7 @@ function sendMessage(){
         newMessage.innerHTML = form.elements['messageText'].value;
         newMessage.classList.add("sender");
         messagesDiv.appendChild(newMessage);
+        messagesDiv.scrollTo(0,messagesDiv.scrollHeight);
 
         
         const request = new XMLHttpRequest();
