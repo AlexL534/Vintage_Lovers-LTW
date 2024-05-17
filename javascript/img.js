@@ -1,5 +1,6 @@
 
 async function changeImages(){
+    //changes the images in the product page
     const image = document.querySelector("#productImages img");
 
     if(image == null){

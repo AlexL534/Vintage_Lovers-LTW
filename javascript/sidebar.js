@@ -1,4 +1,5 @@
 function sideBarActions(){
+    //opens and closes the filters section
     const button = document.querySelector("#filterPage button");
 
     if(!button){

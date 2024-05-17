@@ -1,4 +1,6 @@
 function searchUsers() {
+    //searchs for the users in the admin pages
+
     const searchInput = document.querySelector("#search");
     const userTypeSelect = document.querySelector("#userType");
     const userListSection = document.querySelector('#userList');
@@ -37,6 +39,8 @@ function searchUsers() {
     
 
     async function performSearch() {
+        //performs the search
+        
         const userType = encodeURIComponent(userTypeSelect.value);
         const searchQuery = encodeURIComponent(searchInput.value);
         const query = `/../js_actions/api_search_users.php?search=${searchQuery}&userType=${userType}`;
