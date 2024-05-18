@@ -6,7 +6,7 @@ function encodeForAjax(data) {
 
 function sendMessage(){
     const button = document.querySelector('#messageForm button');
-    messagesDiv = document.getElementById("messages");
+    messagesDiv = document.getElementById("UserMessages");
     const form = button.parentElement;
     console.log(button);
     console.log(messagesDiv);
