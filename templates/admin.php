@@ -466,7 +466,7 @@ function drawAddImages($productId, $session){
     </header>
     <form action="/../actions/action_add_image.php" method="post" enctype="multipart/form-data">
         <label>
-            <p>Title:</p>
+            Title:
             <input type="text" name="title" required>
         </label>
         <input type="file" name="image[]" multiple="multiple"  required>
