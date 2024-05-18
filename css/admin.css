@@ -185,7 +185,7 @@ header h2 {
 /* User Search Form */
 #userSearch form {
     display: flex;
-    justify-content: space-between; /* Adjusted to space between instead of flex-end */
+    justify-content: space-between; 
     margin-bottom: 20px;
 }
 
@@ -198,14 +198,13 @@ header h2 {
 
 #userSearch form input[type="text"] {
     padding: 10px;
-    margin-right: 20px; /* Adjusted margin to create space between elements */
+    margin-right: 20px; 
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 
 /* User List */
-
 #userList ul {
     list-style-type: none;
     padding: 0;
@@ -217,8 +216,8 @@ header h2 {
     border-radius: 1em;
     padding: 10px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto 1fr auto; /* Six columns: labels, username, email, user type, buttons */
-        grid-gap: 10px;
+    grid-template-columns: 60px 250px 35px 250px 65px 1fr auto;
+    grid-gap: 10px;
     align-items: center;
 }
 
@@ -227,27 +226,33 @@ header h2 {
     color: #999;
 }
 
-.username,
-.email {
-    font-size: 16px;
-    color: #333;
-}
-
 .user-details {
     display: flex;
     align-items: center;
-    white-space: nowrap; /* Prevent username and email from wrapping */
+    white-space: nowrap;
 }
 
 .username-light,
-.email-light {
+.email-light,
+.user-type-light {
     font-size: 12px;
     color: #999;
-    margin-right: 10px; /* Adjust spacing between light and actual text */
+    margin-right: 10px;
+}
+
+.username {
+    grid-column: 2 / 3;
+}
+
+.email {
+    grid-column: 4 / 5;
+}
+
+.user-type {
+    grid-column: 6 / 7;
 }
 
 .options-menu {
-    grid-column: 7; /* Buttons in the fifth column */
     display: flex;
     align-items: center;
 }
@@ -268,3 +273,70 @@ header h2 {
     background-color: #f9f9f9;
 }
 
+/*responsive*/
+@media (max-width: 1200px) {
+    .user-item {
+        grid-template-columns: 60px 200px 35px 200px 65px 1fr auto;
+    }
+}
+
+@media (max-width: 992px) {
+    .user-item {
+        grid-template-columns: 50px 130px 25px 175px 25px 1fr auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-item {
+        grid-template-columns: 50px 1fr;
+        grid-template-areas: 
+            "username-light username"
+            "email-light email"
+            "user-type-light user-type"
+            "options-menu options-menu";
+    }
+
+    .username-light { grid-area: username-light; }
+    .username { grid-area: username; }
+    .email-light { grid-area: email-light; }
+    .email { grid-area: email; }
+    .user-type-light { grid-area: user-type-light; }
+    .user-type { grid-area: user-type; }
+    .options-menu { grid-area: options-menu; }
+}
+
+@media (max-width: 576px) {
+    .user-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .options-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+    }
+
+    .options-menu form {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    #userSearch form {
+        
+        flex-direction: column;
+        align-items: center;
+        gap: 1em
+    }
+
+    #userSearch form select{
+        margin: 0;
+        width: 85%;
+    }
+
+    #userSearch form input[type="text"]{
+        margin: 0;
+        width: 80%;
+    }
+}
