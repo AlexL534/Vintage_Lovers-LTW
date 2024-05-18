@@ -315,7 +315,7 @@ function displayProductResults($products, $searchEnabled, $session) {
 
                         if ($ownerId === $loggedInUserId) { ?>
                             <li>
-                                <span class="product_name"><p><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></p></span>
+                                <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
                                 <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
