@@ -109,7 +109,8 @@
 
     #productButtons{
         order: 3;
-        
+        flex-wrap: wrap;
+        row-gap: 1em;
     }
 
 }

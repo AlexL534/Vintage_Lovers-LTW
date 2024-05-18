@@ -32,8 +32,12 @@ a#product_link{
     grid-column: 2;
     grid-row: 2;
     display: flex;
-    margin-left: 3em;
+    justify-self: center;
+    align-self: center;
+    width: 80%;
+    max-width: 30em;
 }
+
 
 .sender,.receiver{
     max-width: 8em;
@@ -88,5 +92,15 @@ a#product_link{
     }
     #product_link{
         order: 3;
+    }
+
+    #messagesPage #product_link{
+        display: flex;
+        align-self: center;
+        width: 100%;
+    }
+
+    #messagesPage #product_link article{
+        align-self: center;
     }
 }
