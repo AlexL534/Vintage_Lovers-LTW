@@ -95,7 +95,7 @@ function drawAddInfoForm($filterType) {
             <?php if ($filterType === 'category' || $filterType === 'condition'): ?>
             <label>Description: <input type="text" name="description"></label>
             <?php endif; ?>
-            <input type="hidden" name="filter_type" value="<?php echo htmlspecialchars($filterType, ENT_QUOTES, 'UTF-8'); ?>">
+            <input type="hidden" name="filter_type" value="<?php echo $filterType; ?>">
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="submit" name="add" value="Add">
             

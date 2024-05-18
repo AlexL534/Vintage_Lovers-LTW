@@ -36,21 +36,20 @@ function drawEditProfile(PDO $db, User $user, Session $session){
 
         <form action= "../actions/action_edit_profile.php" method="post" >
             <label>
-                <p>Username:</p>
+                Username:
                 <input type = "text" name = "username" placeholder= <?= htmlentities($user->getUsername())?>>
             </label>
             <label>
-                <p>Name:</p>
+                Name:
                 <input type = "text" name = "name" placeholder= <?= htmlentities($user->getName())?> >
             </label>    
             <label>
-            <p> Password:</p>
+            Password:
                 <input type = "password" name = "password" >
             </label>
             <input type="submit" name = "login" value="Update">
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         </form>
-
 
     </section>
 <?php }

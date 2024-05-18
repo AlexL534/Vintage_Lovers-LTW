@@ -129,17 +129,20 @@
     grid-template-rows: auto auto auto auto auto;
 }
 
-.editProfile form label{
+.editProfile form label {
     display: grid;
     margin: 1em;
+    text-align: center;
+    margin-bottom: 35px;
+    font-weight: 600;
 }
 
-.editProfile form label p{
-    grid-row: 1;
-    text-align: center;
+.editProfile form input[type="text"],
+.editProfile form input[type="password"] {
+    margin-top: 15px;
+    grid-row: 2;
     font-weight: 500;
 }
-
 
 
 .editProfile form label input{
