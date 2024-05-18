@@ -89,4 +89,14 @@ a#product_link{
     #product_link{
         order: 3;
     }
+
+    #messagesPage #product_link{
+        display: flex;
+        align-self: center;
+        width: 100%;
+    }
+
+    #messagesPage #product_link article{
+        align-self: center;
+    }
 }
