@@ -43,15 +43,9 @@
 .auth form label{
     display: grid;
     margin: 1em;
-}
-
-.auth form label p{
-    grid-row: 1;
     text-align: center;
     font-weight: 500;
 }
-
-
 
 .auth form label input{
     align-self: center;
@@ -60,6 +54,7 @@
     width: 80%;
     max-width: 30em;
     height: 2.5em;
+    margin-top: 0.5em;
 }
 
 .auth form > input[type=submit]{
