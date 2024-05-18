@@ -59,12 +59,12 @@ function drawRemoveInfoForm($filterType, $db) {
         ?>
         <section id="removeInfoForm">
             <header>
-                <h2>Remove <?php echo ucfirst($filterType); ?></h2>
+                <h2>Remove <?php echo htmlspecialchars(ucfirst($filterType), ENT_QUOTES, 'UTF-8'); ?></h2>
             </header>
             <form action="/../actions/action_remove_filter.php" method="post">
-                <label>Select <?php echo ucfirst($filterType); ?> to remove:</label>
+                <label>Select <?php echo htmlspecialchars(ucfirst($filterType), ENT_QUOTES, 'UTF-8'); ?> to remove:</label>
                 <select name="filter_name" required>
-                    <option value="" disabled selected>Select <?php echo ucfirst($filterType); ?></option> 
+                    <option value="" disabled selected>Select <?php echo htmlspecialchars(ucfirst($filterType), ENT_QUOTES, 'UTF-8'); ?></option>
                     <?php
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         ?>
@@ -88,14 +88,14 @@ function drawAddInfoForm($filterType) {
     ?>
     <section id="addInfoForm">
         <header>
-            <h2><?php echo ucfirst($filterType); ?></h2>
+            <h2><?php echo htmlspecialchars(ucfirst($filterType), ENT_QUOTES, 'UTF-8'); ?></h2>
         </header>
         <form action="/../actions/action_add_filter.php" method="post">
             <label>Name: <input type="text" name="name" required></label>
             <?php if ($filterType === 'category' || $filterType === 'condition'): ?>
             <label>Description: <input type="text" name="description"></label>
             <?php endif; ?>
-            <input type="hidden" name="filter_type" value="<?php echo $filterType; ?>">
+            <input type="hidden" name="filter_type" value="<?php echo htmlspecialchars($filterType, ENT_QUOTES, 'UTF-8'); ?>">
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="submit" name="add" value="Add">
             
