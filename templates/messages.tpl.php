@@ -36,7 +36,7 @@ function drawUserQuestion(Session $session, PDO $db){
         $receiver = User::getUser($db,intval($rid));
         $product = Product::getProduct($db,intval($pid)); ?>
         <li><a href="../pages/messages_page.php?sid=<?= $currentUserID?>&rid=<?=$rid ?>&pid=<?=$pid?>">
-            <p>You are having a conversation with <?= htmlentities($receiver->getUserName());?> about the <?= htmlentities($product->getName()); ?></p>
+            <p>You are discussing with <?= htmlentities($receiver->getUserName());?> about the <?= htmlentities($product->getName()); ?></p>
         </a></li>
     <?php } ?>
     
@@ -49,7 +49,6 @@ function drawUserQuestion(Session $session, PDO $db){
 <?php
 function drawInbox(Session $session, PDO $db){
     drawUserQuestion($session,$db);
-    
 }
 ?>
 

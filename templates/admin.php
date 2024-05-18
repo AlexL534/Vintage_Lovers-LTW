@@ -247,8 +247,6 @@ function drawProductList($searchEnabled = true, $session) {
             <?php
         }
 
-
-
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
 
             if ($_SESSION['csrf'] !== $_POST['csrf']) {
