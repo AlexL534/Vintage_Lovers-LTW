@@ -432,15 +432,15 @@ function drawUpdateInfoForm($product_id) {
         <form action="/../actions/action_update_product.php" method="post">
         <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
         <div class="form-group">
-                <label for="name"><p>Name:</p></label>
+                <label for="name">Name:</label>
                 <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($productName); ?>" required>
             </div>
             <div class="form-group">
-                <label for="description"><p>Description:</p></label>
+                <label for="description">Description:</label>
                 <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($productDescription); ?>" required>
             </div>
             <div class="form-group">
-                <label for="price"><p>Price:</p></label>
+                <label for="price">Price:</label>
                 <input type="number" name="price" step="0.01" min="0" id="price" value="<?php echo htmlspecialchars($productPrice); ?>" required>
             </div>
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
