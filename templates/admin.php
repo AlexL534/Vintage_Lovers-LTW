@@ -238,9 +238,8 @@ function drawProductList($searchEnabled = true, $session) {
             ?>
             <section id="productSearch">
                 <form  method="post">
-                    <label for="search"><p>Search for product</p></label>
+                    <label for="search">Search for product</label>
                     <input type="text" id="search" name="search">
-                    <button type="submit">Search</button>
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="action" value="search">
                 </form>
