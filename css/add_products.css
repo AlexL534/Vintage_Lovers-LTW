@@ -81,18 +81,17 @@
     align-items: center;
     width: 100%;
     gap: 2em;
-}
-
-#insertImages p{
     text-align: center;
     font-weight: 500;
 }
+
 
 #insertImages label{
     display: flex;
     flex-direction: column;
     align-items: center;
     width:100%;
+    margin-top: 15px;
 }
 
 #insertImages input, #insertImages label input{
@@ -102,6 +101,7 @@
     width: 80%;
     max-width: 30em;
     height: 2.5em;
+    margin-top: 15px;
 }
 
 #insertImages input[type="file"]::file-selector-button{

@@ -50,24 +50,39 @@
     max-height: 10em;
 }
 
-#filterPage aside label{
-    display: grid;
-    grid-template-columns: 4em 4em;
-    text-align: center;
-    
+#filterPage aside label {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    width: 100%; 
 }
 
-#filterPage aside p{
+.label-text {
+    display: block; 
+    margin-bottom: 1em; 
+    font-size: 1em;
+    line-height: 1.5;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:  ellipsis;
+    margin-right: 0.5em;
+    margin-top: 5px;
+}
+
+.label-order-price {
+    display: block; 
+    font-size: 1em;
     overflow:hidden;
     white-space:nowrap;
     text-overflow:  ellipsis;
 }
 
-
-#filterPage aside input[type="checkbox"]{
-    justify-self: center;
-    width: 2em;
-    border-radius: 10em;
+#filterPage aside input[type="checkbox"] {
+    margin-right: 0.5em; 
+    width: 2em; 
+    height: 2em;
+    border-radius: 10%; 
+    align-self: flex-start; 
 }
 
 /*allow scrollable itens in the filtersection*/

@@ -19,11 +19,11 @@ function drawLogin(Session $session){
     
     <form action= "/../actions/action_login.php" method="post" class= "login" >
         <label>
-            <p>Email:</p>
+            Email:
             <input type="email" name="email" required>
         </label>
         <label>
-           <p> Password:</p>
+            Password:
             <input type = "password" name = "password" required>
         </label>
         <input type="submit" name = "login" value="Login">
@@ -52,19 +52,19 @@ function drawSignup(Session $session){
 
         <form method="post" action = "/../actions/action_signup.php">
             <label>
-                <p>Username:</p>
+                Username:
                 <input type = "text" name = "username" required>
             </label>
             <label>
-                <p>Name:</p>
+                Name:
                 <input type = "text" name = "name" required>
             </label>
             <label>
-                <p>Email:</p>
+                Email:
                 <input type = "email" name = "email" required>
             </label>
             <label>
-                <p>Password:</p>
+                Password:
                 <input type = "password" name = "password" required>
             </label>
             <input type="submit" name = "register" value="Register">
