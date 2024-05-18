@@ -46,7 +46,7 @@ class UserMessage{
                 intval($mesDB['senderID']),
                 intval($mesDB['receiverID']),
                 intval($mesDB['productID']),
-                $mesDB['text'],
+                $mesDB['messageText'],
                 intval($mesDB['timestamp'])
 
             );
@@ -78,7 +78,7 @@ class UserMessage{
     }
 
     static public function insertMessage(int $sid, int $rid, int $pid, string $text, PDO $db){
-        $stmt = $db->prepare('INSERT INTO MESSAGES(senderID,receiverID,productID,text) VALUES (?,?,?,?)');
+        $stmt = $db->prepare('INSERT INTO MESSAGES(senderID,receiverID,productID,messageText) VALUES (?,?,?,?)');
         $stmt->execute(array($sid,$rid,$pid,$text));
     }
 
