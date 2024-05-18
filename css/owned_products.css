@@ -155,11 +155,6 @@
     text-align: center;
 }
 
-#updateProductForm .form-group p{
-    font-weight: 500;
-    text-align: center;
-}
-
 #updateProductForm input[type="text"], #updateProductForm input[type="number"]{
     border-radius: 1em;
     height: 2.5em;

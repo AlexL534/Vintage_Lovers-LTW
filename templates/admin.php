@@ -365,6 +365,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="brand">Brand:</label>
                 <select name="brand" id="brand" required>
+                    <option value="" selected disabled>Select Brand</option>
                     <?php foreach ($brands as $brand): ?>
                         <option value="<?= $brand->getId(); ?>"><?= htmlspecialchars($brand->getName()); ?></option>
                     <?php endforeach; ?>
@@ -373,6 +374,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="category">Category:</label>
                 <select name="category" id="category" required>
+                    <option value="" selected disabled>Select Category</option>
                     <?php foreach ($categories as $category): ?>
                         <option value="<?= $category->getId(); ?>"><?= htmlspecialchars($category->getName()); ?></option>
                     <?php endforeach; ?>
@@ -381,6 +383,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="color">Color:</label>
                 <select name="color" id="color" required>
+                    <option value="" selected disabled>Select Color</option>
                     <?php foreach ($colors as $color): ?>
                         <option value="<?= $color->getId(); ?>"><?= htmlspecialchars($color->getName()); ?></option>
                     <?php endforeach; ?>
@@ -389,6 +392,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="condition">Condition:</label>
                 <select name="condition" id="condition" required>
+                    <option value="" selected disabled>Select Condition</option>
                     <?php foreach ($conditions as $condition): ?>
                         <option value="<?= $condition->getId(); ?>"><?= htmlspecialchars($condition->getName()); ?></option>
                     <?php endforeach; ?>
@@ -397,6 +401,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="size">Sizes:</label>
                 <select name="size" id="size" required>
+                    <option value="" selected disabled>Select Size</option>
                     <?php foreach ($sizes as $size): ?>
                         <option value="<?= $size->getId(); ?>"><?= htmlspecialchars($size->getName()); ?></option>
                     <?php endforeach; ?>
