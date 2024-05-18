@@ -126,10 +126,6 @@ function drawUserList($db, $session) {
         </section>
         <?php
 
-
-
-
-
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
 
             if ($_SESSION['csrf'] !== $_POST['csrf']) {
@@ -226,6 +222,7 @@ function drawUserList($db, $session) {
         echo "An error occurred. Please try again later.";
     }
 }
+
 
 function drawProductList($searchEnabled = true, $session) {
     //draws the section where the owned products are content of the page where the products are showned
