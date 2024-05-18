@@ -19,11 +19,11 @@ function drawLogin(Session $session){
     
     <form action= "/../actions/action_login.php" method="post" class= "login" >
         <label>
-            <p>Email:</p>
+            Email:
             <input type="email" name="email" required>
         </label>
         <label>
-           <p> Password:</p>
+            Password:
             <input type = "password" name = "password" required>
         </label>
         <input type="submit" name = "login" value="Login">
