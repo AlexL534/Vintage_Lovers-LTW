@@ -49,24 +49,24 @@ class User{
     public function getUserOwnedItems(PDO $db){
         try{
             $stmt = $db->prepare('
-                SELECT *
-                FROM PRODUCTS
-                WHERE owner = ?
-                ');
-            
+            SELECT *
+            FROM PRODUCTS
+            WHERE owner = ?
+            ');
+        
             $stmt->execute(array($this->id));
-            
+        
             $products = array();
             while($productDB = $stmt->fetch()){
                 $product = new Product(
-                    $productDB['id'],
-                    $productDB['price'],
-                    isset($productDB['quantity']) ? $productDB['quantity'] : 1,
+                    intval($productDB['id']),
+                    intval($productDB['price']),
+                    isset($productDB['quantity']) ? intval($productDB['quantity']) : 1,
                     $productDB['name'],
                     $productDB['description'],
-                    $productDB['owner'],
-                    $productDB['category'],
-                    $productDB['brand'],
+                    intval($productDB['owner']),
+                    intval($productDB['category']),
+                    intval($productDB['brand']),
                 );
 
                 $products[] = $product;

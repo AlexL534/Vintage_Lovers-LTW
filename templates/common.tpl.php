@@ -24,12 +24,15 @@ function drawHeader(Session $session, array $menuCategories) {
             <link rel="stylesheet" href="/../css/print.css">
             <link rel="stylesheet" href="/../css/add_products.css">
             <link rel="stylesheet" href="/../css/owned_products.css">
+            <link rel="stylesheet" href="../css/inbox.css">
+            <link rel="stylesheet" href="../css/messages.css">
             <script src = "/../javascript/img.js" defer></script>
             <script src = "/../javascript/shopping_cart.js" defer></script>
             <script src = "/../javascript/wishlist.js" defer></script>
             <script src = "/../javascript/search_users.js" defer></script>
             <script src = "/../javascript/sidebar.js" defer></script>
             <script src = "/../javascript/filters.js" defer></script>
+            <script src = "../javascript/message.js" defer></script>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>

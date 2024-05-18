@@ -19,6 +19,7 @@ function drawProfile(PDO $db, User $user){
             }
         ?>
     </section>
+    
 <?php }
 
 function drawEditProfile(PDO $db, User $user, Session $session){
@@ -76,6 +77,7 @@ function drawUserOptions($user){
     <article class = "profileOptions" id="userOptions">
         <ul>
             <li><a href= "/../pages/edit_profile.php"><p>Edit Profile</p></a></li>
+            <li><a href="../pages/inbox.php"><p>Inbox</p></a></li>
             <li><a href = "/../pages/wishlist.php"><p>Wishlist</p></a></li>
             <li><a href="/../pages/seller_product_list.php"><p>Manage owned Products</p></a></li>
             <li><a href="/../pages/seller_add_product.php"><p>List a new Product</p></a></li>
