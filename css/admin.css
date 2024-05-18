@@ -322,4 +322,21 @@ header h2 {
         margin-left: 0;
         margin-bottom: 10px;
     }
+
+    #userSearch form {
+        
+        flex-direction: column;
+        align-items: center;
+        gap: 1em
+    }
+
+    #userSearch form select{
+        margin: 0;
+        width: 85%;
+    }
+
+    #userSearch form input[type="text"]{
+        margin: 0;
+        width: 80%;
+    }
 }
