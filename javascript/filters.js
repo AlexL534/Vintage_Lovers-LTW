@@ -86,9 +86,7 @@ async function verifyCheckbox(){
 
            
             }
-            console.log(products);
             products = sortProducts(products);
-            console.log(products);
             await drawProducts(products);
         });
     });
@@ -309,7 +307,6 @@ function filterProducts(array1,array2){
     let res = [];
     for(let i = 0; i < array1.length; i++){
         if(checkIfIsInArray(array2, array1[i])){
-            console.log("here");
             res.push(array1[i]);
         }
     }
