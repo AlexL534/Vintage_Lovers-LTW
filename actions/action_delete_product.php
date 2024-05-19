@@ -7,6 +7,7 @@ require_once(__DIR__ . '/../classes/color.class.php');
 require_once(__DIR__ . '/../classes/image.class.php');
 require_once(__DIR__ . '/../classes/sold_products.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
+require_once(__DIR__ . '/../classes/message.class.php');
 
 $session = new Session();
 if ($_SESSION['csrf'] !== $_POST['csrf']) {
@@ -43,6 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
         }
         if(SoldProducts::deleteProductSoldProduct($db, $productId) === false){
             $session->addMessage('error', 'could not delete the product from the products sold properly');
+            header('Location: /../pages/main_page.php');
+        }
+        if(UserMessage:: removeMessageProduct($db, $productId) === false){
+            $session->addMessage('error', 'could not delete the messages related to the product');
             header('Location: /../pages/main_page.php');
         }
         $imagesIDs = Image::getImagesIdFromImageOfProduct($db, $productId);

@@ -91,6 +91,29 @@ class UserMessage{
         }
     }
 
+    static public function removeMessageProduct(PDO $db, int $pid){
+        try {
+            $stmt = $db->prepare("DELETE FROM messages WHERE productID = ?");
+            $result = $stmt->execute([$pid]);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    static public function removeMessageUser(PDO $db, int $userID){
+        try {
+            $stmt = $db->prepare("DELETE FROM messages WHERE (senderID = ?) or (receiverID = ?)");
+            $result = $stmt->execute([$userID]);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
 }
 
 ?>

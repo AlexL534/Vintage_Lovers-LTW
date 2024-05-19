@@ -4,6 +4,7 @@ require_once(__DIR__ . '/../database/database_connection.db.php');
 require_once(__DIR__ . '/../classes/user.class.php');
 require_once(__DIR__ . '/../classes/session.class.php');
 require_once(__DIR__ . '/../classes/sold_products.class.php');
+require_once(__DIR__ . '/../classes/message.class.php');
 
 $session = new Session();
 
@@ -28,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
         if ($user->deleteUser($db)) {
             //deletes the sells that where related to this user
             SoldProducts::deleteProductSoldUser($db,$user->getID());
+            UserMessage:: removeMessageUser($db, $user->getID());
             header("Location: ../pages/admin_manage_user.php");
             exit();
         } else {
