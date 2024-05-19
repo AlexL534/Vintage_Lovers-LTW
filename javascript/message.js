@@ -5,12 +5,13 @@ function encodeForAjax(data) {
 }
 
 function sendMessage(){
+    //sends a message asynchronously
     const button = document.querySelector('#messageForm button');
 
     if(button == null){
         return;
     }
-    
+
     messagesDiv = document.getElementById("UserMessages");
     const form = button.parentElement;
     console.log(button);

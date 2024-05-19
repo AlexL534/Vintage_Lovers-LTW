@@ -10,6 +10,11 @@ async function changeImages(){
     const productID = image.getAttribute('id');
     const nextButton = document.querySelector("#productImages button");
 
+    if(nextButton == null){
+        //the button is disable
+        return;
+    }
+
     const response = await fetch("/../js_actions/api_images.php/?id=" + productID);
     const imagesPath = await response.json();
     

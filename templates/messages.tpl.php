@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../classes/message.class.php');
 
 
 function drawUserQuestion(Session $session, PDO $db){
+    //drasw the questions
     $currentUserID=$session->getId();
     $questions = UserMessage::getQuestions($db,$currentUserID);
     $usersAlreadyShown=array();
@@ -48,12 +49,15 @@ function drawUserQuestion(Session $session, PDO $db){
 
 <?php
 function drawInbox(Session $session, PDO $db){
+    //dras the the inbox page (all the conversations you have)
     drawUserQuestion($session,$db);
 }
 ?>
 
 <?php
-function drawMessages(PDO $db,int $pid, Session $session,int $rid){ ?>
+function drawMessages(PDO $db,int $pid, Session $session,int $rid){ 
+    //draws the messages send  for a specific product
+    ?>
     <section id="messagesPage">
         <div id = "UserMessages">
             <?php
@@ -67,6 +71,7 @@ function drawMessages(PDO $db,int $pid, Session $session,int $rid){ ?>
 <?php
 function drawProductInfo(int $pid, PDO $db){
     $product = Product::getProduct($db,$pid);
+    //draws the product info
      ?>
     <a href="/../pages/products.php?id=<?= $pid ?>" id="product_link">
         <article id="productInfoSmall">
@@ -80,7 +85,10 @@ function drawProductInfo(int $pid, PDO $db){
 <?php } ?>
 
 <?php
-function drawMessageForm(int $sid, int $rid, int $pid){ ?>
+function drawMessageForm(int $sid, int $rid, int $pid){ 
+    //draws the message form (where you write the message to send)
+    ?>
+
         <form id="messageForm">
             <input type="hidden" name = "senderID" value = "<?= $sid ?>">
             <input type="hidden" name = "receiverID" value = "<?= $rid ?>">

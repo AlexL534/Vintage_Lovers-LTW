@@ -13,7 +13,11 @@ $pid = intval($_POST['productID']);
 $text = $_POST['messageText'];
 
 
-UserMessage::insertMessage($sid,$rid,$pid,$text,$db);
+if(UserMessage::insertMessage($sid,$rid,$pid,$text,$db) === false){
+    $session->addMessage('error', 'could not send the message. Database error');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
 
 
 ?>
