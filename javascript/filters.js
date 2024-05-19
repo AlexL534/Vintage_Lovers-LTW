@@ -42,25 +42,30 @@ async function verifyCheckbox(){
             }
             else{
             //query the products depending on the boxes checked
-            const productsBrands = await verifyBrands();
-            const productsCategories = await verifyCategories();
-            const productsColors = await verifyColors();
-            const productsCondition = await  verifyConditions();
-            const productsSizes = await verifySizes();
+            const brandsIDs = getBrandsChecked();
+            const categoriesIDs = getCategoriesChecked();
+            const colorsIDs = getColorsChecked();
+            const conditionsIDs = getConditionsChecked();
+            const sizesIDs = getSizesChecked();
+            const productsBrands = await verifyBrands(brandsIDs);
+            const productsCategories = await verifyCategories(categoriesIDs);
+            const productsColors = await verifyColors(colorsIDs);
+            const productsCondition = await  verifyConditions(conditionsIDs);
+            const productsSizes = await verifySizes(sizesIDs);
 
-            if(productsBrands.length != 0){
+            if(brandsIDs.length != 0){
                 products = filterProducts(products, productsBrands);
             }
-            if(productsCategories.length != 0){
+            if(categoriesIDs.length != 0){
                 products = filterProducts(products, productsCategories);
             }
-            if(productsColors.length != 0){
+            if(colorsIDs.length != 0){
                 products = filterProducts(products, productsColors);
             }
-            if(productsCondition.length != 0){
+            if(conditionsIDs.length != 0){
                 products = filterProducts(products, productsCondition);
             }
-            if(productsSizes.length != 0){
+            if(sizesIDs.length != 0){
                 products = filterProducts(products, productsSizes);
             }
 
@@ -74,35 +79,45 @@ async function verifyCheckbox(){
 
 }
 
- async function verifyBrands(){
-    //Checks which brand checkboxes are active
+function getBrandsChecked(){
+    //gets the brands id that were checked
     const brandsCheckBoxes = document.querySelectorAll("#filterPage #brands input[type=checkbox]");
     let brandsIDs = [];
-    let products = [];
     brandsCheckBoxes.forEach(function(checkbox){
         if(checkbox.checked){
             brandsIDs.push(checkbox.name);
         }
     });
+
+    return brandsIDs;
+}
+
+ async function verifyBrands(brandsIDs){
+    //gets the brands that were checked from the database
+    let products = [];
     for(let i = 0; i < brandsIDs.length; i++){
         const response = await fetch("/../js_actions/api_get_products_from_filters.php/?brandID=" + brandsIDs[i]);
         const productsRes = await response.json();
         productsRes.forEach( element => products.push(element));
-        console.log("here");
     }
     return products;
 }
 
-async function verifyCategories(){
+function getCategoriesChecked(){
     //Checks which category checkboxes are active
     const categoriesCheckBoxes = document.querySelectorAll("#filterPage #categories input[type=checkbox]");
     let categoriesIDs = [];
-    let products = [];
     categoriesCheckBoxes.forEach(function(checkbox){
         if(checkbox.checked){
             categoriesIDs.push(checkbox.name);
         }
     });
+    return categoriesIDs;
+}
+
+async function verifyCategories(categoriesIDs){
+    //gets the categories from the database 
+    let products = [];
     for(let i = 0; i < categoriesIDs.length; i++){
         const response = await fetch("/../js_actions/api_get_products_from_filters.php/?categoryID=" + categoriesIDs[i]);
         const productsRes = await response.json();
@@ -112,17 +127,20 @@ async function verifyCategories(){
 }
 
 
-
-async function verifyColors(){
+function getColorsChecked(){
     //Checks which color checkboxes are active
     const colorsCheckBoxes = document.querySelectorAll("#filterPage #colors input[type=checkbox]");
     let colorsIDs = [];
-    let products = [];
     colorsCheckBoxes.forEach(function(checkbox){
         if(checkbox.checked){
             colorsIDs.push(checkbox.name);
         }
     });
+    return colorsIDs;
+}
+async function verifyColors(colorsIDs){
+    //gets the colors from the databse
+    let products = [];
     for(let i = 0; i < colorsIDs.length; i++){
         const response = await fetch("/../js_actions/api_get_products_from_filters.php/?colorID=" + colorsIDs[i]);
         const productsRes = await response.json();
@@ -131,16 +149,20 @@ async function verifyColors(){
     return products;
 }
 
-async function verifyConditions(){
+function getConditionsChecked(){
     //Checks which condition checkboxes are active
     const conditionsCheckBoxes = document.querySelectorAll("#filterPage #conditions input[type=checkbox]");
     let conditionsIDs = [];
-    let products = [];
     conditionsCheckBoxes.forEach(function(checkbox){
         if(checkbox.checked){
             conditionsIDs.push(checkbox.name);
         }
     });
+    return conditionsIDs
+}
+async function verifyConditions(conditionsIDs){
+    //gets the conditions from the database
+    let products = [];
     for(let i = 0; i < conditionsIDs.length; i++){
         const response = await fetch("/../js_actions/api_get_products_from_filters.php/?conditionID=" + conditionsIDs[i]);
         const productsRes = await response.json();
@@ -150,16 +172,21 @@ async function verifyConditions(){
     return products;
 }
 
-async function verifySizes(){
+function getSizesChecked(){
     //Checks which size checkboxes are active
     const sizesCheckBoxes = document.querySelectorAll("#filterPage #sizes input[type=checkbox]");
     let sizesIDs = [];
-    let products = [];
     sizesCheckBoxes.forEach(function(checkbox){
         if(checkbox.checked){
             sizesIDs.push(checkbox.name);
         }
     });
+    return sizesIDs;
+}
+
+async function verifySizes(sizesIDs){
+    //gets the sizes from the database
+    let products = [];
     for(let i = 0; i < sizesIDs.length; i++){
         const response = await fetch("/../js_actions/api_get_products_from_filters.php/?sizesID=" + sizesIDs[i]);
         const productsRes = await response.json();
@@ -173,6 +200,10 @@ async function verifySizes(){
 
 async function drawProducts(products){
     //draw the filtered products
+
+    if(products.length == 0){
+        return;
+    }
 
     const filterPage = document.querySelector("#filterPage");
     const productsSection = document.querySelector("#filterPage .products");
