@@ -74,6 +74,7 @@ function drawRemoveInfoForm($filterType, $db) {
                     ?>
                 </select>
                 <input type="hidden" name="filter_type" value="<?php echo $filterType; ?>">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <input type="submit" name="remove" value="Remove">
             </form>
         </section>

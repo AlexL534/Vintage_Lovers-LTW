@@ -14,14 +14,11 @@ function sendMessage(){
 
     messagesDiv = document.getElementById("UserMessages");
     const form = button.parentElement;
-    console.log(button);
-    console.log(messagesDiv);
-    console.log(form.elements['senderID'].value);
+    
     if(button == null){
         return;
     }
     messagesDiv.scrollTo(0,messagesDiv.scrollHeight);
-    console.log(form['messageText'])
 
     button.addEventListener('click',async function(event){
         event.preventDefault();
@@ -41,7 +38,9 @@ function sendMessage(){
         request.send(encodeForAjax({senderID : form.elements['senderID'].value,
             receiverID : form.elements['receiverID'].value,
             productID : form.elements['productID'].value,
-            messageText : form.elements['messageText'].value}
+            messageText : form.elements['messageText'].value,
+            csrf: form.elements["csrf"].value
+        }
             )
         );
 

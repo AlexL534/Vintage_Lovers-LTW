@@ -93,8 +93,9 @@ function drawMessageForm(int $sid, int $rid, int $pid){
             <input type="hidden" name = "senderID" value = "<?= $sid ?>">
             <input type="hidden" name = "receiverID" value = "<?= $rid ?>">
             <input type="hidden" name = "productID" value = "<?= $pid ?>">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="text" name = "messageText" placeholder ="Write your message here">
-            <button>Send</button>
+            <button type="submit" >Send</button>
         </form>
     </section>
 <?php } ?>

@@ -12,6 +12,12 @@ $rid = intval($_POST['receiverID']);
 $pid = intval($_POST['productID']);
 $text = $_POST['messageText'];
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Suspicious activity found');
+    header('Location: /../pages/main_page.php');
+    exit();
+}
+
 
 if(UserMessage::insertMessage($sid,$rid,$pid,$text,$db) === false){
     $session->addMessage('error', 'could not send the message. Database error');

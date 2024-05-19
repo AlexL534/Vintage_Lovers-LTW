@@ -25,10 +25,12 @@ drawHeader($session, $categories);
             <div class="products">
             <?php 
                 $products = product::getProductByPrice($db,3,150);
-                foreach($products as $product){ 
+                $i = 0;
+                for($i = 0; $i < 8; $i++){
+                    $product = $products[$i];
                     $imagePathArray = Image::getImagesPath($db, $product->getId());
                     $imagePath = isset($imagePathArray[0]) ? htmlentities($imagePathArray[0]) : '';
-                ?>
+                    ?>
                 <a href="products.php?id=<?= $product->getId();?>">
                     <article>
                         <img src = "../<?= $imagePath ?>" alt = "product image" >

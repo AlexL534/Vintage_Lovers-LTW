@@ -10,7 +10,7 @@ $session = new Session();
 $admin = User::getUser($db, $session->getId())->getIsAdmin();
 $categories = getCategoriesForMenu();
 
-if (!$session->isLoggedIn() || !$admin) {
+if (!$session->isLoggedIn()) {
     header("Location: /"); 
     exit; 
 }
