@@ -158,6 +158,10 @@ nav menu li input[type="submit"]{
    transition: background-color 1s;
    width: 100%;
    height: 100%;
+   overflow:hidden;
+   white-space:nowrap;
+   text-overflow:  ellipsis;
+
 }
 nav menu li:hover input[type="submit"]{
    background-color: var(--dark_red);
