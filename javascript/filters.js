@@ -9,7 +9,6 @@ async function verifyCheckbox(){
     let searchQuery = null;
 
     if(document.querySelector("#filterPage > header span") != null){
-        console.log("here");
         searchQuery = document.querySelector("#filterPage > header span").innerHTML;
 
     }
@@ -33,7 +32,21 @@ async function verifyCheckbox(){
     //adds a listener to every checkbox
     checkboxes.forEach(function(checkbox){
         checkbox.addEventListener('change', async function(){
-            products = await getAllProducts();
+            let searchQuery = null;
+            if(document.querySelector("#filterPage > header span") != null){
+                searchQuery = document.querySelector("#filterPage > header span").innerHTML;
+
+            }
+            products = [];
+
+            //gets the products according to the search content
+            if(searchQuery !== null){
+                products = await getSearchProducts(searchQuery);
+                
+            }
+            else{
+                products = await getAllProducts();
+            }
             products = sortProducts(products);
             
             //if a change occurs and every checkbox is disabled, insert all products
@@ -57,6 +70,8 @@ async function verifyCheckbox(){
                 products = filterProducts(products, productsBrands);
             }
             if(categoriesIDs.length != 0){
+                console.log("here");
+                console.log(products)
                 products = filterProducts(products, productsCategories);
             }
             if(colorsIDs.length != 0){
@@ -71,8 +86,9 @@ async function verifyCheckbox(){
 
            
             }
+            console.log(products);
             products = sortProducts(products);
-            
+            console.log(products);
             await drawProducts(products);
         });
     });
@@ -201,10 +217,6 @@ async function verifySizes(sizesIDs){
 async function drawProducts(products){
     //draw the filtered products
 
-    if(products.length == 0){
-        return;
-    }
-
     const filterPage = document.querySelector("#filterPage");
     const productsSection = document.querySelector("#filterPage .products");
     productsSection.remove();
@@ -297,6 +309,7 @@ function filterProducts(array1,array2){
     let res = [];
     for(let i = 0; i < array1.length; i++){
         if(checkIfIsInArray(array2, array1[i])){
+            console.log("here");
             res.push(array1[i]);
         }
     }
