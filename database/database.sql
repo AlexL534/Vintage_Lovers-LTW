@@ -247,6 +247,54 @@ VALUES
     (5,10),
     (1,11);
 
+INSERT INTO IMAGES(path) VALUES 
+('images/Jeans.jpg'),
+('images/JeansT.jpeg'),
+('images/CanvasSneaker.jpg'),
+('images/CanvasSneakerT.jpg'),
+('images/LeatherJacket.jpg'),
+('images/LeatherJacketT.jpg'),
+('images/LinenShirt.jpg'),
+('images/LinenShirtT.jpg'),
+('images/NiceShirt.jpg'),
+('images/NiceShirtT.jpg'),
+('images/RunningPants.jpg'),
+('images/RunningPantsT.jpg'),
+('images/T-Shirt.jpg'),
+('images/T-shirtT.jpeg'),
+('images/VintageDenimJacket.jpg'),
+('images/VintageDenimJacketT.jpg'),
+('images/WhiteTee.jpg'),
+('images/WhiteTeeT.jpeg'),
+('images/YogaLeggins.jpg'),
+('images/YogaLegginsT.jpg'),
+('images/RunningSneakers.jpg'),
+('images/RunningSneakersT.jpg');
+
+Insert INTO IMAGES_OF_PRODUCT(imageID, productID) VALUES
+(1,1),
+(2,1),
+(3,2),
+(4,2),
+(5,3),
+(6,3),
+(7,11),
+(8,11),
+(9,7),
+(10,7),
+(11,8),
+(12,8),
+(13,4),
+(14,4),
+(15,6),
+(16,6),
+(17,5),
+(18,5),
+(19,10),
+(20,10),
+(21, 9),
+(22,9);
+
 
 
 
