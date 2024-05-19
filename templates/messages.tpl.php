@@ -7,7 +7,9 @@ require_once(__DIR__ . '/../classes/message.class.php');
 
 function drawUserQuestion(Session $session, PDO $db){
     $currentUserID=$session->getId();
-    $questions = UserMessage::getQuestions($db,$currentUserID);?>
+    $questions = UserMessage::getQuestions($db,$currentUserID);
+    $usersAlreadyShown=array();
+    $productsAlreadyShown=array();?>
     <h3 id="inboxTitle">
         Your messages
     </h3>
@@ -16,19 +18,25 @@ function drawUserQuestion(Session $session, PDO $db){
     <?php } ?>
     <ul class = "questions">
     <?php foreach($questions as $questionDB){
+        
         $sid=$questionDB['senderID'];
         $rid=$questionDB['receiverID'];
         $pid=$questionDB['productID'];
-        if($currentUserID == $rid && isset($sid) ){
+        
+        if(!isset($rid) && isset($sid) ){
+            
             $rid = $sid;
         }
-        if(!isset($rid)){
+        
+        if(in_array($rid,$usersAlreadyShown) && in_array($pid,$productsAlreadyShown)){
             continue;
         }
+        $usersAlreadyShown[]=$rid;
+        $productsAlreadyShown[]=$pid;
         $receiver = User::getUser($db,intval($rid));
         $product = Product::getProduct($db,intval($pid)); ?>
         <li><a href="../pages/messages_page.php?sid=<?= $currentUserID?>&rid=<?=$rid ?>&pid=<?=$pid?>">
-            <p>You are having a conversation with <?= htmlentities($receiver->getUserName());?> about the <?= htmlentities($product->getName()); ?></p>
+            <p>You are discussing with <?= htmlentities($receiver->getUserName());?> about the <?= htmlentities($product->getName()); ?></p>
         </a></li>
     <?php } ?>
     
@@ -41,7 +49,6 @@ function drawUserQuestion(Session $session, PDO $db){
 <?php
 function drawInbox(Session $session, PDO $db){
     drawUserQuestion($session,$db);
-    
 }
 ?>
 

@@ -87,9 +87,5 @@ function drawProductInfo(PDO $db, int $id, Session $session){
             <button formaction="/../actions/action_add_shopping_cart.php" formmethod="post" type="submit" >Add to the Cart</button>
         </form>  
     <?php } ?>    
-
-
-
-<?php } ?>
-
-
+<?php } 
+?>

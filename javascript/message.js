@@ -44,6 +44,8 @@ function sendMessage(){
             )
         );
 
+        form.reset();
+
     })
 }
 

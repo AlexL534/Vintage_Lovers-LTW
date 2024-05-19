@@ -63,9 +63,7 @@ class UserMessage{
         $stmt = $db->prepare('SELECT DISTINCT senderID , productID FROM MESSAGES WHERE receiverID = ?');
         $stmt->execute(array($sid));
         while($qDB=$stmt->fetch()){
-            if(!in_array($qDB,$questions)){
-                $questions [] = $qDB;
-            }
+            $questions [] = $qDB;
         }
         return $questions;
     }

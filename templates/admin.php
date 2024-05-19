@@ -238,17 +238,14 @@ function drawProductList($searchEnabled = true, $session) {
             ?>
             <section id="productSearch">
                 <form  method="post">
-                    <label for="search"><p>Search for product</p></label>
+                    <label for="search">Search for product</label>
                     <input type="text" id="search" name="search">
-                    <button type="submit">Search</button>
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <input type="hidden" name="action" value="search">
                 </form>
             </section>
             <?php
         }
-
-
 
         if (isset($_POST['action']) && $_POST['action'] === 'search') {
 
@@ -315,7 +312,7 @@ function displayProductResults($products, $searchEnabled, $session) {
 
                         if ($ownerId === $loggedInUserId) { ?>
                             <li>
-                                <span class="product_name"><p><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></p></span>
+                                <span class="product_name"><?php echo $product instanceof Product ? htmlentities($product->getName()) : htmlentities($product['name']); ?></span>
                                 <form action="/../actions/action_delete_product.php" method="post" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="product_id" value="<?php echo $product instanceof Product ? htmlentities($product->getId()) : htmlentities($product['id']); ?>">
@@ -365,6 +362,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="brand">Brand:</label>
                 <select name="brand" id="brand" required>
+                    <option value="" selected disabled>Select Brand</option>
                     <?php foreach ($brands as $brand): ?>
                         <option value="<?= $brand->getId(); ?>"><?= htmlspecialchars($brand->getName()); ?></option>
                     <?php endforeach; ?>
@@ -373,6 +371,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="category">Category:</label>
                 <select name="category" id="category" required>
+                    <option value="" selected disabled>Select Category</option>
                     <?php foreach ($categories as $category): ?>
                         <option value="<?= $category->getId(); ?>"><?= htmlspecialchars($category->getName()); ?></option>
                     <?php endforeach; ?>
@@ -381,6 +380,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="color">Color:</label>
                 <select name="color" id="color" required>
+                    <option value="" selected disabled>Select Color</option>
                     <?php foreach ($colors as $color): ?>
                         <option value="<?= $color->getId(); ?>"><?= htmlspecialchars($color->getName()); ?></option>
                     <?php endforeach; ?>
@@ -389,6 +389,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="condition">Condition:</label>
                 <select name="condition" id="condition" required>
+                    <option value="" selected disabled>Select Condition</option>
                     <?php foreach ($conditions as $condition): ?>
                         <option value="<?= $condition->getId(); ?>"><?= htmlspecialchars($condition->getName()); ?></option>
                     <?php endforeach; ?>
@@ -397,6 +398,7 @@ function drawAddProductForm() {
             <div class="form-group">
                 <label for="size">Sizes:</label>
                 <select name="size" id="size" required>
+                    <option value="" selected disabled>Select Size</option>
                     <?php foreach ($sizes as $size): ?>
                         <option value="<?= $size->getId(); ?>"><?= htmlspecialchars($size->getName()); ?></option>
                     <?php endforeach; ?>
@@ -432,15 +434,15 @@ function drawUpdateInfoForm($product_id) {
         <form action="/../actions/action_update_product.php" method="post">
         <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
         <div class="form-group">
-                <label for="name"><p>Name:</p></label>
+                <label for="name">Name:</label>
                 <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($productName); ?>" required>
             </div>
             <div class="form-group">
-                <label for="description"><p>Description:</p></label>
+                <label for="description">Description:</label>
                 <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($productDescription); ?>" required>
             </div>
             <div class="form-group">
-                <label for="price"><p>Price:</p></label>
+                <label for="price">Price:</label>
                 <input type="number" name="price" step="0.01" min="0" id="price" value="<?php echo htmlspecialchars($productPrice); ?>" required>
             </div>
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
@@ -461,7 +463,7 @@ function drawAddImages($productId, $session){
     </header>
     <form action="/../actions/action_add_image.php" method="post" enctype="multipart/form-data">
         <label>
-            <p>Title:</p>
+            Title:
             <input type="text" name="title" required>
         </label>
         <input type="file" name="image[]" multiple="multiple"  required>
