@@ -67,6 +67,7 @@
     text-overflow:  ellipsis;
     margin-right: 0.5em;
     margin-top: 5px;
+    max-width: 60%
 }
 
 .label-order-price {
@@ -89,6 +90,7 @@
 .scrollable{
     overflow-y: scroll;
     max-height: 10em;
+    width: 90%;
     margin-bottom: 1em;
     border: 2px inset var(--medium_gray);
     border-radius: 1em;

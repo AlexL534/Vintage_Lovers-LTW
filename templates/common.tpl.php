@@ -49,7 +49,7 @@ function drawHeader(Session $session, array $menuCategories) {
             </header>
             
             <nav id= "menu">
-                <input type="checkbox" id="menu_button"> 
+                <input type="checkbox" id="menu_button" placeholder="check"> 
                 <label class="menu_button" for="menu_button"></label>
                 <menu>
                     <?php
