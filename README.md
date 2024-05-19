@@ -10,7 +10,7 @@
 
     git clone <your_repo_url>
     git checkout final-delivery-v1
-    sqlite database/database.db < database/script.sql
+    sqlite database/database.db < database/database.sql
     sudo apt-get install php-gd (only if you don't have already install it)
     php -S localhost:9000
 
@@ -22,6 +22,20 @@ We have used the following external libraries:
 
 ## Screenshots
 
+Screenshots from some of the pages of our website
+
+**All products page**
+![all product](screenshots/all_products.png)
+
+
+**Product page**
+![product](screenshots/Product.png)
+
+**Main page**
+![product](screenshots/main.png)
+
+**Profile page**
+![product](screenshots/Profile.png)
 
 ## Implemented Features
 
@@ -38,18 +52,19 @@ We have used the following external libraries:
 - Respond to inquiries from buyers regarding their items and add further information if needed.
 - Print shipping forms for items that have been sold.
 
-**Buyers**  should be able to:
+**Buyers**:
 
 - Browse items using filters like category, price, and condition.
 - Engage with sellers to ask questions or negotiate prices.
 - Add items to a wishlist or shopping cart.
 - Proceed to checkout with their shopping cart (simulate payment process).
 
-**Admins**  should be able to:
+**Admins**:
 
 - Elevate a user to admin status.
 - Introduce new item categories, sizes, conditions, and other pertinent entities.
 - Oversee and ensure the smooth operation of the entire system (remove/block users, products and other items).
+
 
 **Security**:
 We have been careful with the following security aspects:
