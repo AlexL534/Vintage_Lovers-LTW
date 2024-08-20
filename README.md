@@ -1,5 +1,9 @@
 # Vintage Lovers
 
+
+**FINAL GRADE: 16.2**
+
+
 ## Group ltw10g05
 
 - Lucas Faria (up202207540) 33,3%
